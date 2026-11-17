@@ -86,6 +86,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           FAL_KEY: ${{ secrets.FAL_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}

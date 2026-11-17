@@ -158,7 +158,59 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
                 else:
                     break
 
-    # 2. Secondary: Replicate Flux/SDXL (if configured)
+    # 2. Secondary: Fal.ai Flux Schnell (Ultra-Fast 4-Step 3D Imagery)
+    fal_key = os.getenv("FAL_KEY")
+    if fal_key:
+        fal_key = fal_key.strip().strip("'").strip('"')
+        try:
+            fal_url = "https://fal.run/fal-ai/flux/schnell"
+            fal_payload = json.dumps({
+                "prompt": enriched[:400],
+                "image_size": "portrait_16_9",
+                "num_inference_steps": 4,
+                "seed": seed,
+            }).encode("utf-8")
+            fal_req = urllib.request.Request(
+                fal_url,
+                data=fal_payload,
+                headers={"Authorization": f"Key {fal_key}", "Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(fal_req, timeout=25) as f_resp:
+                f_json = json.loads(f_resp.read().decode("utf-8"))
+                images = f_json.get("images", [])
+                if images and "url" in images[0]:
+                    dl_req = urllib.request.Request(images[0]["url"], headers={"User-Agent": "Mozilla/5.0"})
+                    with urllib.request.urlopen(dl_req, timeout=20) as dl_resp:
+                        data = dl_resp.read()
+                        if len(data) > 20_000:
+                            output_path.write_bytes(data)
+                            print(f"🎨 [Stage 3: Image Engine] Generated Fal.ai Flux Visual: {output_path.name}")
+                            return output_path
+        except Exception as e_fal:
+            print(f"Notice: Fal.ai note ({e_fal})")
+
+    # 3. Tertiary: Hugging Face Serverless Inference (FLUX.1-schnell, 100% Free)
+    hf_token = os.getenv("HF_TOKEN")
+    if hf_token:
+        hf_token = hf_token.strip().strip("'").strip('"')
+        try:
+            hf_url = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell"
+            hf_payload = json.dumps({"inputs": enriched[:400]}).encode("utf-8")
+            hf_req = urllib.request.Request(
+                hf_url,
+                data=hf_payload,
+                headers={"Authorization": f"Bearer {hf_token}", "Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(hf_req, timeout=30) as hf_resp:
+                data = hf_resp.read()
+                if len(data) > 20_000:
+                    output_path.write_bytes(data)
+                    print(f"🎨 [Stage 3: Image Engine] Generated Hugging Face FLUX Visual: {output_path.name}")
+                    return output_path
+        except Exception as e_hf:
+            print(f"Notice: Hugging Face inference note ({e_hf})")
+
+    # 4. Quaternary: Replicate Flux/SDXL (if configured)
     rep_token = os.getenv("REPLICATE_API_TOKEN")
     if rep_token:
         rep_token = rep_token.strip().strip("'").strip('"')
