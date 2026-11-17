@@ -3,20 +3,23 @@
     "Various_The Lion Cub and the Lion 3D-Book.epub::Episode 1: Toffee, the Lion Cub",
     "dynamic::The Deep Sea Abyssal Creature::Ep2",
     "dynamic::What if aliens land on Earth tomorrow?::Ep4",
-    "dynamic::What if gravity suddenly doubled across the entire world?::Ep6"
+    "dynamic::What if gravity suddenly doubled across the entire world?::Ep6",
+    "dynamic::What if you fell into Jupiter's atmosphere?::Ep7"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 6,
+  "episode_count": 7,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
-    "What if gravity suddenly doubled across the entire world?"
+    "What if gravity suddenly doubled across the entire world?",
+    "What if you fell into Jupiter's atmosphere?"
   ],
   "used_topics": [
-    "The immortal jellyfish that can live forever",
-    "What if gravity suddenly doubled across the entire world?",
     "What happens if you never stop peeing forever?",
     "What if aliens land on Earth tomorrow?",
-    "The Deep Sea Abyssal Creature"
+    "The Deep Sea Abyssal Creature",
+    "What if gravity suddenly doubled across the entire world?",
+    "The immortal jellyfish that can live forever",
+    "What if you fell into Jupiter's atmosphere?"
   ]
 }
