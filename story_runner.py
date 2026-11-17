@@ -57,6 +57,7 @@ from story_pipeline.sfx_generator import generate_all_sfx
 from story_pipeline.fast_video_engine import render_fast_story_video
 from story_pipeline.thumbnail_generator import generate_high_ctr_thumbnail
 from story_pipeline.telegram_notifier import notify_success, notify_error, notify_fallback
+from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
 
@@ -105,215 +106,213 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         # -------------------------------------------------------------
         # STAGE 1: Dynamic Viral Topic Generator or Custom User Topic
         # -------------------------------------------------------------
-    custom_override = custom_topic or os.getenv("CUSTOM_TOPIC")
-    if custom_override and custom_override.strip():
-        print(f"\n💡 [Custom User Topic Mode] Generating video for: '{custom_override.strip()}'")
+        custom_override = custom_topic or os.getenv("CUSTOM_TOPIC")
+        if custom_override and custom_override.strip():
+            print(f"\n💡 [Custom User Topic Mode] Generating video for: '{custom_override.strip()}'")
+            history = load_history()
+            ep_num = history.get("episode_count", 0) + 1
+            topic_data = {
+                "topic": custom_override.strip(),
+                "hook_premise": f"The shocking reality of {custom_override.strip()}",
+                "category": "Mind-Blowing Stories & Science",
+                "style": "3D Pixar animation Unreal Engine 5",
+                "episode": ep_num,
+            }
+        else:
+            print("\n💡 [Stage 1/7] Generating unique viral high-curiosity topic...")
+            topic_data = generate_unique_viral_topic()
+
+        ep_num = topic_data.get("episode", 1)
+        chapter_title = topic_data.get("topic", f"Episode {ep_num}")
+        genre = topic_data.get("category", "Science & Mind-Blowing Facts")
+        clean_book_name = chapter_title
+        chapter_id = f"dynamic::{chapter_title}::Ep{ep_num}"
+        book_name = "Dynamic Viral Curiosity Universe"
+
+        print(f"🎯 Target Concept: '{chapter_title}'")
+        print(f"   Category: {genre} | Visual Style: {topic_data.get('style', '3D Pixar')}")
+
+        # -------------------------------------------------------------
+        # STAGE 2: 59-Second Hook-Driven Narrative Script Engine
+        # -------------------------------------------------------------
+        current_stage = "Stage 2: 59-Second Narrative Script Engine"
+        print("\n✍️ [Stage 2/7] Generating 5-beat retention script with hooks every 10 seconds...")
+        script_data = generate_viral_script(topic_data)
+        script_data["episode"] = ep_num
+        script_data["genre"] = genre
+        script_data["title"] = chapter_title
+
+        # Alias beats to scenes for backwards compatibility
+        beats = script_data["beats"]
+        for b in beats:
+            b["scene_number"] = b["beat_number"]
+            b["title"] = b.get("hook_trigger", f"Beat #{b['beat_number']}")
+        script_data["scenes"] = beats
+
+        # Gate 1: Narrative Quality Audit
+        current_stage = "Gate 1: Narrative Quality Audit"
+        audit_story_script(script_data)
+
+        # -------------------------------------------------------------
+        # Foley SFX Verification
+        # -------------------------------------------------------------
+        current_stage = "Foley SFX Engine"
+        PUBLIC_SFX_DIR.mkdir(parents=True, exist_ok=True)
+        if not (PUBLIC_SFX_DIR / "whoosh.wav").exists():
+            print("🔊 Synthesizing Foley SFX Suite...")
+            generate_all_sfx()
+
+        # -------------------------------------------------------------
+        # STAGE 3: High-Definition 3D Pixar & CGI Image Generator
+        # -------------------------------------------------------------
+        current_stage = "Stage 3: 3D Pixar Visual Engine"
+        print(f"\n🎨 [Stage 3/7] Generating enhanced 3D Pixar visuals for all {len(beats)} beats...")
+        PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+        generate_all_beat_images(beats, ep_num)
+
+        # Gate 2: Visual Assets Quality Audit
+        current_stage = "Gate 2: Visual Assets Quality Audit"
+        audit_visual_assets(beats, PUBLIC_DIR)
+
+        # -------------------------------------------------------------
+        # STAGE 4 & 5: Neural Audio & Exact Word Synchronization
+        # -------------------------------------------------------------
+        current_stage = "Stage 4 & 5: Neural Audio & Exact Word Boundaries"
+        print("\n🎙️ [Stage 4 & 5/7] Synthesizing multi-speaker neural voiceovers & word boundaries...")
+        PUBLIC_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+        beats = build_audio_and_timings_sync(beats)
+        script_data["beats"] = beats
+        script_data["scenes"] = beats
+
+        # Gate 3: Audio Sync & Duration Quality Audit (<58.5s)
+        current_stage = "Gate 3: Audio Sync & Duration Audit"
+        audit_audio_sync(beats, PUBLIC_DIR)
+
+        # -------------------------------------------------------------
+        # STAGE 6: Kinetic Subtitles & Typography Compilation
+        # -------------------------------------------------------------
+        current_stage = "Stage 6: Kinetic Subtitles Compilation"
+        print("\n✨ [Stage 6/7] Compiling discrete kinetic karaoke subtitles (safe lower-third)...")
+        ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
+        compile_kinetic_subtitles(beats, ass_path)
+
+        # Gate 4: Subtitles Verification Audit
+        current_stage = "Gate 4: Subtitles Verification Audit"
+        audit_subtitles_file(ass_path)
+
+        # Generate genre-tailored background music (58.0s)
+        current_stage = "Audio Mixing & BGM Engine"
+        bg_music_path = PUBLIC_AUDIO_DIR / "story_bg.wav"
+        print(f"🎵 Generating dynamic background music for '{genre}' (58.0s)...")
+        generate_music_for_genre(genre, bg_music_path, duration=58.0)
+
+        # Save complete story data
+        with open(DATA_JSON_PATH, "w", encoding="utf-8") as f:
+            json.dump(script_data, f, indent=2)
+
+        # -------------------------------------------------------------
+        # STAGE 7 & RENDER: Native Hardware-Accelerated Video Engine
+        # -------------------------------------------------------------
+        current_stage = "Stage 6 & Render: Native Video Synthesis"
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        out_mp4 = OUTPUT_DIR / f"story_episode_{ep_num}.mp4"
+
+        render_success = False
+        if RENDER_ENGINE == "fast":
+            try:
+                render_fast_story_video(script_data, out_mp4)
+                render_success = out_mp4.exists() and out_mp4.stat().st_size > 100_000
+            except Exception as e:
+                print(f"⚠️ Lightning render issue ({e}). Falling back to Remotion...")
+
+        if not render_success:
+            print(f"\n🎬 Rendering via Remotion composition (Timeout: {RENDER_TIMEOUT_SECONDS}s)...")
+            cmd = [
+                "npx",
+                "remotion",
+                "render",
+                "src/index.ts",
+                "StoryVideo",
+                str(out_mp4),
+            ]
+            render_success = render_with_remotion(cmd, str(VIDEO_APP_DIR), out_mp4)
+
+        if not render_success:
+            raise RuntimeError("Video rendering failed across all engines.")
+
+        # Gate 5: Deep ffprobe inspection and duration certification (<59.0s)
+        current_stage = "Gate 5: Final Video Certification Audit"
+        cert = audit_final_rendered_video(out_mp4)
+
+        # -------------------------------------------------------------
+        # High-CTR Thumbnail Generation
+        # -------------------------------------------------------------
+        current_stage = "Thumbnail Generation"
+        print("\n📸 Generating High-CTR Thumbnail...")
+        hook_hl = script_data.get("hook_headline", "WHAT HAPPENS NEXT?!")
+        thumb_path = generate_high_ctr_thumbnail(ep_num, hook_hl, video_path=out_mp4)
+
+        # -------------------------------------------------------------
+        # Automated Social Media Publishing
+        # -------------------------------------------------------------
+        current_stage = "Stage 7: Multi-Platform Publishing"
+        yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
+        full_text = " ".join([b["narration"] for b in beats])
+        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
+        yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
+
+        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
+
+        print("\n📤 Publishing to social platforms...")
+        yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
+        print(f"YouTube: {yt_res}")
+
+        ig_res = upload_to_instagram(str(out_mp4), ig_caption)
+        print(f"Instagram: {ig_res}")
+
+        # -------------------------------------------------------------
+        # Perpetual History Tracking Update
+        # -------------------------------------------------------------
         history = load_history()
-        ep_num = history.get("episode_count", 0) + 1
-        topic_data = {
-            "topic": custom_override.strip(),
-            "hook_premise": f"The shocking reality of {custom_override.strip()}",
-            "category": "Mind-Blowing Stories & Science",
-            "style": "3D Pixar animation Unreal Engine 5",
+        processed_list = history.get("processed_chapters", [])
+        processed_list.append(chapter_id)
+        history["processed_chapters"] = processed_list
+        history["episode_count"] = ep_num
+        history["last_book"] = book_name
+        topics = history.get("generated_topics", [])
+        topics.append(chapter_title)
+        history["used_topics"] = list(set(history.get("used_topics", []) + [chapter_title]))
+        save_history(history)
+
+        # -------------------------------------------------------------
+        # Real-Time Mobile Dispatch (Video Preview + Live Link + Logs)
+        # -------------------------------------------------------------
+        notify_success(
+            episode_num=ep_num,
+            title=chapter_title,
+            duration=cert["duration"],
+            size_mb=cert["size_mb"],
+            youtube_res=yt_res,
+            video_path=out_mp4,
+        )
+
+        print("\n==================================================================")
+        print(f" 🎉 Episode #{ep_num} 100% Certified & Published!")
+        print(f"   • Video: {out_mp4.name} ({cert['duration']:.2f}s, {cert['size_mb']} MB)")
+        print(f"   • Thumbnail: {Path(thumb_path).name}")
+        print("==================================================================")
+
+        return {
+            "status": "SUCCESS",
             "episode": ep_num,
+            "video_path": str(out_mp4),
+            "thumbnail_path": str(thumb_path),
+            "chapter": chapter_title,
+            "duration": cert["duration"],
         }
-    else:
-        print("\n💡 [Stage 1/7] Generating unique viral high-curiosity topic...")
-        topic_data = generate_unique_viral_topic()
-
-    ep_num = topic_data.get("episode", 1)
-    chapter_title = topic_data.get("topic", f"Episode {ep_num}")
-    genre = topic_data.get("category", "Science & Mind-Blowing Facts")
-    clean_book_name = chapter_title
-    chapter_id = f"dynamic::{chapter_title}::Ep{ep_num}"
-    book_name = "Dynamic Viral Curiosity Universe"
-
-    print(f"🎯 Target Concept: '{chapter_title}'")
-    print(f"   Category: {genre} | Visual Style: {topic_data.get('style', '3D Pixar')}")
-
-    # -------------------------------------------------------------
-    # STAGE 2: 59-Second Hook-Driven Narrative Script Engine
-    # -------------------------------------------------------------
-    current_stage = "Stage 2: 59-Second Narrative Script Engine"
-    print("\n✍️ [Stage 2/7] Generating 5-beat retention script with hooks every 10 seconds...")
-    script_data = generate_viral_script(topic_data)
-    script_data["episode"] = ep_num
-    script_data["genre"] = genre
-    script_data["title"] = chapter_title
-
-    # Alias beats to scenes for backwards compatibility
-    beats = script_data["beats"]
-    for b in beats:
-        b["scene_number"] = b["beat_number"]
-        b["title"] = b.get("hook_trigger", f"Beat #{b['beat_number']}")
-    script_data["scenes"] = beats
-
-    # Gate 1: Narrative Quality Audit
-    current_stage = "Gate 1: Narrative Quality Audit"
-    audit_story_script(script_data)
-
-    # -------------------------------------------------------------
-    # Foley SFX Verification
-    # -------------------------------------------------------------
-    current_stage = "Foley SFX Engine"
-    PUBLIC_SFX_DIR.mkdir(parents=True, exist_ok=True)
-    if not (PUBLIC_SFX_DIR / "whoosh.wav").exists():
-        print("🔊 Synthesizing Foley SFX Suite...")
-        generate_all_sfx()
-
-    # -------------------------------------------------------------
-    # STAGE 3: High-Definition 3D Pixar & CGI Image Generator
-    # -------------------------------------------------------------
-    current_stage = "Stage 3: 3D Pixar Visual Engine"
-    print(f"\n🎨 [Stage 3/7] Generating enhanced 3D Pixar visuals for all {len(beats)} beats...")
-    PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-    generate_all_beat_images(beats, ep_num)
-
-    # Gate 2: Visual Assets Quality Audit
-    current_stage = "Gate 2: Visual Assets Quality Audit"
-    audit_visual_assets(beats, PUBLIC_DIR)
-
-    # -------------------------------------------------------------
-    # STAGE 4 & 5: Neural Audio & Exact Word Synchronization
-    # -------------------------------------------------------------
-    current_stage = "Stage 4 & 5: Neural Audio & Exact Word Boundaries"
-    print("\n🎙️ [Stage 4 & 5/7] Synthesizing multi-speaker neural voiceovers & word boundaries...")
-    PUBLIC_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-    beats = build_audio_and_timings_sync(beats)
-    script_data["beats"] = beats
-    script_data["scenes"] = beats
-
-    # Gate 3: Audio Sync & Duration Quality Audit (<58.5s)
-    current_stage = "Gate 3: Audio Sync & Duration Audit"
-    audit_audio_sync(beats, PUBLIC_DIR)
-
-    # -------------------------------------------------------------
-    # STAGE 6: Kinetic Subtitles & Typography Compilation
-    # -------------------------------------------------------------
-    current_stage = "Stage 6: Kinetic Subtitles Compilation"
-    print("\n✨ [Stage 6/7] Compiling discrete kinetic karaoke subtitles (safe lower-third)...")
-    ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
-    compile_kinetic_subtitles(beats, ass_path)
-
-    # Gate 4: Subtitles Verification Audit
-    current_stage = "Gate 4: Subtitles Verification Audit"
-    audit_subtitles_file(ass_path)
-
-    # Generate genre-tailored background music (58.0s)
-    current_stage = "Audio Mixing & BGM Engine"
-    bg_music_path = PUBLIC_AUDIO_DIR / "story_bg.wav"
-    print(f"🎵 Generating dynamic background music for '{genre}' (58.0s)...")
-    generate_music_for_genre(genre, bg_music_path, duration=58.0)
-
-    # Save complete story data
-    with open(DATA_JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(script_data, f, indent=2)
-
-    # -------------------------------------------------------------
-    # STAGE 7 & RENDER: Native Hardware-Accelerated Video Engine
-    # -------------------------------------------------------------
-    current_stage = "Stage 6 & Render: Native Video Synthesis"
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_mp4 = OUTPUT_DIR / f"story_episode_{ep_num}.mp4"
-
-    render_success = False
-    if RENDER_ENGINE == "fast":
-        try:
-            render_fast_story_video(script_data, out_mp4)
-            render_success = out_mp4.exists() and out_mp4.stat().st_size > 100_000
-        except Exception as e:
-            print(f"⚠️ Lightning render issue ({e}). Falling back to Remotion...")
-
-    if not render_success:
-        print(f"\n🎬 Rendering via Remotion composition (Timeout: {RENDER_TIMEOUT_SECONDS}s)...")
-        cmd = [
-            "npx",
-            "remotion",
-            "render",
-            "src/index.ts",
-            "StoryVideo",
-            str(out_mp4),
-        ]
-        render_success = render_with_remotion(cmd, str(VIDEO_APP_DIR), out_mp4)
-
-    if not render_success:
-        raise RuntimeError("Video rendering failed across all engines.")
-
-    # Gate 5: Deep ffprobe inspection and duration certification (<59.0s)
-    current_stage = "Gate 5: Final Video Certification Audit"
-    cert = audit_final_rendered_video(out_mp4)
-
-    # -------------------------------------------------------------
-    # High-CTR Thumbnail Generation
-    # -------------------------------------------------------------
-    current_stage = "Thumbnail Generation"
-    print("\n📸 Generating High-CTR Thumbnail...")
-    hook_hl = script_data.get("hook_headline", "WHAT HAPPENS NEXT?!")
-    thumb_path = generate_high_ctr_thumbnail(ep_num, hook_hl, video_path=out_mp4)
-
-    # -------------------------------------------------------------
-    # Automated Social Media Publishing
-    # -------------------------------------------------------------
-    current_stage = "Stage 7: Multi-Platform Publishing"
-    yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
-    full_text = " ".join([b["narration"] for b in beats])
-    yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
-    yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
-
-    ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
-
-    print("\n📤 Publishing to social platforms...")
-    yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
-    print(f"YouTube: {yt_res}")
-
-    ig_res = upload_to_instagram(str(out_mp4), ig_caption)
-    print(f"Instagram: {ig_res}")
-
-    # -------------------------------------------------------------
-    # Perpetual History Tracking Update
-    # -------------------------------------------------------------
-    history = load_history()
-    processed_list = history.get("processed_chapters", [])
-    processed_list.append(chapter_id)
-    history["processed_chapters"] = processed_list
-    history["episode_count"] = ep_num
-    history["last_book"] = book_name
-    topics = history.get("generated_topics", [])
-    topics.append(chapter_title)
-    history["generated_topics"] = topics
-    history["used_topics"] = list(set(history.get("used_topics", []) + [chapter_title]))
-    save_history(history)
-
-    # -------------------------------------------------------------
-    # Real-Time Mobile Dispatch (Video Preview + Live Link + Logs)
-    # -------------------------------------------------------------
-    notify_success(
-        episode_num=ep_num,
-        title=chapter_title,
-        duration=cert["duration"],
-        size_mb=cert["size_mb"],
-        youtube_res=yt_res,
-        video_path=out_mp4,
-    )
-
-    print("\n==================================================================")
-    print(f" 🎉 Episode #{ep_num} 100% Certified & Published!")
-    print(f"   • Video: {out_mp4.name} ({cert['duration']:.2f}s, {cert['size_mb']} MB)")
-    print(f"   • Thumbnail: {Path(thumb_path).name}")
-    print("==================================================================")
-
-    return {
-        "status": "SUCCESS",
-        "episode": ep_num,
-        "video_path": str(out_mp4),
-        "thumbnail_path": str(thumb_path),
-        "chapter": chapter_title,
-        "duration": cert["duration"],
-    }
     except Exception as e:
         print(f"\n🚨 [CRITICAL AUDIT HALT] Pipeline rejected at: [{current_stage}]")
         print(f"   Reason: {e}")
-        from story_pipeline.training_pipeline import trigger_failure_training
         trigger_failure_training(stage_name=current_stage, error=e)
         raise
 
