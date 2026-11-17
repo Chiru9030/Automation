@@ -56,6 +56,7 @@ from story_pipeline.strict_pipeline_auditor import (
 from story_pipeline.sfx_generator import generate_all_sfx
 from story_pipeline.fast_video_engine import render_fast_story_video
 from story_pipeline.thumbnail_generator import generate_high_ctr_thumbnail
+from story_pipeline.telegram_notifier import notify_success, notify_error, notify_fallback
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
 
@@ -253,6 +254,18 @@ def process_next_story() -> dict:
     history["used_topics"] = list(set(history.get("used_topics", []) + [chapter_title]))
     save_history(history)
 
+    # -------------------------------------------------------------
+    # Real-Time Mobile Dispatch (Video Preview + Live Link + Logs)
+    # -------------------------------------------------------------
+    notify_success(
+        episode_num=ep_num,
+        title=chapter_title,
+        duration=cert["duration"],
+        size_mb=cert["size_mb"],
+        youtube_res=yt_res,
+        video_path=out_mp4,
+    )
+
     print("\n==================================================================")
     print(f" 🎉 Episode #{ep_num} 100% Certified & Published!")
     print(f"   • Video: {out_mp4.name} ({cert['duration']:.2f}s, {cert['size_mb']} MB)")
@@ -270,4 +283,9 @@ def process_next_story() -> dict:
 
 
 if __name__ == "__main__":
-    process_next_story()
+    try:
+        process_next_story()
+    except Exception as e:
+        print(f"🚨 Pipeline Fatal Error: {e}")
+        notify_error(stage_name="Autonomous Story Pipeline", error_msg=str(e), exc=e)
+        sys.exit(1)

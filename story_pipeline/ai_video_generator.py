@@ -83,6 +83,11 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
 
     except Exception as e:
         print(f"Notice: Cloud video generation exception ({e})")
+        try:
+            from story_pipeline.telegram_notifier import notify_fallback
+            notify_fallback("Cloud AI Video Generator", f"Exception ({e}). Falling back to local hardware 3D motion.")
+        except Exception:
+            pass
         return False
 
 
