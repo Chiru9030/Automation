@@ -148,10 +148,11 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         x_expr = "'iw/2-(iw/zoom/2)'"
         y_expr = "'ih/2-(ih/zoom/2)'"
 
-    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, NO 2D inset frames)
+    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, dynamic 3D motion, enhanced vibrance)
     filter_complex = (
         f"[0:v]scale=1620:2880:force_original_aspect_ratio=increase,crop=1620:2880,"
-        f"zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=1080x1920:fps={fps}[outv]"
+        f"zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=1080x1920:fps={fps},"
+        f"eq=saturation=1.25:contrast=1.12:brightness=0.03[outv]"
     )
 
     cmd = [

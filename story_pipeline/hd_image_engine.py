@@ -34,53 +34,74 @@ def enrich_prompt(base_prompt: str) -> str:
 
 
 def generate_procedural_3d_visual(prompt: str, output_path: Path, seed: int = 42) -> Path:
-    """Procedurally synthesizes a 1080x1920 vertical cinematic 3D visual."""
+    """Procedurally synthesizes a high-contrast, vibrant 1080x1920 vertical cinematic 3D visual."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     random.seed(seed)
 
-    # Determine color theme from prompt
+    # Vibrant, saturated color palettes (never dark or black)
     p_lower = prompt.lower()
-    if any(k in p_lower for k in ["space", "moon", "saturn", "alien", "cosmic", "star"]):
-        bg_col = (8, 6, 22)
-        glow_col = (130, 70, 240)
-        core_col = (255, 180, 80)
+    if any(k in p_lower for k in ["space", "moon", "saturn", "alien", "cosmic", "star", "jupiter"]):
+        bg_top = (18, 14, 65)
+        bg_bottom = (45, 15, 80)
+        glow_col = (160, 80, 255)
+        core_col = (255, 200, 90)
+        ring_col = (100, 210, 255)
     elif any(k in p_lower for k in ["sea", "ocean", "jellyfish", "water", "abyss"]):
-        bg_col = (4, 18, 32)
-        glow_col = (30, 180, 220)
-        core_col = (120, 255, 200)
+        bg_top = (10, 35, 75)
+        bg_bottom = (5, 65, 95)
+        glow_col = (40, 210, 240)
+        core_col = (140, 255, 210)
+        ring_col = (80, 180, 255)
     elif any(k in p_lower for k in ["fire", "lava", "volcano", "heat"]):
-        bg_col = (25, 6, 4)
-        glow_col = (230, 80, 30)
-        core_col = (255, 210, 60)
+        bg_top = (65, 12, 10)
+        bg_bottom = (95, 25, 15)
+        glow_col = (255, 90, 40)
+        core_col = (255, 225, 80)
+        ring_col = (255, 160, 40)
     else:
-        bg_col = (14, 12, 28)
-        glow_col = (180, 90, 210)
-        core_col = (240, 200, 100)
+        bg_top = (35, 15, 60)
+        bg_bottom = (60, 25, 90)
+        glow_col = (210, 90, 240)
+        core_col = (255, 215, 110)
+        ring_col = (130, 220, 255)
 
-    img = Image.new("RGB", (1080, 1920), color=bg_col)
+    img = Image.new("RGB", (1080, 1920), color=bg_top)
     draw = ImageDraw.Draw(img)
 
-    # Multi-layered 3D spherical glow & volumetric horizon
-    center_y = int(960 + random.randint(-150, 150))
-    for r in range(750, 0, -8):
-        factor = 1.0 - (r / 750.0)
-        cr = int(glow_col[0] * factor + core_col[0] * (factor**2) * 0.4)
-        cg = int(glow_col[1] * factor + core_col[1] * (factor**2) * 0.4)
-        cb = int(glow_col[2] * factor + core_col[2] * (factor**2) * 0.4)
+    # Vertical gradient background
+    for y in range(1920):
+        factor = y / 1920.0
+        r = int(bg_top[0] * (1 - factor) + bg_bottom[0] * factor)
+        g = int(bg_top[1] * (1 - factor) + bg_bottom[1] * factor)
+        b = int(bg_top[2] * (1 - factor) + bg_bottom[2] * factor)
+        draw.line([(0, y), (1080, y)], fill=(r, g, b))
+
+    # Volumetric Radiant Celestial Sphere (Center)
+    center_y = int(960 + random.randint(-120, 120))
+    for r in range(600, 0, -6):
+        factor = 1.0 - (r / 600.0)
+        cr = int(glow_col[0] * factor + core_col[0] * (factor**1.8))
+        cg = int(glow_col[1] * factor + core_col[1] * (factor**1.8))
+        cb = int(glow_col[2] * factor + core_col[2] * (factor**1.8))
         draw.ellipse([540 - r, center_y - r, 540 + r, center_y + r], fill=(min(255, cr), min(255, cg), min(255, cb)))
 
-    # Atmospheric particles / starfield
-    for _ in range(350):
+    # Brilliant 3D Planetary Ring System
+    for rw in range(-25, 26, 2):
+        draw.ellipse([540 - 750, center_y - 140 + rw, 540 + 750, center_y + 140 + rw], outline=ring_col, width=2)
+
+    # Vibrant Foreground Particle Field
+    for _ in range(400):
         sx = random.randint(0, 1080)
         sy = random.randint(0, 1920)
-        sr = random.randint(1, 4)
-        alpha = random.randint(140, 255)
-        draw.ellipse([sx, sy, sx + sr, sy + sr], fill=(alpha, alpha, alpha))
+        sr = random.randint(2, 6)
+        alpha = random.randint(180, 255)
+        p_col = (alpha, min(255, alpha + 20), min(255, int(alpha * 0.9)))
+        draw.ellipse([sx, sy, sx + sr, sy + sr], fill=p_col)
 
     # Soft cinematic diffusion blur
-    img = img.filter(ImageFilter.GaussianBlur(radius=2))
+    img = img.filter(ImageFilter.GaussianBlur(radius=1.5))
     img.save(str(output_path), quality=95)
-    print(f"🎨 [Stage 3: Image Engine] Synthesized 3D Procedural Visual: {output_path.name}")
+    print(f"🎨 [Stage 3: Image Engine] Synthesized Vibrant 3D Visual: {output_path.name}")
     return output_path
 
 
@@ -161,20 +182,22 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
         except Exception as e_rep:
             print(f"⚠️ Replicate image note: {e_rep}")
 
-    # 3. Universal Free AI Tier (Pollinations Flux & Turbo)
-    for model_name in ["flux", "turbo"]:
-        try:
-            clean_prompt = urllib.parse.quote(enriched[:320])
-            url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=768&height=1344&nologo=true&seed={seed}&model={model_name}"
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
-            with urllib.request.urlopen(req, timeout=18) as response:
-                data = response.read()
-                if len(data) > 15_000:
-                    output_path.write_bytes(data)
-                    print(f"🎨 [Stage 3: Image Engine] Generated 3D Pixar Visual ({model_name}): {output_path.name}")
-                    return output_path
-        except Exception:
-            time.sleep(2)
+    # 3. Universal Free AI Tier (Pollinations Flux & Flux-Realism)
+    for model_name in ["flux", "flux-realism"]:
+        for attempt in range(1, 3):
+            try:
+                clean_prompt = urllib.parse.quote(enriched[:320])
+                url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=768&height=1344&nologo=true&seed={seed}&model={model_name}"
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+                with urllib.request.urlopen(req, timeout=35) as response:
+                    data = response.read()
+                    if len(data) > 15_000:
+                        output_path.write_bytes(data)
+                        print(f"🎨 [Stage 3: Image Engine] Generated 3D Pixar Visual ({model_name}): {output_path.name}")
+                        return output_path
+            except Exception as e_poll:
+                print(f"⚠️ Pollinations {model_name} note (attempt {attempt}): {e_poll}")
+                time.sleep(2)
 
     # 4. Guaranteed Procedural Fallback (Never leaves missing files on disk)
     return generate_procedural_3d_visual(prompt, output_path, seed=seed)
