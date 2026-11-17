@@ -42,14 +42,15 @@ PREMISE: {hook_premise}
 PART: {part_number} of {total_parts}
 
 CRITICAL RULES:
-1. TOTAL SPOKEN WORDS MUST BE BETWEEN 120 AND 135 WORDS (STRICTLY UNDER 59 SECONDS WHEN SPOKEN).
-2. HOOKS EVERY 10 SECONDS: Every beat must start with an intrigue trigger.
-3. STRUCTURE: Exactly 5 beats (each 22-26 words):
-   - Beat 1 (0-10s): The Immediate Shock Hook (Grab in first 3s)
-   - Beat 2 (10-22s): Escalation (10s hook: things get worse/weirder)
-   - Beat 3 (22-35s): The Climax / Peak Danger (20s hook: point of no return)
-   - Beat 4 (35-48s): The Revelation (30s hook: mind-blowing scientific/narrative truth)
-   - Beat 5 (48-58s): Clean Conclusion & CTA (45s hook: clear resolution, ends before 59s)
+1. TOTAL SPOKEN WORDS MUST BE STRICTLY BETWEEN 115 AND 130 WORDS (YIELDS EXACTLY 54-58 SECONDS).
+2. BEAT 1 MUST START WITH A PSYCHOLOGICAL HOOK TRIGGER: "What happens if...", "Imagine if...", "Did you know...", "Why does...", or "Could you survive...".
+3. HOOKS EVERY 10 SECONDS: Every beat must start with an intrigue trigger and maintain rapid pacing.
+4. STRUCTURE: Exactly 5 beats (each 22-26 words):
+   - Beat 1 (0-10s): Immediate Curiosity Shock Hook (Grab in first 3 seconds, 20-25 words)
+   - Beat 2 (10-22s): Escalation (Things get weirder/worse, 22-26 words)
+   - Beat 3 (22-35s): Peak Tension / Point of no return (22-26 words)
+   - Beat 4 (35-48s): Scientific / Narrative Revelation (22-26 words)
+   - Beat 5 (48-58s): Satisfying Conclusion ending with a curiosity CTA question (20-25 words)
 
 Output JSON ONLY:
 {{

@@ -61,6 +61,7 @@ from story_pipeline.telegram_notifier import (
     notify_error,
     notify_fallback,
     notify_zero_upload_blocked,
+    notify_audit_rejection,
 )
 from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
@@ -138,14 +139,31 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         print(f"   Category: {genre} | Visual Style: {topic_data.get('style', '3D Pixar')}")
 
         # -------------------------------------------------------------
-        # STAGE 2: 59-Second Hook-Driven Narrative Script Engine
+        # STAGE 2: 59-Second Hook-Driven Narrative Script Engine & Gate 1 Auditor
         # -------------------------------------------------------------
         current_stage = "Stage 2: 59-Second Narrative Script Engine"
         print("\n✍️ [Stage 2/7] Generating 5-beat retention script with hooks every 10 seconds...")
-        script_data = generate_viral_script(topic_data)
-        script_data["episode"] = ep_num
-        script_data["genre"] = genre
-        script_data["title"] = chapter_title
+        script_data = None
+        for script_attempt in range(1, 4):
+            try:
+                script_data = generate_viral_script(topic_data)
+                script_data["episode"] = ep_num
+                script_data["genre"] = genre
+                script_data["title"] = chapter_title
+                audit_story_script(script_data)
+                break
+            except QualityAuditError as s_err:
+                print(f"⚠️ [Gate 1 Rejection] Script attempt {script_attempt}/3 failed: {s_err}")
+                notify_audit_rejection(
+                    gate_name="Gate 1: Story Script & Hook",
+                    item_name=f"Episode #{ep_num} Script",
+                    reason=str(s_err),
+                    attempt=script_attempt,
+                    max_attempts=3,
+                    action="Regenerating script with amplified psychological curiosity hooks...",
+                )
+                if script_attempt == 3:
+                    raise
 
         # Alias beats to scenes for backwards compatibility
         beats = script_data["beats"]
@@ -153,10 +171,6 @@ def process_next_story(custom_topic: str | None = None) -> dict:
             b["scene_number"] = b["beat_number"]
             b["title"] = b.get("hook_trigger", f"Beat #{b['beat_number']}")
         script_data["scenes"] = beats
-
-        # Gate 1: Narrative Quality Audit
-        current_stage = "Gate 1: Narrative Quality Audit"
-        audit_story_script(script_data)
 
         # -------------------------------------------------------------
         # Foley SFX Verification

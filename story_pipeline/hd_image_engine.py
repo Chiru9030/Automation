@@ -89,17 +89,17 @@ def generate_procedural_3d_visual(prompt: str, output_path: Path, seed: int = 42
     for rw in range(-25, 26, 2):
         draw.ellipse([540 - 750, center_y - 140 + rw, 540 + 750, center_y + 140 + rw], outline=ring_col, width=2)
 
-    # Vibrant Foreground Particle Field
-    for _ in range(400):
+    # Vibrant Foreground Particle Field (Crisp High-Frequency Detail)
+    for _ in range(1200):
         sx = random.randint(0, 1080)
         sy = random.randint(0, 1920)
-        sr = random.randint(2, 6)
-        alpha = random.randint(180, 255)
+        sr = random.randint(1, 4)
+        alpha = random.randint(190, 255)
         p_col = (alpha, min(255, alpha + 20), min(255, int(alpha * 0.9)))
         draw.ellipse([sx, sy, sx + sr, sy + sr], fill=p_col)
 
-    # Soft cinematic diffusion blur
-    img = img.filter(ImageFilter.GaussianBlur(radius=1.5))
+    # Tack-sharp edge enhancement for cinema clarity
+    img = img.filter(ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3))
     img.save(str(output_path), quality=95)
     print(f"🎨 [Stage 3: Image Engine] Synthesized Vibrant 3D Visual: {output_path.name}")
     return output_path
@@ -256,19 +256,46 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
 
 
 def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
-    """Generates enhanced visuals for all beats in the script with spacing."""
+    """Generates enhanced visuals for all beats with active quality auditing and retry loops."""
+    from story_pipeline.strict_pipeline_auditor import audit_single_visual_asset, QualityAuditError
+    from story_pipeline.telegram_notifier import notify_audit_rejection
+
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     has_gemini = bool(os.getenv("GEMINI_API_KEY"))
-    spacing = 10 if has_gemini else 4
+    spacing = 6 if has_gemini else 3
 
     for idx, beat in enumerate(beats):
         b_num = beat["beat_number"]
         out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_beat_{b_num}.jpg"
         prompt = beat.get("visual_prompt") or f"{beat['title']}, {beat['narration']}"
-
-        # Generate with distinct seed per beat
         seed = int(episode_num * 100 + b_num * 17)
-        generate_hd_image(prompt, out_file, seed=seed)
+
+        # Active quality audit loop (up to 3 attempts with dynamic prompt enhancement)
+        beat_certified = False
+        for attempt in range(1, 4):
+            generate_hd_image(prompt, out_file, seed=seed + attempt * 31)
+            try:
+                metrics = audit_single_visual_asset(out_file)
+                print(f"✅ [Auditor Gate 2] Certified Beat #{b_num}: {out_file.name} (Vibrancy: {metrics['colorfulness']:.1f}, Contrast: {metrics['contrast']:.1f}, Sharpness: {metrics['sharpness']:.1f})")
+                beat_certified = True
+                break
+            except QualityAuditError as q_err:
+                print(f"⚠️ [Auditor Gate 2 Rejection] Beat #{b_num} attempt {attempt}/3 rejected: {q_err}")
+                notify_audit_rejection(
+                    gate_name="Gate 2: Visual Quality & Aesthetics",
+                    item_name=out_file.name,
+                    reason=str(q_err),
+                    attempt=attempt,
+                    max_attempts=3,
+                    action="Regenerating with amplified contrast, sharpness, and saturation tokens..."
+                )
+                out_file.unlink(missing_ok=True)
+                prompt += ", ultra-vibrant colors, tack-sharp 3D focus, high contrast, vivid volumetric lighting, octane render"
+
+        if not beat_certified:
+            generate_procedural_3d_visual(prompt, out_file, seed=seed)
+            audit_single_visual_asset(out_file)
+
         beat["image_url"] = f"images/{out_file.name}"
 
         # Spacing to prevent API burst throttling

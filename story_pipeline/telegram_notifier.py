@@ -176,6 +176,30 @@ def notify_fallback(stage_name: str, details: str) -> bool:
     return send_telegram_message(msg)
 
 
+def notify_audit_rejection(
+    gate_name: str,
+    item_name: str,
+    reason: str,
+    attempt: int,
+    max_attempts: int,
+    action: str = "Retrying generation with enhanced parameters...",
+) -> bool:
+    """Sends a real-time mobile report whenever an asset fails strict quality audit and is sent back for retry."""
+    msg = (
+        f"🔬 <b>Auditor Gate Rejection & Retry Notice</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🛡️ <b>Auditor Gate:</b> {gate_name}\n"
+        f"🎯 <b>Target Asset:</b> <code>{item_name}</code>\n"
+        f"❌ <b>Defect Detected:</b> {reason}\n"
+        f"🔄 <b>Attempt:</b> {attempt}/{max_attempts}\n"
+        f"⚙️ <b>Action:</b> {action}\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"ℹ️ <i>Rejecting sub-par quality to maintain production standards.</i>"
+    )
+    print(f"📱 Dispatching audit rejection alert to mobile via Telegram...")
+    return send_telegram_message(msg)
+
+
 def notify_zero_upload_blocked(episode_num: int, title: str, reason: str) -> bool:
     """Sends a high-priority mobile alert when pre-upload safety audit blocks publication."""
     msg = (
