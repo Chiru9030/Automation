@@ -15,6 +15,9 @@ concurrency:
   group: story-pipeline
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   generate-and-publish:
     runs-on: ubuntu-latest
@@ -96,4 +99,4 @@ jobs:
           git config --global user.email "bot@storypipeline.internal"
           git add story_pipeline/story_history.json
           git commit -m "Auto: advanced story episode history [skip ci]" || echo "No changes to commit"
-          git push
+          git push origin main || echo "⚠️ Git push history skipped"
