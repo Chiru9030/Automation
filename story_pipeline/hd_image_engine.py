@@ -91,11 +91,29 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
 
     enriched = enrich_prompt(prompt)
 
-    # 1. Primary: Gemini Imagen 3 (with retry & quota reset backoff)
+    # 1. Primary: Gemini Imagen 3 (Developer API mode & Enterprise support)
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
-        for attempt in range(1, 4):
+        for attempt in range(1, 3):
             try:
+                import base64
+                # Google AI Studio Developer REST API (works with all standard AI Studio keys)
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key={api_key}"
+                req_data = json.dumps({
+                    "instances": [{"prompt": enriched}],
+                    "parameters": {"sampleCount": 1, "aspectRatio": "9:16"}
+                }).encode("utf-8")
+                req = urllib.request.Request(url, data=req_data, headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    resp_json = json.loads(resp.read().decode("utf-8"))
+                    preds = resp_json.get("predictions", [])
+                    if preds and "bytesBase64Encoded" in preds[0]:
+                        img_bytes = base64.b64decode(preds[0]["bytesBase64Encoded"])
+                        output_path.write_bytes(img_bytes)
+                        print(f"🎨 [Stage 3: Image Engine] Generated Imagen 3 Visual: {output_path.name}")
+                        return output_path
+
+                # Fallback to SDK method
                 from google import genai
                 client = genai.Client(api_key=api_key)
                 result = client.models.generate_images(
@@ -112,7 +130,7 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
                 print(f"⚠️ Gemini Imagen Attempt #{attempt} note: {e_genai}")
                 if "resource_exhausted" in err_str or "429" in err_str or "quota" in err_str:
                     wait_time = 20 * attempt
-                    print(f"⏳ Rate limit pause ({err_str[:60]}). Waiting {wait_time}s for Google quota reset...")
+                    print(f"⏳ Rate limit pause. Waiting {wait_time}s for Google quota reset...")
                     time.sleep(wait_time)
                 else:
                     break
