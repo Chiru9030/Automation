@@ -21,8 +21,11 @@ PUBLIC_DIR = BASE_DIR / "video-app" / "public"
 GENERATED_VIDEOS_DIR = PUBLIC_DIR / "generated_videos"
 
 
+HAS_WARNED_CLOUD_FALLBACK = False
+
 def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path: Path) -> bool:
     """Generates real AI motion video using cloud models (Wan 2.1 / MiniMax via Replicate)."""
+    global HAS_WARNED_CLOUD_FALLBACK
     api_token = os.getenv("REPLICATE_API_TOKEN")
     if not api_token:
         return False
@@ -85,11 +88,13 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
 
     except Exception as e:
         print(f"Notice: Cloud video generation exception ({e})")
-        try:
-            from story_pipeline.telegram_notifier import notify_fallback
-            notify_fallback("Cloud AI Video Generator", f"Exception ({e}). Falling back to local hardware 3D motion.")
-        except Exception:
-            pass
+        if not HAS_WARNED_CLOUD_FALLBACK:
+            HAS_WARNED_CLOUD_FALLBACK = True
+            try:
+                from story_pipeline.telegram_notifier import notify_fallback
+                notify_fallback("Cloud AI Video Generator", f"Replicate cloud notice ({str(e)[:120]}). Falling back to local hardware 3D motion.")
+            except Exception:
+                pass
         return False
 
 

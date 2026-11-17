@@ -24,7 +24,7 @@ def get_telegram_creds() -> tuple[str | None, str | None]:
     return bot_token, chat_id
 
 
-def send_telegram_message(text: str, parse_mode: str | None = "HTML") -> bool:
+def send_telegram_message(text: str, parse_mode: str | None = "HTML", reply_markup: dict | None = None) -> bool:
     """Sends a text message to your mobile Telegram chat with automatic fallback."""
     bot_token, chat_id = get_telegram_creds()
     if not bot_token or not chat_id:
@@ -42,6 +42,8 @@ def send_telegram_message(text: str, parse_mode: str | None = "HTML") -> bool:
         }
         if parse_mode:
             payload["parse_mode"] = parse_mode
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
 
         res = requests.post(url, json=payload, timeout=20)
         if res.status_code == 200:
@@ -53,7 +55,6 @@ def send_telegram_message(text: str, parse_mode: str | None = "HTML") -> bool:
             if parse_mode:
                 print("🔄 Retrying Telegram message in plain text format...")
                 payload.pop("parse_mode", None)
-                # Strip HTML tags simply
                 clean_text = text.replace("<b>", "").replace("</b>", "").replace("<i>", "").replace("</i>", "").replace("<code>", "").replace("</code>", "")
                 payload["text"] = clean_text
                 res2 = requests.post(url, json=payload, timeout=20)
@@ -69,7 +70,7 @@ def send_telegram_message(text: str, parse_mode: str | None = "HTML") -> bool:
 
 
 def send_telegram_video(
-    video_path: Path, caption: str, protect_content: bool = True
+    video_path: Path, caption: str, protect_content: bool = True, reply_markup: dict | None = None
 ) -> bool:
     """Sends the rendered vertical video preview directly to your phone."""
     bot_token, chat_id = get_telegram_creds()
@@ -87,6 +88,7 @@ def send_telegram_video(
 
     try:
         import requests
+        import json
 
         url = f"https://api.telegram.org/bot{bot_token}/sendVideo"
         data = {
@@ -95,6 +97,9 @@ def send_telegram_video(
             "supports_streaming": True,
             "protect_content": protect_content,
         }
+        if reply_markup:
+            data["reply_markup"] = json.dumps(reply_markup)
+
         with open(video_path, "rb") as vf:
             files = {"video": vf}
             res = requests.post(url, data=data, files=files, timeout=180)
@@ -117,7 +122,7 @@ def notify_success(
     youtube_res: str,
     video_path: Path | None = None,
 ) -> bool:
-    """Sends celebratory success card + YouTube link + attached video to mobile."""
+    """Sends celebratory success card + YouTube link + attached video with interactive buttons."""
     # Extract video ID or link
     yt_link = "N/A"
     if "Video ID:" in youtube_res:
@@ -136,14 +141,24 @@ def notify_success(
         f"🔗 <b>Watch Live:</b> {yt_link}\n"
     )
 
+    # Interactive Inline Buttons
+    buttons = None
+    if yt_link.startswith("http"):
+        buttons = {
+            "inline_keyboard": [
+                [{"text": "📺 Watch Short on YouTube", "url": yt_link}],
+                [{"text": "🚀 Open YouTube Studio", "url": "https://studio.youtube.com"}]
+            ]
+        }
+
     # 1. Always deliver the status text report first
     print("📱 Sending mobile status report via Telegram...")
-    sent_text = send_telegram_message(msg)
+    sent_text = send_telegram_message(msg, reply_markup=buttons)
 
     # 2. Then attempt to deliver the video file preview
     if video_path and video_path.exists():
         print("📱 Sending mobile video preview via Telegram...")
-        send_telegram_video(video_path, caption=f"🎬 Ep #{episode_num}: {title}", protect_content=True)
+        send_telegram_video(video_path, caption=f"🎬 Ep #{episode_num}: {title}", protect_content=True, reply_markup=buttons)
 
     return sent_text
 

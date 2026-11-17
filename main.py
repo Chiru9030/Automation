@@ -48,7 +48,27 @@ def upload_to_youtube(video_path: str, title: str, description: str, tags: list[
     media = MediaFileUpload(video_path, chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(part=",".join(body.keys()), body=body, media_body=media)
     response = request.execute()
-    return f"Successfully uploaded to YouTube! Video ID: {response['id']}"
+    video_id = response.get("id")
+
+    # Post engagement booster comment
+    if video_id:
+        try:
+            comment_body = {
+                "snippet": {
+                    "videoId": video_id,
+                    "topLevelComment": {
+                        "snippet": {
+                            "textOriginal": "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for new episodes every 5 hours! 🚀"
+                        }
+                    }
+                }
+            }
+            youtube.commentThreads().insert(part="snippet", body=comment_body).execute()
+            print("💬 Automatically posted engagement comment on YouTube Short!")
+        except Exception as e_comm:
+            print(f"Notice: Auto-comment note ({e_comm})")
+
+    return f"Successfully uploaded to YouTube! Video ID: {video_id}"
 
 
 def upload_to_instagram(video_path: str, caption: str) -> str:

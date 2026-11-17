@@ -52,8 +52,34 @@ def build_subtitle_chunks(words: list[dict], max_words_per_chunk: int = 3) -> li
     return chunks
 
 
+def get_word_highlight_color(word: str) -> str:
+    """Returns dynamic Hormozi/MrBeast highlight colors based on word emotion and category."""
+    w_clean = word.lower().strip(".,!?;:\"'")
+    # 1. Numbers / Statistics / Quantities -> Neon Emerald Green (&H0066FF00&)
+    if any(c.isdigit() for c in w_clean) or w_clean in [
+        "hundred", "thousand", "million", "billion", "trillion", "zero",
+        "percent", "years", "hours", "seconds", "liters", "miles", "gravity", "double"
+    ]:
+        return r"{\c&H0066FF00&}"
+    # 2. Danger / Shock / Catastrophe -> Neon Crimson Red (&H003333FF&)
+    if w_clean in [
+        "die", "death", "kill", "destroyed", "terror", "crushed", "shattered",
+        "exploded", "fatal", "suffocate", "warning", "catastrophe", "violently",
+        "radiation", "lethal", "toxic", "fall", "collapse", "danger"
+    ]:
+        return r"{\c&H003333FF&}"
+    # 3. Curiosity / Questions / Mystery -> Neon Cyan (&H00FFFF00&)
+    if w_clean in [
+        "what", "why", "how", "secret", "never", "mystery", "shocking",
+        "hidden", "truth", "discovered", "impossible", "imagine", "if"
+    ]:
+        return r"{\c&H00FFFF00&}"
+    # Default active highlight -> Neon Golden Yellow (&H0000E6FF&)
+    return r"{\c&H0000E6FF&}"
+
+
 def compile_kinetic_subtitles(beats: list[dict], output_ass_path: Path) -> Path:
-    """Compiles exact frame-accurate ASS subtitles for the entire video."""
+    """Compiles exact frame-accurate ASS subtitles for the entire video (clean lower-third, NO top header text)."""
     header = """[Script Info]
 Title: Kinetic Viral Story Subtitles
 ScriptType: v4.00+
@@ -66,7 +92,6 @@ PlayResY: 1920
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: KineticSub,Impact,58,&H00FFFFFF,&H0000E6FF,&H00000000,&H90000000,-1,0,0,0,100,100,2,0,1,5,3,2,60,60,240,1
-Style: BeatBadge,Impact,30,&H0000E6FF,&H00FFFFFF,&H00000000,&HB005050F,-1,0,0,0,100,100,2,0,1,4,2,8,40,40,75,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -81,15 +106,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         chunks = build_subtitle_chunks(words, max_words_per_chunk=3)
         beat["subtitle_chunks"] = chunks
 
-        # Top Badge (Avatar + Speaker + Beat)
-        b_start = format_ass_time(running_time)
-        b_end = format_ass_time(running_time + beat_dur)
-        avatar = beat.get("speaker_avatar", "🎙️")
-        speaker = beat.get("speaker_name", "NARRATOR").upper()
-        title = beat.get("title", f"BEAT #{beat['beat_number']}").upper()
-        events.append(f"Dialogue: 1,{b_start},{b_end},BeatBadge,,0,0,0,,{avatar} {speaker} • {title}")
-
-        # Active Word Karaoke Events (Zero drift, 100% discrete synchronization)
+        # Active Word Karaoke Events with Emotion Color Highlighting (Zero top header clutter)
         for chunk in chunks:
             chunk_words = chunk["words"]
             for i, target_word in enumerate(chunk_words):
@@ -99,7 +116,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 parts = []
                 for j, w in enumerate(chunk_words):
                     if j == i:
-                        parts.append(r"{\c&H0000E6FF&}" + w["word"] + r"{\c&H00FFFFFF&}")
+                        h_col = get_word_highlight_color(w["word"])
+                        parts.append(h_col + w["word"] + r"{\c&H00FFFFFF&}")
                     else:
                         parts.append(w["word"])
                 line_text = " ".join(parts)

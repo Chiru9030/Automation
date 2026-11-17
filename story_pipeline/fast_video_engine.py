@@ -49,7 +49,6 @@ PlayResY: 1920
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: KaraokeWord,Impact,64,&H00FFFFFF,&H0000E6FF,&H00000000,&H90000000,-1,0,0,0,100,100,2,0,1,6,4,2,60,60,220,1
-Style: HeaderBadge,Impact,32,&H0000E6FF,&H00FFFFFF,&H00000000,&HB005050F,-1,0,0,0,100,100,2,0,1,4,3,8,40,40,65,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -61,13 +60,6 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for scene in scenes:
         scene_dur = scene.get("duration_in_frames", 360) / fps
         chunks = scene.get("subtitle_chunks", [])
-
-        # Scene Top Header Badge (stays visible throughout scene)
-        badge_start = format_ass_time(running_time)
-        badge_end = format_ass_time(running_time + scene_dur)
-        badge_speaker = scene.get("speaker_name", "NARRATOR").upper()
-        badge_title = scene.get("title", "STORY").upper()
-        events.append(f"Dialogue: 1,{badge_start},{badge_end},HeaderBadge,,0,0,0,,{badge_speaker} \\N {badge_title}")
 
         # Active Discrete Karaoke Events (Zero drift, 100% frame-perfect sync!)
         for chunk in chunks:
@@ -162,22 +154,40 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             audio_stream_idx += 1
         running_offset += sc.get("duration_in_frames", 360) / 30
 
-    # Add SFX cues
+    # Step 4.2: Add Cinematic Sound Effects at Every Cut & Transition
     sfx_labels = []
-    running_sfx_offset = 0.0
-    for sc in scenes:
-        sfx_name = sc.get("sfx")
-        if sfx_name:
-            sfx_file = PUBLIC_DIR / "sfx" / f"{sfx_name}.wav"
-            if sfx_file.exists():
-                audio_inputs.extend(["-i", str(sfx_file)])
-                offset_ms = int(running_sfx_offset * 1000)
-                vol = 0.65 if sfx_name == "impact_boom" else 0.35
-                label = f"[sfx_{audio_stream_idx}]"
-                filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},volume={vol}{label}")
-                sfx_labels.append(label)
-                audio_stream_idx += 1
-        running_sfx_offset += sc.get("duration_in_frames", 360) / 30
+    cut_timestamps = []
+    running_cut = 0.0
+    for idx, sc in enumerate(scenes):
+        if idx > 0:
+            cut_timestamps.append((running_cut, idx))
+        running_cut += sc.get("duration_in_frames", 360) / 30.0
+
+    # Opening impact sound at 0.0s
+    boom_file = PUBLIC_DIR / "sfx" / "impact_boom.wav"
+    whoosh_file = PUBLIC_DIR / "sfx" / "whoosh.wav"
+
+    if boom_file.exists():
+        audio_inputs.extend(["-i", str(boom_file)])
+        label = f"[sfx_{audio_stream_idx}]"
+        filter_inputs.append(f"[{audio_stream_idx}:a]adelay=0|0,volume=0.55{label}")
+        sfx_labels.append(label)
+        audio_stream_idx += 1
+
+    # Sound effect at every cut between scenes
+    for cut_sec, cut_idx in cut_timestamps:
+        offset_ms = max(0, int((cut_sec - 0.12) * 1000))  # Start 120ms before visual cut for seamless impact
+        sfx_target = whoosh_file if cut_idx % 2 == 1 else boom_file
+        if not sfx_target.exists():
+            sfx_target = whoosh_file if whoosh_file.exists() else boom_file
+
+        if sfx_target.exists():
+            audio_inputs.extend(["-i", str(sfx_target)])
+            label = f"[cut_sfx_{audio_stream_idx}]"
+            vol = 0.65 if "boom" in sfx_target.name else 0.50
+            filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},volume={vol}{label}")
+            sfx_labels.append(label)
+            audio_stream_idx += 1
 
     all_tracks = ["[bgm]"] + voice_mix_labels + sfx_labels
     num_tracks = len(all_tracks)
