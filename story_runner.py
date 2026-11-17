@@ -56,7 +56,12 @@ from story_pipeline.strict_pipeline_auditor import (
 from story_pipeline.sfx_generator import generate_all_sfx
 from story_pipeline.fast_video_engine import render_fast_story_video
 from story_pipeline.thumbnail_generator import generate_high_ctr_thumbnail
-from story_pipeline.telegram_notifier import notify_success, notify_error, notify_fallback
+from story_pipeline.telegram_notifier import (
+    notify_success,
+    notify_error,
+    notify_fallback,
+    notify_zero_upload_blocked,
+)
 from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
@@ -240,9 +245,21 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         if not render_success:
             raise RuntimeError("Video rendering failed across all engines.")
 
-        # Gate 5: Deep ffprobe inspection and duration certification (<59.0s)
-        current_stage = "Gate 5: Final Video Certification Audit"
-        cert = audit_final_rendered_video(out_mp4)
+        # -------------------------------------------------------------
+        # Gate 5: Zero-Upload Safety Guard & Comprehensive Multi-Pillar Audit
+        # -------------------------------------------------------------
+        current_stage = "Gate 5: Zero-Upload Pre-Flight Safety Certification"
+        print("\n🛡️ [Zero-Upload Safety Guard] Running comprehensive pre-flight verification...")
+        try:
+            cert = audit_final_rendered_video(out_mp4, ass_path=ass_path)
+        except Exception as audit_err:
+            print(f"🛑 [ZERO-UPLOAD SAFETY HALT] Pre-upload verification rejected video: {audit_err}")
+            notify_zero_upload_blocked(
+                episode_num=ep_num,
+                title=chapter_title,
+                reason=str(audit_err)
+            )
+            raise audit_err
 
         # -------------------------------------------------------------
         # High-CTR Thumbnail Generation

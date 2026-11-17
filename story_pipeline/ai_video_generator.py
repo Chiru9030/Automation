@@ -1,9 +1,11 @@
 """
 Autonomous AI Video Generation & Animation Engine.
-Supports heavy cloud state-of-the-art video models:
-- Wan 2.1 (wavespeedai/wan-2.1-t2v-720p) - Alibaba's #1 Open-Source 3D Video Model
-- MiniMax Video-01 (minimax/video-01) - Expressive Cinematic Character Motion
-- Automatic fallback to high-depth multi-plane cinematic motion rendering when offline.
+Supports state-of-the-art open-source video generation models:
+1. Wan 2.1 (wavespeedai/wan-2.1-t2v-720p) - Alibaba's #1 Open-Source 3D Video Model
+2. CogVideoX-5B (thudm/cogvideox-5b) - THUDM's Leading Open-Source 3D Video Model
+3. AnimateDiff-Lightning (bytedance/animatediff-lightning-4step) - ByteDance High-Speed Video Engine
+4. Pollinations Video - Generative Video Endpoint
+5. Local Hardware 3D Motion Synthesis - Resilient Full-Bleed 1080x1920 Cinematic Parallax
 """
 
 import os
@@ -20,89 +22,196 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_DIR = BASE_DIR / "video-app" / "public"
 GENERATED_VIDEOS_DIR = PUBLIC_DIR / "generated_videos"
 
-
 HAS_WARNED_CLOUD_FALLBACK = False
 
-def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path: Path) -> bool:
-    """Generates real AI motion video using cloud models (Wan 2.1 / MiniMax via Replicate)."""
+
+def build_strong_ai_video_prompt(
+    base_prompt: str,
+    camera_motion: str = "smooth-zoom-in",
+    visual_style: str = "3D Pixar",
+) -> str:
+    """
+    Constructs an engineered, cinema-grade prompt for open-source AI video models
+    (Wan 2.1, CogVideoX-5B, AnimateDiff-Lightning, Pollinations).
+
+    Infuses:
+    - Dynamic subject clarity & continuous fluid action
+    - Precise spatial camera motion direction (dolly push, tracking pan, dramatic boom)
+    - Volumetric atmospheric lighting, Unreal Engine 5 render, raytracing, vivid contrast
+    - High-frame-rate fluid physics, 8k resolution, zero artifacts
+    """
+    # 1. Translate camera motion token into explicit cinematography directions
+    cam_directives = {
+        "pan-right": "cinematic slow tracking pan shot moving smoothly from left to right across the vibrant environment",
+        "dramatic-pulse": "suspenseful high-tension camera zoom with rapid focus pull and intense dynamic lighting",
+        "warm-dolly": "epic scope revealing slow dolly-out camera shot pulling backward to reveal vast scale",
+        "sunset-drift": "sweeping vertical crane rise tilting upward smoothly, dramatic perspective shift",
+        "smooth-zoom-in": "slow dramatic camera dolly forward push-in into the scene, smooth continuous motion, 60fps",
+    }
+    cam_str = cam_directives.get(camera_motion, cam_directives["smooth-zoom-in"])
+
+    # 2. Cinema-grade style enhancements
+    style_tokens = (
+        "masterpiece, 3D Pixar animated film aesthetic, Disney cinematic lighting, "
+        "Unreal Engine 5 render, volumetric god rays, ray-traced reflections, "
+        "subsurface scattering, highly detailed textures, vibrant vivid saturated colors, "
+        "dynamic fluid motion, perfect physics simulation, 8k resolution, cinematic color grading, "
+        "hyper-realistic depth of field, full vertical 9:16 frame composition"
+    )
+
+    clean_base = base_prompt.strip().rstrip(".")
+    strong_prompt = f"{clean_base}, {cam_str}, {style_tokens}"
+    return strong_prompt
+
+
+def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path: Path, camera_motion: str = "smooth-zoom-in") -> bool:
+    """
+    Generates real AI motion video using cloud open-source models:
+    - Tier 1: Wan 2.1 (wavespeedai/wan-2.1-t2v-720p)
+    - Tier 2: CogVideoX-5B (thudm/cogvideox-5b)
+    - Tier 3: AnimateDiff-Lightning (bytedance/animatediff-lightning-4step)
+    - Tier 4: Pollinations Video
+    """
     global HAS_WARNED_CLOUD_FALLBACK
+
+    strong_prompt = build_strong_ai_video_prompt(prompt, camera_motion=camera_motion)
+
     api_token = os.getenv("REPLICATE_API_TOKEN")
-    if not api_token:
-        return False
-    api_token = api_token.strip().strip("'").strip('"')
-    os.environ["REPLICATE_API_TOKEN"] = api_token
+    if api_token:
+        api_token = api_token.strip().strip("'").strip('"')
+        os.environ["REPLICATE_API_TOKEN"] = api_token
 
-    try:
-        import replicate
-        client = replicate.Client(api_token=api_token)
-        print(f"🌐 [Cloud AI Video] Generating realistic video via Wan 2.1 / MiniMax for: '{prompt[:45]}...'")
+    temp_cloud = output_video_path.with_suffix(".cloud.mp4")
 
-        # 1. Try Wan 2.1 (9:16 Vertical Video)
-        output = None
+    # -------------------------------------------------------------
+    # Try Replicate Open-Source Suite (Wan 2.1 -> CogVideoX -> AnimateDiff)
+    # -------------------------------------------------------------
+    if api_token:
         try:
-            output = client.run(
-                "wavespeedai/wan-2.1-t2v-720p",
-                input={
-                    "prompt": f"{prompt}, 3D Pixar animated film style, Disney cinematic lighting, fluid character motion, 8k",
-                    "aspect_ratio": "9:16",
-                    "fast_mode": True,
-                }
-            )
-        except Exception as e_wan:
-            print(f"Notice: Wan 2.1 note ({e_wan}), falling back to MiniMax...")
-            output = client.run(
-                "minimax/video-01",
-                input={
-                    "prompt": f"{prompt}, 3D Pixar animation, Disney cinematic style, 8k",
-                    "prompt_optimizer": True,
-                }
-            )
+            import replicate
+            client = replicate.Client(api_token=api_token)
+            print(f"🌐 [Cloud AI Video] Initiating Open-Source Video Cascade for: '{prompt[:45]}...'")
 
-        temp_cloud = output_video_path.with_suffix(".cloud.mp4")
-        if isinstance(output, list) and len(output) > 0:
-            output = output[0]
+            output = None
 
-        if hasattr(output, "read"):
-            temp_cloud.write_bytes(output.read())
-        else:
-            video_url = str(output.url) if hasattr(output, "url") else str(output)
-            print(f"📥 Downloading generated AI video from cloud: {video_url[:60]}...")
-            req_dl = urllib.request.Request(video_url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req_dl, timeout=60) as resp:
-                temp_cloud.write_bytes(resp.read())
-
-        if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
-            # Standardize cloud video to 1080x1920 @ 30fps for seamless concatenation
-            cmd_norm = [
-                "ffmpeg", "-y", "-i", str(temp_cloud),
-                "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
-                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
-                "-pix_fmt", "yuv420p",
-                "-an",
-                str(output_video_path),
-            ]
-            subprocess.run(cmd_norm, check=True, capture_output=True)
-            temp_cloud.unlink(missing_ok=True)
-            return output_video_path.exists() and output_video_path.stat().st_size > 50_000
-        return False
-
-    except Exception as e:
-        print(f"Notice: Cloud video generation exception ({e})")
-        if not HAS_WARNED_CLOUD_FALLBACK:
-            HAS_WARNED_CLOUD_FALLBACK = True
+            # 1. Wan 2.1 (Alibaba Open-Source Text-to-Video)
             try:
-                from story_pipeline.telegram_notifier import notify_fallback
-                notify_fallback("Cloud AI Video Generator", f"Replicate cloud notice ({str(e)[:120]}). Falling back to local hardware 3D motion.")
-            except Exception:
-                pass
-        return False
+                print("   • Testing Model 1: Wan 2.1 (720p 9:16)...")
+                output = client.run(
+                    "wavespeedai/wan-2.1-t2v-720p",
+                    input={
+                        "prompt": strong_prompt,
+                        "aspect_ratio": "9:16",
+                        "fast_mode": True,
+                    }
+                )
+            except Exception as e_wan:
+                print(f"Notice: Wan 2.1 ({e_wan}), advancing to CogVideoX-5B...")
+
+            # 2. CogVideoX-5B (THUDM Leading Open-Source)
+            if not output:
+                try:
+                    print("   • Testing Model 2: CogVideoX-5B...")
+                    output = client.run(
+                        "thudm/cogvideox-5b",
+                        input={
+                            "prompt": strong_prompt[:500],
+                            "num_frames": 49,
+                        }
+                    )
+                except Exception as e_cog:
+                    print(f"Notice: CogVideoX-5B ({e_cog}), advancing to AnimateDiff-Lightning...")
+
+            # 3. AnimateDiff-Lightning (ByteDance High-Speed Distilled)
+            if not output:
+                try:
+                    print("   • Testing Model 3: AnimateDiff-Lightning...")
+                    output = client.run(
+                        "bytedance/animatediff-lightning-4step",
+                        input={
+                            "prompt": strong_prompt[:400],
+                        }
+                    )
+                except Exception as e_anim:
+                    print(f"Notice: AnimateDiff-Lightning ({e_anim})...")
+
+            # Process output stream / URL if successful
+            if output:
+                if isinstance(output, list) and len(output) > 0:
+                    output = output[0]
+
+                if hasattr(output, "read"):
+                    temp_cloud.write_bytes(output.read())
+                else:
+                    video_url = str(output.url) if hasattr(output, "url") else str(output)
+                    print(f"📥 Downloading generated AI video from cloud: {video_url[:60]}...")
+                    req_dl = urllib.request.Request(video_url, headers={"User-Agent": "Mozilla/5.0"})
+                    with urllib.request.urlopen(req_dl, timeout=60) as resp:
+                        temp_cloud.write_bytes(resp.read())
+
+                if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
+                    cmd_norm = [
+                        "ffmpeg", "-y", "-i", str(temp_cloud),
+                        "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
+                        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
+                        "-pix_fmt", "yuv420p",
+                        "-an",
+                        str(output_video_path),
+                    ]
+                    subprocess.run(cmd_norm, check=True, capture_output=True)
+                    temp_cloud.unlink(missing_ok=True)
+                    if output_video_path.exists() and output_video_path.stat().st_size > 50_000:
+                        print("✅ [Cloud AI Video] Successfully generated & normalized via Replicate!")
+                        return True
+        except Exception as e_rep:
+            print(f"Notice: Replicate open-source suite note ({e_rep})")
+
+    # -------------------------------------------------------------
+    # Try Model 4: Pollinations Video (Free Open-Source Generative Video)
+    # -------------------------------------------------------------
+    try:
+        encoded_prompt = urllib.parse.quote(strong_prompt[:250])
+        poll_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?model=flux&video=true&width=1080&height=1920&nologo=true"
+        print(f"🌐 [Pollinations Video] Attempting open generative video...")
+        req_poll = urllib.request.Request(poll_url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req_poll, timeout=25) as resp:
+            content_type = resp.headers.get("Content-Type", "")
+            if "video" in content_type or "mp4" in content_type:
+                temp_cloud.write_bytes(resp.read())
+                if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
+                    cmd_norm = [
+                        "ffmpeg", "-y", "-i", str(temp_cloud),
+                        "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
+                        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
+                        "-pix_fmt", "yuv420p",
+                        "-an",
+                        str(output_video_path),
+                    ]
+                    subprocess.run(cmd_norm, check=True, capture_output=True)
+                    temp_cloud.unlink(missing_ok=True)
+                    if output_video_path.exists() and output_video_path.stat().st_size > 50_000:
+                        print("✅ [Pollinations Video] Successfully generated & normalized!")
+                        return True
+    except Exception as e_poll:
+        print(f"Notice: Pollinations video note ({e_poll})")
+
+    # Send one throttled warning if falling back to local hardware 3D motion
+    if not HAS_WARNED_CLOUD_FALLBACK:
+        HAS_WARNED_CLOUD_FALLBACK = True
+        try:
+            from story_pipeline.telegram_notifier import notify_fallback
+            notify_fallback("Cloud AI Video Generator", "Cloud open-source video models offline or unauthenticated. Continuing seamlessly with local hardware 3D motion synthesis.")
+        except Exception:
+            pass
+
+    return False
 
 
 def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
     """
     Ensures every scene has a genuine animated video clip:
-    1. Checks if cloud AI video is enabled via REPLICATE_API_TOKEN.
-    2. Otherwise, synthesizes a high-depth 1080x1920 cinematic animated MP4 clip.
+    1. Checks if open-source cloud AI video is reachable.
+    2. Otherwise, synthesizes a high-depth 1080x1920 cinematic animated MP4 clip from the 3D scene visual.
     """
     output_video_path.parent.mkdir(parents=True, exist_ok=True)
     if output_video_path.exists() and output_video_path.stat().st_size > 100_000:
@@ -114,9 +223,10 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         img_path = PUBLIC_DIR / "images" / "file0.jpg"
 
     prompt = scene.get("visual_prompt") or f"{scene.get('title', 'action')}, {scene.get('narration', '')[:80]}"
+    motion = scene.get("camera_motion") or scene.get("camera_style", "smooth-zoom-in")
 
-    # Try Cloud Heavy Model (Wan 2.1 / MiniMax)
-    cloud_success = generate_ai_video_replicate(prompt, img_path, output_video_path)
+    # Try Cloud Open-Source Suite (Wan 2.1 / CogVideoX / AnimateDiff / Pollinations)
+    cloud_success = generate_ai_video_replicate(prompt, img_path, output_video_path, camera_motion=motion)
     if cloud_success:
         print(f"🎬 Successfully retrieved Cloud AI Video: {output_video_path.name}")
         return output_video_path
@@ -126,7 +236,6 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
     dur_frames = scene.get("duration_in_frames", 360)
     duration_sec = dur_frames / fps
 
-    motion = scene.get("camera_motion") or scene.get("camera_style", "smooth-zoom-in")
     if motion == "pan-right":
         # Dynamic 3D tracking pan across the scene
         zoom_expr = "'1.25'"

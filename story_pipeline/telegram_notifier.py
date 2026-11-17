@@ -176,6 +176,22 @@ def notify_fallback(stage_name: str, details: str) -> bool:
     return send_telegram_message(msg)
 
 
+def notify_zero_upload_blocked(episode_num: int, title: str, reason: str) -> bool:
+    """Sends a high-priority mobile alert when pre-upload safety audit blocks publication."""
+    msg = (
+        f"🛑 <b>ZERO-UPLOAD SAFETY HALT: Publication Blocked!</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🎬 <b>Episode:</b> #{episode_num}\n"
+        f"🎯 <b>Topic:</b> {title}\n"
+        f"❌ <b>Violation:</b> {reason}\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"🛡️ <b>Action:</b> YouTube & Instagram upload was <b>STRICTLY BLOCKED</b>.\n"
+        f"🚫 <i>No blank screens, missing audio, or missing subtitles will ever be uploaded.</i>"
+    )
+    print(f"📱 Dispatching Zero-Upload Safety Halt alert to mobile...")
+    return send_telegram_message(msg)
+
+
 def notify_error(stage_name: str, error_msg: str, exc: Exception | None = None) -> bool:
     """Sends an urgent alert when a pipeline step or auditor rejects an output."""
     tb = ""
