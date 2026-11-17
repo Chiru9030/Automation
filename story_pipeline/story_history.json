@@ -5,24 +5,27 @@
     "dynamic::What if aliens land on Earth tomorrow?::Ep4",
     "dynamic::What if gravity suddenly doubled across the entire world?::Ep6",
     "dynamic::What if you fell into Jupiter's atmosphere?::Ep7",
-    "dynamic::What happens if your immune system discovers your eyes?::Ep8"
+    "dynamic::What happens if your immune system discovers your eyes?::Ep8",
+    "dynamic::What happens if your body starts turning into a living stone statue?::Ep9"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 8,
+  "episode_count": 9,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
     "What if gravity suddenly doubled across the entire world?",
     "What if you fell into Jupiter's atmosphere?",
-    "What happens if your immune system discovers your eyes?"
+    "What happens if your immune system discovers your eyes?",
+    "What happens if your body starts turning into a living stone statue?"
   ],
   "used_topics": [
-    "What if aliens land on Earth tomorrow?",
-    "What if gravity suddenly doubled across the entire world?",
-    "The Deep Sea Abyssal Creature",
-    "What happens if your immune system discovers your eyes?",
+    "The immortal jellyfish that can live forever",
     "What happens if you never stop peeing forever?",
+    "What happens if your immune system discovers your eyes?",
+    "What if gravity suddenly doubled across the entire world?",
+    "What happens if your body starts turning into a living stone statue?",
+    "What if aliens land on Earth tomorrow?",
     "What if you fell into Jupiter's atmosphere?",
-    "The immortal jellyfish that can live forever"
+    "The Deep Sea Abyssal Creature"
   ]
 }
