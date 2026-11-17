@@ -73,19 +73,27 @@ Output JSON ONLY:
 }}"""
             res = None
             active_model = None
-            for model_id in ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash", "gemini-3.8-flash"]:
-                try:
-                    res = client.models.generate_content(
-                        model=model_id,
-                        contents=prompt,
-                        config=dict(response_mime_type="application/json")
-                    )
-                    if res and res.text:
-                        active_model = model_id
-                        break
-                except Exception as m_err:
-                    print(f"⚠️ Model {model_id} script generation error: {m_err}")
-                    continue
+            for model_id in ["gemini-3.8-flash", "gemini-2.0-flash-exp", "gemini-1.5-flash-8b", "gemini-1.5-flash"]:
+                for attempt in range(1, 3):
+                    try:
+                        res = client.models.generate_content(
+                            model=model_id,
+                            contents=prompt,
+                            config=dict(response_mime_type="application/json")
+                        )
+                        if res and res.text:
+                            active_model = model_id
+                            break
+                    except Exception as m_err:
+                        err_s = str(m_err).lower()
+                        if "503" in err_s or "unavailable" in err_s or "demand" in err_s:
+                            print(f"⏳ {model_id} high demand. Waiting 3s (attempt {attempt})...")
+                            time.sleep(3)
+                        else:
+                            print(f"⚠️ Model {model_id} script error: {m_err}")
+                            break
+                if res and res.text:
+                    break
 
             if res and res.text:
                 data = json.loads(res.text)

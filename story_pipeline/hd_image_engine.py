@@ -6,6 +6,7 @@ Generates vertical 1080x1920 illustrations for every story beat:
 3. Procedural Cinematic 3D Engine (Pillow) guarantees 100% asset uptime even during network blocks.
 """
 
+import json
 import math
 import os
 import random
@@ -94,6 +95,7 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
     # 1. Primary: Gemini Imagen 3 (Developer API mode & Enterprise support)
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
+        api_key = api_key.strip().strip("'").strip('"')
         for attempt in range(1, 3):
             try:
                 import base64
@@ -138,6 +140,8 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
     # 2. Secondary: Replicate Flux/SDXL (if configured)
     rep_token = os.getenv("REPLICATE_API_TOKEN")
     if rep_token:
+        rep_token = rep_token.strip().strip("'").strip('"')
+        os.environ["REPLICATE_API_TOKEN"] = rep_token
         try:
             import replicate
             client = replicate.Client(api_token=rep_token)

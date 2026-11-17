@@ -26,6 +26,8 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
     api_token = os.getenv("REPLICATE_API_TOKEN")
     if not api_token:
         return False
+    api_token = api_token.strip().strip("'").strip('"')
+    os.environ["REPLICATE_API_TOKEN"] = api_token
 
     try:
         import replicate
