@@ -100,9 +100,11 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     print(" 🚀 Autonomous 7-Stage Viral Story Video Pipeline Initiated")
     print("==================================================================")
 
-    # -------------------------------------------------------------
-    # STAGE 1: Dynamic Viral Topic Generator or Custom User Topic
-    # -------------------------------------------------------------
+    current_stage = "Stage 1: Dynamic Viral Topic Generator"
+    try:
+        # -------------------------------------------------------------
+        # STAGE 1: Dynamic Viral Topic Generator or Custom User Topic
+        # -------------------------------------------------------------
     custom_override = custom_topic or os.getenv("CUSTOM_TOPIC")
     if custom_override and custom_override.strip():
         print(f"\n💡 [Custom User Topic Mode] Generating video for: '{custom_override.strip()}'")
@@ -132,6 +134,7 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     # -------------------------------------------------------------
     # STAGE 2: 59-Second Hook-Driven Narrative Script Engine
     # -------------------------------------------------------------
+    current_stage = "Stage 2: 59-Second Narrative Script Engine"
     print("\n✍️ [Stage 2/7] Generating 5-beat retention script with hooks every 10 seconds...")
     script_data = generate_viral_script(topic_data)
     script_data["episode"] = ep_num
@@ -146,11 +149,13 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     script_data["scenes"] = beats
 
     # Gate 1: Narrative Quality Audit
+    current_stage = "Gate 1: Narrative Quality Audit"
     audit_story_script(script_data)
 
     # -------------------------------------------------------------
     # Foley SFX Verification
     # -------------------------------------------------------------
+    current_stage = "Foley SFX Engine"
     PUBLIC_SFX_DIR.mkdir(parents=True, exist_ok=True)
     if not (PUBLIC_SFX_DIR / "whoosh.wav").exists():
         print("🔊 Synthesizing Foley SFX Suite...")
@@ -159,16 +164,19 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     # -------------------------------------------------------------
     # STAGE 3: High-Definition 3D Pixar & CGI Image Generator
     # -------------------------------------------------------------
+    current_stage = "Stage 3: 3D Pixar Visual Engine"
     print(f"\n🎨 [Stage 3/7] Generating enhanced 3D Pixar visuals for all {len(beats)} beats...")
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     generate_all_beat_images(beats, ep_num)
 
     # Gate 2: Visual Assets Quality Audit
+    current_stage = "Gate 2: Visual Assets Quality Audit"
     audit_visual_assets(beats, PUBLIC_DIR)
 
     # -------------------------------------------------------------
     # STAGE 4 & 5: Neural Audio & Exact Word Synchronization
     # -------------------------------------------------------------
+    current_stage = "Stage 4 & 5: Neural Audio & Exact Word Boundaries"
     print("\n🎙️ [Stage 4 & 5/7] Synthesizing multi-speaker neural voiceovers & word boundaries...")
     PUBLIC_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
     beats = build_audio_and_timings_sync(beats)
@@ -176,19 +184,23 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     script_data["scenes"] = beats
 
     # Gate 3: Audio Sync & Duration Quality Audit (<58.5s)
+    current_stage = "Gate 3: Audio Sync & Duration Audit"
     audit_audio_sync(beats, PUBLIC_DIR)
 
     # -------------------------------------------------------------
     # STAGE 6: Kinetic Subtitles & Typography Compilation
     # -------------------------------------------------------------
+    current_stage = "Stage 6: Kinetic Subtitles Compilation"
     print("\n✨ [Stage 6/7] Compiling discrete kinetic karaoke subtitles (safe lower-third)...")
     ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
     compile_kinetic_subtitles(beats, ass_path)
 
     # Gate 4: Subtitles Verification Audit
+    current_stage = "Gate 4: Subtitles Verification Audit"
     audit_subtitles_file(ass_path)
 
     # Generate genre-tailored background music (58.0s)
+    current_stage = "Audio Mixing & BGM Engine"
     bg_music_path = PUBLIC_AUDIO_DIR / "story_bg.wav"
     print(f"🎵 Generating dynamic background music for '{genre}' (58.0s)...")
     generate_music_for_genre(genre, bg_music_path, duration=58.0)
@@ -200,6 +212,7 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     # -------------------------------------------------------------
     # STAGE 7 & RENDER: Native Hardware-Accelerated Video Engine
     # -------------------------------------------------------------
+    current_stage = "Stage 6 & Render: Native Video Synthesis"
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     out_mp4 = OUTPUT_DIR / f"story_episode_{ep_num}.mp4"
 
@@ -227,11 +240,13 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         raise RuntimeError("Video rendering failed across all engines.")
 
     # Gate 5: Deep ffprobe inspection and duration certification (<59.0s)
+    current_stage = "Gate 5: Final Video Certification Audit"
     cert = audit_final_rendered_video(out_mp4)
 
     # -------------------------------------------------------------
     # High-CTR Thumbnail Generation
     # -------------------------------------------------------------
+    current_stage = "Thumbnail Generation"
     print("\n📸 Generating High-CTR Thumbnail...")
     hook_hl = script_data.get("hook_headline", "WHAT HAPPENS NEXT?!")
     thumb_path = generate_high_ctr_thumbnail(ep_num, hook_hl, video_path=out_mp4)
@@ -239,6 +254,7 @@ def process_next_story(custom_topic: str | None = None) -> dict:
     # -------------------------------------------------------------
     # Automated Social Media Publishing
     # -------------------------------------------------------------
+    current_stage = "Stage 7: Multi-Platform Publishing"
     yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
     full_text = " ".join([b["narration"] for b in beats])
     yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
@@ -294,6 +310,12 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         "chapter": chapter_title,
         "duration": cert["duration"],
     }
+    except Exception as e:
+        print(f"\n🚨 [CRITICAL AUDIT HALT] Pipeline rejected at: [{current_stage}]")
+        print(f"   Reason: {e}")
+        from story_pipeline.training_pipeline import trigger_failure_training
+        trigger_failure_training(stage_name=current_stage, error=e)
+        raise
 
 
 if __name__ == "__main__":

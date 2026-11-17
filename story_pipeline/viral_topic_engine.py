@@ -182,7 +182,8 @@ Return JSON format ONLY:
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
             res = None
-            for model_id in ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-1.5-flash"]:
+            active_model = None
+            for model_id in ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash", "gemini-3.8-flash"]:
                 try:
                     res = client.models.generate_content(
                         model=model_id,
@@ -190,18 +191,22 @@ Return JSON format ONLY:
                         config=dict(response_mime_type="application/json")
                     )
                     if res and res.text:
+                        active_model = model_id
                         break
-                except Exception:
+                except Exception as m_err:
+                    print(f"⚠️ Model {model_id} error: {m_err}")
                     continue
-            data = json.loads(res.text)
-            if data.get("topic") and data["topic"] not in used_topics:
-                data["episode"] = ep_count
-                used_topics.add(data["topic"])
-                history["used_topics"] = list(used_topics)
-                history["episode_count"] = ep_count
-                save_history(history)
-                print(f"💡 [Stage 1: Topic Engine] Generated AI Topic #{ep_count}: '{data['topic']}'")
-                return data
+
+            if res and res.text:
+                data = json.loads(res.text)
+                if data.get("topic") and data["topic"] not in used_topics:
+                    data["episode"] = ep_count
+                    used_topics.add(data["topic"])
+                    history["used_topics"] = list(used_topics)
+                    history["episode_count"] = ep_count
+                    save_history(history)
+                    print(f"💡 [Stage 1: Topic Engine] Gemini AI ({active_model}) generated Topic #{ep_count}: '{data['topic']}'")
+                    return data
         except Exception as e:
             print(f"Notice: Gemini topic generation note: {e}")
 

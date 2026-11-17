@@ -91,10 +91,10 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
 
     enriched = enrich_prompt(prompt)
 
-    # 1. Try Gemini Imagen 3 (with exponential backoff for rate limits)
+    # 1. Primary: Gemini Imagen 3 (with retry & quota reset backoff)
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
-        for attempt in range(1, 3):
+        for attempt in range(1, 4):
             try:
                 from google import genai
                 client = genai.Client(api_key=api_key)
@@ -109,34 +109,61 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
                     return output_path
             except Exception as e_genai:
                 err_str = str(e_genai).lower()
+                print(f"⚠️ Gemini Imagen Attempt #{attempt} note: {e_genai}")
                 if "resource_exhausted" in err_str or "429" in err_str or "quota" in err_str:
-                    print(f"⏳ Rate limit pause ({e_genai}). Waiting 10s...")
-                    time.sleep(10)
+                    wait_time = 20 * attempt
+                    print(f"⏳ Rate limit pause ({err_str[:60]}). Waiting {wait_time}s for Google quota reset...")
+                    time.sleep(wait_time)
                 else:
                     break
 
-    # 2. Universal Free Tier (Pollinations)
-    for attempt in range(1, 2):
+    # 2. Secondary: Replicate Flux/SDXL (if configured)
+    rep_token = os.getenv("REPLICATE_API_TOKEN")
+    if rep_token:
+        try:
+            import replicate
+            client = replicate.Client(api_token=rep_token)
+            out = client.run(
+                "black-forest-labs/flux-schnell",
+                input={"prompt": enriched[:400], "aspect_ratio": "9:16"},
+            )
+            if out and len(out) > 0:
+                img_url = str(out[0])
+                req = urllib.request.Request(img_url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=20) as resp:
+                    data = resp.read()
+                    if len(data) > 20_000:
+                        output_path.write_bytes(data)
+                        print(f"🎨 [Stage 3: Image Engine] Generated Replicate Flux Visual: {output_path.name}")
+                        return output_path
+        except Exception as e_rep:
+            print(f"⚠️ Replicate image note: {e_rep}")
+
+    # 3. Universal Free AI Tier (Pollinations Flux & Turbo)
+    for model_name in ["flux", "turbo"]:
         try:
             clean_prompt = urllib.parse.quote(enriched[:320])
-            url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=768&height=1344&nologo=true&seed={seed}"
+            url = f"https://image.pollinations.ai/prompt/{clean_prompt}?width=768&height=1344&nologo=true&seed={seed}&model={model_name}"
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
-            with urllib.request.urlopen(req, timeout=15) as response:
+            with urllib.request.urlopen(req, timeout=18) as response:
                 data = response.read()
-                if len(data) > 8000:
+                if len(data) > 15_000:
                     output_path.write_bytes(data)
-                    print(f"🎨 [Stage 3: Image Engine] Generated 3D Pixar Visual: {output_path.name}")
+                    print(f"🎨 [Stage 3: Image Engine] Generated 3D Pixar Visual ({model_name}): {output_path.name}")
                     return output_path
         except Exception:
-            pass
+            time.sleep(2)
 
-    # 3. Guaranteed Procedural Fallback (Never leaves missing files on disk)
+    # 4. Guaranteed Procedural Fallback (Never leaves missing files on disk)
     return generate_procedural_3d_visual(prompt, output_path, seed=seed)
 
 
 def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
     """Generates enhanced visuals for all beats in the script with spacing."""
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    has_gemini = bool(os.getenv("GEMINI_API_KEY"))
+    spacing = 10 if has_gemini else 4
+
     for idx, beat in enumerate(beats):
         b_num = beat["beat_number"]
         out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_beat_{b_num}.jpg"
@@ -147,8 +174,8 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
         generate_hd_image(prompt, out_file, seed=seed)
         beat["image_url"] = f"images/{out_file.name}"
 
-        # 4-second spacing to prevent API burst throttling
+        # Spacing to prevent API burst throttling
         if idx < len(beats) - 1:
-            time.sleep(4)
+            time.sleep(spacing)
 
     return beats

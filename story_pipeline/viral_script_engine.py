@@ -72,7 +72,8 @@ Output JSON ONLY:
   ]
 }}"""
             res = None
-            for model_id in ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-1.5-flash"]:
+            active_model = None
+            for model_id in ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.5-flash", "gemini-3.8-flash"]:
                 try:
                     res = client.models.generate_content(
                         model=model_id,
@@ -80,13 +81,18 @@ Output JSON ONLY:
                         config=dict(response_mime_type="application/json")
                     )
                     if res and res.text:
+                        active_model = model_id
                         break
-                except Exception:
+                except Exception as m_err:
+                    print(f"⚠️ Model {model_id} script generation error: {m_err}")
                     continue
-            data = json.loads(res.text)
-            if "beats" in data and len(data["beats"]) == 5:
-                print(f"📝 [Stage 2: Script Engine] AI Script synthesized for '{topic}' ({sum(len(b['narration'].split()) for b in data['beats'])} words)")
-                return data
+
+            if res and res.text:
+                data = json.loads(res.text)
+                if "beats" in data and len(data["beats"]) == 5:
+                    word_count = sum(len(b['narration'].split()) for b in data['beats'])
+                    print(f"📝 [Stage 2: Script Engine] Gemini AI ({active_model}) synthesized script for '{topic}' ({word_count} words)")
+                    return data
         except Exception as e:
             print(f"Notice: Gemini script generation note ({e})")
 

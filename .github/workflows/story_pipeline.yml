@@ -70,6 +70,7 @@ jobs:
           FAL_KEY: ${{ secrets.FAL_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}
           RENDER_ENGINE: fast
           PYTHONUNBUFFERED: "1"
         run: |
