@@ -17,13 +17,18 @@ load_dotenv()
 def get_telegram_creds() -> tuple[str | None, str | None]:
     bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    if bot_token:
+        bot_token = bot_token.strip().strip("'").strip('"')
+    if chat_id:
+        chat_id = chat_id.strip().strip("'").strip('"')
     return bot_token, chat_id
 
 
-def send_telegram_message(text: str, parse_mode: str = "HTML") -> bool:
-    """Sends a text message to your mobile Telegram chat."""
+def send_telegram_message(text: str, parse_mode: str | None = "HTML") -> bool:
+    """Sends a text message to your mobile Telegram chat with automatic fallback."""
     bot_token, chat_id = get_telegram_creds()
     if not bot_token or not chat_id:
+        print("⚠️ Telegram skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID missing in environment.")
         return False
 
     try:
@@ -33,11 +38,31 @@ def send_telegram_message(text: str, parse_mode: str = "HTML") -> bool:
         payload = {
             "chat_id": chat_id,
             "text": text,
-            "parse_mode": parse_mode,
             "disable_web_page_preview": False,
         }
-        res = requests.post(url, json=payload, timeout=15)
-        return res.status_code == 200
+        if parse_mode:
+            payload["parse_mode"] = parse_mode
+
+        res = requests.post(url, json=payload, timeout=20)
+        if res.status_code == 200:
+            print("✅ Telegram notification delivered successfully!")
+            return True
+        else:
+            print(f"⚠️ Telegram API error ({res.status_code}): {res.text}")
+            # If HTML parsing failed, retry as plain text
+            if parse_mode:
+                print("🔄 Retrying Telegram message in plain text format...")
+                payload.pop("parse_mode", None)
+                # Strip HTML tags simply
+                clean_text = text.replace("<b>", "").replace("</b>", "").replace("<i>", "").replace("</i>", "").replace("<code>", "").replace("</code>", "")
+                payload["text"] = clean_text
+                res2 = requests.post(url, json=payload, timeout=20)
+                if res2.status_code == 200:
+                    print("✅ Telegram notification delivered (plain text fallback)!")
+                    return True
+                else:
+                    print(f"⚠️ Telegram retry error ({res2.status_code}): {res2.text}")
+            return False
     except Exception as e:
         print(f"⚠️ Telegram message dispatch error: {e}")
         return False
@@ -56,13 +81,9 @@ def send_telegram_video(
         return False
 
     file_size_mb = video_path.stat().st_size / 1_000_000
-    if file_size_mb > 50.0:
-        # Telegram Bot API standard limit is 50MB for direct file upload
-        send_telegram_message(
-            caption
-            + f"\n\nℹ️ <i>Video size ({file_size_mb:.1f}MB) exceeds Telegram's 50MB direct bot limit. Download from GitHub Artifacts.</i>"
-        )
-        return True
+    if file_size_mb > 49.0:
+        print(f"ℹ️ Video size ({file_size_mb:.1f}MB) exceeds Telegram's 50MB direct bot limit.")
+        return False
 
     try:
         import requests
@@ -70,15 +91,19 @@ def send_telegram_video(
         url = f"https://api.telegram.org/bot{bot_token}/sendVideo"
         data = {
             "chat_id": chat_id,
-            "caption": caption[:1024],
-            "parse_mode": "HTML",
+            "caption": caption[:1000],
             "supports_streaming": True,
-            "protect_content": protect_content,  # View-Once / Anti-Forward protection
+            "protect_content": protect_content,
         }
         with open(video_path, "rb") as vf:
             files = {"video": vf}
             res = requests.post(url, data=data, files=files, timeout=180)
-            return res.status_code == 200
+            if res.status_code == 200:
+                print("✅ Telegram video preview delivered successfully!")
+                return True
+            else:
+                print(f"⚠️ Telegram video upload error ({res.status_code}): {res.text}")
+                return False
     except Exception as e:
         print(f"⚠️ Telegram video dispatch error: {e}")
         return False
@@ -106,16 +131,21 @@ def notify_success(
         f"⏱️ <b>Duration:</b> {duration:.2f}s\n"
         f"📦 <b>Size:</b> {size_mb:.1f} MB\n"
         f"✅ <b>Auditor Gate:</b> 5/5 Certified (1080x1920 @ 30fps)\n"
-        f"🔊 <b>Voice:</b> Single Narrator (Crazy Bass DSP Boost)\n"
+        f"🔊 <b>Voice:</b> Single Narrator (Crazy Bass Boost)\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🔗 <b>Watch Live:</b> {yt_link}\n"
     )
 
+    # 1. Always deliver the status text report first
+    print("📱 Sending mobile status report via Telegram...")
+    sent_text = send_telegram_message(msg)
+
+    # 2. Then attempt to deliver the video file preview
     if video_path and video_path.exists():
         print("📱 Sending mobile video preview via Telegram...")
-        return send_telegram_video(video_path, caption=msg, protect_content=True)
-    else:
-        return send_telegram_message(msg)
+        send_telegram_video(video_path, caption=f"🎬 Ep #{episode_num}: {title}", protect_content=True)
+
+    return sent_text
 
 
 def notify_fallback(stage_name: str, details: str) -> bool:
