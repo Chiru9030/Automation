@@ -9,6 +9,7 @@ Generates gripping, high-retention stories strictly under 59 seconds:
 
 import json
 import os
+import time
 from pathlib import Path
 from dotenv import load_dotenv
 

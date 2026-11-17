@@ -244,12 +244,11 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
         ]
         subprocess.run(cmd_fallback, check=True, capture_output=True)
 
-    # Clean up temp clips
+    # Clean up temp clips (preserve ass_path for Gate 5 audit verification)
     for p in clip_paths:
         p.unlink(missing_ok=True)
     concat_list.unlink(missing_ok=True)
     visuals_only.unlink(missing_ok=True)
-    ass_path.unlink(missing_ok=True)
 
     elapsed = time.time() - t0
     print(f"✅ [Lightning Video Engine] 60-second video rendered in {elapsed:.1f} seconds! -> {out_mp4.name}")

@@ -10,6 +10,7 @@ Ensures 100% uniqueness by tracking history and avoiding duplicates.
 import json
 import os
 import random
+import time
 from pathlib import Path
 from dotenv import load_dotenv
 
