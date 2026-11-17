@@ -95,16 +95,30 @@ def render_with_remotion(cmd: list, cwd: str, out_file: Path) -> bool:
     return False
 
 
-def process_next_story() -> dict:
+def process_next_story(custom_topic: str | None = None) -> dict:
     print("\n==================================================================")
     print(" 🚀 Autonomous 7-Stage Viral Story Video Pipeline Initiated")
     print("==================================================================")
 
     # -------------------------------------------------------------
-    # STAGE 1: Dynamic Viral Topic Generator
+    # STAGE 1: Dynamic Viral Topic Generator or Custom User Topic
     # -------------------------------------------------------------
-    print("\n💡 [Stage 1/7] Generating unique viral high-curiosity topic...")
-    topic_data = generate_unique_viral_topic()
+    custom_override = custom_topic or os.getenv("CUSTOM_TOPIC")
+    if custom_override and custom_override.strip():
+        print(f"\n💡 [Custom User Topic Mode] Generating video for: '{custom_override.strip()}'")
+        history = load_history()
+        ep_num = history.get("episode_count", 0) + 1
+        topic_data = {
+            "topic": custom_override.strip(),
+            "hook_premise": f"The shocking reality of {custom_override.strip()}",
+            "category": "Mind-Blowing Stories & Science",
+            "style": "3D Pixar animation Unreal Engine 5",
+            "episode": ep_num,
+        }
+    else:
+        print("\n💡 [Stage 1/7] Generating unique viral high-curiosity topic...")
+        topic_data = generate_unique_viral_topic()
+
     ep_num = topic_data.get("episode", 1)
     chapter_title = topic_data.get("topic", f"Episode {ep_num}")
     genre = topic_data.get("category", "Science & Mind-Blowing Facts")
@@ -283,8 +297,13 @@ def process_next_story() -> dict:
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Autonomous Story Video Pipeline")
+    parser.add_argument("--topic", type=str, default="", help="Custom topic or story prompt to render immediately")
+    args = parser.parse_args()
+
     try:
-        process_next_story()
+        process_next_story(custom_topic=args.topic if args.topic else None)
     except Exception as e:
         print(f"🚨 Pipeline Fatal Error: {e}")
         notify_error(stage_name="Autonomous Story Pipeline", error_msg=str(e), exc=e)

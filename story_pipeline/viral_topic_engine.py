@@ -181,11 +181,18 @@ Return JSON format ONLY:
   "category": "Category name",
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
-            res = client.models.generate_content(
-                model="gemini-2.0-flash",
-                contents=prompt,
-                config=dict(response_mime_type="application/json")
-            )
+            res = None
+            for model_id in ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-1.5-flash"]:
+                try:
+                    res = client.models.generate_content(
+                        model=model_id,
+                        contents=prompt,
+                        config=dict(response_mime_type="application/json")
+                    )
+                    if res and res.text:
+                        break
+                except Exception:
+                    continue
             data = json.loads(res.text)
             if data.get("topic") and data["topic"] not in used_topics:
                 data["episode"] = ep_count

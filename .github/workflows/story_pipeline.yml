@@ -4,7 +4,12 @@ on:
   schedule:
     # Trigger automatically every 5 hours (00:00, 05:00, 10:00, 15:00, 20:00 UTC)
     - cron: '0 */5 * * *'
-  workflow_dispatch: # Allows manual one-click trigger from GitHub web interface
+  workflow_dispatch:
+    inputs:
+      custom_topic:
+        description: 'Custom Topic or Story Idea (Leave blank for autonomous generation)'
+        required: false
+        default: ''
 
 concurrency:
   group: story-pipeline

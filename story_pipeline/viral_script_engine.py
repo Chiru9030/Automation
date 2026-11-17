@@ -71,11 +71,18 @@ Output JSON ONLY:
     ... (exactly 5 beats)
   ]
 }}"""
-            res = client.models.generate_content(
-                model="gemini-2.0-flash",
-                contents=prompt,
-                config=dict(response_mime_type="application/json")
-            )
+            res = None
+            for model_id in ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-1.5-flash"]:
+                try:
+                    res = client.models.generate_content(
+                        model=model_id,
+                        contents=prompt,
+                        config=dict(response_mime_type="application/json")
+                    )
+                    if res and res.text:
+                        break
+                except Exception:
+                    continue
             data = json.loads(res.text)
             if "beats" in data and len(data["beats"]) == 5:
                 print(f"📝 [Stage 2: Script Engine] AI Script synthesized for '{topic}' ({sum(len(b['narration'].split()) for b in data['beats'])} words)")
