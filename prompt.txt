@@ -1,0 +1,24 @@
+# ========================================================
+# VIDEO GENERATION PROMPT
+# ========================================================
+# Edit this file to generate a new video!
+# You can specify the Genre, Topic, and customize the details.
+
+Genre: Sci-Fi / Space
+Topic: 3 Mind-Blowing Facts About Space
+Style: Dark space, glowing neon cyan, kinetic typography
+Music Mood: Futuristic Cosmic Synth & Pulsing Bass
+
+Facts to Feature:
+1. Venus Time Warp: A day on Venus is longer than its whole year!
+   - Highlight: longer
+   - Subtext: Venus takes 243 Earth days to rotate once, but only 225 Earth days to orbit the Sun.
+
+2. Cosmic Ocean: There is a giant reservoir of water floating in space!
+   - Highlight: 140 TRILLION
+   - Subtext: Surrounding a distant quasar, this cloud holds 140 trillion times more water than all Earth's oceans combined.
+
+3. Neutron Star: One teaspoon of a neutron star weighs 6 billion tons!
+   - Highlight: 6 billion tons
+   - Subtext: They spin up to 700 times per second and are so dense that a single grain would crush Earth's crust.
+

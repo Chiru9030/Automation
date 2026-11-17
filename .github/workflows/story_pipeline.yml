@@ -1,0 +1,70 @@
+name: 8-Hour Autonomous Story Video Pipeline
+
+on:
+  schedule:
+    # Trigger automatically every 8 hours (00:00, 08:00, 16:00 UTC)
+    - cron: '0 */8 * * *'
+  workflow_dispatch: # Allows manual one-click trigger from GitHub web interface
+
+concurrency:
+  group: story-pipeline
+  cancel-in-progress: false
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install System Dependencies (FFmpeg & Chromium)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg chromium-browser fonts-liberation
+
+      - name: Install Python Requirements
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Remotion NPM Packages
+        working-directory: ./video-app
+        run: |
+          npm ci || npm install
+
+      - name: Run Autonomous Story Pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
+        run: |
+          python3 story_runner.py
+
+      - name: Upload Generated Video Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-episode-mp4
+          path: video-app/out/*.mp4
+          retention-days: 7
+
+      - name: Commit Updated Story History
+        run: |
+          git config --global user.name "Story Automation Bot"
+          git config --global user.email "bot@storypipeline.internal"
+          git add story_pipeline/story_history.json
+          git commit -m "Auto: advanced story episode history [skip ci]" || echo "No changes to commit"
+          git push

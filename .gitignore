@@ -1,0 +1,30 @@
+# Environment & Secrets
+.env
+*.env
+youtube_tokens.json
+instagram_session.json
+client_secrets.json
+
+# Node & Dependencies
+node_modules/
+video-app/node_modules/
+.npm
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+*.egg-info/
+
+# Build & Video Outputs
+video-app/out/
+*.mp4
+.remotion/
+.cache/
+
+# OS Specific
+.DS_Store
+Thumbs.db

@@ -1,0 +1,28 @@
+{
+  "name": "remotion-space-facts",
+  "version": "1.0.0",
+  "description": "Remotion vertical video for Space Facts",
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "preview": "remotion preview src/index.ts",
+    "render": "remotion render src/index.ts StoryVideo out/story_video.mp4",
+    "render:story": "remotion render src/index.ts StoryVideo out/story_video.mp4",
+    "render:facts": "remotion render src/index.ts SpaceFacts out/space_facts.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.200",
+    "@remotion/motion-blur": "^4.0.543",
+    "@remotion/noise": "^4.0.543",
+    "@remotion/shapes": "^4.0.543",
+    "@remotion/transitions": "^4.0.543",
+    "lucide-react": "^1.73.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.200"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.4.5"
+  }
+}

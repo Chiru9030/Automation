@@ -1,0 +1,37 @@
+{
+  "genre": "Sci-Fi / Space",
+  "category": "3 MIND-BLOWING FACTS ABOUT S",
+  "title": "3 Mind-Blowing Facts About\nSpace",
+  "subtitle": "WAIT UNTIL #3... \ud83e\udd2f",
+  "hookEmoji": "\ud83e\ude90",
+  "facts": [
+    {
+      "number": 1,
+      "badge": "Fact #1",
+      "headline": "A day on Venus is longer than its whole year!",
+      "subtext": "Venus rotates so slowly that it takes 243 Earth days to spin once, but only 225 Earth days to orbit the Sun.",
+      "highlightWord": "longer",
+      "emoji": "\ud83d\udd25"
+    },
+    {
+      "number": 2,
+      "badge": "Fact #2",
+      "headline": "There is a giant reservoir of water floating in space!",
+      "subtext": "Hovering around a distant quasar, this cloud holds 140 TRILLION times more water than all Earth's oceans combined.",
+      "highlightWord": "140 TRILLION",
+      "emoji": "\ud83c\udf0a"
+    },
+    {
+      "number": 3,
+      "badge": "Fact #3",
+      "headline": "One teaspoon of a neutron star weighs 6 billion tons!",
+      "subtext": "They are so dense and spin up to 700 times per second \u2014 a single grain would crush through Earth's crust.",
+      "highlightWord": "6 billion tons",
+      "emoji": "\u26a1"
+    }
+  ],
+  "outroTitle": "FOLLOW FOR MORE",
+  "outroSubtitle": "Which fact shocked you most? \ud83d\udc47",
+  "outroEmoji": "\ud83d\ude80",
+  "audioFile": "audio/background.wav"
+}

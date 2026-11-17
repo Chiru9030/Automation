@@ -1,0 +1,2007 @@
+{
+  "title": "The Lion Cub and the Lion 3D-Book",
+  "chapter": "Episode 1: Toffee, the Lion Cub",
+  "episode": 1,
+  "genre": "Children Adventure / Energetic",
+  "hook_headline": "THE SECRET OF THE LION CUB AND",
+  "scenes": [
+    {
+      "scene_number": 1,
+      "title": "THE WILD CUB",
+      "narration": "Whatever you do, never turn your back on a lion cub in the wild. Meet Toffee, the most reckless cub in the savannah, who believed he was already king.",
+      "camera_style": "smooth-zoom-in",
+      "speaker": "narrator",
+      "speaker_name": "Narrator",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whoosh",
+      "image_url": "images/file0.jpg",
+      "audio_url": "audio/scene_1.mp3",
+      "audio_duration_sec": 8.74,
+      "duration_in_frames": 277,
+      "words": [
+        {
+          "word": "Whatever",
+          "start_sec": 0.084125,
+          "end_sec": 0.372583,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "you",
+          "start_sec": 0.384625,
+          "end_sec": 0.492791,
+          "start_frame": 12,
+          "end_frame": 15
+        },
+        {
+          "word": "do",
+          "start_sec": 0.504791,
+          "end_sec": 0.889416,
+          "start_frame": 15,
+          "end_frame": 27
+        },
+        {
+          "word": "never",
+          "start_sec": 1.370208,
+          "end_sec": 1.538458,
+          "start_frame": 41,
+          "end_frame": 46
+        },
+        {
+          "word": "turn",
+          "start_sec": 1.5505,
+          "end_sec": 1.73075,
+          "start_frame": 47,
+          "end_frame": 52
+        },
+        {
+          "word": "your",
+          "start_sec": 1.73075,
+          "end_sec": 1.814875,
+          "start_frame": 52,
+          "end_frame": 54
+        },
+        {
+          "word": "back",
+          "start_sec": 1.814916,
+          "end_sec": 2.115374,
+          "start_frame": 54,
+          "end_frame": 63
+        },
+        {
+          "word": "on",
+          "start_sec": 2.115375,
+          "end_sec": 2.175458,
+          "start_frame": 63,
+          "end_frame": 65
+        },
+        {
+          "word": "a",
+          "start_sec": 2.1755,
+          "end_sec": 2.2115409,
+          "start_frame": 65,
+          "end_frame": 66
+        },
+        {
+          "word": "lion",
+          "start_sec": 2.211541,
+          "end_sec": 2.572124,
+          "start_frame": 66,
+          "end_frame": 77
+        },
+        {
+          "word": "cub",
+          "start_sec": 2.572125,
+          "end_sec": 2.7884580000000003,
+          "start_frame": 77,
+          "end_frame": 84
+        },
+        {
+          "word": "in",
+          "start_sec": 2.8005,
+          "end_sec": 2.848583,
+          "start_frame": 84,
+          "end_frame": 85
+        },
+        {
+          "word": "the",
+          "start_sec": 2.860583,
+          "end_sec": 2.908666,
+          "start_frame": 86,
+          "end_frame": 87
+        },
+        {
+          "word": "wild",
+          "start_sec": 2.908666,
+          "end_sec": 3.353374,
+          "start_frame": 87,
+          "end_frame": 101
+        },
+        {
+          "word": "Meet",
+          "start_sec": 3.738,
+          "end_sec": 3.954333,
+          "start_frame": 112,
+          "end_frame": 119
+        },
+        {
+          "word": "Toffee",
+          "start_sec": 3.954333,
+          "end_sec": 4.519249,
+          "start_frame": 119,
+          "end_frame": 136
+        },
+        {
+          "word": "the",
+          "start_sec": 4.783666,
+          "end_sec": 4.843749,
+          "start_frame": 144,
+          "end_frame": 145
+        },
+        {
+          "word": "most",
+          "start_sec": 4.84375,
+          "end_sec": 5.120208,
+          "start_frame": 145,
+          "end_frame": 154
+        },
+        {
+          "word": "reckless",
+          "start_sec": 5.132208,
+          "end_sec": 5.5288330000000006,
+          "start_frame": 154,
+          "end_frame": 166
+        },
+        {
+          "word": "cub",
+          "start_sec": 5.528833,
+          "end_sec": 5.8052909999999995,
+          "start_frame": 166,
+          "end_frame": 174
+        },
+        {
+          "word": "in",
+          "start_sec": 5.817291,
+          "end_sec": 5.877374,
+          "start_frame": 175,
+          "end_frame": 176
+        },
+        {
+          "word": "the",
+          "start_sec": 5.877416,
+          "end_sec": 5.937499,
+          "start_frame": 176,
+          "end_frame": 178
+        },
+        {
+          "word": "savannah",
+          "start_sec": 5.9495,
+          "end_sec": 6.538457999999999,
+          "start_frame": 178,
+          "end_frame": 196
+        },
+        {
+          "word": "who",
+          "start_sec": 6.899041,
+          "end_sec": 6.971166,
+          "start_frame": 207,
+          "end_frame": 209
+        },
+        {
+          "word": "believed",
+          "start_sec": 6.971166,
+          "end_sec": 7.4158740000000005,
+          "start_frame": 209,
+          "end_frame": 222
+        },
+        {
+          "word": "he",
+          "start_sec": 7.427875,
+          "end_sec": 7.5120000000000005,
+          "start_frame": 223,
+          "end_frame": 225
+        },
+        {
+          "word": "was",
+          "start_sec": 7.512,
+          "end_sec": 7.65625,
+          "start_frame": 225,
+          "end_frame": 230
+        },
+        {
+          "word": "already",
+          "start_sec": 7.66825,
+          "end_sec": 7.98075,
+          "start_frame": 230,
+          "end_frame": 239
+        },
+        {
+          "word": "king",
+          "start_sec": 7.992791,
+          "end_sec": 8.377416,
+          "start_frame": 240,
+          "end_frame": 251
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WHATEVER YOU DO",
+          "start_frame": 3,
+          "end_frame": 41,
+          "words": [
+            {
+              "word": "WHATEVER",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "YOU",
+              "start_frame": 12,
+              "end_frame": 15
+            },
+            {
+              "word": "DO",
+              "start_frame": 15,
+              "end_frame": 27
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "NEVER TURN YOUR",
+          "start_frame": 41,
+          "end_frame": 54,
+          "words": [
+            {
+              "word": "NEVER",
+              "start_frame": 41,
+              "end_frame": 46
+            },
+            {
+              "word": "TURN",
+              "start_frame": 47,
+              "end_frame": 52
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 52,
+              "end_frame": 54
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "BACK ON A",
+          "start_frame": 54,
+          "end_frame": 66,
+          "words": [
+            {
+              "word": "BACK",
+              "start_frame": 54,
+              "end_frame": 63
+            },
+            {
+              "word": "ON",
+              "start_frame": 63,
+              "end_frame": 65
+            },
+            {
+              "word": "A",
+              "start_frame": 65,
+              "end_frame": 66
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "LION CUB IN",
+          "start_frame": 66,
+          "end_frame": 86,
+          "words": [
+            {
+              "word": "LION",
+              "start_frame": 66,
+              "end_frame": 77
+            },
+            {
+              "word": "CUB",
+              "start_frame": 77,
+              "end_frame": 84
+            },
+            {
+              "word": "IN",
+              "start_frame": 84,
+              "end_frame": 85
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "THE WILD MEET",
+          "start_frame": 86,
+          "end_frame": 119,
+          "words": [
+            {
+              "word": "THE",
+              "start_frame": 86,
+              "end_frame": 87
+            },
+            {
+              "word": "WILD",
+              "start_frame": 87,
+              "end_frame": 101
+            },
+            {
+              "word": "MEET",
+              "start_frame": 112,
+              "end_frame": 119
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "TOFFEE THE MOST",
+          "start_frame": 119,
+          "end_frame": 154,
+          "words": [
+            {
+              "word": "TOFFEE",
+              "start_frame": 119,
+              "end_frame": 136
+            },
+            {
+              "word": "THE",
+              "start_frame": 144,
+              "end_frame": 145
+            },
+            {
+              "word": "MOST",
+              "start_frame": 145,
+              "end_frame": 154
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "RECKLESS CUB IN",
+          "start_frame": 154,
+          "end_frame": 176,
+          "words": [
+            {
+              "word": "RECKLESS",
+              "start_frame": 154,
+              "end_frame": 166
+            },
+            {
+              "word": "CUB",
+              "start_frame": 166,
+              "end_frame": 174
+            },
+            {
+              "word": "IN",
+              "start_frame": 175,
+              "end_frame": 176
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "THE SAVANNAH WHO",
+          "start_frame": 176,
+          "end_frame": 209,
+          "words": [
+            {
+              "word": "THE",
+              "start_frame": 176,
+              "end_frame": 178
+            },
+            {
+              "word": "SAVANNAH",
+              "start_frame": 178,
+              "end_frame": 196
+            },
+            {
+              "word": "WHO",
+              "start_frame": 207,
+              "end_frame": 209
+            }
+          ]
+        },
+        {
+          "chunk_id": 8,
+          "text": "BELIEVED HE WAS",
+          "start_frame": 209,
+          "end_frame": 230,
+          "words": [
+            {
+              "word": "BELIEVED",
+              "start_frame": 209,
+              "end_frame": 222
+            },
+            {
+              "word": "HE",
+              "start_frame": 223,
+              "end_frame": 225
+            },
+            {
+              "word": "WAS",
+              "start_frame": 225,
+              "end_frame": 230
+            }
+          ]
+        },
+        {
+          "chunk_id": 9,
+          "text": "ALREADY KING",
+          "start_frame": 230,
+          "end_frame": 251,
+          "words": [
+            {
+              "word": "ALREADY",
+              "start_frame": 230,
+              "end_frame": 239
+            },
+            {
+              "word": "KING",
+              "start_frame": 240,
+              "end_frame": 251
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 2,
+      "title": "THE DANGEROUS ESCAPE",
+      "narration": "Ignoring his father's strict warning, Toffee broke into a wild sprint toward the bustling airport terminal, chasing what he thought was an epic adventure.",
+      "camera_style": "pan-right",
+      "speaker": "narrator",
+      "speaker_name": "Narrator",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whoosh",
+      "image_url": "images/file3.jpg",
+      "audio_url": "audio/scene_2.mp3",
+      "audio_duration_sec": 9.38,
+      "duration_in_frames": 297,
+      "words": [
+        {
+          "word": "Ignoring",
+          "start_sec": 0.084125,
+          "end_sec": 0.564875,
+          "start_frame": 3,
+          "end_frame": 17
+        },
+        {
+          "word": "his",
+          "start_sec": 0.564916,
+          "end_sec": 0.697124,
+          "start_frame": 17,
+          "end_frame": 21
+        },
+        {
+          "word": "father's",
+          "start_sec": 0.709125,
+          "end_sec": 1.177875,
+          "start_frame": 21,
+          "end_frame": 35
+        },
+        {
+          "word": "strict",
+          "start_sec": 1.177875,
+          "end_sec": 1.5745,
+          "start_frame": 35,
+          "end_frame": 47
+        },
+        {
+          "word": "warning",
+          "start_sec": 1.5745,
+          "end_sec": 1.995166,
+          "start_frame": 47,
+          "end_frame": 60
+        },
+        {
+          "word": "Toffee",
+          "start_sec": 2.34375,
+          "end_sec": 2.752416,
+          "start_frame": 70,
+          "end_frame": 83
+        },
+        {
+          "word": "broke",
+          "start_sec": 2.752416,
+          "end_sec": 3.1129990000000003,
+          "start_frame": 83,
+          "end_frame": 93
+        },
+        {
+          "word": "into",
+          "start_sec": 3.113,
+          "end_sec": 3.305291,
+          "start_frame": 93,
+          "end_frame": 99
+        },
+        {
+          "word": "a",
+          "start_sec": 3.305291,
+          "end_sec": 3.3894159999999998,
+          "start_frame": 99,
+          "end_frame": 102
+        },
+        {
+          "word": "wild",
+          "start_sec": 3.389416,
+          "end_sec": 3.846166,
+          "start_frame": 102,
+          "end_frame": 115
+        },
+        {
+          "word": "sprint",
+          "start_sec": 3.846166,
+          "end_sec": 4.350957,
+          "start_frame": 115,
+          "end_frame": 131
+        },
+        {
+          "word": "toward",
+          "start_sec": 4.459125,
+          "end_sec": 4.711541,
+          "start_frame": 134,
+          "end_frame": 141
+        },
+        {
+          "word": "the",
+          "start_sec": 4.711541,
+          "end_sec": 4.807707000000001,
+          "start_frame": 141,
+          "end_frame": 144
+        },
+        {
+          "word": "bustling",
+          "start_sec": 4.819708,
+          "end_sec": 5.408666,
+          "start_frame": 145,
+          "end_frame": 162
+        },
+        {
+          "word": "airport",
+          "start_sec": 5.420666,
+          "end_sec": 5.865374,
+          "start_frame": 163,
+          "end_frame": 176
+        },
+        {
+          "word": "terminal",
+          "start_sec": 5.865375,
+          "end_sec": 6.286041,
+          "start_frame": 176,
+          "end_frame": 189
+        },
+        {
+          "word": "chasing",
+          "start_sec": 6.682708,
+          "end_sec": 7.079333,
+          "start_frame": 200,
+          "end_frame": 212
+        },
+        {
+          "word": "what",
+          "start_sec": 7.079333,
+          "end_sec": 7.187499,
+          "start_frame": 212,
+          "end_frame": 216
+        },
+        {
+          "word": "he",
+          "start_sec": 7.1875,
+          "end_sec": 7.307708,
+          "start_frame": 216,
+          "end_frame": 219
+        },
+        {
+          "word": "thought",
+          "start_sec": 7.307708,
+          "end_sec": 7.740416,
+          "start_frame": 219,
+          "end_frame": 232
+        },
+        {
+          "word": "was",
+          "start_sec": 7.752416,
+          "end_sec": 7.908666,
+          "start_frame": 233,
+          "end_frame": 237
+        },
+        {
+          "word": "an",
+          "start_sec": 7.908666,
+          "end_sec": 8.016832,
+          "start_frame": 237,
+          "end_frame": 241
+        },
+        {
+          "word": "epic",
+          "start_sec": 8.149041,
+          "end_sec": 8.425499,
+          "start_frame": 244,
+          "end_frame": 253
+        },
+        {
+          "word": "adventure",
+          "start_sec": 8.4375,
+          "end_sec": 9.038458,
+          "start_frame": 253,
+          "end_frame": 271
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "IGNORING HIS FATHER'S",
+          "start_frame": 3,
+          "end_frame": 35,
+          "words": [
+            {
+              "word": "IGNORING",
+              "start_frame": 3,
+              "end_frame": 17
+            },
+            {
+              "word": "HIS",
+              "start_frame": 17,
+              "end_frame": 21
+            },
+            {
+              "word": "FATHER'S",
+              "start_frame": 21,
+              "end_frame": 35
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "STRICT WARNING TOFFEE",
+          "start_frame": 35,
+          "end_frame": 83,
+          "words": [
+            {
+              "word": "STRICT",
+              "start_frame": 35,
+              "end_frame": 47
+            },
+            {
+              "word": "WARNING",
+              "start_frame": 47,
+              "end_frame": 60
+            },
+            {
+              "word": "TOFFEE",
+              "start_frame": 70,
+              "end_frame": 83
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "BROKE INTO A",
+          "start_frame": 83,
+          "end_frame": 102,
+          "words": [
+            {
+              "word": "BROKE",
+              "start_frame": 83,
+              "end_frame": 93
+            },
+            {
+              "word": "INTO",
+              "start_frame": 93,
+              "end_frame": 99
+            },
+            {
+              "word": "A",
+              "start_frame": 99,
+              "end_frame": 102
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "WILD SPRINT TOWARD",
+          "start_frame": 102,
+          "end_frame": 141,
+          "words": [
+            {
+              "word": "WILD",
+              "start_frame": 102,
+              "end_frame": 115
+            },
+            {
+              "word": "SPRINT",
+              "start_frame": 115,
+              "end_frame": 131
+            },
+            {
+              "word": "TOWARD",
+              "start_frame": 134,
+              "end_frame": 141
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "THE BUSTLING AIRPORT",
+          "start_frame": 141,
+          "end_frame": 176,
+          "words": [
+            {
+              "word": "THE",
+              "start_frame": 141,
+              "end_frame": 144
+            },
+            {
+              "word": "BUSTLING",
+              "start_frame": 145,
+              "end_frame": 162
+            },
+            {
+              "word": "AIRPORT",
+              "start_frame": 163,
+              "end_frame": 176
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "TERMINAL CHASING WHAT",
+          "start_frame": 176,
+          "end_frame": 216,
+          "words": [
+            {
+              "word": "TERMINAL",
+              "start_frame": 176,
+              "end_frame": 189
+            },
+            {
+              "word": "CHASING",
+              "start_frame": 200,
+              "end_frame": 212
+            },
+            {
+              "word": "WHAT",
+              "start_frame": 212,
+              "end_frame": 216
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "HE THOUGHT WAS",
+          "start_frame": 216,
+          "end_frame": 237,
+          "words": [
+            {
+              "word": "HE",
+              "start_frame": 216,
+              "end_frame": 219
+            },
+            {
+              "word": "THOUGHT",
+              "start_frame": 219,
+              "end_frame": 232
+            },
+            {
+              "word": "WAS",
+              "start_frame": 233,
+              "end_frame": 237
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "AN EPIC ADVENTURE",
+          "start_frame": 237,
+          "end_frame": 271,
+          "words": [
+            {
+              "word": "AN",
+              "start_frame": 237,
+              "end_frame": 241
+            },
+            {
+              "word": "EPIC",
+              "start_frame": 244,
+              "end_frame": 253
+            },
+            {
+              "word": "ADVENTURE",
+              "start_frame": 253,
+              "end_frame": 271
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 3,
+      "title": "DISASTER IN THE CROWD",
+      "narration": "Suddenly, disaster struck! In the roaring sea of strangers, Toffee was completely swallowed by the crowd. Alone, terrified, he cried out: Dad, where are you?!",
+      "camera_style": "dramatic-pulse",
+      "speaker": "toffee",
+      "speaker_name": "Toffee",
+      "speaker_avatar": "\ud83e\udd81",
+      "sfx": "impact_boom",
+      "image_url": "images/file8.jpg",
+      "audio_url": "audio/scene_3.mp3",
+      "audio_duration_sec": 13.49,
+      "duration_in_frames": 420,
+      "words": [
+        {
+          "word": "Suddenly",
+          "start_sec": 0.097166,
+          "end_sec": 0.745749,
+          "start_frame": 3,
+          "end_frame": 22
+        },
+        {
+          "word": "disaster",
+          "start_sec": 1.017,
+          "end_sec": 1.642,
+          "start_frame": 31,
+          "end_frame": 49
+        },
+        {
+          "word": "struck",
+          "start_sec": 1.653791,
+          "end_sec": 2.149082,
+          "start_frame": 50,
+          "end_frame": 64
+        },
+        {
+          "word": "In",
+          "start_sec": 2.959916,
+          "end_sec": 3.113207,
+          "start_frame": 89,
+          "end_frame": 93
+        },
+        {
+          "word": "the",
+          "start_sec": 3.125,
+          "end_sec": 3.231125,
+          "start_frame": 94,
+          "end_frame": 97
+        },
+        {
+          "word": "roaring",
+          "start_sec": 3.242916,
+          "end_sec": 3.667457,
+          "start_frame": 97,
+          "end_frame": 110
+        },
+        {
+          "word": "sea",
+          "start_sec": 3.67925,
+          "end_sec": 3.96225,
+          "start_frame": 110,
+          "end_frame": 119
+        },
+        {
+          "word": "of",
+          "start_sec": 3.974041,
+          "end_sec": 4.091957,
+          "start_frame": 119,
+          "end_frame": 123
+        },
+        {
+          "word": "strangers",
+          "start_sec": 4.103791,
+          "end_sec": 4.858499,
+          "start_frame": 123,
+          "end_frame": 146
+        },
+        {
+          "word": "Toffee",
+          "start_sec": 5.1415,
+          "end_sec": 5.566040999999999,
+          "start_frame": 154,
+          "end_frame": 167
+        },
+        {
+          "word": "was",
+          "start_sec": 5.577833,
+          "end_sec": 5.754708,
+          "start_frame": 167,
+          "end_frame": 173
+        },
+        {
+          "word": "completely",
+          "start_sec": 5.7665,
+          "end_sec": 6.403290999999999,
+          "start_frame": 173,
+          "end_frame": 192
+        },
+        {
+          "word": "swallowed",
+          "start_sec": 6.415083,
+          "end_sec": 6.981124,
+          "start_frame": 192,
+          "end_frame": 209
+        },
+        {
+          "word": "by",
+          "start_sec": 6.992916,
+          "end_sec": 7.146207,
+          "start_frame": 210,
+          "end_frame": 214
+        },
+        {
+          "word": "the",
+          "start_sec": 7.158,
+          "end_sec": 7.264125,
+          "start_frame": 215,
+          "end_frame": 218
+        },
+        {
+          "word": "crowd",
+          "start_sec": 7.275958,
+          "end_sec": 7.747666000000001,
+          "start_frame": 218,
+          "end_frame": 232
+        },
+        {
+          "word": "Alone",
+          "start_sec": 8.561333,
+          "end_sec": 9.044832999999999,
+          "start_frame": 257,
+          "end_frame": 271
+        },
+        {
+          "word": "terrified",
+          "start_sec": 9.30425,
+          "end_sec": 9.964625,
+          "start_frame": 279,
+          "end_frame": 299
+        },
+        {
+          "word": "he",
+          "start_sec": 10.271208,
+          "end_sec": 10.400916,
+          "start_frame": 308,
+          "end_frame": 312
+        },
+        {
+          "word": "cried",
+          "start_sec": 10.41275,
+          "end_sec": 10.790125000000002,
+          "start_frame": 312,
+          "end_frame": 324
+        },
+        {
+          "word": "out",
+          "start_sec": 10.801875,
+          "end_sec": 11.0495,
+          "start_frame": 324,
+          "end_frame": 331
+        },
+        {
+          "word": "Dad",
+          "start_sec": 11.332541,
+          "end_sec": 11.709916000000002,
+          "start_frame": 340,
+          "end_frame": 351
+        },
+        {
+          "word": "where",
+          "start_sec": 11.981125,
+          "end_sec": 12.216958,
+          "start_frame": 359,
+          "end_frame": 367
+        },
+        {
+          "word": "are",
+          "start_sec": 12.228791,
+          "end_sec": 12.393873999999999,
+          "start_frame": 367,
+          "end_frame": 372
+        },
+        {
+          "word": "you",
+          "start_sec": 12.405666,
+          "end_sec": 12.676874,
+          "start_frame": 372,
+          "end_frame": 380
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "SUDDENLY DISASTER STRUCK",
+          "start_frame": 3,
+          "end_frame": 89,
+          "words": [
+            {
+              "word": "SUDDENLY",
+              "start_frame": 3,
+              "end_frame": 22
+            },
+            {
+              "word": "DISASTER",
+              "start_frame": 31,
+              "end_frame": 49
+            },
+            {
+              "word": "STRUCK",
+              "start_frame": 50,
+              "end_frame": 64
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "IN THE ROARING",
+          "start_frame": 89,
+          "end_frame": 110,
+          "words": [
+            {
+              "word": "IN",
+              "start_frame": 89,
+              "end_frame": 93
+            },
+            {
+              "word": "THE",
+              "start_frame": 94,
+              "end_frame": 97
+            },
+            {
+              "word": "ROARING",
+              "start_frame": 97,
+              "end_frame": 110
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "SEA OF STRANGERS",
+          "start_frame": 110,
+          "end_frame": 154,
+          "words": [
+            {
+              "word": "SEA",
+              "start_frame": 110,
+              "end_frame": 119
+            },
+            {
+              "word": "OF",
+              "start_frame": 119,
+              "end_frame": 123
+            },
+            {
+              "word": "STRANGERS",
+              "start_frame": 123,
+              "end_frame": 146
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "TOFFEE WAS COMPLETELY",
+          "start_frame": 154,
+          "end_frame": 192,
+          "words": [
+            {
+              "word": "TOFFEE",
+              "start_frame": 154,
+              "end_frame": 167
+            },
+            {
+              "word": "WAS",
+              "start_frame": 167,
+              "end_frame": 173
+            },
+            {
+              "word": "COMPLETELY",
+              "start_frame": 173,
+              "end_frame": 192
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "SWALLOWED BY THE",
+          "start_frame": 192,
+          "end_frame": 218,
+          "words": [
+            {
+              "word": "SWALLOWED",
+              "start_frame": 192,
+              "end_frame": 209
+            },
+            {
+              "word": "BY",
+              "start_frame": 210,
+              "end_frame": 214
+            },
+            {
+              "word": "THE",
+              "start_frame": 215,
+              "end_frame": 218
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "CROWD ALONE TERRIFIED",
+          "start_frame": 218,
+          "end_frame": 308,
+          "words": [
+            {
+              "word": "CROWD",
+              "start_frame": 218,
+              "end_frame": 232
+            },
+            {
+              "word": "ALONE",
+              "start_frame": 257,
+              "end_frame": 271
+            },
+            {
+              "word": "TERRIFIED",
+              "start_frame": 279,
+              "end_frame": 299
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "HE CRIED OUT",
+          "start_frame": 308,
+          "end_frame": 340,
+          "words": [
+            {
+              "word": "HE",
+              "start_frame": 308,
+              "end_frame": 312
+            },
+            {
+              "word": "CRIED",
+              "start_frame": 312,
+              "end_frame": 324
+            },
+            {
+              "word": "OUT",
+              "start_frame": 324,
+              "end_frame": 331
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "DAD WHERE ARE",
+          "start_frame": 340,
+          "end_frame": 372,
+          "words": [
+            {
+              "word": "DAD",
+              "start_frame": 340,
+              "end_frame": 351
+            },
+            {
+              "word": "WHERE",
+              "start_frame": 359,
+              "end_frame": 367
+            },
+            {
+              "word": "ARE",
+              "start_frame": 367,
+              "end_frame": 372
+            }
+          ]
+        },
+        {
+          "chunk_id": 8,
+          "text": "YOU",
+          "start_frame": 372,
+          "end_frame": 380,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 372,
+              "end_frame": 380
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 4,
+      "title": "THE FATHER'S RESCUE",
+      "narration": "Just as panic took over, two massive golden paws scooped him into the warmest hug in the world. His father whispered: I will always find you, my son.",
+      "camera_style": "warm-dolly",
+      "speaker": "father",
+      "speaker_name": "Father Lion",
+      "speaker_avatar": "\ud83d\udc51",
+      "sfx": "pop",
+      "image_url": "images/file9.jpg",
+      "audio_url": "audio/scene_4.mp3",
+      "audio_duration_sec": 10.82,
+      "duration_in_frames": 340,
+      "words": [
+        {
+          "word": "Just",
+          "start_sec": 0.101541,
+          "end_sec": 0.449499,
+          "start_frame": 3,
+          "end_frame": 13
+        },
+        {
+          "word": "as",
+          "start_sec": 0.462375,
+          "end_sec": 0.578375,
+          "start_frame": 14,
+          "end_frame": 17
+        },
+        {
+          "word": "panic",
+          "start_sec": 0.59125,
+          "end_sec": 1.029375,
+          "start_frame": 18,
+          "end_frame": 31
+        },
+        {
+          "word": "took",
+          "start_sec": 1.04225,
+          "end_sec": 1.2613329999999998,
+          "start_frame": 31,
+          "end_frame": 38
+        },
+        {
+          "word": "over",
+          "start_sec": 1.274208,
+          "end_sec": 1.609249,
+          "start_frame": 38,
+          "end_frame": 48
+        },
+        {
+          "word": "two",
+          "start_sec": 1.854125,
+          "end_sec": 2.047416,
+          "start_frame": 56,
+          "end_frame": 61
+        },
+        {
+          "word": "massive",
+          "start_sec": 2.060291,
+          "end_sec": 2.511332,
+          "start_frame": 62,
+          "end_frame": 75
+        },
+        {
+          "word": "golden",
+          "start_sec": 2.524208,
+          "end_sec": 2.9107909999999997,
+          "start_frame": 76,
+          "end_frame": 87
+        },
+        {
+          "word": "paws",
+          "start_sec": 2.923708,
+          "end_sec": 3.284541,
+          "start_frame": 88,
+          "end_frame": 99
+        },
+        {
+          "word": "scooped",
+          "start_sec": 3.297416,
+          "end_sec": 3.6453740000000003,
+          "start_frame": 99,
+          "end_frame": 109
+        },
+        {
+          "word": "him",
+          "start_sec": 3.65825,
+          "end_sec": 3.7613329999999996,
+          "start_frame": 110,
+          "end_frame": 113
+        },
+        {
+          "word": "into",
+          "start_sec": 3.774208,
+          "end_sec": 3.954624,
+          "start_frame": 113,
+          "end_frame": 119
+        },
+        {
+          "word": "the",
+          "start_sec": 3.967541,
+          "end_sec": 4.0706240000000005,
+          "start_frame": 119,
+          "end_frame": 122
+        },
+        {
+          "word": "warmest",
+          "start_sec": 4.0835,
+          "end_sec": 4.521625,
+          "start_frame": 123,
+          "end_frame": 136
+        },
+        {
+          "word": "hug",
+          "start_sec": 4.534541,
+          "end_sec": 4.830916,
+          "start_frame": 136,
+          "end_frame": 145
+        },
+        {
+          "word": "in",
+          "start_sec": 4.843833,
+          "end_sec": 4.908249,
+          "start_frame": 145,
+          "end_frame": 147
+        },
+        {
+          "word": "the",
+          "start_sec": 4.921125,
+          "end_sec": 4.998458,
+          "start_frame": 148,
+          "end_frame": 150
+        },
+        {
+          "word": "world",
+          "start_sec": 5.011333,
+          "end_sec": 5.501041,
+          "start_frame": 150,
+          "end_frame": 165
+        },
+        {
+          "word": "His",
+          "start_sec": 6.39175,
+          "end_sec": 6.636583,
+          "start_frame": 192,
+          "end_frame": 199
+        },
+        {
+          "word": "father",
+          "start_sec": 6.6495,
+          "end_sec": 6.997458,
+          "start_frame": 199,
+          "end_frame": 210
+        },
+        {
+          "word": "whispered",
+          "start_sec": 7.010291,
+          "end_sec": 7.474207,
+          "start_frame": 210,
+          "end_frame": 224
+        },
+        {
+          "word": "I",
+          "start_sec": 7.770625,
+          "end_sec": 7.8608329999999995,
+          "start_frame": 233,
+          "end_frame": 236
+        },
+        {
+          "word": "will",
+          "start_sec": 7.873708,
+          "end_sec": 8.092791,
+          "start_frame": 236,
+          "end_frame": 243
+        },
+        {
+          "word": "always",
+          "start_sec": 8.105666,
+          "end_sec": 8.479374,
+          "start_frame": 243,
+          "end_frame": 254
+        },
+        {
+          "word": "find",
+          "start_sec": 8.49225,
+          "end_sec": 8.801541,
+          "start_frame": 255,
+          "end_frame": 264
+        },
+        {
+          "word": "you",
+          "start_sec": 8.814416,
+          "end_sec": 9.020582,
+          "start_frame": 264,
+          "end_frame": 271
+        },
+        {
+          "word": "my",
+          "start_sec": 9.239708,
+          "end_sec": 9.394333,
+          "start_frame": 277,
+          "end_frame": 282
+        },
+        {
+          "word": "son",
+          "start_sec": 9.407208,
+          "end_sec": 9.909791,
+          "start_frame": 282,
+          "end_frame": 297
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "JUST AS PANIC",
+          "start_frame": 3,
+          "end_frame": 31,
+          "words": [
+            {
+              "word": "JUST",
+              "start_frame": 3,
+              "end_frame": 13
+            },
+            {
+              "word": "AS",
+              "start_frame": 14,
+              "end_frame": 17
+            },
+            {
+              "word": "PANIC",
+              "start_frame": 18,
+              "end_frame": 31
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "TOOK OVER TWO",
+          "start_frame": 31,
+          "end_frame": 62,
+          "words": [
+            {
+              "word": "TOOK",
+              "start_frame": 31,
+              "end_frame": 38
+            },
+            {
+              "word": "OVER",
+              "start_frame": 38,
+              "end_frame": 48
+            },
+            {
+              "word": "TWO",
+              "start_frame": 56,
+              "end_frame": 61
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "MASSIVE GOLDEN PAWS",
+          "start_frame": 62,
+          "end_frame": 99,
+          "words": [
+            {
+              "word": "MASSIVE",
+              "start_frame": 62,
+              "end_frame": 75
+            },
+            {
+              "word": "GOLDEN",
+              "start_frame": 76,
+              "end_frame": 87
+            },
+            {
+              "word": "PAWS",
+              "start_frame": 88,
+              "end_frame": 99
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "SCOOPED HIM INTO",
+          "start_frame": 99,
+          "end_frame": 119,
+          "words": [
+            {
+              "word": "SCOOPED",
+              "start_frame": 99,
+              "end_frame": 109
+            },
+            {
+              "word": "HIM",
+              "start_frame": 110,
+              "end_frame": 113
+            },
+            {
+              "word": "INTO",
+              "start_frame": 113,
+              "end_frame": 119
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "THE WARMEST HUG",
+          "start_frame": 119,
+          "end_frame": 145,
+          "words": [
+            {
+              "word": "THE",
+              "start_frame": 119,
+              "end_frame": 122
+            },
+            {
+              "word": "WARMEST",
+              "start_frame": 123,
+              "end_frame": 136
+            },
+            {
+              "word": "HUG",
+              "start_frame": 136,
+              "end_frame": 145
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "IN THE WORLD",
+          "start_frame": 145,
+          "end_frame": 192,
+          "words": [
+            {
+              "word": "IN",
+              "start_frame": 145,
+              "end_frame": 147
+            },
+            {
+              "word": "THE",
+              "start_frame": 148,
+              "end_frame": 150
+            },
+            {
+              "word": "WORLD",
+              "start_frame": 150,
+              "end_frame": 165
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "HIS FATHER WHISPERED",
+          "start_frame": 192,
+          "end_frame": 233,
+          "words": [
+            {
+              "word": "HIS",
+              "start_frame": 192,
+              "end_frame": 199
+            },
+            {
+              "word": "FATHER",
+              "start_frame": 199,
+              "end_frame": 210
+            },
+            {
+              "word": "WHISPERED",
+              "start_frame": 210,
+              "end_frame": 224
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "I WILL ALWAYS",
+          "start_frame": 233,
+          "end_frame": 255,
+          "words": [
+            {
+              "word": "I",
+              "start_frame": 233,
+              "end_frame": 236
+            },
+            {
+              "word": "WILL",
+              "start_frame": 236,
+              "end_frame": 243
+            },
+            {
+              "word": "ALWAYS",
+              "start_frame": 243,
+              "end_frame": 254
+            }
+          ]
+        },
+        {
+          "chunk_id": 8,
+          "text": "FIND YOU MY",
+          "start_frame": 255,
+          "end_frame": 282,
+          "words": [
+            {
+              "word": "FIND",
+              "start_frame": 255,
+              "end_frame": 264
+            },
+            {
+              "word": "YOU",
+              "start_frame": 264,
+              "end_frame": 271
+            },
+            {
+              "word": "MY",
+              "start_frame": 277,
+              "end_frame": 282
+            }
+          ]
+        },
+        {
+          "chunk_id": 9,
+          "text": "SON",
+          "start_frame": 282,
+          "end_frame": 297,
+          "words": [
+            {
+              "word": "SON",
+              "start_frame": 282,
+              "end_frame": 297
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 5,
+      "title": "THE REAL LESSON",
+      "narration": "That day, Toffee learned real courage isn't running away\u2014it's knowing who has your back. Subscribe and follow right now for Episode Two!",
+      "camera_style": "sunset-drift",
+      "speaker": "narrator",
+      "speaker_name": "Narrator",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whoosh",
+      "image_url": "images/file18.jpg",
+      "audio_url": "audio/scene_5.mp3",
+      "audio_duration_sec": 8.98,
+      "duration_in_frames": 466,
+      "words": [
+        {
+          "word": "That",
+          "start_sec": 0.096166,
+          "end_sec": 0.264416,
+          "start_frame": 3,
+          "end_frame": 8
+        },
+        {
+          "word": "day",
+          "start_sec": 0.264416,
+          "end_sec": 0.636999,
+          "start_frame": 8,
+          "end_frame": 19
+        },
+        {
+          "word": "Toffee",
+          "start_sec": 0.889416,
+          "end_sec": 1.2499989999999999,
+          "start_frame": 27,
+          "end_frame": 37
+        },
+        {
+          "word": "learned",
+          "start_sec": 1.25,
+          "end_sec": 1.586541,
+          "start_frame": 38,
+          "end_frame": 48
+        },
+        {
+          "word": "real",
+          "start_sec": 1.586541,
+          "end_sec": 1.899041,
+          "start_frame": 48,
+          "end_frame": 57
+        },
+        {
+          "word": "courage",
+          "start_sec": 1.899041,
+          "end_sec": 2.343749,
+          "start_frame": 57,
+          "end_frame": 70
+        },
+        {
+          "word": "isn't",
+          "start_sec": 2.488,
+          "end_sec": 2.752416,
+          "start_frame": 75,
+          "end_frame": 83
+        },
+        {
+          "word": "running",
+          "start_sec": 2.752416,
+          "end_sec": 3.004791,
+          "start_frame": 83,
+          "end_frame": 90
+        },
+        {
+          "word": "away",
+          "start_sec": 3.004791,
+          "end_sec": 3.413457,
+          "start_frame": 90,
+          "end_frame": 102
+        },
+        {
+          "word": "it's",
+          "start_sec": 3.858166,
+          "end_sec": 3.990374,
+          "start_frame": 116,
+          "end_frame": 120
+        },
+        {
+          "word": "knowing",
+          "start_sec": 3.990375,
+          "end_sec": 4.362958,
+          "start_frame": 120,
+          "end_frame": 131
+        },
+        {
+          "word": "who",
+          "start_sec": 4.363,
+          "end_sec": 4.447125000000001,
+          "start_frame": 131,
+          "end_frame": 133
+        },
+        {
+          "word": "has",
+          "start_sec": 4.447125,
+          "end_sec": 4.6995,
+          "start_frame": 133,
+          "end_frame": 141
+        },
+        {
+          "word": "your",
+          "start_sec": 4.6995,
+          "end_sec": 4.783625,
+          "start_frame": 141,
+          "end_frame": 144
+        },
+        {
+          "word": "back",
+          "start_sec": 4.783666,
+          "end_sec": 5.204332,
+          "start_frame": 144,
+          "end_frame": 156
+        },
+        {
+          "word": "Subscribe",
+          "start_sec": 5.588958,
+          "end_sec": 6.129833,
+          "start_frame": 168,
+          "end_frame": 184
+        },
+        {
+          "word": "and",
+          "start_sec": 6.213958,
+          "end_sec": 6.2740409999999995,
+          "start_frame": 186,
+          "end_frame": 188
+        },
+        {
+          "word": "follow",
+          "start_sec": 6.274041,
+          "end_sec": 6.6346240000000005,
+          "start_frame": 188,
+          "end_frame": 199
+        },
+        {
+          "word": "right",
+          "start_sec": 6.634625,
+          "end_sec": 6.838958,
+          "start_frame": 199,
+          "end_frame": 205
+        },
+        {
+          "word": "now",
+          "start_sec": 6.850958,
+          "end_sec": 7.223541,
+          "start_frame": 206,
+          "end_frame": 217
+        },
+        {
+          "word": "for",
+          "start_sec": 7.415875,
+          "end_sec": 7.6802909999999995,
+          "start_frame": 222,
+          "end_frame": 230
+        },
+        {
+          "word": "Episode",
+          "start_sec": 7.752416,
+          "end_sec": 8.245207,
+          "start_frame": 233,
+          "end_frame": 247
+        },
+        {
+          "word": "Two",
+          "start_sec": 8.245208,
+          "end_sec": 8.629833,
+          "start_frame": 247,
+          "end_frame": 259
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "THAT DAY TOFFEE",
+          "start_frame": 3,
+          "end_frame": 38,
+          "words": [
+            {
+              "word": "THAT",
+              "start_frame": 3,
+              "end_frame": 8
+            },
+            {
+              "word": "DAY",
+              "start_frame": 8,
+              "end_frame": 19
+            },
+            {
+              "word": "TOFFEE",
+              "start_frame": 27,
+              "end_frame": 37
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "LEARNED REAL COURAGE",
+          "start_frame": 38,
+          "end_frame": 75,
+          "words": [
+            {
+              "word": "LEARNED",
+              "start_frame": 38,
+              "end_frame": 48
+            },
+            {
+              "word": "REAL",
+              "start_frame": 48,
+              "end_frame": 57
+            },
+            {
+              "word": "COURAGE",
+              "start_frame": 57,
+              "end_frame": 70
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "ISN'T RUNNING AWAY",
+          "start_frame": 75,
+          "end_frame": 116,
+          "words": [
+            {
+              "word": "ISN'T",
+              "start_frame": 75,
+              "end_frame": 83
+            },
+            {
+              "word": "RUNNING",
+              "start_frame": 83,
+              "end_frame": 90
+            },
+            {
+              "word": "AWAY",
+              "start_frame": 90,
+              "end_frame": 102
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "IT'S KNOWING WHO",
+          "start_frame": 116,
+          "end_frame": 133,
+          "words": [
+            {
+              "word": "IT'S",
+              "start_frame": 116,
+              "end_frame": 120
+            },
+            {
+              "word": "KNOWING",
+              "start_frame": 120,
+              "end_frame": 131
+            },
+            {
+              "word": "WHO",
+              "start_frame": 131,
+              "end_frame": 133
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "HAS YOUR BACK",
+          "start_frame": 133,
+          "end_frame": 168,
+          "words": [
+            {
+              "word": "HAS",
+              "start_frame": 133,
+              "end_frame": 141
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 141,
+              "end_frame": 144
+            },
+            {
+              "word": "BACK",
+              "start_frame": 144,
+              "end_frame": 156
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "SUBSCRIBE AND FOLLOW",
+          "start_frame": 168,
+          "end_frame": 199,
+          "words": [
+            {
+              "word": "SUBSCRIBE",
+              "start_frame": 168,
+              "end_frame": 184
+            },
+            {
+              "word": "AND",
+              "start_frame": 186,
+              "end_frame": 188
+            },
+            {
+              "word": "FOLLOW",
+              "start_frame": 188,
+              "end_frame": 199
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "RIGHT NOW FOR",
+          "start_frame": 199,
+          "end_frame": 233,
+          "words": [
+            {
+              "word": "RIGHT",
+              "start_frame": 199,
+              "end_frame": 205
+            },
+            {
+              "word": "NOW",
+              "start_frame": 206,
+              "end_frame": 217
+            },
+            {
+              "word": "FOR",
+              "start_frame": 222,
+              "end_frame": 230
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "EPISODE TWO",
+          "start_frame": 233,
+          "end_frame": 441,
+          "words": [
+            {
+              "word": "EPISODE",
+              "start_frame": 233,
+              "end_frame": 247
+            },
+            {
+              "word": "TWO",
+              "start_frame": 247,
+              "end_frame": 259
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
