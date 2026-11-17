@@ -68,6 +68,72 @@ VIRAL_TOPIC_POOL = [
         "category": "Wild Nature Secrets",
         "style": "Bioluminescent 3D Pixar ocean",
     },
+    {
+        "topic": "What if you fell into Jupiter's atmosphere?",
+        "hook_premise": "If you jumped into Jupiter's storm clouds, you would fall for thousands of miles through crushing diamond hail before liquid metallic hydrogen dissolved you.",
+        "category": "Space Extreme",
+        "style": "3D Pixar cosmic storm simulation",
+    },
+    {
+        "topic": "What happens if a nuclear submarine sinks to Mariana Trench?",
+        "hook_premise": "At 36,000 feet beneath the waves, the water pressure is so intense that a titanium submarine hull would crumple inward in less than two milliseconds.",
+        "category": "Deep Sea Thriller",
+        "style": "Cinematic 3D deep sea pressure simulation",
+    },
+    {
+        "topic": "The sound of the Sun would be deafening if sound traveled in space",
+        "hook_premise": "If space had an atmosphere, the nuclear fusion roaring on the Sun's surface would reach Earth at 130 decibels—the deafening roar of a jet engine right next to your ear.",
+        "category": "Cosmic Paradox",
+        "style": "3D Pixar solar flare animation",
+    },
+    {
+        "topic": "What if oxygen disappeared from Earth for 5 seconds?",
+        "hook_premise": "If oxygen vanished for five seconds, the sky would turn pitch black, every concrete building would crumble to dust, and the daytime sun would burn your skin instantly.",
+        "category": "Catastrophe Simulation",
+        "style": "Cinematic 3D disaster animation",
+    },
+    {
+        "topic": "The terrifying secret behind sleep paralysis demons",
+        "hook_premise": "When your brain wakes up before your motor cortex, your amygdala floods your vision with terrifying shadow figures that feel 100% physically present in your room.",
+        "category": "Neuroscience Thriller",
+        "style": "3D Pixar neuroscience shadow simulation",
+    },
+    {
+        "topic": "What happens if you never sleep for 11 straight days?",
+        "hook_premise": "After 72 hours without sleep, your brain cells begin literally consuming their own synapses in a desperate bid to clear toxic waste proteins.",
+        "category": "Human Biology Extreme",
+        "style": "3D Pixar medical cellular animation",
+    },
+    {
+        "topic": "What if gravity suddenly doubled across the entire world?",
+        "hook_premise": "If Earth's gravity doubled this second, you would instantly collapse under your own weight, bridges would snap, and birds would plummet out of the sky.",
+        "category": "Physics Paradox",
+        "style": "Cinematic 3D gravity physics simulation",
+    },
+    {
+        "topic": "The secret Soviet borehole that dug 40,000 feet into Earth",
+        "hook_premise": "Deep beneath Russia lies a 9-inch metal cap covering the deepest hole humans ever dug, where temperatures reached 356 degrees and the rock flowed like plastic.",
+        "category": "Historical Mystery",
+        "style": "Cinematic 3D underground borehole render",
+    },
+    {
+        "topic": "What happens if an asteroid the size of a coin hit Earth at lightspeed?",
+        "hook_premise": "A single copper penny traveling at 99.99% the speed of light carries enough kinetic energy to vaporize an entire metropolis in a blinding nuclear fireball.",
+        "category": "Astrophysics Extreme",
+        "style": "Cinematic 3D particle impact simulation",
+    },
+    {
+        "topic": "What lies beneath Antarctica's 2-mile thick ice sheet?",
+        "hook_premise": "Trapped beneath two miles of Antarctic ice are prehistoric subterranean lakes that have been completely sealed from Earth's atmosphere for 15 million years.",
+        "category": "Earth Mysteries",
+        "style": "3D Pixar glacial cavern render",
+    },
+    {
+        "topic": "The ancient monster that hunted Megalodons for breakfast",
+        "hook_premise": "Livyatan Melvillei was a prehistoric sperm whale with 14-inch teeth that actively wrestled and hunted giant Megalodon sharks in primordial oceans.",
+        "category": "Prehistoric Beasts",
+        "style": "Cinematic 3D ocean monster battle",
+    },
 ]
 
 
