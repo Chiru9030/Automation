@@ -1,9 +1,9 @@
-name: 8-Hour Autonomous Story Video Pipeline
+name: 5-Hour Autonomous Story Video Pipeline
 
 on:
   schedule:
-    # Trigger automatically every 8 hours (00:00, 08:00, 16:00 UTC)
-    - cron: '0 */8 * * *'
+    # Trigger automatically every 5 hours (00:00, 05:00, 10:00, 15:00, 20:00 UTC)
+    - cron: '0 */5 * * *'
   workflow_dispatch: # Allows manual one-click trigger from GitHub web interface
 
 concurrency:

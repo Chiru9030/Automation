@@ -72,10 +72,9 @@ def generate_hd_image(prompt: str, output_path: Path) -> Path:
         except Exception as e:
             time.sleep(2)
 
-    # Fallback to existing base image if network throttles
-    fallback = PUBLIC_IMAGES_DIR / "file0.jpg"
-    if fallback.exists() and not output_path.exists():
-        output_path.write_bytes(fallback.read_bytes())
+    # Do not silently copy fallback or stale images
+    if not output_path.exists() or output_path.stat().st_size < 10_000:
+        print(f"⚠️ [Image Engine Warning] Generation pending for: {output_path.name}")
 
     return output_path
 

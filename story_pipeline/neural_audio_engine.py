@@ -11,10 +11,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_AUDIO_DIR = BASE_DIR / "video-app" / "public" / "audio"
 
-VOICE_MAP = {
-    "narrator": {"voice": "en-US-ChristopherNeural", "rate": "+4%", "pitch": "+0Hz"},
-    "character_hero": {"voice": "en-US-GuyNeural", "rate": "+5%", "pitch": "+0Hz"},
-    "character_guide": {"voice": "en-US-EricNeural", "rate": "+0%", "pitch": "+0Hz"},
+# Single Deep Cinematic Voice with Crazy Bass
+SINGLE_BASS_VOICE = {
+    "voice": "en-US-ChristopherNeural",
+    "rate": "+3%",
+    "pitch": "-4Hz",  # Deep, resonant cinematic voice
 }
 
 
@@ -45,8 +46,7 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
     for i, beat in enumerate(beats):
         b_num = beat["beat_number"]
         narration = beat["narration"]
-        speaker = beat.get("speaker", "narrator")
-        cfg = VOICE_MAP.get(speaker, VOICE_MAP["narrator"])
+        cfg = SINGLE_BASS_VOICE
 
         audio_filename = f"beat_{b_num}.mp3"
         audio_path = PUBLIC_AUDIO_DIR / audio_filename
@@ -101,6 +101,22 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
                     })
 
         audio_path.write_bytes(audio_bytes)
+
+        # Apply Crazy Bass DSP Audio Mastering (Heavy cinema sub-bass boost)
+        temp_raw = audio_path.with_suffix(".raw.mp3")
+        try:
+            audio_path.rename(temp_raw)
+            cmd_bass = [
+                "ffmpeg", "-y", "-i", str(temp_raw),
+                "-af", "bass=g=16:f=95:w=0.6,equalizer=f=60:t=q:w=1.5:g=12,volume=1.2,loudnorm=I=-14:TP=-1.5:LRA=7",
+                str(audio_path),
+            ]
+            subprocess.run(cmd_bass, check=True, capture_output=True)
+            temp_raw.unlink(missing_ok=True)
+        except Exception:
+            if temp_raw.exists() and not audio_path.exists():
+                temp_raw.rename(audio_path)
+
         dur_sec = get_audio_duration(audio_path)
 
         # Fallback word timestamps if boundaries missing
@@ -127,7 +143,7 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
         beat["words"] = raw_words
 
         total_frames += dur_frames
-        print(f"🎙️ [Stage 4/5: Audio Engine] Beat #{b_num} [{beat.get('speaker_name', speaker)}]: {dur_sec:.2f}s ({dur_frames}f, {len(raw_words)} words) -> {audio_filename}")
+        print(f"🎙️ [Stage 4/5: Audio Engine] Beat #{b_num} [CrazyBass Narrator]: {dur_sec:.2f}s ({dur_frames}f, {len(raw_words)} words) -> {audio_filename}")
 
     # Lock composition to strictly 1740 frames (58.0 seconds @ 30fps)
     target_frames = 1740  # 58.0s (strictly < 59s limit)

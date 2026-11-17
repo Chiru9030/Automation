@@ -1,14 +1,14 @@
 """
-Continuous 8-Hour Story-to-Shorts Automation Daemon.
+Continuous 5-Hour Story-to-Shorts Automation Daemon.
 Protected with Circuit Breakers & Non-Blocking Error Handling.
-Every 8 hours, it:
-1. Ingests the next chapter from your uploaded story books in 'books/'.
-2. Generates the 60-second video script with Gemini.
-3. Generates AI voice narration (edge-tts).
-4. Generates background music matching the genre.
-5. Renders the vertical 60-second video in Remotion.
-6. Publishes to YouTube Shorts and Instagram Reels.
-7. Sleeps for 8 hours and repeats!
+Every 5 hours, it:
+1. Synthesizes a new viral story chapter.
+2. Generates 3D Pixar visuals and neural voiceovers.
+3. Renders a 60-second vertical MP4.
+4. Generates a high-CTR thumbnail.
+5. Publishes to YouTube Shorts and Instagram Reels.
+6. Updates episode history.
+7. Sleeps for 5 hours and repeats!
 """
 
 import argparse
@@ -23,7 +23,7 @@ sys.path.insert(0, str(BASE_DIR))
 
 from story_runner import process_next_story
 
-DEFAULT_INTERVAL_HOURS = 8.0
+DEFAULT_INTERVAL_HOURS = 5.0
 MAX_CONSECUTIVE_FAILURES = 3
 COOLDOWN_ON_ERROR_SECONDS = 600  # 10 minutes
 

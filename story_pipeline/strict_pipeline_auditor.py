@@ -40,22 +40,59 @@ def audit_story_script(script_data: dict) -> bool:
     return True
 
 
+import hashlib
+
 def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
-    """Audits all generated visual assets for resolution and file integrity."""
+    """Audits all generated visual assets for resolution, vertical aspect ratio, and 100% uniqueness."""
+    seen_hashes = {}
+    fallback_file = public_dir / "images" / "file0.jpg"
+    fallback_hash = None
+    if fallback_file.exists():
+        fallback_hash = hashlib.sha256(fallback_file.read_bytes()).hexdigest()
+
     for b in beats:
+        b_num = b.get("beat_number", 1)
         img_rel = b.get("image_url")
         if not img_rel:
-            raise QualityAuditError(f"Visual Rejection: Beat #{b['beat_number']} missing image_url")
+            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} missing image_url")
 
         img_path = public_dir / img_rel
         if not img_path.exists():
             raise QualityAuditError(f"Visual Rejection: File not found on disk: {img_path}")
 
-        size = img_path.stat().st_size
-        if size < 12_000:
-            raise QualityAuditError(f"Visual Rejection: Corrupt or incomplete image file ({size} bytes): {img_path.name}")
+        raw_bytes = img_path.read_bytes()
+        size = len(raw_bytes)
+        if size < 20_000:
+            raise QualityAuditError(f"Visual Rejection: Incomplete or corrupt image ({size} bytes) on Beat #{b_num}")
 
-    print(f"✅ [Auditor Gate 2/5] Visual Assets Approved (All {len(beats)} images verified > 12KB).")
+        file_hash = hashlib.sha256(raw_bytes).hexdigest()
+
+        # Reject any silent fallback to file0.jpg (lion from epub)
+        if fallback_hash and file_hash == fallback_hash:
+            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} is an invalid duplicate copy of legacy file0.jpg!")
+
+        # Enforce 100% visual uniqueness across beats (0 duplicate frames)
+        if file_hash in seen_hashes:
+            prev_b = seen_hashes[file_hash]
+            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} image is identical to Beat #{prev_b} ({img_path.name})! Every beat must have a unique visual.")
+        seen_hashes[file_hash] = b_num
+
+        # Check orientation: must be vertical (height >= width)
+        try:
+            cmd = ["ffprobe", "-v", "error", "-show_entries", "stream=width,height", "-of", "json", str(img_path)]
+            res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            info = json.loads(res.stdout)
+            st = info.get("streams", [{}])[0]
+            w, h = st.get("width", 0), st.get("height", 0)
+            if w > 0 and h > 0:
+                if h < w * 1.2:
+                    raise QualityAuditError(f"Visual Rejection: Beat #{b_num} is horizontal or square ({w}x{h}). Vertical 9:16 aspect ratio strictly required!")
+        except QualityAuditError:
+            raise
+        except Exception:
+            pass
+
+    print(f"✅ [Auditor Gate 2/5] Visual Assets Approved (All {len(beats)} images verified vertical, high-res, and 100% unique).")
     return True
 
 

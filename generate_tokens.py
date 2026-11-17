@@ -18,16 +18,28 @@ def generate_youtube_tokens():
         return False
 
     try:
+        import json
         from google_auth_oauthlib.flow import InstalledAppFlow
+
+        with open(client_secrets_file) as f:
+            secret_data = json.load(f)
+
+        client_type = list(secret_data.keys())[0]
+        port = 8080 if client_type == "web" else 0
+
+        if client_type == "web":
+            print("⚠️ Notice: Your client_secrets.json is configured as 'Web application'.")
+            print(f"👉 Please make sure 'http://localhost:{port}/' is added in Google Cloud Console under:")
+            print("   'Authorized redirect URIs' for this OAuth Client ID.\n")
 
         scopes = ["https://www.googleapis.com/auth/youtube.upload"]
         flow = InstalledAppFlow.from_client_secrets_file(client_secrets_file, scopes)
-        credentials = flow.run_local_server(port=0)
+        credentials = flow.run_local_server(port=port)
 
         with open("youtube_tokens.json", "w") as token_file:
             token_file.write(credentials.to_json())
 
-        print(" Successfully created 'youtube_tokens.json'!")
+        print("✅ Successfully created 'youtube_tokens.json'!")
         return True
     except Exception as e:
         print(f"Failed to generate YouTube tokens: {e}")

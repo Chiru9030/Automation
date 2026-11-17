@@ -53,13 +53,33 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                 }
             )
 
-        video_url = str(output)
-        if hasattr(output, "url"):
-            video_url = str(output.url)
+        temp_cloud = output_video_path.with_suffix(".cloud.mp4")
+        if isinstance(output, list) and len(output) > 0:
+            output = output[0]
 
-        print(f"📥 Downloading generated AI video from cloud: {video_url[:60]}...")
-        urllib.request.urlretrieve(video_url, str(output_video_path))
-        return output_video_path.exists() and output_video_path.stat().st_size > 50_000
+        if hasattr(output, "read"):
+            temp_cloud.write_bytes(output.read())
+        else:
+            video_url = str(output.url) if hasattr(output, "url") else str(output)
+            print(f"📥 Downloading generated AI video from cloud: {video_url[:60]}...")
+            req_dl = urllib.request.Request(video_url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req_dl, timeout=60) as resp:
+                temp_cloud.write_bytes(resp.read())
+
+        if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
+            # Standardize cloud video to 1080x1920 @ 30fps for seamless concatenation
+            cmd_norm = [
+                "ffmpeg", "-y", "-i", str(temp_cloud),
+                "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
+                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
+                "-pix_fmt", "yuv420p",
+                "-an",
+                str(output_video_path),
+            ]
+            subprocess.run(cmd_norm, check=True, capture_output=True)
+            temp_cloud.unlink(missing_ok=True)
+            return output_video_path.exists() and output_video_path.stat().st_size > 50_000
+        return False
 
     except Exception as e:
         print(f"Notice: Cloud video generation exception ({e})")
@@ -89,44 +109,43 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         print(f"🎬 Successfully retrieved Cloud AI Video: {output_video_path.name}")
         return output_video_path
 
-    # High-Depth Local Synthesis (Hardware Accelerated)
+    # True Full-Bleed 1080x1920 3D Cinematic Motion Synthesis
     fps = 30
     dur_frames = scene.get("duration_in_frames", 360)
     duration_sec = dur_frames / fps
 
-    style = scene.get("camera_style", "smooth-zoom-in")
-    if style == "pan-right":
-        zoom_expr = "'1.15'"
-        x_expr = "'min(x+0.8,iw-ow)'"
+    motion = scene.get("camera_motion") or scene.get("camera_style", "smooth-zoom-in")
+    if motion == "pan-right":
+        # Dynamic 3D tracking pan across the scene
+        zoom_expr = "'1.25'"
+        x_expr = "'min(x+1.6,iw-ow)'"
         y_expr = "'ih/2-(ih/zoom/2)'"
-    elif style == "dramatic-pulse":
-        zoom_expr = "'min(zoom+0.0012,1.26)'"
+    elif motion == "dramatic-pulse":
+        # Dramatic suspense zoom push
+        zoom_expr = "'min(zoom+0.0018,1.38)'"
         x_expr = "'iw/2-(iw/zoom/2)'"
         y_expr = "'ih/2-(ih/zoom/2)'"
-    elif style == "warm-dolly":
-        zoom_expr = "'max(1.22-0.0008*on,1.10)'"
+    elif motion == "warm-dolly":
+        # Scope revealing 3D dolly-out
+        zoom_expr = "'max(1.35-0.0012*on,1.06)'"
         x_expr = "'iw/2-(iw/zoom/2)'"
         y_expr = "'ih/2-(ih/zoom/2)'"
-    elif style == "sunset-drift":
-        zoom_expr = "'min(zoom+0.0006,1.18)'"
+    elif motion == "sunset-drift":
+        # Sweeping 3D vertical crane rise / tilt
+        zoom_expr = "'1.22'"
         x_expr = "'iw/2-(iw/zoom/2)'"
-        y_expr = "'max(y-0.8,0)'"
+        y_expr = "'max(y-1.5,0)'"
     else:
-        zoom_expr = "'min(zoom+0.0008,1.22)'"
+        # Immersive 3D deep push-in
+        zoom_expr = "'min(zoom+0.0014,1.32)'"
         x_expr = "'iw/2-(iw/zoom/2)'"
         y_expr = "'ih/2-(ih/zoom/2)'"
 
-    # Multi-plane depth: ambient blurred background + crisp animated hero illustration
+    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, NO 2D inset frames)
     filter_complex = (
-        f"[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,gblur=sigma=22[bg];"
-        f"[0:v]zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=960x960:fps={fps}[hero];"
-        f"color=c=#030208:s=1080x1920:d={duration_sec}:r={fps}[base];"
-        f"[base][bg]overlay=0:0[bglayer];"
-        f"[bglayer][hero]overlay=x=(W-w)/2:y=200[outv]"
+        f"[0:v]scale=1620:2880:force_original_aspect_ratio=increase,crop=1620:2880,"
+        f"zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=1080x1920:fps={fps}[outv]"
     )
-
-    encoder = "h264_videotoolbox" if os.uname().sysname == "Darwin" else "libx264"
-    extra_enc = ["-b:v", "6M"] if encoder == "h264_videotoolbox" else ["-preset", "ultrafast", "-crf", "22"]
 
     cmd = [
         "ffmpeg", "-y",
@@ -134,8 +153,9 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         "-t", f"{duration_sec:.2f}",
         "-filter_complex", filter_complex,
         "-map", "[outv]",
-        "-c:v", encoder,
-        *extra_enc,
+        "-c:v", "libx264",
+        "-preset", "ultrafast",
+        "-crf", "22",
         "-pix_fmt", "yuv420p",
         str(output_video_path),
     ]

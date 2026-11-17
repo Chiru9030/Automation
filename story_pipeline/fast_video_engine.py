@@ -212,7 +212,27 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
         str(out_mp4),
     ]
 
-    subprocess.run(cmd_final, check=True, capture_output=True)
+    try:
+        subprocess.run(cmd_final, check=True, capture_output=True)
+    except subprocess.CalledProcessError:
+        print("⚠️ Notice: Switching final composite to libx264 ultrafast...")
+        cmd_fallback = [
+            "ffmpeg", "-y",
+            "-i", str(visuals_only),
+            *audio_inputs,
+            "-filter_complex", f"[0:v]ass='{escaped_ass}'[vout];{audio_filter_graph}",
+            "-map", "[vout]",
+            "-map", "[aout]",
+            "-c:v", "libx264",
+            "-preset", "ultrafast",
+            "-crf", "22",
+            "-c:a", "aac",
+            "-b:a", "192k",
+            "-t", f"{total_sec:.2f}",
+            "-pix_fmt", "yuv420p",
+            str(out_mp4),
+        ]
+        subprocess.run(cmd_fallback, check=True, capture_output=True)
 
     # Clean up temp clips
     for p in clip_paths:

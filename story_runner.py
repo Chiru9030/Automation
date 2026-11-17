@@ -1,6 +1,6 @@
 """
 Autonomous Dynamic Story-to-Shorts Pipeline Runner (7-Stage Viral Production Engine).
-Runs continuously on an 8-hour schedule or 1-click cloud trigger without manual book uploads:
+Runs continuously on a 5-hour schedule or 1-click cloud trigger without manual book uploads:
 1. Stage 1: Unique Viral Curiosity Topic Generator ("What If", Paradoxes, Shocking Science).
 2. Stage 2: Hook-Driven 59-Second Narrative Script Engine (Retention hooks every 10 seconds).
    -> Auditor Gate 1: Narrative structure, pacing, word count verification.
@@ -226,10 +226,10 @@ def process_next_story() -> dict:
     # -------------------------------------------------------------
     yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
     full_text = " ".join([b["narration"] for b in beats])
-    yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 8 hours! #shorts #viral #story"
+    yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
     yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
 
-    ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 8 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
+    ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
 
     print("\n📤 Publishing to social platforms...")
     yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
