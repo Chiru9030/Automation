@@ -40,20 +40,35 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install System Dependencies (FFmpeg & Chromium)
+      - name: Ensure System Dependencies (FFmpeg & Fonts)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg chromium-browser fonts-liberation
+          which ffmpeg >/dev/null 2>&1 || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-liberation)
+
+      - name: Cache Python Dependencies
+        uses: actions/cache@v4
+        id: pip-cache
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
 
       - name: Install Python Requirements
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Cache Node Modules
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: video-app/node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('video-app/package.json') }}
+
       - name: Install Remotion NPM Packages
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         working-directory: ./video-app
-        run: |
-          npm ci || npm install
+        run: npm install --prefer-offline --no-audit
 
       - name: Unpack Social Media Auth Tokens (If provided)
         run: |
