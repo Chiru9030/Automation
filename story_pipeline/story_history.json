@@ -1,7 +1,18 @@
 {
   "processed_chapters": [
-    "Various_The Lion Cub and the Lion 3D-Book.epub::Episode 1: Toffee, the Lion Cub"
+    "Various_The Lion Cub and the Lion 3D-Book.epub::Episode 1: Toffee, the Lion Cub",
+    "dynamic::The Deep Sea Abyssal Creature::Ep2",
+    "dynamic::What if aliens land on Earth tomorrow?::Ep4"
   ],
-  "last_book": "Various_The Lion Cub and the Lion 3D-Book.epub",
-  "episode_count": 1
+  "last_book": "Dynamic Viral Curiosity Universe",
+  "episode_count": 4,
+  "generated_topics": [
+    "The Deep Sea Abyssal Creature",
+    "What if aliens land on Earth tomorrow?"
+  ],
+  "used_topics": [
+    "What if aliens land on Earth tomorrow?",
+    "The Deep Sea Abyssal Creature",
+    "What happens if you never stop peeing forever?"
+  ]
 }

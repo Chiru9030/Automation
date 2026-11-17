@@ -13,7 +13,7 @@ concurrency:
 jobs:
   generate-and-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout Repository
@@ -47,10 +47,24 @@ jobs:
         run: |
           npm ci || npm install
 
+      - name: Unpack Social Media Auth Tokens (If provided)
+        run: |
+          if [ -n "${{ secrets.YOUTUBE_TOKENS }}" ]; then
+            echo '${{ secrets.YOUTUBE_TOKENS }}' > youtube_tokens.json
+            echo "✅ Configured YouTube OAuth token"
+          fi
+          if [ -n "${{ secrets.IG_SESSION }}" ]; then
+            echo '${{ secrets.IG_SESSION }}' > instagram_session.json
+            echo "✅ Configured Instagram session"
+          fi
+
       - name: Run Autonomous Story Pipeline
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          RENDER_ENGINE: fast
+          PYTHONUNBUFFERED: "1"
         run: |
           python3 story_runner.py
 
@@ -59,6 +73,13 @@ jobs:
         with:
           name: story-episode-mp4
           path: video-app/out/*.mp4
+          retention-days: 7
+
+      - name: Upload Generated Thumbnail Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-thumbnail-jpg
+          path: video-app/out/*.jpg
           retention-days: 7
 
       - name: Commit Updated Story History

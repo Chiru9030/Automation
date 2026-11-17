@@ -1,7 +1,8 @@
 """
 Autonomous AI Video Generation & Animation Engine.
 Supports heavy cloud state-of-the-art video models:
-- MiniMax Video-01 / Kling-v1 / CogVideoX (via Replicate / ModelsLab / Pollinations)
+- Wan 2.1 (wavespeedai/wan-2.1-t2v-720p) - Alibaba's #1 Open-Source 3D Video Model
+- MiniMax Video-01 (minimax/video-01) - Expressive Cinematic Character Motion
 - Automatic fallback to high-depth multi-plane cinematic motion rendering when offline.
 """
 
@@ -10,7 +11,6 @@ import subprocess
 import time
 import urllib.request
 import urllib.parse
-import json
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -21,33 +21,48 @@ PUBLIC_DIR = BASE_DIR / "video-app" / "public"
 GENERATED_VIDEOS_DIR = PUBLIC_DIR / "generated_videos"
 
 
-def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path: Path, duration_sec: int = 5) -> bool:
-    """Generates real AI motion video using cloud models (MiniMax / Kling / CogVideoX via Replicate)."""
+def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path: Path) -> bool:
+    """Generates real AI motion video using cloud models (Wan 2.1 / MiniMax via Replicate)."""
     api_token = os.getenv("REPLICATE_API_TOKEN")
     if not api_token:
         return False
 
     try:
         import replicate
-        print(f"🌐 [Cloud AI Video] Generating realistic video via MiniMax/Kling for: '{prompt[:40]}...'")
+        client = replicate.Client(api_token=api_token)
+        print(f"🌐 [Cloud AI Video] Generating realistic video via Wan 2.1 / MiniMax for: '{prompt[:45]}...'")
 
-        # Use MiniMax Video-01 or Kling
-        with open(image_path, "rb") as img_file:
-            output = replicate.run(
+        # 1. Try Wan 2.1 (9:16 Vertical Video)
+        output = None
+        try:
+            output = client.run(
+                "wavespeedai/wan-2.1-t2v-720p",
+                input={
+                    "prompt": f"{prompt}, 3D Pixar animated film style, Disney cinematic lighting, fluid character motion, 8k",
+                    "aspect_ratio": "9:16",
+                    "fast_mode": True,
+                }
+            )
+        except Exception as e_wan:
+            print(f"Notice: Wan 2.1 note ({e_wan}), falling back to MiniMax...")
+            output = client.run(
                 "minimax/video-01",
                 input={
-                    "prompt": f"{prompt}, cinematic lighting, photorealistic character motion, 4k, smooth animation",
-                    "first_frame_image": img_file,
+                    "prompt": f"{prompt}, 3D Pixar animation, Disney cinematic style, 8k",
+                    "prompt_optimizer": True,
                 }
             )
 
         video_url = str(output)
+        if hasattr(output, "url"):
+            video_url = str(output.url)
+
         print(f"📥 Downloading generated AI video from cloud: {video_url[:60]}...")
         urllib.request.urlretrieve(video_url, str(output_video_path))
         return output_video_path.exists() and output_video_path.stat().st_size > 50_000
 
     except Exception as e:
-        print(f"Notice: Replicate video generation note ({e})")
+        print(f"Notice: Cloud video generation exception ({e})")
         return False
 
 
@@ -66,9 +81,9 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
     if not img_path.exists():
         img_path = PUBLIC_DIR / "images" / "file0.jpg"
 
-    prompt = f"A cute lion cub in the golden savannah, {scene.get('title', 'action')}, {scene.get('narration', '')[:60]}"
+    prompt = scene.get("visual_prompt") or f"{scene.get('title', 'action')}, {scene.get('narration', '')[:80]}"
 
-    # Try Cloud Heavy Model first
+    # Try Cloud Heavy Model (Wan 2.1 / MiniMax)
     cloud_success = generate_ai_video_replicate(prompt, img_path, output_video_path)
     if cloud_success:
         print(f"🎬 Successfully retrieved Cloud AI Video: {output_video_path.name}")

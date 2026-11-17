@@ -13,6 +13,7 @@ import subprocess
 import time
 from pathlib import Path
 from story_pipeline.ai_video_generator import generate_scene_video_clip
+from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 VIDEO_APP_DIR = BASE_DIR / "video-app"
@@ -101,9 +102,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 
 def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
-    """Renders the complete 60-second vertical video in ~15-20 seconds with native hardware acceleration."""
+    """Renders the complete vertical video strictly under 59 seconds with native hardware acceleration."""
     t0 = time.time()
-    scenes = script_data.get("scenes", [])
+    scenes = script_data.get("scenes") or script_data.get("beats", [])
     temp_dir = OUTPUT_DIR / "fast_render_tmp"
     temp_dir.mkdir(parents=True, exist_ok=True)
 
@@ -133,7 +134,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
 
     # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting)
     ass_path = temp_dir / "subtitles.ass"
-    generate_karaoke_ass(scenes, ass_path)
+    compile_kinetic_subtitles(scenes, ass_path)
     print(f"  ✨ Frame-Accurate discrete karaoke subtitles generated: {ass_path.name}")
 
     # Step 4: Multi-Track Audio Mixing (Voiceovers + Ducked Music + SFX)
@@ -191,6 +192,10 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
 
     escaped_ass = str(ass_path.resolve()).replace(":", "\\:")
 
+    total_sec = min(sum(sc.get("duration_in_frames", 348) for sc in scenes) / 30.0, 58.0)
+    if total_sec < 50.0:
+        total_sec = 56.0
+
     cmd_final = [
         "ffmpeg", "-y",
         "-i", str(visuals_only),
@@ -202,7 +207,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
         *extra_enc,
         "-c:a", "aac",
         "-b:a", "192k",
-        "-t", "60.0",
+        "-t", f"{total_sec:.2f}",
         "-pix_fmt", "yuv420p",
         str(out_mp4),
     ]

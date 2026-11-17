@@ -1,0 +1,297 @@
+"""
+Stage 2: 59-Second Hook-Driven Viral Script Engine.
+Generates gripping, high-retention stories strictly under 59 seconds:
+- Retention hooks every 10 seconds to eliminate drop-off
+- Strictly 120-135 spoken words (yielding exactly 54-58 seconds at natural neural speaking pace)
+- 5 Structured beats: Hook -> Escalation -> Climax -> Revelation -> Clean Conclusion
+- Supports standalone stories or maximum 5-part serials with standalone satisfying payoffs.
+"""
+
+import json
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TARGET_DURATION_SECONDS = 58.0  # Strictly under 59.0s limit for YouTube Shorts / Reels
+
+
+def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: int = 1) -> dict:
+    """
+    Generates a 5-beat viral story script designed for maximum retention:
+    Every beat has an attention hook every 10 seconds and finishes strictly under 59s.
+    """
+    topic = topic_data["topic"]
+    hook_premise = topic_data.get("hook_premise", "")
+    category = topic_data.get("category", "Curiosity")
+    style = topic_data.get("style", "3D Pixar animation")
+    ep_num = topic_data.get("episode", 1)
+
+    api_key = os.getenv("GEMINI_API_KEY")
+    if api_key:
+        try:
+            from google import genai
+            client = genai.Client(api_key=api_key)
+
+            prompt = f"""You are a world-class viral short-form scriptwriter for YouTube Shorts and TikTok.
+Write an intensely gripping, educational, or shocking story for:
+TOPIC: {topic}
+PREMISE: {hook_premise}
+PART: {part_number} of {total_parts}
+
+CRITICAL RULES:
+1. TOTAL SPOKEN WORDS MUST BE BETWEEN 120 AND 135 WORDS (STRICTLY UNDER 59 SECONDS WHEN SPOKEN).
+2. HOOKS EVERY 10 SECONDS: Every beat must start with an intrigue trigger.
+3. STRUCTURE: Exactly 5 beats (each 22-26 words):
+   - Beat 1 (0-10s): The Immediate Shock Hook (Grab in first 3s)
+   - Beat 2 (10-22s): Escalation (10s hook: things get worse/weirder)
+   - Beat 3 (22-35s): The Climax / Peak Danger (20s hook: point of no return)
+   - Beat 4 (35-48s): The Revelation (30s hook: mind-blowing scientific/narrative truth)
+   - Beat 5 (48-58s): Clean Conclusion & CTA (45s hook: clear resolution, ends before 59s)
+
+Output JSON ONLY:
+{{
+  "episode_title": "{topic.upper()[:28]}",
+  "hook_headline": "VIRAL HOOK (3-4 WORDS)",
+  "total_words_count": 128,
+  "beats": [
+    {{
+      "beat_number": 1,
+      "time_window": "0-10s",
+      "hook_trigger": "Opening Question Hook",
+      "narration": "Verbatim spoken text (22-26 words)",
+      "speaker": "narrator",
+      "speaker_name": "Narrator",
+      "speaker_avatar": "🎙️",
+      "sfx": "whoosh",
+      "camera_motion": "smooth-zoom-in",
+      "visual_prompt": "3D Pixar cinematic prompt, highly detailed, 8k, Unreal Engine 5 render"
+    }},
+    ... (exactly 5 beats)
+  ]
+}}"""
+            res = client.models.generate_content(
+                model="gemini-2.0-flash",
+                contents=prompt,
+                config=dict(response_mime_type="application/json")
+            )
+            data = json.loads(res.text)
+            if "beats" in data and len(data["beats"]) == 5:
+                print(f"📝 [Stage 2: Script Engine] AI Script synthesized for '{topic}' ({sum(len(b['narration'].split()) for b in data['beats'])} words)")
+                return data
+        except Exception as e:
+            print(f"Notice: Gemini script generation note ({e})")
+
+    # Procedural Fallback Engine (Guaranteed 5-Beat Structure with 10s Retention Hooks)
+    return generate_procedural_script(topic, hook_premise, style, ep_num)
+
+
+def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num: int) -> dict:
+    """Builds a guaranteed 5-beat viral script perfectly timed to 57 seconds."""
+    clean_title = topic.upper()[:26]
+
+    if "peeing" in topic.lower():
+        beats = [
+            {
+                "beat_number": 1,
+                "time_window": "0-10s",
+                "hook_trigger": "Opening Curiosity Hook",
+                "narration": "What happens if you never stop peeing forever? In the first twenty minutes, you would think it is just an annoying medical mystery.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-zoom-in",
+                "visual_prompt": f"{style}, cute 3D character in hospital looking confused at bathroom door, glowing holographic medical monitors, 8k",
+            },
+            {
+                "beat_number": 2,
+                "time_window": "10-22s",
+                "hook_trigger": "10s Escalation Hook",
+                "narration": "By hour three, pure terror sets in. Your kidneys filter twelve liters of fluid, violently draining all vital sodium and potassium from your bloodstream.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "pan-right",
+                "visual_prompt": f"{style}, 3D anatomical cross-section of glowing human kidneys working at hyper speed, pulsing blue and amber warning lights, cinematic",
+            },
+            {
+                "beat_number": 3,
+                "time_window": "22-35s",
+                "hook_trigger": "20s Danger Hook",
+                "narration": "No matter how much water you chug, your mouth turns into sandpaper. Your blood thickens like sludge, and your heart begins to flutter uncontrollably.",
+                "speaker": "character_hero",
+                "speaker_name": "Dr. Vance",
+                "speaker_avatar": "🩺",
+                "sfx": "impact_boom",
+                "camera_motion": "dramatic-pulse",
+                "visual_prompt": f"{style}, dramatic close-up of a human heart glowing with red warning sparks, dark dramatic background, high stakes",
+            },
+            {
+                "beat_number": 4,
+                "time_window": "35-48s",
+                "hook_trigger": "30s Climax Hook",
+                "narration": "Within twelve hours, without continuous intravenous salt infusions, your brain would swell from acute water intoxication, causing you to hallucinate wildly.",
+                "speaker": "character_hero",
+                "speaker_name": "Dr. Vance",
+                "speaker_avatar": "🩺",
+                "sfx": "pop",
+                "camera_motion": "warm-dolly",
+                "visual_prompt": f"{style}, 3D animation of brain synapses firing with glowing neon pulses, surreal dreamscape floating in hospital room, Disney cinematic",
+            },
+            {
+                "beat_number": 5,
+                "time_window": "48-58s",
+                "hook_trigger": "45s Resolution Hook",
+                "narration": "The human body is an exquisite balance. Be thankful your bladder knows when to shut off. Hit follow right now for the next bizarre question!",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "sunset-drift",
+                "visual_prompt": f"{style}, triumphant healthy character drinking pure glowing water at sunrise, golden sun rays, inspirational Disney masterpiece",
+            },
+        ]
+    elif "dinosaur" in topic.lower() or "roar" in topic.lower():
+        beats = [
+            {
+                "beat_number": 1,
+                "time_window": "0-10s",
+                "hook_trigger": "Opening Truth Hook",
+                "narration": "Everything Hollywood told you about the T-Rex is completely wrong. Dinosaurs never actually roared like lions in Jurassic Park.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-zoom-in",
+                "visual_prompt": f"{style}, massive majestic Tyrannosaurus Rex in prehistoric mist, amber eyes, cinematic jungle lighting, Unreal Engine 5 render, 8k",
+            },
+            {
+                "beat_number": 2,
+                "time_window": "10-22s",
+                "hook_trigger": "10s Escalation Hook",
+                "narration": "Fossilized vocal larynxes prove dinosaurs lacked the vocal cords to roar. Instead, they produced an infrasonic closed-mouth boom, identical to giant prehistoric birds.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "pan-right",
+                "visual_prompt": f"{style}, close-up of T-Rex throat vibrating with deep bass energy waves rippling through air, golden dust motes shaking, 8k",
+            },
+            {
+                "beat_number": 3,
+                "time_window": "22-35s",
+                "hook_trigger": "20s Danger Hook",
+                "narration": "This sound was so low humans couldn't even hear it—you would only feel the twenty-hertz vibration shaking the marrow in your bones.",
+                "speaker": "character_hero",
+                "speaker_name": "Paleontologist",
+                "speaker_avatar": "🦖",
+                "sfx": "impact_boom",
+                "camera_motion": "dramatic-pulse",
+                "visual_prompt": f"{style}, prehistoric puddle with sonic water ripples forming geometric patterns as the earth tremors, dramatic suspense",
+            },
+            {
+                "beat_number": 4,
+                "time_window": "35-48s",
+                "hook_trigger": "30s Climax Hook",
+                "narration": "By the time you felt the shockwave in your chest, the apex predator was already lunging from the ancient jungle shadows directly behind you.",
+                "speaker": "character_hero",
+                "speaker_name": "Paleontologist",
+                "speaker_avatar": "🦖",
+                "sfx": "pop",
+                "camera_motion": "warm-dolly",
+                "visual_prompt": f"{style}, gigantic dinosaur shadow looming over jungle trees, glowing predatory eyes in dark canopy, cinematic action, 8k",
+            },
+            {
+                "beat_number": 5,
+                "time_window": "48-58s",
+                "hook_trigger": "45s Resolution Hook",
+                "narration": "A silent killer is far more terrifying than a noisy one. What prehistoric myth should we bust next? Follow for Episode Two!",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "sunset-drift",
+                "visual_prompt": f"{style}, majestic dinosaur silhouette standing atop a prehistoric mountain peak under a purple nebula sky, breathtaking Disney masterpiece",
+            },
+        ]
+    else:
+        # Universal Dynamic 5-Beat Script
+        beats = [
+            {
+                "beat_number": 1,
+                "time_window": "0-10s",
+                "hook_trigger": "Opening Shock Hook",
+                "narration": f"What if {topic.lower()}? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-zoom-in",
+                "visual_prompt": f"{style}, dramatic epic opening cinematic of {topic}, vibrant volumetric lighting, Unreal Engine 5, 8k",
+            },
+            {
+                "beat_number": 2,
+                "time_window": "10-22s",
+                "hook_trigger": "10s Escalation Hook",
+                "narration": "Within seconds, the initial shockwave ripples across the globe, shattering communication satellites and throwing power grids into absolute chaotic blackout.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "pan-right",
+                "visual_prompt": f"{style}, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
+            },
+            {
+                "beat_number": 3,
+                "time_window": "22-35s",
+                "hook_trigger": "20s Danger Hook",
+                "narration": "Panic spreads like wildfire. As the emergency alarms echo through deserted city avenues, survivors scramble for the only remaining underground shelters.",
+                "speaker": "character_hero",
+                "speaker_name": "Commander",
+                "speaker_avatar": "🚨",
+                "sfx": "impact_boom",
+                "camera_motion": "dramatic-pulse",
+                "visual_prompt": f"{style}, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
+            },
+            {
+                "beat_number": 4,
+                "time_window": "35-48s",
+                "hook_trigger": "30s Climax Hook",
+                "narration": "Yet amidst the catastrophe, an unexpected scientific discovery reveals a hidden anomaly that might just hold the key to our survival.",
+                "speaker": "character_guide",
+                "speaker_name": "Scientist",
+                "speaker_avatar": "🔬",
+                "sfx": "pop",
+                "camera_motion": "warm-dolly",
+                "visual_prompt": f"{style}, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
+            },
+            {
+                "beat_number": 5,
+                "time_window": "48-58s",
+                "hook_trigger": "45s Resolution Hook",
+                "narration": "Our world is far more fragile than we dare to admit. What would you do first? Drop a follow right now for Episode Two!",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "sunset-drift",
+                "visual_prompt": f"{style}, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
+            },
+        ]
+
+    total_words = sum(len(b["narration"].split()) for b in beats)
+    return {
+        "episode_title": clean_title,
+        "hook_headline": f"WHAT IF {clean_title[:18]}?!",
+        "total_words_count": total_words,
+        "beats": beats,
+    }
+
+
+if __name__ == "__main__":
+    test_topic = {"topic": "What happens if you never stop peeing forever?", "category": "Biology", "style": "3D Pixar animation"}
+    s = generate_viral_script(test_topic)
+    print(json.dumps(s, indent=2))
