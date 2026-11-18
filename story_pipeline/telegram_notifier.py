@@ -6,6 +6,7 @@ Delivers real-time notifications, upload logs, error alerts, and video previews 
 3. Error: Immediate failure alert with stage diagnosis and traceback.
 """
 
+import html
 import os
 import traceback
 from pathlib import Path
@@ -185,14 +186,18 @@ def notify_audit_rejection(
     action: str = "Retrying generation with enhanced parameters...",
 ) -> bool:
     """Sends a real-time mobile report whenever an asset fails strict quality audit and is sent back for retry."""
+    esc_gate = html.escape(str(gate_name))
+    esc_item = html.escape(str(item_name))
+    esc_reason = html.escape(str(reason))
+    esc_action = html.escape(str(action))
     msg = (
         f"🔬 <b>Auditor Gate Rejection & Retry Notice</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"🛡️ <b>Auditor Gate:</b> {gate_name}\n"
-        f"🎯 <b>Target Asset:</b> <code>{item_name}</code>\n"
-        f"❌ <b>Defect Detected:</b> {reason}\n"
+        f"🛡️ <b>Auditor Gate:</b> {esc_gate}\n"
+        f"🎯 <b>Target Asset:</b> <code>{esc_item}</code>\n"
+        f"❌ <b>Defect Detected:</b> {esc_reason}\n"
         f"🔄 <b>Attempt:</b> {attempt}/{max_attempts}\n"
-        f"⚙️ <b>Action:</b> {action}\n"
+        f"⚙️ <b>Action:</b> {esc_action}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"ℹ️ <i>Rejecting sub-par quality to maintain production standards.</i>"
     )
@@ -202,12 +207,14 @@ def notify_audit_rejection(
 
 def notify_zero_upload_blocked(episode_num: int, title: str, reason: str) -> bool:
     """Sends a high-priority mobile alert when pre-upload safety audit blocks publication."""
+    esc_title = html.escape(str(title))
+    esc_reason = html.escape(str(reason))
     msg = (
         f"🛑 <b>ZERO-UPLOAD SAFETY HALT: Publication Blocked!</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🎬 <b>Episode:</b> #{episode_num}\n"
-        f"🎯 <b>Topic:</b> {title}\n"
-        f"❌ <b>Violation:</b> {reason}\n"
+        f"🎯 <b>Topic:</b> {esc_title}\n"
+        f"❌ <b>Violation:</b> {esc_reason}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🛡️ <b>Action:</b> YouTube & Instagram upload was <b>STRICTLY BLOCKED</b>.\n"
         f"🚫 <i>No blank screens, missing audio, or missing subtitles will ever be uploaded.</i>"
@@ -218,14 +225,17 @@ def notify_zero_upload_blocked(episode_num: int, title: str, reason: str) -> boo
 
 def notify_error(stage_name: str, error_msg: str, exc: Exception | None = None) -> bool:
     """Sends an urgent alert when a pipeline step or auditor rejects an output."""
+    esc_stage = html.escape(str(stage_name))
+    esc_error = html.escape(str(error_msg))
     tb = ""
     if exc:
-        tb = f"\n<pre>{traceback.format_exc()[-400:]}</pre>"
+        raw_tb = traceback.format_exc()[-400:]
+        tb = f"\n<pre>{html.escape(raw_tb)}</pre>"
 
     msg = (
-        f"🚨 <b>Pipeline Alert: Failure in {stage_name}</b>\n"
+        f"🚨 <b>Pipeline Alert: Failure in {esc_stage}</b>\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"❌ <b>Error:</b> {error_msg}\n"
+        f"❌ <b>Error:</b> {esc_error}\n"
         f"{tb}"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🔄 <i>Check GitHub Actions log for full diagnostic.</i>"

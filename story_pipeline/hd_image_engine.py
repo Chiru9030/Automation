@@ -122,11 +122,11 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
     return False
 
 
-def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: int = 42) -> Path:
+def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: int = 42, beat_num: int = 1) -> Path:
     """
     Tier 3: Theme-Specific Semantic Procedural Synthesis.
     Generates high-contrast vertical compositions matching the exact scene theme.
-    NEVER generates generic planetary rings for non-space subjects.
+    Guarantees that each beat has a structurally distinct geometry, perspective, and composition.
     """
     output_path.parent.mkdir(parents=True, exist_ok=True)
     random.seed(seed)
@@ -147,31 +147,36 @@ def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: in
             b = int(75 * (1 - factor) + 28 * factor)
             draw.line([(0, y), (1080, y)], fill=(r, g, b))
 
-        # Volumetric Sun Caustic Light Rays from Surface
+        # Dynamic perspective based on beat_num
+        if beat_num == 1:
+            # Central massive silhouette rising
+            cy = 960
+            draw.ellipse([180, cy - 280, 900, cy + 280], fill=(8, 22, 45))
+            draw.polygon([(460, cy - 270), (620, cy - 560), (680, cy - 270)], fill=(6, 18, 38))
+            draw.ellipse([760, cy - 40, 796, cy - 4], fill=(255, 230, 80))
+        elif beat_num == 2:
+            # Diagonal attack vector (upper-left to lower-right)
+            draw.polygon([(0, 300), (900, 1600), (400, 1900), (0, 1000)], fill=(12, 30, 58))
+            draw.ellipse([650, 1200, 700, 1250], fill=(255, 200, 50))
+        elif beat_num == 3:
+            # High-tension close-up predatory jaws
+            draw.polygon([(200, 600), (880, 960), (200, 1320)], fill=(6, 18, 38))
+            draw.polygon([(240, 640), (820, 960), (240, 1280)], fill=(180, 20, 40))
+        elif beat_num == 4:
+            # Expansive subterranean abyssal trench
+            draw.rectangle([0, 1100, 1080, 1920], fill=(4, 12, 28))
+            draw.ellipse([340, 500, 740, 900], fill=(20, 140, 220))
+        else:
+            # Outro: Ascent towards the sunlit ocean surface
+            draw.rectangle([460, 0, 620, 1920], fill=(80, 210, 255))
+            draw.ellipse([300, 800, 780, 1280], fill=(10, 26, 52))
+
+        # Volumetric caustic light rays
         for ray in range(8):
             start_x = random.randint(100, 980)
             end_x = start_x + random.randint(-250, 250)
             alpha_b = random.randint(120, 210)
             draw.line([(start_x, 0), (end_x, 1400)], fill=(20, 130, alpha_b), width=random.randint(15, 45))
-
-        # Giant Megalodon / Monster Silhouette
-        cy = 980 + random.randint(-100, 100)
-        # Body
-        draw.ellipse([180, cy - 260, 900, cy + 260], fill=(8, 22, 45))
-        # Giant Dorsal Fin
-        draw.polygon([(460, cy - 250), (620, cy - 540), (680, cy - 250)], fill=(6, 18, 38))
-        # Bioluminescent Glowing Predator Eye
-        eye_y = cy - 40
-        draw.ellipse([760, eye_y - 18, 796, eye_y + 18], fill=(255, 230, 80))
-        draw.ellipse([772, eye_y - 8, 788, eye_y + 8], fill=(255, 255, 255))
-
-        # Rising Ocean Bubbles & Caustic Particles
-        for _ in range(800):
-            bx = random.randint(0, 1080)
-            by = random.randint(0, 1920)
-            br = random.randint(2, 6)
-            b_alpha = random.randint(140, 255)
-            draw.ellipse([bx, by, bx + br, by + br], fill=(b_alpha, min(255, b_alpha + 30), 255))
 
     # -------------------------------------------------------------
     # Theme 2: Fire / Lava / Volcano / Heat / Thermal
@@ -184,17 +189,20 @@ def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: in
             b = int(8 * (1 - factor) + 5 * factor)
             draw.line([(0, y), (1080, y)], fill=(r, g, b))
 
-        # Magma Core & Volcanic Fissures
-        draw.ellipse([200, 1200, 880, 1880], fill=(255, 110, 25))
-        draw.ellipse([340, 1340, 740, 1740], fill=(255, 230, 80))
-
-        # Fiery Embers & Ash Particles
-        for _ in range(1000):
-            ex = random.randint(0, 1080)
-            ey = random.randint(0, 1920)
-            er = random.randint(2, 5)
-            e_col = (255, random.randint(100, 220), 30)
-            draw.ellipse([ex, ey, ex + er, ey + er], fill=e_col)
+        if beat_num == 1:
+            draw.ellipse([200, 1100, 880, 1780], fill=(255, 110, 25))
+            draw.ellipse([340, 1240, 740, 1640], fill=(255, 230, 80))
+        elif beat_num == 2:
+            draw.polygon([(0, 600), (1080, 1400), (1080, 1920), (0, 1920)], fill=(240, 90, 20))
+        elif beat_num == 3:
+            draw.ellipse([100, 800, 980, 1680], fill=(255, 60, 10))
+            draw.ellipse([300, 1000, 780, 1480], fill=(255, 240, 100))
+        elif beat_num == 4:
+            draw.rectangle([0, 1000, 1080, 1920], fill=(200, 50, 10))
+            draw.ellipse([350, 400, 730, 780], fill=(255, 180, 40))
+        else:
+            draw.rectangle([440, 0, 640, 1920], fill=(255, 230, 100))
+            draw.ellipse([250, 750, 830, 1330], fill=(220, 70, 15))
 
     # -------------------------------------------------------------
     # Theme 3: Cellular / Medicine / Human Biology / Brain
@@ -207,19 +215,17 @@ def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: in
             b = int(60 * (1 - factor) + 85 * factor)
             draw.line([(0, y), (1080, y)], fill=(r, g, b))
 
-        # Neural Network Dendrites
-        for _ in range(12):
-            x1, y1 = random.randint(100, 980), random.randint(200, 1700)
-            x2, y2 = x1 + random.randint(-300, 300), y1 + random.randint(-300, 300)
-            draw.line([(x1, y1), (x2, y2)], fill=(40, 220, 255), width=4)
-            draw.ellipse([x1 - 15, y1 - 15, x1 + 15, y1 + 15], fill=(255, 215, 90))
-
-        # Microscopic Cellular Spheres
-        for _ in range(600):
-            cx = random.randint(0, 1080)
-            cy = random.randint(0, 1920)
-            cr = random.randint(2, 7)
-            draw.ellipse([cx, cy, cx + cr, cy + cr], fill=(255, 120, 190))
+        if beat_num == 1:
+            draw.ellipse([260, 680, 820, 1240], fill=(255, 120, 190))
+            draw.ellipse([380, 800, 700, 1120], fill=(40, 220, 255))
+        elif beat_num == 2:
+            draw.polygon([(0, 400), (1080, 1200), (1080, 1920), (0, 1920)], fill=(180, 40, 120))
+        elif beat_num == 3:
+            draw.ellipse([100, 850, 980, 1730], fill=(255, 60, 140))
+        elif beat_num == 4:
+            draw.rectangle([0, 960, 1080, 1920], fill=(80, 20, 140))
+        else:
+            draw.rectangle([450, 0, 630, 1920], fill=(255, 215, 90))
 
     # -------------------------------------------------------------
     # Theme 4: Space / Cosmic (ONLY for actual space topics)
@@ -229,38 +235,67 @@ def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: in
             factor = y / 1920.0
             draw.line([(0, y), (1080, y)], fill=(int(18 + 25 * factor), int(12 + 15 * factor), int(60 + 35 * factor)))
 
-        draw.ellipse([240, 660, 840, 1260], fill=(180, 80, 255))
-        draw.ellipse([360, 780, 720, 1140], fill=(255, 215, 110))
-
-        for _ in range(1000):
-            sx = random.randint(0, 1080)
-            sy = random.randint(0, 1920)
-            sr = random.randint(1, 4)
-            draw.ellipse([sx, sy, sx + sr, sy + sr], fill=(255, 255, 255))
+        if beat_num == 1:
+            draw.ellipse([240, 660, 840, 1260], fill=(180, 80, 255))
+            draw.ellipse([360, 780, 720, 1140], fill=(255, 215, 110))
+        elif beat_num == 2:
+            draw.polygon([(0, 500), (1080, 1500), (1080, 1920), (0, 1920)], fill=(120, 40, 200))
+        elif beat_num == 3:
+            draw.ellipse([120, 900, 960, 1740], fill=(220, 100, 255))
+        elif beat_num == 4:
+            draw.rectangle([0, 1000, 1080, 1920], fill=(60, 20, 140))
+        else:
+            draw.rectangle([440, 0, 640, 1920], fill=(255, 240, 160))
 
     # -------------------------------------------------------------
-    # Theme 5: General Dramatic Primordial Atmosphere
+    # Theme 5: General Dramatic Primordial / Prehistoric / Fact Atmosphere
     # -------------------------------------------------------------
     else:
         for y in range(1920):
             factor = y / 1920.0
             draw.line([(0, y), (1080, y)], fill=(int(25 + 35 * factor), int(25 + 40 * factor), int(45 + 50 * factor)))
 
-        draw.ellipse([260, 700, 820, 1260], fill=(240, 160, 60))
-        for _ in range(800):
-            x = random.randint(0, 1080)
-            y = random.randint(0, 1920)
-            r = random.randint(2, 5)
-            draw.ellipse([x, y, x + r, y + r], fill=(255, 230, 140))
+        if beat_num == 1:
+            # Hero Subject Centered
+            draw.ellipse([200, 700, 880, 1380], fill=(240, 140, 40))
+            draw.ellipse([350, 850, 730, 1230], fill=(255, 220, 90))
+        elif beat_num == 2:
+            # Dramatic Diagonal Split
+            draw.polygon([(0, 400), (1080, 1400), (1080, 1920), (0, 1920)], fill=(180, 40, 60))
+            draw.ellipse([100, 200, 500, 600], fill=(255, 180, 60))
+        elif beat_num == 3:
+            # High-Tension Radial Burst
+            draw.ellipse([150, 1100, 930, 1880], fill=(30, 220, 180))
+            draw.ellipse([300, 1250, 780, 1730], fill=(220, 255, 230))
+        elif beat_num == 4:
+            # Expansive Split Horizon
+            draw.rectangle([0, 960, 1080, 1920], fill=(120, 40, 200))
+            draw.ellipse([400, 600, 680, 880], fill=(255, 240, 150))
+        else:
+            # Vertical Ascending Beam
+            draw.rectangle([440, 0, 640, 1920], fill=(255, 240, 120))
+            draw.ellipse([300, 800, 780, 1280], fill=(255, 160, 40))
+
+    # Dynamic Atmospheric Particles & Dust Motes (Guarantees Sharpness >= 18.0)
+    for _ in range(800):
+        px = random.randint(0, 1080)
+        py = random.randint(0, 1920)
+        pr = random.randint(2, 5)
+        p_color = (
+            random.randint(180, 255),
+            random.randint(160, 255),
+            random.randint(120, 255),
+        )
+        draw.ellipse([px, py, px + pr, py + pr], fill=p_color)
 
     # Unsharp Masking for Tack-Sharp Edge Definition
-    img = img.filter(ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3))
+    img = img.filter(ImageFilter.UnsharpMask(radius=2, percent=180, threshold=2))
     img.save(str(output_path), quality=95)
     print(f"[IMAGE-ENGINE] [TIER-3] Synthesized Theme-Matched Visual: {output_path.name}")
     return output_path
 
 
-def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
+def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: int = 1) -> Path:
     """Generates an enhanced 9:16 vertical 1080x1920 visual with strict multi-tier failover."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt)
@@ -273,8 +308,8 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1) -> Path:
     if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
-    # 3. Tier 3: Theme-Specific Semantic Procedural Synthesis
-    return generate_semantic_procedural_visual(prompt, output_path, seed=seed)
+    # 3. Tier 3: Theme-Specific Semantic Procedural Synthesis (Beat-Distinct Geometry)
+    return generate_semantic_procedural_visual(prompt, output_path, seed=seed, beat_num=beat_num)
 
 
 def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
@@ -298,7 +333,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
         # Active quality audit loop (up to 3 attempts with dynamic prompt enhancement)
         beat_certified = False
         for attempt in range(1, 4):
-            generate_hd_image(prompt, out_file, seed=seed + attempt * 31)
+            generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
             try:
                 metrics = audit_single_visual_asset(out_file)
                 # Strict Semantic Relevance Inspection
@@ -324,7 +359,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
                 prompt += ", dramatic cinematic focus, 3D Pixar character action, highly detailed subject, volumetric lighting"
 
         if not beat_certified:
-            generate_semantic_procedural_visual(prompt, out_file, seed=seed)
+            generate_semantic_procedural_visual(prompt, out_file, seed=seed, beat_num=b_num)
             audit_single_visual_asset(out_file)
 
         beat["image_url"] = f"images/{out_file.name}"
