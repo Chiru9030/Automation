@@ -8,10 +8,11 @@
     "dynamic::What happens if your immune system discovers your eyes?::Ep8",
     "dynamic::What happens if your body starts turning into a living stone statue?::Ep9",
     "dynamic::What happens if your brain permanently loses the ability to sleep?::Ep10",
-    "dynamic::The colossal megalodon that hunted prehistoric oceans::Ep11"
+    "dynamic::The colossal megalodon that hunted prehistoric oceans::Ep11",
+    "dynamic::What if the Moon was replaced by Saturn?::Ep12"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 11,
+  "episode_count": 12,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -20,19 +21,21 @@
     "What happens if your immune system discovers your eyes?",
     "What happens if your body starts turning into a living stone statue?",
     "What happens if your brain permanently loses the ability to sleep?",
-    "The colossal megalodon that hunted prehistoric oceans"
+    "The colossal megalodon that hunted prehistoric oceans",
+    "What if the Moon was replaced by Saturn?"
   ],
   "used_topics": [
-    "What happens if your body starts turning into a living stone statue?",
+    "The ancient monster that hunted Megalodons for breakfast",
     "What happens if your brain permanently loses the ability to sleep?",
+    "The immortal jellyfish that can live forever",
     "What happens if your immune system discovers your eyes?",
     "What if aliens land on Earth tomorrow?",
-    "The immortal jellyfish that can live forever",
+    "What happens if you never stop peeing forever?",
+    "What if the Moon was replaced by Saturn?",
+    "What happens if you drink boiling lava?",
     "What if gravity suddenly doubled across the entire world?",
     "The colossal megalodon that hunted prehistoric oceans",
-    "What happens if you drink boiling lava?",
-    "The ancient monster that hunted Megalodons for breakfast",
-    "What happens if you never stop peeing forever?",
+    "What happens if your body starts turning into a living stone statue?",
     "The Deep Sea Abyssal Creature"
   ]
 }
