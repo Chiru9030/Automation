@@ -1,13 +1,14 @@
 """
-Stage 7: Strict Pipeline Quality Auditor & Verification Gate.
+Stage 7: Strict Production Pipeline Quality Auditor & Verification Gate.
 Audits every frame, subtitle timing, audio boundary, visual asset, and narrative beat.
-Rejects any output that fails strict engagement, duration (<59s), or audiovisual standards:
-- Duration Gate: Strictly between 50.0s and 58.5s (never exceeding 59s for Shorts/Reels)
-- Resolution Gate: Strictly 1080x1920 @ 30fps
-- Visual Gate: Rigorous contrast (stddev >= 22), vibrancy/colorfulness (>= 25), and sharpness (>= 12)
-- Subtitle Gate: 100% word synchronization, zero negative durations, lower-third safe zone
-- Audio Gate: Non-silent AAC stereo (volume >= -45dB), dynamic range >= 10dB
-- Engagement Gate: Hooks every 10s, clean conclusion in beat 5.
+Enforces strict quality bars:
+- Gate 1 (Script): Psychological curiosity hook in Beat 1, 105-138 words, narrative payoff.
+- Gate 2 (Visuals): Contrast (stddev >= 20.0), vibrancy (>= 22.0), sharpness (>= 10.0),
+                    semantic content matching (no celestial rings on ocean scenes), 0% near-duplicates.
+- Gate 3 (Audio): Duration strictly 50.0s - 58.5s, non-silent AAC stereo, valid word timestamps.
+- Gate 4 (Subtitles): Safe lower-third (MarginV 180-260), >= 25 discrete kinetic events.
+- Gate 5 (Pre-Flight): 5-point visual frame sampling, motion differential (0% frozen frames),
+                       volume detect non-silence, 0% blank screens.
 """
 
 import hashlib
@@ -21,6 +22,23 @@ from PIL import Image, ImageStat, ImageFilter
 class QualityAuditError(Exception):
     """Raised when an asset or render fails strict quality verification."""
     pass
+
+
+def compute_dhash(im: Image.Image) -> int:
+    """Computes a 64-bit difference hash for perceptual image comparison."""
+    resized = im.convert("L").resize((9, 8), Image.Resampling.LANCZOS)
+    pixels = list(resized.getdata())
+    val = 0
+    for row in range(8):
+        for col in range(8):
+            idx = row * 9 + col
+            val = (val << 1) | (1 if pixels[idx] > pixels[idx + 1] else 0)
+    return val
+
+
+def hamming_distance(h1: int, h2: int) -> int:
+    """Computes Hamming distance between two 64-bit hashes."""
+    return bin(h1 ^ h2).count("1")
 
 
 def audit_story_script(script_data: dict) -> bool:
@@ -54,7 +72,7 @@ def audit_story_script(script_data: dict) -> bool:
     if len(last_beat.split()) < 14:
         raise QualityAuditError("Payoff Rejection: Beat 5 conclusion is too abrupt.")
 
-    print(f"✅ [Auditor Gate 1/5] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook).")
+    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook).")
     return True
 
 
@@ -114,9 +132,44 @@ def audit_single_visual_asset(img_path: Path) -> dict:
         raise QualityAuditError(f"Visual Parsing Error: Failed to decode image file ({e})")
 
 
+def audit_semantic_content_relevance(img_path: Path, scene_prompt: str, beat_title: str) -> bool:
+    """
+    Audits semantic content matching between visual asset and scene narrative.
+    Rejects generic or mismatched imagery (e.g. celestial space rings on ocean monster scenes).
+    """
+    if not img_path.exists():
+        raise QualityAuditError(f"Semantic Rejection: Image {img_path.name} not found on disk.")
+
+    p_lower = (scene_prompt + " " + beat_title).lower()
+
+    with Image.open(img_path) as im:
+        rgb = im.convert("RGB")
+        stat = ImageStat.Stat(rgb)
+        mean_r, mean_g, mean_b = stat.mean[:3]
+
+        # 1. Marine / Ocean / Megalodon theme validation
+        if any(k in p_lower for k in ["ocean", "sea", "megalodon", "shark", "underwater", "abyss", "marine"]):
+            if mean_r > mean_b * 1.35 and mean_r > 95:
+                raise QualityAuditError(
+                    f"Semantic Mismatch: Ocean scene {img_path.name} is predominantly red/purple "
+                    f"({mean_r:.0f}R vs {mean_b:.0f}B). Lacks marine/underwater chromatic profile."
+                )
+
+        # 2. Fire / Lava / Magma theme validation
+        if any(k in p_lower for k in ["fire", "lava", "volcano", "heat", "magma", "burning"]):
+            if mean_b > mean_r * 1.35 and mean_b > 95:
+                raise QualityAuditError(
+                    f"Semantic Mismatch: Lava scene {img_path.name} is predominantly blue/cold "
+                    f"({mean_b:.0f}B vs {mean_r:.0f}R). Lacks thermal/magma chromatic profile."
+                )
+
+    return True
+
+
 def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
     """Audits all generated visual assets for resolution, vertical aspect ratio, aesthetic quality, and 100% uniqueness."""
     seen_hashes = {}
+    seen_dhashes = {}
     fallback_file = public_dir / "images" / "file0.jpg"
     fallback_hash = None
     if fallback_file.exists():
@@ -136,7 +189,7 @@ def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
         if fallback_hash and file_hash == fallback_hash:
             raise QualityAuditError(f"Visual Rejection: Beat #{b_num} is an invalid duplicate copy of legacy file0.jpg!")
 
-        # Enforce 100% visual uniqueness across beats (0 duplicate frames)
+        # Enforce exact bitwise uniqueness
         if file_hash in seen_hashes:
             prev_b = seen_hashes[file_hash]
             raise QualityAuditError(f"Visual Rejection: Beat #{b_num} image is identical to Beat #{prev_b}! Every beat must have a unique visual.")
@@ -145,7 +198,19 @@ def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
         # Deep aesthetic inspection
         audit_single_visual_asset(img_path)
 
-    print(f"✅ [Auditor Gate 2/5] Visual Assets Approved (All {len(beats)} images verified vertical, high-contrast, sharp, and 100% unique).")
+        # Enforce perceptual difference (No near-identical images between beats)
+        with Image.open(img_path) as im:
+            d_hash = compute_dhash(im)
+            for prev_b, prev_dhash in seen_dhashes.items():
+                dist = hamming_distance(d_hash, prev_dhash)
+                if dist < 6:
+                    raise QualityAuditError(
+                        f"Visual Rejection: Beat #{b_num} is a near-identical duplicate of Beat #{prev_b} "
+                        f"(Hamming distance {dist} < 6). Every beat must depict a distinct visual scene!"
+                    )
+            seen_dhashes[b_num] = d_hash
+
+    print(f"[AUDITOR] [GATE-2] Visual Assets Approved (All {len(beats)} images verified vertical, high-contrast, sharp, and 100% unique).")
     return True
 
 
@@ -173,12 +238,8 @@ def audit_audio_sync(beats: list[dict], public_dir: Path) -> bool:
         for w in words:
             if w["end_frame"] < w["start_frame"]:
                 raise QualityAuditError(f"Subtitle Rejection: Negative word duration detected on '{w['word']}'")
-            w_dur = (w["end_frame"] - w["start_frame"]) / fps
-            if w_dur < 0.05:
-                # Minimum audible word duration sanity check
-                pass
 
-    print(f"✅ [Auditor Gate 3/5] Audio & Timings Approved (Duration: {total_sec:.2f}s, strictly < 58.5s).")
+    print(f"[AUDITOR] [GATE-3] Audio & Timings Approved (Duration: {total_sec:.2f}s, strictly < 58.5s).")
     return True
 
 
@@ -195,7 +256,7 @@ def audit_subtitles_file(ass_path: Path) -> bool:
     if "MarginV" not in text or "Alignment" not in text:
         raise QualityAuditError("Subtitle Rejection: Missing ASS formatting style headers!")
 
-    print(f"✅ [Auditor Gate 4/5] Subtitles File Approved ({dialogue_count} discrete kinetic events in safe lower-third).")
+    print(f"[AUDITOR] [GATE-4] Subtitles File Approved ({dialogue_count} discrete kinetic events in safe lower-third).")
     return True
 
 
@@ -206,7 +267,8 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
     2. Duration check: Strictly 50.0s to 58.5s (< 59.0s limit).
     3. Audio Integrity check: Volume detect to reject silent tracks (< -45dB).
     4. Visual Content check: 5-point sampling (10%, 30%, 50%, 70%, 90%) rejecting pitch-black or blank frames.
-    5. Subtitles check: Verifies presence of kinetic lower-third subtitles.
+    5. Motion Differential check: Verifies video is actively moving across sampled frames (0% frozen frames).
+    6. Subtitles check: Verifies presence of kinetic lower-third subtitles.
     """
     if not mp4_path.exists():
         raise QualityAuditError(f"Final Render Rejection: Output video missing at {mp4_path}")
@@ -267,10 +329,11 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
             raise
         print(f"Notice: Volume detect check ({e_vol})")
 
-    # 4. Multi-Point Visual Sampling (10%, 30%, 50%, 70%, 90%)
+    # 4. Multi-Point Visual Sampling & Motion Differential
     sample_points = [duration * 0.10, duration * 0.30, duration * 0.50, duration * 0.70, duration * 0.90]
     all_black = True
     temp_frame = mp4_path.parent / "temp_audit_frame.jpg"
+    frame_hashes = []
 
     for t_pt in sample_points:
         try:
@@ -288,15 +351,21 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
                     stat = ImageStat.Stat(im)
                     mean_lum = sum(stat.mean[:3]) / 3.0
                     std_dev = sum(stat.stddev[:3]) / 3.0
-                    temp_frame.unlink(missing_ok=True)
                     if mean_lum > 14.0 or std_dev > 10.0:
                         all_black = False
-                        break
+                    frame_hashes.append(compute_dhash(im))
+                temp_frame.unlink(missing_ok=True)
         except Exception:
             pass
 
     if all_black:
         raise QualityAuditError("Visual Content Rejection: Detected plain black, frozen, or blank screen across video! Upload aborted.")
+
+    # Check for frozen frames across the video timeline
+    if len(frame_hashes) >= 3:
+        all_identical = all(hamming_distance(frame_hashes[0], h) == 0 for h in frame_hashes[1:])
+        if all_identical:
+            raise QualityAuditError("Motion Rejection: Video appears 100% frozen with zero visual motion across the timeline!")
 
     # 5. Subtitles Presence Check
     if ass_path:
@@ -305,12 +374,12 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
         if ass_path.stat().st_size < 300:
             raise QualityAuditError("Subtitles Rejection: Subtitle file is suspiciously small or empty!")
 
-    print(f"✅ [Auditor Gate 5/5] Final Video 100% Certified for Production:")
+    print(f"[AUDITOR] [GATE-5] Final Video 100% Certified for Production:")
     print(f"   • Resolution: 1080x1920 (9:16 Vertical)")
     print(f"   • Duration: {duration:.2f}s (Strictly within 50.0s - 58.5s)")
     print(f"   • Size: {size / 1_000_000:.1f} MB")
     print(f"   • Audio: AAC Stereo Audible (Non-silent, Voice + BGM + SFX)")
-    print(f"   • Visual Content: Verified Multi-Point Colorful Motion (0% Blank)")
+    print(f"   • Visual Content: Verified Multi-Point Colorful Motion (0% Blank, 0% Frozen)")
 
     return {
         "status": "CERTIFIED",

@@ -102,9 +102,11 @@ def render_with_remotion(cmd: list, cwd: str, out_file: Path) -> bool:
     return False
 
 
-def process_next_story(custom_topic: str | None = None) -> dict:
+PIPELINE_VERSION = "v1.0.0"
+
+def process_next_story(custom_topic: str | None = None, publish: bool = True) -> dict:
     print("\n==================================================================")
-    print(" 🚀 Autonomous 7-Stage Viral Story Video Pipeline Initiated")
+    print(f" 🚀 Autonomous 7-Stage Viral Story Video Pipeline ({PIPELINE_VERSION}) Initiated")
     print("==================================================================")
 
     current_stage = "Stage 1: Dynamic Viral Topic Generator"
@@ -284,7 +286,7 @@ def process_next_story(custom_topic: str | None = None) -> dict:
         thumb_path = generate_high_ctr_thumbnail(ep_num, hook_hl, video_path=out_mp4)
 
         # -------------------------------------------------------------
-        # Automated Social Media Publishing
+        # Automated Social Media Publishing (Skipped if publish=False)
         # -------------------------------------------------------------
         current_stage = "Stage 7: Multi-Platform Publishing"
         yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
@@ -294,12 +296,17 @@ def process_next_story(custom_topic: str | None = None) -> dict:
 
         ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
 
-        print("\n📤 Publishing to social platforms...")
-        yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
-        print(f"YouTube: {yt_res}")
+        if publish:
+            print("\n📤 Publishing to social platforms...")
+            yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
+            print(f"YouTube: {yt_res}")
 
-        ig_res = upload_to_instagram(str(out_mp4), ig_caption)
-        print(f"Instagram: {ig_res}")
+            ig_res = upload_to_instagram(str(out_mp4), ig_caption)
+            print(f"Instagram: {ig_res}")
+        else:
+            print("\n🧪 [Sample Mode Active] Video rendered & certified locally. Social publishing skipped.")
+            yt_res = "[LOCAL SAMPLE] Video generated locally, upload skipped."
+            ig_res = "[LOCAL SAMPLE] Video generated locally, upload skipped."
 
         # -------------------------------------------------------------
         # Perpetual History Tracking Update
@@ -352,10 +359,17 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Autonomous Story Video Pipeline")
     parser.add_argument("--topic", type=str, default="", help="Custom topic or story prompt to render immediately")
+    parser.add_argument("--sample", action="store_true", help="Generate sample video locally without publishing")
+    parser.add_argument("--no-upload", action="store_true", help="Skip uploading to YouTube/Instagram")
     args = parser.parse_args()
 
+    should_publish = not (args.sample or args.no_upload)
+
     try:
-        process_next_story(custom_topic=args.topic if args.topic else None)
+        process_next_story(
+            custom_topic=args.topic if args.topic else None,
+            publish=should_publish,
+        )
     except Exception as e:
         print(f"🚨 Pipeline Fatal Error: {e}")
         notify_error(stage_name="Autonomous Story Pipeline", error_msg=str(e), exc=e)

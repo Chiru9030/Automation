@@ -231,42 +231,43 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         print(f"🎬 Successfully retrieved Cloud AI Video: {output_video_path.name}")
         return output_video_path
 
-    # True Full-Bleed 1080x1920 3D Cinematic Motion Synthesis
+    # Continuous Full-Timeline 1080x1920 3D Cinematic Motion Synthesis
     fps = 30
     dur_frames = scene.get("duration_in_frames", 360)
     duration_sec = dur_frames / fps
+    dur = max(dur_frames, 30)
 
     if motion == "pan-right":
-        # Dynamic 3D tracking pan across the scene
-        zoom_expr = "'1.25'"
-        x_expr = "'min(x+1.6,iw-ow)'"
-        y_expr = "'ih/2-(ih/zoom/2)'"
-    elif motion == "dramatic-pulse":
-        # Dramatic suspense zoom push
-        zoom_expr = "'min(zoom+0.0018,1.38)'"
-        x_expr = "'iw/2-(iw/zoom/2)'"
-        y_expr = "'ih/2-(ih/zoom/2)'"
-    elif motion == "warm-dolly":
-        # Scope revealing 3D dolly-out
-        zoom_expr = "'max(1.35-0.0012*on,1.06)'"
-        x_expr = "'iw/2-(iw/zoom/2)'"
-        y_expr = "'ih/2-(ih/zoom/2)'"
-    elif motion == "sunset-drift":
-        # Sweeping 3D vertical crane rise / tilt
+        # Continuous horizontal tracking pan across entire scene
         zoom_expr = "'1.22'"
-        x_expr = "'iw/2-(iw/zoom/2)'"
-        y_expr = "'max(y-1.5,0)'"
+        x_expr = f"'(iw-ow) * (on/{dur})'"
+        y_expr = "'ih/2-(ih/zoom/2) + sin(on/22)*12'"
+    elif motion == "dramatic-pulse":
+        # Dynamic high-tension zoom with continuous harmonic camera breath
+        zoom_expr = f"'1.08 + 0.24*(on/{dur}) + 0.03*sin(on/10)'"
+        x_expr = "'iw/2-(iw/zoom/2) + sin(on/18)*18'"
+        y_expr = "'ih/2-(ih/zoom/2) + cos(on/22)*14'"
+    elif motion == "warm-dolly":
+        # Continuous cinematic dolly-out revealing epic scale
+        zoom_expr = f"'1.32 - 0.22*(on/{dur})'"
+        x_expr = "'iw/2-(iw/zoom/2) + sin(on/25)*15'"
+        y_expr = "'ih/2-(ih/zoom/2) + cos(on/30)*10'"
+    elif motion == "sunset-drift":
+        # Continuous sweeping vertical crane rise
+        zoom_expr = "'1.20'"
+        x_expr = "'iw/2-(iw/zoom/2) + sin(on/24)*12'"
+        y_expr = f"'(ih-oh) * (1.0 - (on/{dur}))'"
     else:
-        # Immersive 3D deep push-in
-        zoom_expr = "'min(zoom+0.0014,1.32)'"
-        x_expr = "'iw/2-(iw/zoom/2)'"
-        y_expr = "'ih/2-(ih/zoom/2)'"
+        # Default: Continuous immersive dolly push-in with organic handheld camera sway
+        zoom_expr = f"'1.06 + 0.26*(on/{dur})'"
+        x_expr = "'iw/2-(iw/zoom/2) + sin(on/20)*16'"
+        y_expr = "'ih/2-(ih/zoom/2) + cos(on/26)*12'"
 
-    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, dynamic 3D motion, enhanced vibrance)
+    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, continuous dynamic 3D motion, enhanced vibrance)
     filter_complex = (
-        f"[0:v]scale=1620:2880:force_original_aspect_ratio=increase,crop=1620:2880,"
+        f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
         f"zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=1080x1920:fps={fps},"
-        f"eq=saturation=1.25:contrast=1.12:brightness=0.03[outv]"
+        f"eq=saturation=1.22:contrast=1.12:brightness=0.02[outv]"
     )
 
     cmd = [

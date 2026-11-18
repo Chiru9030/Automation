@@ -135,7 +135,7 @@ def notify_success(
         f"🎯 <b>Topic:</b> {title}\n"
         f"⏱️ <b>Duration:</b> {duration:.2f}s\n"
         f"📦 <b>Size:</b> {size_mb:.1f} MB\n"
-        f"✅ <b>Auditor Gate:</b> 5/5 Certified (1080x1920 @ 30fps)\n"
+        f"✅ <b>Auditor Gate:</b> 5/5 Certified (v1.0.0 Production Standard)\n"
         f"🔊 <b>Voice:</b> Single Narrator (Crazy Bass Boost)\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🔗 <b>Watch Live:</b> {yt_link}\n"

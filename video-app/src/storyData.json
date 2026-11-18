@@ -1,201 +1,201 @@
 {
-  "episode_title": "WHAT IF ALIENS LAND ON EAR",
-  "hook_headline": "WHAT IF WHAT IF ALIENS LAN?!",
+  "episode_title": "THE COLOSSAL MEGALODON THA",
+  "hook_headline": "WHAT IF THE COLOSSAL MEGAL?!",
   "total_words_count": 110,
   "beats": [
     {
       "beat_number": 1,
       "time_window": "0-10s",
       "hook_trigger": "Opening Shock Hook",
-      "narration": "What if what if aliens land on earth tomorrow?? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
+      "narration": "What if the colossal megalodon that hunted prehistoric oceans? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
       "speaker": "narrator",
       "speaker_name": "Narrator",
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "smooth-zoom-in",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, dramatic epic opening cinematic of What if aliens land on Earth tomorrow?, vibrant volumetric lighting, Unreal Engine 5, 8k",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, dramatic epic opening cinematic of The colossal megalodon that hunted prehistoric oceans, vibrant volumetric lighting, Unreal Engine 5, 8k",
       "scene_number": 1,
       "title": "Opening Shock Hook",
-      "image_url": "images/ep_4_beat_1.jpg",
+      "image_url": "images/ep_11_beat_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 9.41,
-      "duration_in_frames": 294,
+      "audio_duration_sec": 10.44,
+      "duration_in_frames": 325,
       "words": [
         {
           "word": "What",
-          "start_sec": 0.098083,
-          "end_sec": 0.302416,
+          "start_sec": 0.098541,
+          "end_sec": 0.304832,
           "start_frame": 3,
           "end_frame": 9
         },
         {
           "word": "if",
-          "start_sec": 0.314416,
-          "end_sec": 0.43462399999999995,
-          "start_frame": 9,
-          "end_frame": 13
+          "start_sec": 0.317,
+          "end_sec": 0.414083,
+          "start_frame": 10,
+          "end_frame": 12
         },
         {
-          "word": "what",
-          "start_sec": 0.446625,
-          "end_sec": 0.590875,
+          "word": "the",
+          "start_sec": 0.426208,
+          "end_sec": 0.523291,
           "start_frame": 13,
-          "end_frame": 18
+          "end_frame": 16
         },
         {
-          "word": "if",
-          "start_sec": 0.602875,
-          "end_sec": 0.711041,
-          "start_frame": 18,
-          "end_frame": 21
+          "word": "colossal",
+          "start_sec": 0.535416,
+          "end_sec": 1.008707,
+          "start_frame": 16,
+          "end_frame": 30
         },
         {
-          "word": "aliens",
-          "start_sec": 0.723083,
-          "end_sec": 1.179833,
-          "start_frame": 22,
-          "end_frame": 35
+          "word": "megalodon",
+          "start_sec": 1.020875,
+          "end_sec": 1.603416,
+          "start_frame": 31,
+          "end_frame": 48
         },
         {
-          "word": "land",
-          "start_sec": 1.191833,
-          "end_sec": 1.4802909999999998,
-          "start_frame": 36,
-          "end_frame": 44
+          "word": "that",
+          "start_sec": 1.615541,
+          "end_sec": 1.7490409999999998,
+          "start_frame": 48,
+          "end_frame": 52
         },
         {
-          "word": "on",
-          "start_sec": 1.492291,
-          "end_sec": 1.6244990000000001,
-          "start_frame": 45,
-          "end_frame": 49
+          "word": "hunted",
+          "start_sec": 1.761166,
+          "end_sec": 2.100957,
+          "start_frame": 53,
+          "end_frame": 63
         },
         {
-          "word": "earth",
-          "start_sec": 1.636541,
-          "end_sec": 1.852874,
-          "start_frame": 49,
-          "end_frame": 56
+          "word": "prehistoric",
+          "start_sec": 2.113125,
+          "end_sec": 2.7684580000000003,
+          "start_frame": 63,
+          "end_frame": 83
         },
         {
-          "word": "tomorrow",
-          "start_sec": 1.864916,
-          "end_sec": 2.381749,
-          "start_frame": 56,
-          "end_frame": 71
+          "word": "oceans",
+          "start_sec": 2.780583,
+          "end_sec": 3.350958,
+          "start_frame": 83,
+          "end_frame": 101
         },
         {
           "word": "Most",
-          "start_sec": 3.209125,
-          "end_sec": 3.569708,
-          "start_frame": 96,
-          "end_frame": 107
+          "start_sec": 4.186875,
+          "end_sec": 4.550958,
+          "start_frame": 126,
+          "end_frame": 137
         },
         {
           "word": "people",
-          "start_sec": 3.58175,
-          "end_sec": 3.870208,
-          "start_frame": 107,
-          "end_frame": 116
+          "start_sec": 4.563125,
+          "end_sec": 4.854375,
+          "start_frame": 137,
+          "end_frame": 146
         },
         {
           "word": "assume",
-          "start_sec": 3.882208,
-          "end_sec": 4.254791,
-          "start_frame": 116,
-          "end_frame": 128
+          "start_sec": 4.8665,
+          "end_sec": 5.242708,
+          "start_frame": 146,
+          "end_frame": 157
         },
         {
           "word": "civilization",
-          "start_sec": 4.266833,
-          "end_sec": 5.012041,
-          "start_frame": 128,
-          "end_frame": 150
+          "start_sec": 5.254875,
+          "end_sec": 6.007291,
+          "start_frame": 158,
+          "end_frame": 180
         },
         {
           "word": "would",
-          "start_sec": 5.024041,
-          "end_sec": 5.144249,
-          "start_frame": 151,
-          "end_frame": 154
-        },
-        {
-          "word": "carry",
-          "start_sec": 5.15625,
-          "end_sec": 5.504791,
-          "start_frame": 155,
-          "end_frame": 165
-        },
-        {
-          "word": "on",
-          "start_sec": 5.516833,
-          "end_sec": 5.757208,
-          "start_frame": 166,
-          "end_frame": 173
-        },
-        {
-          "word": "but",
-          "start_sec": 6.021625,
-          "end_sec": 6.141833,
+          "start_sec": 6.019416,
+          "end_sec": 6.140790999999999,
           "start_frame": 181,
           "end_frame": 184
         },
         {
-          "word": "the",
-          "start_sec": 6.153833,
-          "end_sec": 6.213915999999999,
+          "word": "carry",
+          "start_sec": 6.152916,
+          "end_sec": 6.504874,
           "start_frame": 185,
-          "end_frame": 186
+          "end_frame": 195
+        },
+        {
+          "word": "on",
+          "start_sec": 6.517,
+          "end_sec": 6.759708000000001,
+          "start_frame": 196,
+          "end_frame": 203
+        },
+        {
+          "word": "but",
+          "start_sec": 7.026708,
+          "end_sec": 7.148083,
+          "start_frame": 211,
+          "end_frame": 214
+        },
+        {
+          "word": "the",
+          "start_sec": 7.160208,
+          "end_sec": 7.220874,
+          "start_frame": 215,
+          "end_frame": 217
         },
         {
           "word": "immediate",
-          "start_sec": 6.225958,
-          "end_sec": 6.658666,
-          "start_frame": 187,
-          "end_frame": 200
+          "start_sec": 7.233,
+          "end_sec": 7.669874999999999,
+          "start_frame": 217,
+          "end_frame": 230
         },
         {
           "word": "reality",
-          "start_sec": 6.670666,
-          "end_sec": 7.175457,
-          "start_frame": 200,
-          "end_frame": 215
+          "start_sec": 7.682041,
+          "end_sec": 8.191749,
+          "start_frame": 230,
+          "end_frame": 246
         },
         {
           "word": "is",
-          "start_sec": 7.1875,
-          "end_sec": 7.3317499999999995,
-          "start_frame": 216,
-          "end_frame": 220
+          "start_sec": 8.203875,
+          "end_sec": 8.3495,
+          "start_frame": 246,
+          "end_frame": 250
         },
         {
           "word": "far",
-          "start_sec": 7.34375,
-          "end_sec": 7.584125,
-          "start_frame": 220,
-          "end_frame": 228
+          "start_sec": 8.361666,
+          "end_sec": 8.604374,
+          "start_frame": 251,
+          "end_frame": 258
         },
         {
           "word": "more",
-          "start_sec": 7.596166,
-          "end_sec": 7.788457,
-          "start_frame": 228,
-          "end_frame": 234
+          "start_sec": 8.6165,
+          "end_sec": 8.810666,
+          "start_frame": 258,
+          "end_frame": 264
         },
         {
           "word": "terrifying",
-          "start_sec": 7.8005,
-          "end_sec": 8.557708,
-          "start_frame": 234,
-          "end_frame": 257
+          "start_sec": 8.822833,
+          "end_sec": 9.587416,
+          "start_frame": 265,
+          "end_frame": 288
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "WHAT IF WHAT",
+          "text": "WHAT IF THE",
           "start_frame": 3,
-          "end_frame": 18,
+          "end_frame": 16,
           "words": [
             {
               "word": "WHAT",
@@ -204,174 +204,174 @@
             },
             {
               "word": "IF",
-              "start_frame": 9,
-              "end_frame": 13
+              "start_frame": 10,
+              "end_frame": 12
             },
             {
-              "word": "WHAT",
+              "word": "THE",
               "start_frame": 13,
-              "end_frame": 18
+              "end_frame": 16
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "IF ALIENS LAND",
-          "start_frame": 18,
-          "end_frame": 45,
+          "text": "COLOSSAL MEGALODON THAT",
+          "start_frame": 16,
+          "end_frame": 53,
           "words": [
             {
-              "word": "IF",
-              "start_frame": 18,
-              "end_frame": 21
+              "word": "COLOSSAL",
+              "start_frame": 16,
+              "end_frame": 30
             },
             {
-              "word": "ALIENS",
-              "start_frame": 22,
-              "end_frame": 35
+              "word": "MEGALODON",
+              "start_frame": 31,
+              "end_frame": 48
             },
             {
-              "word": "LAND",
-              "start_frame": 36,
-              "end_frame": 44
+              "word": "THAT",
+              "start_frame": 48,
+              "end_frame": 52
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "ON EARTH TOMORROW",
-          "start_frame": 45,
-          "end_frame": 96,
+          "text": "HUNTED PREHISTORIC OCEANS",
+          "start_frame": 53,
+          "end_frame": 126,
           "words": [
             {
-              "word": "ON",
-              "start_frame": 45,
-              "end_frame": 49
+              "word": "HUNTED",
+              "start_frame": 53,
+              "end_frame": 63
             },
             {
-              "word": "EARTH",
-              "start_frame": 49,
-              "end_frame": 56
+              "word": "PREHISTORIC",
+              "start_frame": 63,
+              "end_frame": 83
             },
             {
-              "word": "TOMORROW",
-              "start_frame": 56,
-              "end_frame": 71
+              "word": "OCEANS",
+              "start_frame": 83,
+              "end_frame": 101
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "MOST PEOPLE ASSUME",
-          "start_frame": 96,
-          "end_frame": 128,
+          "start_frame": 126,
+          "end_frame": 158,
           "words": [
             {
               "word": "MOST",
-              "start_frame": 96,
-              "end_frame": 107
+              "start_frame": 126,
+              "end_frame": 137
             },
             {
               "word": "PEOPLE",
-              "start_frame": 107,
-              "end_frame": 116
+              "start_frame": 137,
+              "end_frame": 146
             },
             {
               "word": "ASSUME",
-              "start_frame": 116,
-              "end_frame": 128
+              "start_frame": 146,
+              "end_frame": 157
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "CIVILIZATION WOULD CARRY",
-          "start_frame": 128,
-          "end_frame": 166,
+          "start_frame": 158,
+          "end_frame": 196,
           "words": [
             {
               "word": "CIVILIZATION",
-              "start_frame": 128,
-              "end_frame": 150
+              "start_frame": 158,
+              "end_frame": 180
             },
             {
               "word": "WOULD",
-              "start_frame": 151,
-              "end_frame": 154
+              "start_frame": 181,
+              "end_frame": 184
             },
             {
               "word": "CARRY",
-              "start_frame": 155,
-              "end_frame": 165
+              "start_frame": 185,
+              "end_frame": 195
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "ON BUT THE",
-          "start_frame": 166,
-          "end_frame": 187,
+          "start_frame": 196,
+          "end_frame": 217,
           "words": [
             {
               "word": "ON",
-              "start_frame": 166,
-              "end_frame": 173
+              "start_frame": 196,
+              "end_frame": 203
             },
             {
               "word": "BUT",
-              "start_frame": 181,
-              "end_frame": 184
+              "start_frame": 211,
+              "end_frame": 214
             },
             {
               "word": "THE",
-              "start_frame": 185,
-              "end_frame": 186
+              "start_frame": 215,
+              "end_frame": 217
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "IMMEDIATE REALITY IS",
-          "start_frame": 187,
-          "end_frame": 220,
+          "start_frame": 217,
+          "end_frame": 251,
           "words": [
             {
               "word": "IMMEDIATE",
-              "start_frame": 187,
-              "end_frame": 200
+              "start_frame": 217,
+              "end_frame": 230
             },
             {
               "word": "REALITY",
-              "start_frame": 200,
-              "end_frame": 215
+              "start_frame": 230,
+              "end_frame": 246
             },
             {
               "word": "IS",
-              "start_frame": 216,
-              "end_frame": 220
+              "start_frame": 246,
+              "end_frame": 250
             }
           ]
         },
         {
           "chunk_id": 7,
           "text": "FAR MORE TERRIFYING",
-          "start_frame": 220,
-          "end_frame": 257,
+          "start_frame": 251,
+          "end_frame": 288,
           "words": [
             {
               "word": "FAR",
-              "start_frame": 220,
-              "end_frame": 228
+              "start_frame": 251,
+              "end_frame": 258
             },
             {
               "word": "MORE",
-              "start_frame": 228,
-              "end_frame": 234
+              "start_frame": 258,
+              "end_frame": 264
             },
             {
               "word": "TERRIFYING",
-              "start_frame": 234,
-              "end_frame": 257
+              "start_frame": 265,
+              "end_frame": 288
             }
           ]
         }
@@ -387,153 +387,153 @@
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "pan-right",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
       "scene_number": 2,
       "title": "10s Escalation Hook",
-      "image_url": "images/ep_4_beat_2.jpg",
+      "image_url": "images/ep_11_beat_2.jpg",
       "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 9.36,
-      "duration_in_frames": 293,
+      "audio_duration_sec": 9.46,
+      "duration_in_frames": 296,
       "words": [
         {
           "word": "Within",
-          "start_sec": 0.098083,
-          "end_sec": 0.482708,
+          "start_sec": 0.098541,
+          "end_sec": 0.486874,
           "start_frame": 3,
-          "end_frame": 14
+          "end_frame": 15
         },
         {
           "word": "seconds",
-          "start_sec": 0.494708,
-          "end_sec": 1.023541,
+          "start_sec": 0.499041,
+          "end_sec": 1.033041,
           "start_frame": 15,
           "end_frame": 31
         },
         {
           "word": "the",
-          "start_sec": 1.179791,
-          "end_sec": 1.275957,
-          "start_frame": 35,
-          "end_frame": 38
+          "start_sec": 1.190791,
+          "end_sec": 1.287874,
+          "start_frame": 36,
+          "end_frame": 39
         },
         {
           "word": "initial",
-          "start_sec": 1.288,
-          "end_sec": 1.672625,
+          "start_sec": 1.3,
+          "end_sec": 1.688333,
           "start_frame": 39,
-          "end_frame": 50
+          "end_frame": 51
         },
         {
           "word": "shockwave",
-          "start_sec": 1.684625,
-          "end_sec": 2.2615410000000002,
+          "start_sec": 1.7005,
+          "end_sec": 2.283041,
           "start_frame": 51,
           "end_frame": 68
         },
         {
           "word": "ripples",
-          "start_sec": 2.273541,
-          "end_sec": 2.598041,
-          "start_frame": 68,
-          "end_frame": 78
+          "start_sec": 2.295125,
+          "end_sec": 2.6227910000000003,
+          "start_frame": 69,
+          "end_frame": 79
         },
         {
           "word": "across",
-          "start_sec": 2.610083,
-          "end_sec": 2.982666,
-          "start_frame": 78,
-          "end_frame": 89
+          "start_sec": 2.634958,
+          "end_sec": 3.0111660000000002,
+          "start_frame": 79,
+          "end_frame": 90
         },
         {
           "word": "the",
-          "start_sec": 2.994708,
-          "end_sec": 3.1028740000000004,
-          "start_frame": 90,
-          "end_frame": 93
+          "start_sec": 3.023291,
+          "end_sec": 3.132499,
+          "start_frame": 91,
+          "end_frame": 94
         },
         {
           "word": "globe",
-          "start_sec": 3.114916,
-          "end_sec": 3.451457,
-          "start_frame": 93,
-          "end_frame": 104
+          "start_sec": 3.144666,
+          "end_sec": 3.484457,
+          "start_frame": 94,
+          "end_frame": 105
         },
         {
           "word": "shattering",
-          "start_sec": 3.739916,
-          "end_sec": 4.184624,
-          "start_frame": 112,
-          "end_frame": 126
+          "start_sec": 3.775708,
+          "end_sec": 4.224749,
+          "start_frame": 113,
+          "end_frame": 127
         },
         {
           "word": "communication",
-          "start_sec": 4.196625,
-          "end_sec": 4.89375,
-          "start_frame": 126,
-          "end_frame": 147
+          "start_sec": 4.236875,
+          "end_sec": 4.94075,
+          "start_frame": 127,
+          "end_frame": 148
         },
         {
           "word": "satellites",
-          "start_sec": 4.90575,
-          "end_sec": 5.4706660000000005,
-          "start_frame": 147,
-          "end_frame": 164
+          "start_sec": 4.952916,
+          "end_sec": 5.523291,
+          "start_frame": 149,
+          "end_frame": 166
         },
         {
           "word": "and",
-          "start_sec": 5.482708,
-          "end_sec": 5.638958,
-          "start_frame": 164,
-          "end_frame": 169
+          "start_sec": 5.535416,
+          "end_sec": 5.693166,
+          "start_frame": 166,
+          "end_frame": 171
         },
         {
           "word": "throwing",
-          "start_sec": 5.650958,
-          "end_sec": 6.011541,
-          "start_frame": 170,
-          "end_frame": 180
+          "start_sec": 5.705333,
+          "end_sec": 6.069416,
+          "start_frame": 171,
+          "end_frame": 182
         },
         {
           "word": "power",
-          "start_sec": 6.023541,
-          "end_sec": 6.348041,
-          "start_frame": 181,
-          "end_frame": 190
+          "start_sec": 6.081541,
+          "end_sec": 6.409206999999999,
+          "start_frame": 182,
+          "end_frame": 192
         },
         {
           "word": "grids",
-          "start_sec": 6.360083,
-          "end_sec": 6.684583,
-          "start_frame": 191,
-          "end_frame": 201
+          "start_sec": 6.421375,
+          "end_sec": 6.749041,
+          "start_frame": 193,
+          "end_frame": 202
         },
         {
           "word": "into",
-          "start_sec": 6.696625,
-          "end_sec": 6.900958,
-          "start_frame": 201,
-          "end_frame": 207
+          "start_sec": 6.761166,
+          "end_sec": 6.9674570000000005,
+          "start_frame": 203,
+          "end_frame": 209
         },
         {
           "word": "absolute",
-          "start_sec": 6.913,
-          "end_sec": 7.453875,
-          "start_frame": 207,
-          "end_frame": 224
+          "start_sec": 6.979625,
+          "end_sec": 7.52575,
+          "start_frame": 209,
+          "end_frame": 226
         },
         {
           "word": "chaotic",
-          "start_sec": 7.465875,
-          "end_sec": 7.922625,
-          "start_frame": 224,
-          "end_frame": 238
+          "start_sec": 7.537875,
+          "end_sec": 7.999041,
+          "start_frame": 226,
+          "end_frame": 240
         },
         {
           "word": "blackout",
-          "start_sec": 7.934625,
-          "end_sec": 8.523583,
-          "start_frame": 238,
-          "end_frame": 256
+          "start_sec": 8.011166,
+          "end_sec": 8.605832,
+          "start_frame": 240,
+          "end_frame": 258
         }
       ],
       "subtitle_chunks": [
@@ -546,7 +546,7 @@
             {
               "word": "WITHIN",
               "start_frame": 3,
-              "end_frame": 14
+              "end_frame": 15
             },
             {
               "word": "SECONDS",
@@ -555,8 +555,8 @@
             },
             {
               "word": "THE",
-              "start_frame": 35,
-              "end_frame": 38
+              "start_frame": 36,
+              "end_frame": 39
             }
           ]
         },
@@ -564,12 +564,12 @@
           "chunk_id": 1,
           "text": "INITIAL SHOCKWAVE RIPPLES",
           "start_frame": 39,
-          "end_frame": 78,
+          "end_frame": 79,
           "words": [
             {
               "word": "INITIAL",
               "start_frame": 39,
-              "end_frame": 50
+              "end_frame": 51
             },
             {
               "word": "SHOCKWAVE",
@@ -578,118 +578,118 @@
             },
             {
               "word": "RIPPLES",
-              "start_frame": 68,
-              "end_frame": 78
+              "start_frame": 69,
+              "end_frame": 79
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "ACROSS THE GLOBE",
-          "start_frame": 78,
-          "end_frame": 112,
+          "start_frame": 79,
+          "end_frame": 113,
           "words": [
             {
               "word": "ACROSS",
-              "start_frame": 78,
-              "end_frame": 89
+              "start_frame": 79,
+              "end_frame": 90
             },
             {
               "word": "THE",
-              "start_frame": 90,
-              "end_frame": 93
+              "start_frame": 91,
+              "end_frame": 94
             },
             {
               "word": "GLOBE",
-              "start_frame": 93,
-              "end_frame": 104
+              "start_frame": 94,
+              "end_frame": 105
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "SHATTERING COMMUNICATION SATELLITES",
-          "start_frame": 112,
-          "end_frame": 164,
+          "start_frame": 113,
+          "end_frame": 166,
           "words": [
             {
               "word": "SHATTERING",
-              "start_frame": 112,
-              "end_frame": 126
+              "start_frame": 113,
+              "end_frame": 127
             },
             {
               "word": "COMMUNICATION",
-              "start_frame": 126,
-              "end_frame": 147
+              "start_frame": 127,
+              "end_frame": 148
             },
             {
               "word": "SATELLITES",
-              "start_frame": 147,
-              "end_frame": 164
+              "start_frame": 149,
+              "end_frame": 166
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "AND THROWING POWER",
-          "start_frame": 164,
-          "end_frame": 191,
+          "start_frame": 166,
+          "end_frame": 193,
           "words": [
             {
               "word": "AND",
-              "start_frame": 164,
-              "end_frame": 169
+              "start_frame": 166,
+              "end_frame": 171
             },
             {
               "word": "THROWING",
-              "start_frame": 170,
-              "end_frame": 180
+              "start_frame": 171,
+              "end_frame": 182
             },
             {
               "word": "POWER",
-              "start_frame": 181,
-              "end_frame": 190
+              "start_frame": 182,
+              "end_frame": 192
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "GRIDS INTO ABSOLUTE",
-          "start_frame": 191,
-          "end_frame": 224,
+          "start_frame": 193,
+          "end_frame": 226,
           "words": [
             {
               "word": "GRIDS",
-              "start_frame": 191,
-              "end_frame": 201
+              "start_frame": 193,
+              "end_frame": 202
             },
             {
               "word": "INTO",
-              "start_frame": 201,
-              "end_frame": 207
+              "start_frame": 203,
+              "end_frame": 209
             },
             {
               "word": "ABSOLUTE",
-              "start_frame": 207,
-              "end_frame": 224
+              "start_frame": 209,
+              "end_frame": 226
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "CHAOTIC BLACKOUT",
-          "start_frame": 224,
-          "end_frame": 256,
+          "start_frame": 226,
+          "end_frame": 258,
           "words": [
             {
               "word": "CHAOTIC",
-              "start_frame": 224,
-              "end_frame": 238
+              "start_frame": 226,
+              "end_frame": 240
             },
             {
               "word": "BLACKOUT",
-              "start_frame": 238,
-              "end_frame": 256
+              "start_frame": 240,
+              "end_frame": 258
             }
           ]
         }
@@ -705,160 +705,160 @@
       "speaker_avatar": "\ud83d\udea8",
       "sfx": "impact_boom",
       "camera_motion": "dramatic-pulse",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
       "scene_number": 3,
       "title": "20s Danger Hook",
-      "image_url": "images/ep_4_beat_3.jpg",
+      "image_url": "images/ep_11_beat_3.jpg",
       "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 9.79,
-      "duration_in_frames": 306,
+      "audio_duration_sec": 10.3,
+      "duration_in_frames": 321,
       "words": [
         {
           "word": "Panic",
-          "start_sec": 0.097625,
-          "end_sec": 0.419041,
+          "start_sec": 0.098541,
+          "end_sec": 0.438332,
           "start_frame": 3,
           "end_frame": 13
         },
         {
           "word": "spreads",
-          "start_sec": 0.430958,
-          "end_sec": 0.835708,
-          "start_frame": 13,
-          "end_frame": 25
+          "start_sec": 0.4505,
+          "end_sec": 0.863125,
+          "start_frame": 14,
+          "end_frame": 26
         },
         {
           "word": "like",
-          "start_sec": 0.847625,
-          "end_sec": 1.026208,
-          "start_frame": 25,
+          "start_sec": 0.87525,
+          "end_sec": 1.033,
+          "start_frame": 26,
           "end_frame": 31
         },
         {
           "word": "wildfire",
-          "start_sec": 1.038083,
-          "end_sec": 1.764291,
+          "start_sec": 1.045125,
+          "end_sec": 1.8825,
           "start_frame": 31,
-          "end_frame": 53
+          "end_frame": 56
         },
         {
           "word": "As",
-          "start_sec": 2.607125,
-          "end_sec": 2.833333,
-          "start_frame": 78,
-          "end_frame": 85
-        },
-        {
-          "word": "the",
-          "start_sec": 2.857125,
-          "end_sec": 2.928541,
-          "start_frame": 86,
+          "start_sec": 2.718458,
+          "end_sec": 2.9490410000000002,
+          "start_frame": 82,
           "end_frame": 88
         },
         {
-          "word": "emergency",
-          "start_sec": 2.952375,
-          "end_sec": 3.488083,
+          "word": "the",
+          "start_sec": 2.961166,
+          "end_sec": 3.021832,
           "start_frame": 89,
-          "end_frame": 105
+          "end_frame": 91
+        },
+        {
+          "word": "emergency",
+          "start_sec": 3.034,
+          "end_sec": 3.628666,
+          "start_frame": 91,
+          "end_frame": 109
         },
         {
           "word": "alarms",
-          "start_sec": 3.511916,
-          "end_sec": 3.9166659999999998,
-          "start_frame": 105,
-          "end_frame": 117
+          "start_sec": 3.640791,
+          "end_sec": 4.126207,
+          "start_frame": 109,
+          "end_frame": 124
         },
         {
           "word": "echo",
-          "start_sec": 3.940458,
-          "end_sec": 4.154749,
-          "start_frame": 118,
-          "end_frame": 125
+          "start_sec": 4.138333,
+          "end_sec": 4.405333000000001,
+          "start_frame": 124,
+          "end_frame": 132
         },
         {
           "word": "through",
-          "start_sec": 4.166666,
-          "end_sec": 4.357124,
-          "start_frame": 125,
-          "end_frame": 131
+          "start_sec": 4.417458,
+          "end_sec": 4.623749,
+          "start_frame": 133,
+          "end_frame": 139
         },
         {
           "word": "deserted",
-          "start_sec": 4.380958,
-          "end_sec": 4.797624,
-          "start_frame": 131,
-          "end_frame": 144
-        },
-        {
-          "word": "city",
-          "start_sec": 4.821416,
-          "end_sec": 5.083332,
-          "start_frame": 145,
+          "start_sec": 4.635916,
+          "end_sec": 5.072791,
+          "start_frame": 139,
           "end_frame": 152
         },
         {
-          "word": "avenues",
-          "start_sec": 5.107125,
-          "end_sec": 5.571416,
+          "word": "city",
+          "start_sec": 5.084958,
+          "end_sec": 5.424749,
           "start_frame": 153,
-          "end_frame": 167
+          "end_frame": 163
+        },
+        {
+          "word": "avenues",
+          "start_sec": 5.436875,
+          "end_sec": 5.9708749999999995,
+          "start_frame": 163,
+          "end_frame": 179
         },
         {
           "word": "survivors",
-          "start_sec": 5.809541,
-          "end_sec": 6.345249,
-          "start_frame": 174,
-          "end_frame": 190
-        },
-        {
-          "word": "scramble",
-          "start_sec": 6.369041,
-          "end_sec": 6.809499000000001,
-          "start_frame": 191,
+          "start_sec": 6.213583,
+          "end_sec": 6.783958,
+          "start_frame": 186,
           "end_frame": 204
         },
         {
+          "word": "scramble",
+          "start_sec": 6.796125,
+          "end_sec": 7.245166,
+          "start_frame": 204,
+          "end_frame": 217
+        },
+        {
           "word": "for",
-          "start_sec": 6.833333,
-          "end_sec": 6.952374,
-          "start_frame": 205,
-          "end_frame": 209
-        },
-        {
-          "word": "the",
-          "start_sec": 6.964291,
-          "end_sec": 7.059541,
-          "start_frame": 209,
-          "end_frame": 212
-        },
-        {
-          "word": "only",
-          "start_sec": 7.083333,
-          "end_sec": 7.357124,
-          "start_frame": 212,
+          "start_sec": 7.257291,
+          "end_sec": 7.378666,
+          "start_frame": 218,
           "end_frame": 221
         },
         {
-          "word": "remaining",
-          "start_sec": 7.380958,
-          "end_sec": 7.845249,
-          "start_frame": 221,
+          "word": "the",
+          "start_sec": 7.390791,
+          "end_sec": 7.499999,
+          "start_frame": 222,
+          "end_frame": 225
+        },
+        {
+          "word": "only",
+          "start_sec": 7.512125,
+          "end_sec": 7.827666,
+          "start_frame": 225,
           "end_frame": 235
         },
         {
+          "word": "remaining",
+          "start_sec": 7.839791,
+          "end_sec": 8.264541,
+          "start_frame": 235,
+          "end_frame": 248
+        },
+        {
           "word": "underground",
-          "start_sec": 7.869041,
-          "end_sec": 8.369041,
-          "start_frame": 236,
-          "end_frame": 251
+          "start_sec": 8.276708,
+          "end_sec": 8.786416,
+          "start_frame": 248,
+          "end_frame": 264
         },
         {
           "word": "shelters",
-          "start_sec": 8.392875,
-          "end_sec": 8.928583,
-          "start_frame": 252,
-          "end_frame": 268
+          "start_sec": 8.798541,
+          "end_sec": 9.441749,
+          "start_frame": 264,
+          "end_frame": 283
         }
       ],
       "subtitle_chunks": [
@@ -875,12 +875,12 @@
             },
             {
               "word": "SPREADS",
-              "start_frame": 13,
-              "end_frame": 25
+              "start_frame": 14,
+              "end_frame": 26
             },
             {
               "word": "LIKE",
-              "start_frame": 25,
+              "start_frame": 26,
               "end_frame": 31
             }
           ]
@@ -889,137 +889,137 @@
           "chunk_id": 1,
           "text": "WILDFIRE AS THE",
           "start_frame": 31,
-          "end_frame": 89,
+          "end_frame": 91,
           "words": [
             {
               "word": "WILDFIRE",
               "start_frame": 31,
-              "end_frame": 53
+              "end_frame": 56
             },
             {
               "word": "AS",
-              "start_frame": 78,
-              "end_frame": 85
+              "start_frame": 82,
+              "end_frame": 88
             },
             {
               "word": "THE",
-              "start_frame": 86,
-              "end_frame": 88
+              "start_frame": 89,
+              "end_frame": 91
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "EMERGENCY ALARMS ECHO",
-          "start_frame": 89,
-          "end_frame": 125,
+          "start_frame": 91,
+          "end_frame": 133,
           "words": [
             {
               "word": "EMERGENCY",
-              "start_frame": 89,
-              "end_frame": 105
+              "start_frame": 91,
+              "end_frame": 109
             },
             {
               "word": "ALARMS",
-              "start_frame": 105,
-              "end_frame": 117
+              "start_frame": 109,
+              "end_frame": 124
             },
             {
               "word": "ECHO",
-              "start_frame": 118,
-              "end_frame": 125
+              "start_frame": 124,
+              "end_frame": 132
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "THROUGH DESERTED CITY",
-          "start_frame": 125,
-          "end_frame": 153,
+          "start_frame": 133,
+          "end_frame": 163,
           "words": [
             {
               "word": "THROUGH",
-              "start_frame": 125,
-              "end_frame": 131
+              "start_frame": 133,
+              "end_frame": 139
             },
             {
               "word": "DESERTED",
-              "start_frame": 131,
-              "end_frame": 144
+              "start_frame": 139,
+              "end_frame": 152
             },
             {
               "word": "CITY",
-              "start_frame": 145,
-              "end_frame": 152
+              "start_frame": 153,
+              "end_frame": 163
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "AVENUES SURVIVORS SCRAMBLE",
-          "start_frame": 153,
-          "end_frame": 205,
+          "start_frame": 163,
+          "end_frame": 218,
           "words": [
             {
               "word": "AVENUES",
-              "start_frame": 153,
-              "end_frame": 167
+              "start_frame": 163,
+              "end_frame": 179
             },
             {
               "word": "SURVIVORS",
-              "start_frame": 174,
-              "end_frame": 190
+              "start_frame": 186,
+              "end_frame": 204
             },
             {
               "word": "SCRAMBLE",
-              "start_frame": 191,
-              "end_frame": 204
+              "start_frame": 204,
+              "end_frame": 217
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "FOR THE ONLY",
-          "start_frame": 205,
-          "end_frame": 221,
+          "start_frame": 218,
+          "end_frame": 235,
           "words": [
             {
               "word": "FOR",
-              "start_frame": 205,
-              "end_frame": 209
+              "start_frame": 218,
+              "end_frame": 221
             },
             {
               "word": "THE",
-              "start_frame": 209,
-              "end_frame": 212
+              "start_frame": 222,
+              "end_frame": 225
             },
             {
               "word": "ONLY",
-              "start_frame": 212,
-              "end_frame": 221
+              "start_frame": 225,
+              "end_frame": 235
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "REMAINING UNDERGROUND SHELTERS",
-          "start_frame": 221,
-          "end_frame": 268,
+          "start_frame": 235,
+          "end_frame": 283,
           "words": [
             {
               "word": "REMAINING",
-              "start_frame": 221,
-              "end_frame": 235
+              "start_frame": 235,
+              "end_frame": 248
             },
             {
               "word": "UNDERGROUND",
-              "start_frame": 236,
-              "end_frame": 251
+              "start_frame": 248,
+              "end_frame": 264
             },
             {
               "word": "SHELTERS",
-              "start_frame": 252,
-              "end_frame": 268
+              "start_frame": 264,
+              "end_frame": 283
             }
           ]
         }
@@ -1035,160 +1035,160 @@
       "speaker_avatar": "\ud83d\udd2c",
       "sfx": "pop",
       "camera_motion": "warm-dolly",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
       "scene_number": 4,
       "title": "30s Climax Hook",
-      "image_url": "images/ep_4_beat_4.jpg",
+      "image_url": "images/ep_11_beat_4.jpg",
       "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 8.26,
-      "duration_in_frames": 260,
+      "audio_duration_sec": 7.87,
+      "duration_in_frames": 248,
       "words": [
         {
           "word": "Yet",
-          "start_sec": 0.1,
-          "end_sec": 0.3125,
+          "start_sec": 0.098541,
+          "end_sec": 0.304832,
           "start_frame": 3,
           "end_frame": 9
         },
         {
           "word": "amidst",
-          "start_sec": 0.325,
-          "end_sec": 0.65,
+          "start_sec": 0.317,
+          "end_sec": 0.644666,
           "start_frame": 10,
-          "end_frame": 20
+          "end_frame": 19
         },
         {
           "word": "the",
-          "start_sec": 0.6625,
-          "end_sec": 0.75,
+          "start_sec": 0.656791,
+          "end_sec": 0.729624,
           "start_frame": 20,
           "end_frame": 22
         },
         {
           "word": "catastrophe",
-          "start_sec": 0.7625,
-          "end_sec": 1.5625,
-          "start_frame": 23,
-          "end_frame": 47
+          "start_sec": 0.74175,
+          "end_sec": 1.4941659999999999,
+          "start_frame": 22,
+          "end_frame": 45
         },
         {
           "word": "an",
-          "start_sec": 1.825,
-          "end_sec": 1.9375,
-          "start_frame": 55,
-          "end_frame": 58
+          "start_sec": 1.736875,
+          "end_sec": 1.85825,
+          "start_frame": 52,
+          "end_frame": 56
         },
         {
           "word": "unexpected",
-          "start_sec": 1.95,
-          "end_sec": 2.6,
-          "start_frame": 58,
-          "end_frame": 78
+          "start_sec": 1.870375,
+          "end_sec": 2.477166,
+          "start_frame": 56,
+          "end_frame": 74
         },
         {
           "word": "scientific",
-          "start_sec": 2.6125,
-          "end_sec": 3.25,
-          "start_frame": 78,
-          "end_frame": 98
+          "start_sec": 2.489333,
+          "end_sec": 3.0961239999999997,
+          "start_frame": 75,
+          "end_frame": 93
         },
         {
           "word": "discovery",
-          "start_sec": 3.2625,
-          "end_sec": 3.8125,
-          "start_frame": 98,
-          "end_frame": 114
+          "start_sec": 3.10825,
+          "end_sec": 3.6422499999999998,
+          "start_frame": 93,
+          "end_frame": 109
         },
         {
           "word": "reveals",
-          "start_sec": 3.825,
-          "end_sec": 4.25,
-          "start_frame": 115,
-          "end_frame": 128
+          "start_sec": 3.654375,
+          "end_sec": 4.054875,
+          "start_frame": 110,
+          "end_frame": 122
         },
         {
           "word": "a",
-          "start_sec": 4.2625,
-          "end_sec": 4.325,
-          "start_frame": 128,
-          "end_frame": 130
+          "start_sec": 4.067,
+          "end_sec": 4.1155409,
+          "start_frame": 122,
+          "end_frame": 123
         },
         {
           "word": "hidden",
-          "start_sec": 4.3375,
-          "end_sec": 4.625,
-          "start_frame": 130,
-          "end_frame": 139
+          "start_sec": 4.127666,
+          "end_sec": 4.406790999999999,
+          "start_frame": 124,
+          "end_frame": 132
         },
         {
           "word": "anomaly",
-          "start_sec": 4.6375,
-          "end_sec": 5.15,
-          "start_frame": 139,
-          "end_frame": 154
+          "start_sec": 4.418916,
+          "end_sec": 4.904332,
+          "start_frame": 133,
+          "end_frame": 147
         },
         {
           "word": "that",
-          "start_sec": 5.1625,
-          "end_sec": 5.324999999999999,
-          "start_frame": 155,
-          "end_frame": 160
+          "start_sec": 4.9165,
+          "end_sec": 5.07425,
+          "start_frame": 147,
+          "end_frame": 152
         },
         {
           "word": "might",
-          "start_sec": 5.3375,
-          "end_sec": 5.5875,
-          "start_frame": 160,
-          "end_frame": 168
+          "start_sec": 5.086416,
+          "end_sec": 5.304874,
+          "start_frame": 153,
+          "end_frame": 159
         },
         {
           "word": "just",
-          "start_sec": 5.6,
-          "end_sec": 5.824999999999999,
-          "start_frame": 168,
-          "end_frame": 175
+          "start_sec": 5.317,
+          "end_sec": 5.535458,
+          "start_frame": 160,
+          "end_frame": 166
         },
         {
           "word": "hold",
-          "start_sec": 5.8375,
-          "end_sec": 6.050000000000001,
-          "start_frame": 175,
-          "end_frame": 182
+          "start_sec": 5.547583,
+          "end_sec": 5.766041,
+          "start_frame": 166,
+          "end_frame": 173
         },
         {
           "word": "the",
-          "start_sec": 6.0625,
-          "end_sec": 6.15,
-          "start_frame": 182,
-          "end_frame": 184
+          "start_sec": 5.778166,
+          "end_sec": 5.863124,
+          "start_frame": 173,
+          "end_frame": 176
         },
         {
           "word": "key",
-          "start_sec": 6.1625,
-          "end_sec": 6.449999999999999,
-          "start_frame": 185,
-          "end_frame": 193
+          "start_sec": 5.87525,
+          "end_sec": 6.142250000000001,
+          "start_frame": 176,
+          "end_frame": 184
         },
         {
           "word": "to",
-          "start_sec": 6.4625,
-          "end_sec": 6.575,
-          "start_frame": 194,
-          "end_frame": 197
+          "start_sec": 6.154375,
+          "end_sec": 6.263583,
+          "start_frame": 185,
+          "end_frame": 188
         },
         {
           "word": "our",
-          "start_sec": 6.5875,
-          "end_sec": 6.7250000000000005,
-          "start_frame": 198,
-          "end_frame": 202
+          "start_sec": 6.275708,
+          "end_sec": 6.409208,
+          "start_frame": 188,
+          "end_frame": 192
         },
         {
           "word": "survival",
-          "start_sec": 6.7375,
-          "end_sec": 7.375,
-          "start_frame": 202,
-          "end_frame": 221
+          "start_sec": 6.421375,
+          "end_sec": 7.028166000000001,
+          "start_frame": 193,
+          "end_frame": 211
         }
       ],
       "subtitle_chunks": [
@@ -1196,7 +1196,7 @@
           "chunk_id": 0,
           "text": "YET AMIDST THE",
           "start_frame": 3,
-          "end_frame": 23,
+          "end_frame": 22,
           "words": [
             {
               "word": "YET",
@@ -1206,7 +1206,7 @@
             {
               "word": "AMIDST",
               "start_frame": 10,
-              "end_frame": 20
+              "end_frame": 19
             },
             {
               "word": "THE",
@@ -1218,138 +1218,138 @@
         {
           "chunk_id": 1,
           "text": "CATASTROPHE AN UNEXPECTED",
-          "start_frame": 23,
-          "end_frame": 78,
+          "start_frame": 22,
+          "end_frame": 75,
           "words": [
             {
               "word": "CATASTROPHE",
-              "start_frame": 23,
-              "end_frame": 47
+              "start_frame": 22,
+              "end_frame": 45
             },
             {
               "word": "AN",
-              "start_frame": 55,
-              "end_frame": 58
+              "start_frame": 52,
+              "end_frame": 56
             },
             {
               "word": "UNEXPECTED",
-              "start_frame": 58,
-              "end_frame": 78
+              "start_frame": 56,
+              "end_frame": 74
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "SCIENTIFIC DISCOVERY REVEALS",
-          "start_frame": 78,
-          "end_frame": 128,
+          "start_frame": 75,
+          "end_frame": 122,
           "words": [
             {
               "word": "SCIENTIFIC",
-              "start_frame": 78,
-              "end_frame": 98
+              "start_frame": 75,
+              "end_frame": 93
             },
             {
               "word": "DISCOVERY",
-              "start_frame": 98,
-              "end_frame": 114
+              "start_frame": 93,
+              "end_frame": 109
             },
             {
               "word": "REVEALS",
-              "start_frame": 115,
-              "end_frame": 128
+              "start_frame": 110,
+              "end_frame": 122
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "A HIDDEN ANOMALY",
-          "start_frame": 128,
-          "end_frame": 155,
+          "start_frame": 122,
+          "end_frame": 147,
           "words": [
             {
               "word": "A",
-              "start_frame": 128,
-              "end_frame": 130
+              "start_frame": 122,
+              "end_frame": 123
             },
             {
               "word": "HIDDEN",
-              "start_frame": 130,
-              "end_frame": 139
+              "start_frame": 124,
+              "end_frame": 132
             },
             {
               "word": "ANOMALY",
-              "start_frame": 139,
-              "end_frame": 154
+              "start_frame": 133,
+              "end_frame": 147
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "THAT MIGHT JUST",
-          "start_frame": 155,
-          "end_frame": 175,
+          "start_frame": 147,
+          "end_frame": 166,
           "words": [
             {
               "word": "THAT",
-              "start_frame": 155,
-              "end_frame": 160
+              "start_frame": 147,
+              "end_frame": 152
             },
             {
               "word": "MIGHT",
-              "start_frame": 160,
-              "end_frame": 168
+              "start_frame": 153,
+              "end_frame": 159
             },
             {
               "word": "JUST",
-              "start_frame": 168,
-              "end_frame": 175
+              "start_frame": 160,
+              "end_frame": 166
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "HOLD THE KEY",
-          "start_frame": 175,
-          "end_frame": 194,
+          "start_frame": 166,
+          "end_frame": 185,
           "words": [
             {
               "word": "HOLD",
-              "start_frame": 175,
-              "end_frame": 182
+              "start_frame": 166,
+              "end_frame": 173
             },
             {
               "word": "THE",
-              "start_frame": 182,
-              "end_frame": 184
+              "start_frame": 173,
+              "end_frame": 176
             },
             {
               "word": "KEY",
-              "start_frame": 185,
-              "end_frame": 193
+              "start_frame": 176,
+              "end_frame": 184
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "TO OUR SURVIVAL",
-          "start_frame": 194,
-          "end_frame": 221,
+          "start_frame": 185,
+          "end_frame": 211,
           "words": [
             {
               "word": "TO",
-              "start_frame": 194,
-              "end_frame": 197
+              "start_frame": 185,
+              "end_frame": 188
             },
             {
               "word": "OUR",
-              "start_frame": 198,
-              "end_frame": 202
+              "start_frame": 188,
+              "end_frame": 192
             },
             {
               "word": "SURVIVAL",
-              "start_frame": 202,
-              "end_frame": 221
+              "start_frame": 193,
+              "end_frame": 211
             }
           ]
         }
@@ -1365,181 +1365,181 @@
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "sunset-drift",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
       "scene_number": 5,
       "title": "45s Resolution Hook",
-      "image_url": "images/ep_4_beat_5.jpg",
+      "image_url": "images/ep_11_beat_5.jpg",
       "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 8.83,
-      "duration_in_frames": 587,
+      "audio_duration_sec": 8.93,
+      "duration_in_frames": 550,
       "words": [
         {
           "word": "Our",
-          "start_sec": 0.098083,
-          "end_sec": 0.350499,
+          "start_sec": 0.098541,
+          "end_sec": 0.353416,
           "start_frame": 3,
           "end_frame": 11
         },
         {
           "word": "world",
-          "start_sec": 0.3625,
-          "end_sec": 0.675,
+          "start_sec": 0.365541,
+          "end_sec": 0.681082,
           "start_frame": 11,
           "end_frame": 20
         },
         {
           "word": "is",
-          "start_sec": 0.687,
-          "end_sec": 0.807208,
+          "start_sec": 0.693208,
+          "end_sec": 0.8145830000000001,
           "start_frame": 21,
           "end_frame": 24
         },
         {
           "word": "far",
-          "start_sec": 0.81925,
-          "end_sec": 1.071666,
+          "start_sec": 0.826708,
+          "end_sec": 1.081583,
           "start_frame": 25,
           "end_frame": 32
         },
         {
           "word": "more",
-          "start_sec": 1.083666,
-          "end_sec": 1.275957,
+          "start_sec": 1.093708,
+          "end_sec": 1.287874,
           "start_frame": 33,
-          "end_frame": 38
+          "end_frame": 39
         },
         {
           "word": "fragile",
-          "start_sec": 1.288,
-          "end_sec": 1.7327080000000001,
+          "start_sec": 1.3,
+          "end_sec": 1.749041,
           "start_frame": 39,
           "end_frame": 52
         },
         {
           "word": "than",
-          "start_sec": 1.744708,
-          "end_sec": 1.876916,
-          "start_frame": 52,
-          "end_frame": 56
+          "start_sec": 1.761166,
+          "end_sec": 1.894666,
+          "start_frame": 53,
+          "end_frame": 57
         },
         {
           "word": "we",
-          "start_sec": 1.888958,
-          "end_sec": 1.9851239999999999,
+          "start_sec": 1.906791,
+          "end_sec": 2.0038739999999997,
           "start_frame": 57,
           "end_frame": 60
         },
         {
           "word": "dare",
-          "start_sec": 1.997125,
-          "end_sec": 2.2615410000000002,
+          "start_sec": 2.016,
+          "end_sec": 2.283,
           "start_frame": 60,
           "end_frame": 68
         },
         {
           "word": "to",
-          "start_sec": 2.273541,
-          "end_sec": 2.3937489999999997,
-          "start_frame": 68,
+          "start_sec": 2.295125,
+          "end_sec": 2.4165,
+          "start_frame": 69,
           "end_frame": 72
         },
         {
           "word": "admit",
-          "start_sec": 2.40575,
-          "end_sec": 2.826416,
-          "start_frame": 72,
-          "end_frame": 85
+          "start_sec": 2.428625,
+          "end_sec": 2.8533749999999998,
+          "start_frame": 73,
+          "end_frame": 86
         },
         {
           "word": "What",
-          "start_sec": 3.653833,
-          "end_sec": 3.870166,
-          "start_frame": 110,
-          "end_frame": 116
+          "start_sec": 3.689333,
+          "end_sec": 3.907791,
+          "start_frame": 111,
+          "end_frame": 117
         },
         {
           "word": "would",
-          "start_sec": 3.882208,
-          "end_sec": 4.002416,
-          "start_frame": 116,
-          "end_frame": 120
+          "start_sec": 3.919916,
+          "end_sec": 4.041291,
+          "start_frame": 118,
+          "end_frame": 121
         },
         {
           "word": "you",
-          "start_sec": 4.014416,
-          "end_sec": 4.098541,
-          "start_frame": 120,
-          "end_frame": 123
+          "start_sec": 4.053416,
+          "end_sec": 4.138374000000001,
+          "start_frame": 122,
+          "end_frame": 124
         },
         {
           "word": "do",
-          "start_sec": 4.110583,
-          "end_sec": 4.2788330000000006,
-          "start_frame": 123,
-          "end_frame": 128
+          "start_sec": 4.1505,
+          "end_sec": 4.320416,
+          "start_frame": 125,
+          "end_frame": 130
         },
         {
           "word": "first",
-          "start_sec": 4.290875,
-          "end_sec": 4.819707999999999,
-          "start_frame": 129,
-          "end_frame": 145
+          "start_sec": 4.332541,
+          "end_sec": 4.866541,
+          "start_frame": 130,
+          "end_frame": 146
         },
         {
           "word": "Drop",
-          "start_sec": 5.649041,
-          "end_sec": 5.949541,
-          "start_frame": 169,
-          "end_frame": 178
+          "start_sec": 5.703875,
+          "end_sec": 6.007291,
+          "start_frame": 171,
+          "end_frame": 180
         },
         {
           "word": "a",
-          "start_sec": 5.961541,
-          "end_sec": 6.033666,
-          "start_frame": 179,
-          "end_frame": 181
+          "start_sec": 6.019416,
+          "end_sec": 6.092249,
+          "start_frame": 181,
+          "end_frame": 183
         },
         {
           "word": "follow",
-          "start_sec": 6.045666,
-          "end_sec": 6.442291,
-          "start_frame": 181,
-          "end_frame": 193
+          "start_sec": 6.104375,
+          "end_sec": 6.504875,
+          "start_frame": 183,
+          "end_frame": 195
         },
         {
           "word": "right",
-          "start_sec": 6.454333,
-          "end_sec": 6.658666,
-          "start_frame": 194,
-          "end_frame": 200
+          "start_sec": 6.517,
+          "end_sec": 6.723291000000001,
+          "start_frame": 196,
+          "end_frame": 202
         },
         {
           "word": "now",
-          "start_sec": 6.670666,
-          "end_sec": 6.8990409999999995,
-          "start_frame": 200,
-          "end_frame": 207
+          "start_sec": 6.735416,
+          "end_sec": 6.965999,
+          "start_frame": 202,
+          "end_frame": 209
         },
         {
           "word": "for",
-          "start_sec": 6.911041,
-          "end_sec": 7.091332,
-          "start_frame": 207,
-          "end_frame": 213
+          "start_sec": 6.978166,
+          "end_sec": 7.160207,
+          "start_frame": 209,
+          "end_frame": 215
         },
         {
           "word": "Episode",
-          "start_sec": 7.103375,
-          "end_sec": 7.584125,
-          "start_frame": 213,
-          "end_frame": 228
+          "start_sec": 7.172333,
+          "end_sec": 7.657749,
+          "start_frame": 215,
+          "end_frame": 230
         },
         {
           "word": "Two",
-          "start_sec": 7.596166,
-          "end_sec": 7.980791,
-          "start_frame": 228,
-          "end_frame": 239
+          "start_sec": 7.669916,
+          "end_sec": 8.058249,
+          "start_frame": 230,
+          "end_frame": 242
         }
       ],
       "subtitle_chunks": [
@@ -1570,7 +1570,7 @@
           "chunk_id": 1,
           "text": "FAR MORE FRAGILE",
           "start_frame": 25,
-          "end_frame": 52,
+          "end_frame": 53,
           "words": [
             {
               "word": "FAR",
@@ -1580,7 +1580,7 @@
             {
               "word": "MORE",
               "start_frame": 33,
-              "end_frame": 38
+              "end_frame": 39
             },
             {
               "word": "FRAGILE",
@@ -1592,13 +1592,13 @@
         {
           "chunk_id": 2,
           "text": "THAN WE DARE",
-          "start_frame": 52,
-          "end_frame": 68,
+          "start_frame": 53,
+          "end_frame": 69,
           "words": [
             {
               "word": "THAN",
-              "start_frame": 52,
-              "end_frame": 56
+              "start_frame": 53,
+              "end_frame": 57
             },
             {
               "word": "WE",
@@ -1615,318 +1615,318 @@
         {
           "chunk_id": 3,
           "text": "TO ADMIT WHAT",
-          "start_frame": 68,
-          "end_frame": 116,
+          "start_frame": 69,
+          "end_frame": 118,
           "words": [
             {
               "word": "TO",
-              "start_frame": 68,
+              "start_frame": 69,
               "end_frame": 72
             },
             {
               "word": "ADMIT",
-              "start_frame": 72,
-              "end_frame": 85
+              "start_frame": 73,
+              "end_frame": 86
             },
             {
               "word": "WHAT",
-              "start_frame": 110,
-              "end_frame": 116
+              "start_frame": 111,
+              "end_frame": 117
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "WOULD YOU DO",
-          "start_frame": 116,
-          "end_frame": 129,
+          "start_frame": 118,
+          "end_frame": 130,
           "words": [
             {
               "word": "WOULD",
-              "start_frame": 116,
-              "end_frame": 120
+              "start_frame": 118,
+              "end_frame": 121
             },
             {
               "word": "YOU",
-              "start_frame": 120,
-              "end_frame": 123
+              "start_frame": 122,
+              "end_frame": 124
             },
             {
               "word": "DO",
-              "start_frame": 123,
-              "end_frame": 128
+              "start_frame": 125,
+              "end_frame": 130
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "FIRST DROP A",
-          "start_frame": 129,
-          "end_frame": 181,
+          "start_frame": 130,
+          "end_frame": 183,
           "words": [
             {
               "word": "FIRST",
-              "start_frame": 129,
-              "end_frame": 145
+              "start_frame": 130,
+              "end_frame": 146
             },
             {
               "word": "DROP",
-              "start_frame": 169,
-              "end_frame": 178
+              "start_frame": 171,
+              "end_frame": 180
             },
             {
               "word": "A",
-              "start_frame": 179,
-              "end_frame": 181
+              "start_frame": 181,
+              "end_frame": 183
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "FOLLOW RIGHT NOW",
-          "start_frame": 181,
-          "end_frame": 207,
+          "start_frame": 183,
+          "end_frame": 209,
           "words": [
             {
               "word": "FOLLOW",
-              "start_frame": 181,
-              "end_frame": 193
+              "start_frame": 183,
+              "end_frame": 195
             },
             {
               "word": "RIGHT",
-              "start_frame": 194,
-              "end_frame": 200
+              "start_frame": 196,
+              "end_frame": 202
             },
             {
               "word": "NOW",
-              "start_frame": 200,
-              "end_frame": 207
+              "start_frame": 202,
+              "end_frame": 209
             }
           ]
         },
         {
           "chunk_id": 7,
           "text": "FOR EPISODE TWO",
-          "start_frame": 207,
-          "end_frame": 239,
+          "start_frame": 209,
+          "end_frame": 242,
           "words": [
             {
               "word": "FOR",
-              "start_frame": 207,
-              "end_frame": 213
+              "start_frame": 209,
+              "end_frame": 215
             },
             {
               "word": "EPISODE",
-              "start_frame": 213,
-              "end_frame": 228
+              "start_frame": 215,
+              "end_frame": 230
             },
             {
               "word": "TWO",
-              "start_frame": 228,
-              "end_frame": 239
+              "start_frame": 230,
+              "end_frame": 242
             }
           ]
         }
       ]
     }
   ],
-  "episode": 4,
-  "genre": "Sci-Fi / Global Event",
-  "title": "What if aliens land on Earth tomorrow?",
+  "episode": 11,
+  "genre": "Mind-Blowing Stories & Science",
+  "title": "The colossal megalodon that hunted prehistoric oceans",
   "scenes": [
     {
       "beat_number": 1,
       "time_window": "0-10s",
       "hook_trigger": "Opening Shock Hook",
-      "narration": "What if what if aliens land on earth tomorrow?? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
+      "narration": "What if the colossal megalodon that hunted prehistoric oceans? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
       "speaker": "narrator",
       "speaker_name": "Narrator",
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "smooth-zoom-in",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, dramatic epic opening cinematic of What if aliens land on Earth tomorrow?, vibrant volumetric lighting, Unreal Engine 5, 8k",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, dramatic epic opening cinematic of The colossal megalodon that hunted prehistoric oceans, vibrant volumetric lighting, Unreal Engine 5, 8k",
       "scene_number": 1,
       "title": "Opening Shock Hook",
-      "image_url": "images/ep_4_beat_1.jpg",
+      "image_url": "images/ep_11_beat_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 9.41,
-      "duration_in_frames": 294,
+      "audio_duration_sec": 10.44,
+      "duration_in_frames": 325,
       "words": [
         {
           "word": "What",
-          "start_sec": 0.098083,
-          "end_sec": 0.302416,
+          "start_sec": 0.098541,
+          "end_sec": 0.304832,
           "start_frame": 3,
           "end_frame": 9
         },
         {
           "word": "if",
-          "start_sec": 0.314416,
-          "end_sec": 0.43462399999999995,
-          "start_frame": 9,
-          "end_frame": 13
+          "start_sec": 0.317,
+          "end_sec": 0.414083,
+          "start_frame": 10,
+          "end_frame": 12
         },
         {
-          "word": "what",
-          "start_sec": 0.446625,
-          "end_sec": 0.590875,
+          "word": "the",
+          "start_sec": 0.426208,
+          "end_sec": 0.523291,
           "start_frame": 13,
-          "end_frame": 18
+          "end_frame": 16
         },
         {
-          "word": "if",
-          "start_sec": 0.602875,
-          "end_sec": 0.711041,
-          "start_frame": 18,
-          "end_frame": 21
+          "word": "colossal",
+          "start_sec": 0.535416,
+          "end_sec": 1.008707,
+          "start_frame": 16,
+          "end_frame": 30
         },
         {
-          "word": "aliens",
-          "start_sec": 0.723083,
-          "end_sec": 1.179833,
-          "start_frame": 22,
-          "end_frame": 35
+          "word": "megalodon",
+          "start_sec": 1.020875,
+          "end_sec": 1.603416,
+          "start_frame": 31,
+          "end_frame": 48
         },
         {
-          "word": "land",
-          "start_sec": 1.191833,
-          "end_sec": 1.4802909999999998,
-          "start_frame": 36,
-          "end_frame": 44
+          "word": "that",
+          "start_sec": 1.615541,
+          "end_sec": 1.7490409999999998,
+          "start_frame": 48,
+          "end_frame": 52
         },
         {
-          "word": "on",
-          "start_sec": 1.492291,
-          "end_sec": 1.6244990000000001,
-          "start_frame": 45,
-          "end_frame": 49
+          "word": "hunted",
+          "start_sec": 1.761166,
+          "end_sec": 2.100957,
+          "start_frame": 53,
+          "end_frame": 63
         },
         {
-          "word": "earth",
-          "start_sec": 1.636541,
-          "end_sec": 1.852874,
-          "start_frame": 49,
-          "end_frame": 56
+          "word": "prehistoric",
+          "start_sec": 2.113125,
+          "end_sec": 2.7684580000000003,
+          "start_frame": 63,
+          "end_frame": 83
         },
         {
-          "word": "tomorrow",
-          "start_sec": 1.864916,
-          "end_sec": 2.381749,
-          "start_frame": 56,
-          "end_frame": 71
+          "word": "oceans",
+          "start_sec": 2.780583,
+          "end_sec": 3.350958,
+          "start_frame": 83,
+          "end_frame": 101
         },
         {
           "word": "Most",
-          "start_sec": 3.209125,
-          "end_sec": 3.569708,
-          "start_frame": 96,
-          "end_frame": 107
+          "start_sec": 4.186875,
+          "end_sec": 4.550958,
+          "start_frame": 126,
+          "end_frame": 137
         },
         {
           "word": "people",
-          "start_sec": 3.58175,
-          "end_sec": 3.870208,
-          "start_frame": 107,
-          "end_frame": 116
+          "start_sec": 4.563125,
+          "end_sec": 4.854375,
+          "start_frame": 137,
+          "end_frame": 146
         },
         {
           "word": "assume",
-          "start_sec": 3.882208,
-          "end_sec": 4.254791,
-          "start_frame": 116,
-          "end_frame": 128
+          "start_sec": 4.8665,
+          "end_sec": 5.242708,
+          "start_frame": 146,
+          "end_frame": 157
         },
         {
           "word": "civilization",
-          "start_sec": 4.266833,
-          "end_sec": 5.012041,
-          "start_frame": 128,
-          "end_frame": 150
+          "start_sec": 5.254875,
+          "end_sec": 6.007291,
+          "start_frame": 158,
+          "end_frame": 180
         },
         {
           "word": "would",
-          "start_sec": 5.024041,
-          "end_sec": 5.144249,
-          "start_frame": 151,
-          "end_frame": 154
-        },
-        {
-          "word": "carry",
-          "start_sec": 5.15625,
-          "end_sec": 5.504791,
-          "start_frame": 155,
-          "end_frame": 165
-        },
-        {
-          "word": "on",
-          "start_sec": 5.516833,
-          "end_sec": 5.757208,
-          "start_frame": 166,
-          "end_frame": 173
-        },
-        {
-          "word": "but",
-          "start_sec": 6.021625,
-          "end_sec": 6.141833,
+          "start_sec": 6.019416,
+          "end_sec": 6.140790999999999,
           "start_frame": 181,
           "end_frame": 184
         },
         {
-          "word": "the",
-          "start_sec": 6.153833,
-          "end_sec": 6.213915999999999,
+          "word": "carry",
+          "start_sec": 6.152916,
+          "end_sec": 6.504874,
           "start_frame": 185,
-          "end_frame": 186
+          "end_frame": 195
+        },
+        {
+          "word": "on",
+          "start_sec": 6.517,
+          "end_sec": 6.759708000000001,
+          "start_frame": 196,
+          "end_frame": 203
+        },
+        {
+          "word": "but",
+          "start_sec": 7.026708,
+          "end_sec": 7.148083,
+          "start_frame": 211,
+          "end_frame": 214
+        },
+        {
+          "word": "the",
+          "start_sec": 7.160208,
+          "end_sec": 7.220874,
+          "start_frame": 215,
+          "end_frame": 217
         },
         {
           "word": "immediate",
-          "start_sec": 6.225958,
-          "end_sec": 6.658666,
-          "start_frame": 187,
-          "end_frame": 200
+          "start_sec": 7.233,
+          "end_sec": 7.669874999999999,
+          "start_frame": 217,
+          "end_frame": 230
         },
         {
           "word": "reality",
-          "start_sec": 6.670666,
-          "end_sec": 7.175457,
-          "start_frame": 200,
-          "end_frame": 215
+          "start_sec": 7.682041,
+          "end_sec": 8.191749,
+          "start_frame": 230,
+          "end_frame": 246
         },
         {
           "word": "is",
-          "start_sec": 7.1875,
-          "end_sec": 7.3317499999999995,
-          "start_frame": 216,
-          "end_frame": 220
+          "start_sec": 8.203875,
+          "end_sec": 8.3495,
+          "start_frame": 246,
+          "end_frame": 250
         },
         {
           "word": "far",
-          "start_sec": 7.34375,
-          "end_sec": 7.584125,
-          "start_frame": 220,
-          "end_frame": 228
+          "start_sec": 8.361666,
+          "end_sec": 8.604374,
+          "start_frame": 251,
+          "end_frame": 258
         },
         {
           "word": "more",
-          "start_sec": 7.596166,
-          "end_sec": 7.788457,
-          "start_frame": 228,
-          "end_frame": 234
+          "start_sec": 8.6165,
+          "end_sec": 8.810666,
+          "start_frame": 258,
+          "end_frame": 264
         },
         {
           "word": "terrifying",
-          "start_sec": 7.8005,
-          "end_sec": 8.557708,
-          "start_frame": 234,
-          "end_frame": 257
+          "start_sec": 8.822833,
+          "end_sec": 9.587416,
+          "start_frame": 265,
+          "end_frame": 288
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "WHAT IF WHAT",
+          "text": "WHAT IF THE",
           "start_frame": 3,
-          "end_frame": 18,
+          "end_frame": 16,
           "words": [
             {
               "word": "WHAT",
@@ -1935,174 +1935,174 @@
             },
             {
               "word": "IF",
-              "start_frame": 9,
-              "end_frame": 13
+              "start_frame": 10,
+              "end_frame": 12
             },
             {
-              "word": "WHAT",
+              "word": "THE",
               "start_frame": 13,
-              "end_frame": 18
+              "end_frame": 16
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "IF ALIENS LAND",
-          "start_frame": 18,
-          "end_frame": 45,
+          "text": "COLOSSAL MEGALODON THAT",
+          "start_frame": 16,
+          "end_frame": 53,
           "words": [
             {
-              "word": "IF",
-              "start_frame": 18,
-              "end_frame": 21
+              "word": "COLOSSAL",
+              "start_frame": 16,
+              "end_frame": 30
             },
             {
-              "word": "ALIENS",
-              "start_frame": 22,
-              "end_frame": 35
+              "word": "MEGALODON",
+              "start_frame": 31,
+              "end_frame": 48
             },
             {
-              "word": "LAND",
-              "start_frame": 36,
-              "end_frame": 44
+              "word": "THAT",
+              "start_frame": 48,
+              "end_frame": 52
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "ON EARTH TOMORROW",
-          "start_frame": 45,
-          "end_frame": 96,
+          "text": "HUNTED PREHISTORIC OCEANS",
+          "start_frame": 53,
+          "end_frame": 126,
           "words": [
             {
-              "word": "ON",
-              "start_frame": 45,
-              "end_frame": 49
+              "word": "HUNTED",
+              "start_frame": 53,
+              "end_frame": 63
             },
             {
-              "word": "EARTH",
-              "start_frame": 49,
-              "end_frame": 56
+              "word": "PREHISTORIC",
+              "start_frame": 63,
+              "end_frame": 83
             },
             {
-              "word": "TOMORROW",
-              "start_frame": 56,
-              "end_frame": 71
+              "word": "OCEANS",
+              "start_frame": 83,
+              "end_frame": 101
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "MOST PEOPLE ASSUME",
-          "start_frame": 96,
-          "end_frame": 128,
+          "start_frame": 126,
+          "end_frame": 158,
           "words": [
             {
               "word": "MOST",
-              "start_frame": 96,
-              "end_frame": 107
+              "start_frame": 126,
+              "end_frame": 137
             },
             {
               "word": "PEOPLE",
-              "start_frame": 107,
-              "end_frame": 116
+              "start_frame": 137,
+              "end_frame": 146
             },
             {
               "word": "ASSUME",
-              "start_frame": 116,
-              "end_frame": 128
+              "start_frame": 146,
+              "end_frame": 157
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "CIVILIZATION WOULD CARRY",
-          "start_frame": 128,
-          "end_frame": 166,
+          "start_frame": 158,
+          "end_frame": 196,
           "words": [
             {
               "word": "CIVILIZATION",
-              "start_frame": 128,
-              "end_frame": 150
+              "start_frame": 158,
+              "end_frame": 180
             },
             {
               "word": "WOULD",
-              "start_frame": 151,
-              "end_frame": 154
+              "start_frame": 181,
+              "end_frame": 184
             },
             {
               "word": "CARRY",
-              "start_frame": 155,
-              "end_frame": 165
+              "start_frame": 185,
+              "end_frame": 195
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "ON BUT THE",
-          "start_frame": 166,
-          "end_frame": 187,
+          "start_frame": 196,
+          "end_frame": 217,
           "words": [
             {
               "word": "ON",
-              "start_frame": 166,
-              "end_frame": 173
+              "start_frame": 196,
+              "end_frame": 203
             },
             {
               "word": "BUT",
-              "start_frame": 181,
-              "end_frame": 184
+              "start_frame": 211,
+              "end_frame": 214
             },
             {
               "word": "THE",
-              "start_frame": 185,
-              "end_frame": 186
+              "start_frame": 215,
+              "end_frame": 217
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "IMMEDIATE REALITY IS",
-          "start_frame": 187,
-          "end_frame": 220,
+          "start_frame": 217,
+          "end_frame": 251,
           "words": [
             {
               "word": "IMMEDIATE",
-              "start_frame": 187,
-              "end_frame": 200
+              "start_frame": 217,
+              "end_frame": 230
             },
             {
               "word": "REALITY",
-              "start_frame": 200,
-              "end_frame": 215
+              "start_frame": 230,
+              "end_frame": 246
             },
             {
               "word": "IS",
-              "start_frame": 216,
-              "end_frame": 220
+              "start_frame": 246,
+              "end_frame": 250
             }
           ]
         },
         {
           "chunk_id": 7,
           "text": "FAR MORE TERRIFYING",
-          "start_frame": 220,
-          "end_frame": 257,
+          "start_frame": 251,
+          "end_frame": 288,
           "words": [
             {
               "word": "FAR",
-              "start_frame": 220,
-              "end_frame": 228
+              "start_frame": 251,
+              "end_frame": 258
             },
             {
               "word": "MORE",
-              "start_frame": 228,
-              "end_frame": 234
+              "start_frame": 258,
+              "end_frame": 264
             },
             {
               "word": "TERRIFYING",
-              "start_frame": 234,
-              "end_frame": 257
+              "start_frame": 265,
+              "end_frame": 288
             }
           ]
         }
@@ -2118,153 +2118,153 @@
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "pan-right",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
       "scene_number": 2,
       "title": "10s Escalation Hook",
-      "image_url": "images/ep_4_beat_2.jpg",
+      "image_url": "images/ep_11_beat_2.jpg",
       "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 9.36,
-      "duration_in_frames": 293,
+      "audio_duration_sec": 9.46,
+      "duration_in_frames": 296,
       "words": [
         {
           "word": "Within",
-          "start_sec": 0.098083,
-          "end_sec": 0.482708,
+          "start_sec": 0.098541,
+          "end_sec": 0.486874,
           "start_frame": 3,
-          "end_frame": 14
+          "end_frame": 15
         },
         {
           "word": "seconds",
-          "start_sec": 0.494708,
-          "end_sec": 1.023541,
+          "start_sec": 0.499041,
+          "end_sec": 1.033041,
           "start_frame": 15,
           "end_frame": 31
         },
         {
           "word": "the",
-          "start_sec": 1.179791,
-          "end_sec": 1.275957,
-          "start_frame": 35,
-          "end_frame": 38
+          "start_sec": 1.190791,
+          "end_sec": 1.287874,
+          "start_frame": 36,
+          "end_frame": 39
         },
         {
           "word": "initial",
-          "start_sec": 1.288,
-          "end_sec": 1.672625,
+          "start_sec": 1.3,
+          "end_sec": 1.688333,
           "start_frame": 39,
-          "end_frame": 50
+          "end_frame": 51
         },
         {
           "word": "shockwave",
-          "start_sec": 1.684625,
-          "end_sec": 2.2615410000000002,
+          "start_sec": 1.7005,
+          "end_sec": 2.283041,
           "start_frame": 51,
           "end_frame": 68
         },
         {
           "word": "ripples",
-          "start_sec": 2.273541,
-          "end_sec": 2.598041,
-          "start_frame": 68,
-          "end_frame": 78
+          "start_sec": 2.295125,
+          "end_sec": 2.6227910000000003,
+          "start_frame": 69,
+          "end_frame": 79
         },
         {
           "word": "across",
-          "start_sec": 2.610083,
-          "end_sec": 2.982666,
-          "start_frame": 78,
-          "end_frame": 89
+          "start_sec": 2.634958,
+          "end_sec": 3.0111660000000002,
+          "start_frame": 79,
+          "end_frame": 90
         },
         {
           "word": "the",
-          "start_sec": 2.994708,
-          "end_sec": 3.1028740000000004,
-          "start_frame": 90,
-          "end_frame": 93
+          "start_sec": 3.023291,
+          "end_sec": 3.132499,
+          "start_frame": 91,
+          "end_frame": 94
         },
         {
           "word": "globe",
-          "start_sec": 3.114916,
-          "end_sec": 3.451457,
-          "start_frame": 93,
-          "end_frame": 104
+          "start_sec": 3.144666,
+          "end_sec": 3.484457,
+          "start_frame": 94,
+          "end_frame": 105
         },
         {
           "word": "shattering",
-          "start_sec": 3.739916,
-          "end_sec": 4.184624,
-          "start_frame": 112,
-          "end_frame": 126
+          "start_sec": 3.775708,
+          "end_sec": 4.224749,
+          "start_frame": 113,
+          "end_frame": 127
         },
         {
           "word": "communication",
-          "start_sec": 4.196625,
-          "end_sec": 4.89375,
-          "start_frame": 126,
-          "end_frame": 147
+          "start_sec": 4.236875,
+          "end_sec": 4.94075,
+          "start_frame": 127,
+          "end_frame": 148
         },
         {
           "word": "satellites",
-          "start_sec": 4.90575,
-          "end_sec": 5.4706660000000005,
-          "start_frame": 147,
-          "end_frame": 164
+          "start_sec": 4.952916,
+          "end_sec": 5.523291,
+          "start_frame": 149,
+          "end_frame": 166
         },
         {
           "word": "and",
-          "start_sec": 5.482708,
-          "end_sec": 5.638958,
-          "start_frame": 164,
-          "end_frame": 169
+          "start_sec": 5.535416,
+          "end_sec": 5.693166,
+          "start_frame": 166,
+          "end_frame": 171
         },
         {
           "word": "throwing",
-          "start_sec": 5.650958,
-          "end_sec": 6.011541,
-          "start_frame": 170,
-          "end_frame": 180
+          "start_sec": 5.705333,
+          "end_sec": 6.069416,
+          "start_frame": 171,
+          "end_frame": 182
         },
         {
           "word": "power",
-          "start_sec": 6.023541,
-          "end_sec": 6.348041,
-          "start_frame": 181,
-          "end_frame": 190
+          "start_sec": 6.081541,
+          "end_sec": 6.409206999999999,
+          "start_frame": 182,
+          "end_frame": 192
         },
         {
           "word": "grids",
-          "start_sec": 6.360083,
-          "end_sec": 6.684583,
-          "start_frame": 191,
-          "end_frame": 201
+          "start_sec": 6.421375,
+          "end_sec": 6.749041,
+          "start_frame": 193,
+          "end_frame": 202
         },
         {
           "word": "into",
-          "start_sec": 6.696625,
-          "end_sec": 6.900958,
-          "start_frame": 201,
-          "end_frame": 207
+          "start_sec": 6.761166,
+          "end_sec": 6.9674570000000005,
+          "start_frame": 203,
+          "end_frame": 209
         },
         {
           "word": "absolute",
-          "start_sec": 6.913,
-          "end_sec": 7.453875,
-          "start_frame": 207,
-          "end_frame": 224
+          "start_sec": 6.979625,
+          "end_sec": 7.52575,
+          "start_frame": 209,
+          "end_frame": 226
         },
         {
           "word": "chaotic",
-          "start_sec": 7.465875,
-          "end_sec": 7.922625,
-          "start_frame": 224,
-          "end_frame": 238
+          "start_sec": 7.537875,
+          "end_sec": 7.999041,
+          "start_frame": 226,
+          "end_frame": 240
         },
         {
           "word": "blackout",
-          "start_sec": 7.934625,
-          "end_sec": 8.523583,
-          "start_frame": 238,
-          "end_frame": 256
+          "start_sec": 8.011166,
+          "end_sec": 8.605832,
+          "start_frame": 240,
+          "end_frame": 258
         }
       ],
       "subtitle_chunks": [
@@ -2277,7 +2277,7 @@
             {
               "word": "WITHIN",
               "start_frame": 3,
-              "end_frame": 14
+              "end_frame": 15
             },
             {
               "word": "SECONDS",
@@ -2286,8 +2286,8 @@
             },
             {
               "word": "THE",
-              "start_frame": 35,
-              "end_frame": 38
+              "start_frame": 36,
+              "end_frame": 39
             }
           ]
         },
@@ -2295,12 +2295,12 @@
           "chunk_id": 1,
           "text": "INITIAL SHOCKWAVE RIPPLES",
           "start_frame": 39,
-          "end_frame": 78,
+          "end_frame": 79,
           "words": [
             {
               "word": "INITIAL",
               "start_frame": 39,
-              "end_frame": 50
+              "end_frame": 51
             },
             {
               "word": "SHOCKWAVE",
@@ -2309,118 +2309,118 @@
             },
             {
               "word": "RIPPLES",
-              "start_frame": 68,
-              "end_frame": 78
+              "start_frame": 69,
+              "end_frame": 79
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "ACROSS THE GLOBE",
-          "start_frame": 78,
-          "end_frame": 112,
+          "start_frame": 79,
+          "end_frame": 113,
           "words": [
             {
               "word": "ACROSS",
-              "start_frame": 78,
-              "end_frame": 89
+              "start_frame": 79,
+              "end_frame": 90
             },
             {
               "word": "THE",
-              "start_frame": 90,
-              "end_frame": 93
+              "start_frame": 91,
+              "end_frame": 94
             },
             {
               "word": "GLOBE",
-              "start_frame": 93,
-              "end_frame": 104
+              "start_frame": 94,
+              "end_frame": 105
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "SHATTERING COMMUNICATION SATELLITES",
-          "start_frame": 112,
-          "end_frame": 164,
+          "start_frame": 113,
+          "end_frame": 166,
           "words": [
             {
               "word": "SHATTERING",
-              "start_frame": 112,
-              "end_frame": 126
+              "start_frame": 113,
+              "end_frame": 127
             },
             {
               "word": "COMMUNICATION",
-              "start_frame": 126,
-              "end_frame": 147
+              "start_frame": 127,
+              "end_frame": 148
             },
             {
               "word": "SATELLITES",
-              "start_frame": 147,
-              "end_frame": 164
+              "start_frame": 149,
+              "end_frame": 166
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "AND THROWING POWER",
-          "start_frame": 164,
-          "end_frame": 191,
+          "start_frame": 166,
+          "end_frame": 193,
           "words": [
             {
               "word": "AND",
-              "start_frame": 164,
-              "end_frame": 169
+              "start_frame": 166,
+              "end_frame": 171
             },
             {
               "word": "THROWING",
-              "start_frame": 170,
-              "end_frame": 180
+              "start_frame": 171,
+              "end_frame": 182
             },
             {
               "word": "POWER",
-              "start_frame": 181,
-              "end_frame": 190
+              "start_frame": 182,
+              "end_frame": 192
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "GRIDS INTO ABSOLUTE",
-          "start_frame": 191,
-          "end_frame": 224,
+          "start_frame": 193,
+          "end_frame": 226,
           "words": [
             {
               "word": "GRIDS",
-              "start_frame": 191,
-              "end_frame": 201
+              "start_frame": 193,
+              "end_frame": 202
             },
             {
               "word": "INTO",
-              "start_frame": 201,
-              "end_frame": 207
+              "start_frame": 203,
+              "end_frame": 209
             },
             {
               "word": "ABSOLUTE",
-              "start_frame": 207,
-              "end_frame": 224
+              "start_frame": 209,
+              "end_frame": 226
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "CHAOTIC BLACKOUT",
-          "start_frame": 224,
-          "end_frame": 256,
+          "start_frame": 226,
+          "end_frame": 258,
           "words": [
             {
               "word": "CHAOTIC",
-              "start_frame": 224,
-              "end_frame": 238
+              "start_frame": 226,
+              "end_frame": 240
             },
             {
               "word": "BLACKOUT",
-              "start_frame": 238,
-              "end_frame": 256
+              "start_frame": 240,
+              "end_frame": 258
             }
           ]
         }
@@ -2436,160 +2436,160 @@
       "speaker_avatar": "\ud83d\udea8",
       "sfx": "impact_boom",
       "camera_motion": "dramatic-pulse",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
       "scene_number": 3,
       "title": "20s Danger Hook",
-      "image_url": "images/ep_4_beat_3.jpg",
+      "image_url": "images/ep_11_beat_3.jpg",
       "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 9.79,
-      "duration_in_frames": 306,
+      "audio_duration_sec": 10.3,
+      "duration_in_frames": 321,
       "words": [
         {
           "word": "Panic",
-          "start_sec": 0.097625,
-          "end_sec": 0.419041,
+          "start_sec": 0.098541,
+          "end_sec": 0.438332,
           "start_frame": 3,
           "end_frame": 13
         },
         {
           "word": "spreads",
-          "start_sec": 0.430958,
-          "end_sec": 0.835708,
-          "start_frame": 13,
-          "end_frame": 25
+          "start_sec": 0.4505,
+          "end_sec": 0.863125,
+          "start_frame": 14,
+          "end_frame": 26
         },
         {
           "word": "like",
-          "start_sec": 0.847625,
-          "end_sec": 1.026208,
-          "start_frame": 25,
+          "start_sec": 0.87525,
+          "end_sec": 1.033,
+          "start_frame": 26,
           "end_frame": 31
         },
         {
           "word": "wildfire",
-          "start_sec": 1.038083,
-          "end_sec": 1.764291,
+          "start_sec": 1.045125,
+          "end_sec": 1.8825,
           "start_frame": 31,
-          "end_frame": 53
+          "end_frame": 56
         },
         {
           "word": "As",
-          "start_sec": 2.607125,
-          "end_sec": 2.833333,
-          "start_frame": 78,
-          "end_frame": 85
-        },
-        {
-          "word": "the",
-          "start_sec": 2.857125,
-          "end_sec": 2.928541,
-          "start_frame": 86,
+          "start_sec": 2.718458,
+          "end_sec": 2.9490410000000002,
+          "start_frame": 82,
           "end_frame": 88
         },
         {
-          "word": "emergency",
-          "start_sec": 2.952375,
-          "end_sec": 3.488083,
+          "word": "the",
+          "start_sec": 2.961166,
+          "end_sec": 3.021832,
           "start_frame": 89,
-          "end_frame": 105
+          "end_frame": 91
+        },
+        {
+          "word": "emergency",
+          "start_sec": 3.034,
+          "end_sec": 3.628666,
+          "start_frame": 91,
+          "end_frame": 109
         },
         {
           "word": "alarms",
-          "start_sec": 3.511916,
-          "end_sec": 3.9166659999999998,
-          "start_frame": 105,
-          "end_frame": 117
+          "start_sec": 3.640791,
+          "end_sec": 4.126207,
+          "start_frame": 109,
+          "end_frame": 124
         },
         {
           "word": "echo",
-          "start_sec": 3.940458,
-          "end_sec": 4.154749,
-          "start_frame": 118,
-          "end_frame": 125
+          "start_sec": 4.138333,
+          "end_sec": 4.405333000000001,
+          "start_frame": 124,
+          "end_frame": 132
         },
         {
           "word": "through",
-          "start_sec": 4.166666,
-          "end_sec": 4.357124,
-          "start_frame": 125,
-          "end_frame": 131
+          "start_sec": 4.417458,
+          "end_sec": 4.623749,
+          "start_frame": 133,
+          "end_frame": 139
         },
         {
           "word": "deserted",
-          "start_sec": 4.380958,
-          "end_sec": 4.797624,
-          "start_frame": 131,
-          "end_frame": 144
-        },
-        {
-          "word": "city",
-          "start_sec": 4.821416,
-          "end_sec": 5.083332,
-          "start_frame": 145,
+          "start_sec": 4.635916,
+          "end_sec": 5.072791,
+          "start_frame": 139,
           "end_frame": 152
         },
         {
-          "word": "avenues",
-          "start_sec": 5.107125,
-          "end_sec": 5.571416,
+          "word": "city",
+          "start_sec": 5.084958,
+          "end_sec": 5.424749,
           "start_frame": 153,
-          "end_frame": 167
+          "end_frame": 163
+        },
+        {
+          "word": "avenues",
+          "start_sec": 5.436875,
+          "end_sec": 5.9708749999999995,
+          "start_frame": 163,
+          "end_frame": 179
         },
         {
           "word": "survivors",
-          "start_sec": 5.809541,
-          "end_sec": 6.345249,
-          "start_frame": 174,
-          "end_frame": 190
-        },
-        {
-          "word": "scramble",
-          "start_sec": 6.369041,
-          "end_sec": 6.809499000000001,
-          "start_frame": 191,
+          "start_sec": 6.213583,
+          "end_sec": 6.783958,
+          "start_frame": 186,
           "end_frame": 204
         },
         {
+          "word": "scramble",
+          "start_sec": 6.796125,
+          "end_sec": 7.245166,
+          "start_frame": 204,
+          "end_frame": 217
+        },
+        {
           "word": "for",
-          "start_sec": 6.833333,
-          "end_sec": 6.952374,
-          "start_frame": 205,
-          "end_frame": 209
-        },
-        {
-          "word": "the",
-          "start_sec": 6.964291,
-          "end_sec": 7.059541,
-          "start_frame": 209,
-          "end_frame": 212
-        },
-        {
-          "word": "only",
-          "start_sec": 7.083333,
-          "end_sec": 7.357124,
-          "start_frame": 212,
+          "start_sec": 7.257291,
+          "end_sec": 7.378666,
+          "start_frame": 218,
           "end_frame": 221
         },
         {
-          "word": "remaining",
-          "start_sec": 7.380958,
-          "end_sec": 7.845249,
-          "start_frame": 221,
+          "word": "the",
+          "start_sec": 7.390791,
+          "end_sec": 7.499999,
+          "start_frame": 222,
+          "end_frame": 225
+        },
+        {
+          "word": "only",
+          "start_sec": 7.512125,
+          "end_sec": 7.827666,
+          "start_frame": 225,
           "end_frame": 235
         },
         {
+          "word": "remaining",
+          "start_sec": 7.839791,
+          "end_sec": 8.264541,
+          "start_frame": 235,
+          "end_frame": 248
+        },
+        {
           "word": "underground",
-          "start_sec": 7.869041,
-          "end_sec": 8.369041,
-          "start_frame": 236,
-          "end_frame": 251
+          "start_sec": 8.276708,
+          "end_sec": 8.786416,
+          "start_frame": 248,
+          "end_frame": 264
         },
         {
           "word": "shelters",
-          "start_sec": 8.392875,
-          "end_sec": 8.928583,
-          "start_frame": 252,
-          "end_frame": 268
+          "start_sec": 8.798541,
+          "end_sec": 9.441749,
+          "start_frame": 264,
+          "end_frame": 283
         }
       ],
       "subtitle_chunks": [
@@ -2606,12 +2606,12 @@
             },
             {
               "word": "SPREADS",
-              "start_frame": 13,
-              "end_frame": 25
+              "start_frame": 14,
+              "end_frame": 26
             },
             {
               "word": "LIKE",
-              "start_frame": 25,
+              "start_frame": 26,
               "end_frame": 31
             }
           ]
@@ -2620,137 +2620,137 @@
           "chunk_id": 1,
           "text": "WILDFIRE AS THE",
           "start_frame": 31,
-          "end_frame": 89,
+          "end_frame": 91,
           "words": [
             {
               "word": "WILDFIRE",
               "start_frame": 31,
-              "end_frame": 53
+              "end_frame": 56
             },
             {
               "word": "AS",
-              "start_frame": 78,
-              "end_frame": 85
+              "start_frame": 82,
+              "end_frame": 88
             },
             {
               "word": "THE",
-              "start_frame": 86,
-              "end_frame": 88
+              "start_frame": 89,
+              "end_frame": 91
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "EMERGENCY ALARMS ECHO",
-          "start_frame": 89,
-          "end_frame": 125,
+          "start_frame": 91,
+          "end_frame": 133,
           "words": [
             {
               "word": "EMERGENCY",
-              "start_frame": 89,
-              "end_frame": 105
+              "start_frame": 91,
+              "end_frame": 109
             },
             {
               "word": "ALARMS",
-              "start_frame": 105,
-              "end_frame": 117
+              "start_frame": 109,
+              "end_frame": 124
             },
             {
               "word": "ECHO",
-              "start_frame": 118,
-              "end_frame": 125
+              "start_frame": 124,
+              "end_frame": 132
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "THROUGH DESERTED CITY",
-          "start_frame": 125,
-          "end_frame": 153,
+          "start_frame": 133,
+          "end_frame": 163,
           "words": [
             {
               "word": "THROUGH",
-              "start_frame": 125,
-              "end_frame": 131
+              "start_frame": 133,
+              "end_frame": 139
             },
             {
               "word": "DESERTED",
-              "start_frame": 131,
-              "end_frame": 144
+              "start_frame": 139,
+              "end_frame": 152
             },
             {
               "word": "CITY",
-              "start_frame": 145,
-              "end_frame": 152
+              "start_frame": 153,
+              "end_frame": 163
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "AVENUES SURVIVORS SCRAMBLE",
-          "start_frame": 153,
-          "end_frame": 205,
+          "start_frame": 163,
+          "end_frame": 218,
           "words": [
             {
               "word": "AVENUES",
-              "start_frame": 153,
-              "end_frame": 167
+              "start_frame": 163,
+              "end_frame": 179
             },
             {
               "word": "SURVIVORS",
-              "start_frame": 174,
-              "end_frame": 190
+              "start_frame": 186,
+              "end_frame": 204
             },
             {
               "word": "SCRAMBLE",
-              "start_frame": 191,
-              "end_frame": 204
+              "start_frame": 204,
+              "end_frame": 217
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "FOR THE ONLY",
-          "start_frame": 205,
-          "end_frame": 221,
+          "start_frame": 218,
+          "end_frame": 235,
           "words": [
             {
               "word": "FOR",
-              "start_frame": 205,
-              "end_frame": 209
+              "start_frame": 218,
+              "end_frame": 221
             },
             {
               "word": "THE",
-              "start_frame": 209,
-              "end_frame": 212
+              "start_frame": 222,
+              "end_frame": 225
             },
             {
               "word": "ONLY",
-              "start_frame": 212,
-              "end_frame": 221
+              "start_frame": 225,
+              "end_frame": 235
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "REMAINING UNDERGROUND SHELTERS",
-          "start_frame": 221,
-          "end_frame": 268,
+          "start_frame": 235,
+          "end_frame": 283,
           "words": [
             {
               "word": "REMAINING",
-              "start_frame": 221,
-              "end_frame": 235
+              "start_frame": 235,
+              "end_frame": 248
             },
             {
               "word": "UNDERGROUND",
-              "start_frame": 236,
-              "end_frame": 251
+              "start_frame": 248,
+              "end_frame": 264
             },
             {
               "word": "SHELTERS",
-              "start_frame": 252,
-              "end_frame": 268
+              "start_frame": 264,
+              "end_frame": 283
             }
           ]
         }
@@ -2766,160 +2766,160 @@
       "speaker_avatar": "\ud83d\udd2c",
       "sfx": "pop",
       "camera_motion": "warm-dolly",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
       "scene_number": 4,
       "title": "30s Climax Hook",
-      "image_url": "images/ep_4_beat_4.jpg",
+      "image_url": "images/ep_11_beat_4.jpg",
       "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 8.26,
-      "duration_in_frames": 260,
+      "audio_duration_sec": 7.87,
+      "duration_in_frames": 248,
       "words": [
         {
           "word": "Yet",
-          "start_sec": 0.1,
-          "end_sec": 0.3125,
+          "start_sec": 0.098541,
+          "end_sec": 0.304832,
           "start_frame": 3,
           "end_frame": 9
         },
         {
           "word": "amidst",
-          "start_sec": 0.325,
-          "end_sec": 0.65,
+          "start_sec": 0.317,
+          "end_sec": 0.644666,
           "start_frame": 10,
-          "end_frame": 20
+          "end_frame": 19
         },
         {
           "word": "the",
-          "start_sec": 0.6625,
-          "end_sec": 0.75,
+          "start_sec": 0.656791,
+          "end_sec": 0.729624,
           "start_frame": 20,
           "end_frame": 22
         },
         {
           "word": "catastrophe",
-          "start_sec": 0.7625,
-          "end_sec": 1.5625,
-          "start_frame": 23,
-          "end_frame": 47
+          "start_sec": 0.74175,
+          "end_sec": 1.4941659999999999,
+          "start_frame": 22,
+          "end_frame": 45
         },
         {
           "word": "an",
-          "start_sec": 1.825,
-          "end_sec": 1.9375,
-          "start_frame": 55,
-          "end_frame": 58
+          "start_sec": 1.736875,
+          "end_sec": 1.85825,
+          "start_frame": 52,
+          "end_frame": 56
         },
         {
           "word": "unexpected",
-          "start_sec": 1.95,
-          "end_sec": 2.6,
-          "start_frame": 58,
-          "end_frame": 78
+          "start_sec": 1.870375,
+          "end_sec": 2.477166,
+          "start_frame": 56,
+          "end_frame": 74
         },
         {
           "word": "scientific",
-          "start_sec": 2.6125,
-          "end_sec": 3.25,
-          "start_frame": 78,
-          "end_frame": 98
+          "start_sec": 2.489333,
+          "end_sec": 3.0961239999999997,
+          "start_frame": 75,
+          "end_frame": 93
         },
         {
           "word": "discovery",
-          "start_sec": 3.2625,
-          "end_sec": 3.8125,
-          "start_frame": 98,
-          "end_frame": 114
+          "start_sec": 3.10825,
+          "end_sec": 3.6422499999999998,
+          "start_frame": 93,
+          "end_frame": 109
         },
         {
           "word": "reveals",
-          "start_sec": 3.825,
-          "end_sec": 4.25,
-          "start_frame": 115,
-          "end_frame": 128
+          "start_sec": 3.654375,
+          "end_sec": 4.054875,
+          "start_frame": 110,
+          "end_frame": 122
         },
         {
           "word": "a",
-          "start_sec": 4.2625,
-          "end_sec": 4.325,
-          "start_frame": 128,
-          "end_frame": 130
+          "start_sec": 4.067,
+          "end_sec": 4.1155409,
+          "start_frame": 122,
+          "end_frame": 123
         },
         {
           "word": "hidden",
-          "start_sec": 4.3375,
-          "end_sec": 4.625,
-          "start_frame": 130,
-          "end_frame": 139
+          "start_sec": 4.127666,
+          "end_sec": 4.406790999999999,
+          "start_frame": 124,
+          "end_frame": 132
         },
         {
           "word": "anomaly",
-          "start_sec": 4.6375,
-          "end_sec": 5.15,
-          "start_frame": 139,
-          "end_frame": 154
+          "start_sec": 4.418916,
+          "end_sec": 4.904332,
+          "start_frame": 133,
+          "end_frame": 147
         },
         {
           "word": "that",
-          "start_sec": 5.1625,
-          "end_sec": 5.324999999999999,
-          "start_frame": 155,
-          "end_frame": 160
+          "start_sec": 4.9165,
+          "end_sec": 5.07425,
+          "start_frame": 147,
+          "end_frame": 152
         },
         {
           "word": "might",
-          "start_sec": 5.3375,
-          "end_sec": 5.5875,
-          "start_frame": 160,
-          "end_frame": 168
+          "start_sec": 5.086416,
+          "end_sec": 5.304874,
+          "start_frame": 153,
+          "end_frame": 159
         },
         {
           "word": "just",
-          "start_sec": 5.6,
-          "end_sec": 5.824999999999999,
-          "start_frame": 168,
-          "end_frame": 175
+          "start_sec": 5.317,
+          "end_sec": 5.535458,
+          "start_frame": 160,
+          "end_frame": 166
         },
         {
           "word": "hold",
-          "start_sec": 5.8375,
-          "end_sec": 6.050000000000001,
-          "start_frame": 175,
-          "end_frame": 182
+          "start_sec": 5.547583,
+          "end_sec": 5.766041,
+          "start_frame": 166,
+          "end_frame": 173
         },
         {
           "word": "the",
-          "start_sec": 6.0625,
-          "end_sec": 6.15,
-          "start_frame": 182,
-          "end_frame": 184
+          "start_sec": 5.778166,
+          "end_sec": 5.863124,
+          "start_frame": 173,
+          "end_frame": 176
         },
         {
           "word": "key",
-          "start_sec": 6.1625,
-          "end_sec": 6.449999999999999,
-          "start_frame": 185,
-          "end_frame": 193
+          "start_sec": 5.87525,
+          "end_sec": 6.142250000000001,
+          "start_frame": 176,
+          "end_frame": 184
         },
         {
           "word": "to",
-          "start_sec": 6.4625,
-          "end_sec": 6.575,
-          "start_frame": 194,
-          "end_frame": 197
+          "start_sec": 6.154375,
+          "end_sec": 6.263583,
+          "start_frame": 185,
+          "end_frame": 188
         },
         {
           "word": "our",
-          "start_sec": 6.5875,
-          "end_sec": 6.7250000000000005,
-          "start_frame": 198,
-          "end_frame": 202
+          "start_sec": 6.275708,
+          "end_sec": 6.409208,
+          "start_frame": 188,
+          "end_frame": 192
         },
         {
           "word": "survival",
-          "start_sec": 6.7375,
-          "end_sec": 7.375,
-          "start_frame": 202,
-          "end_frame": 221
+          "start_sec": 6.421375,
+          "end_sec": 7.028166000000001,
+          "start_frame": 193,
+          "end_frame": 211
         }
       ],
       "subtitle_chunks": [
@@ -2927,7 +2927,7 @@
           "chunk_id": 0,
           "text": "YET AMIDST THE",
           "start_frame": 3,
-          "end_frame": 23,
+          "end_frame": 22,
           "words": [
             {
               "word": "YET",
@@ -2937,7 +2937,7 @@
             {
               "word": "AMIDST",
               "start_frame": 10,
-              "end_frame": 20
+              "end_frame": 19
             },
             {
               "word": "THE",
@@ -2949,138 +2949,138 @@
         {
           "chunk_id": 1,
           "text": "CATASTROPHE AN UNEXPECTED",
-          "start_frame": 23,
-          "end_frame": 78,
+          "start_frame": 22,
+          "end_frame": 75,
           "words": [
             {
               "word": "CATASTROPHE",
-              "start_frame": 23,
-              "end_frame": 47
+              "start_frame": 22,
+              "end_frame": 45
             },
             {
               "word": "AN",
-              "start_frame": 55,
-              "end_frame": 58
+              "start_frame": 52,
+              "end_frame": 56
             },
             {
               "word": "UNEXPECTED",
-              "start_frame": 58,
-              "end_frame": 78
+              "start_frame": 56,
+              "end_frame": 74
             }
           ]
         },
         {
           "chunk_id": 2,
           "text": "SCIENTIFIC DISCOVERY REVEALS",
-          "start_frame": 78,
-          "end_frame": 128,
+          "start_frame": 75,
+          "end_frame": 122,
           "words": [
             {
               "word": "SCIENTIFIC",
-              "start_frame": 78,
-              "end_frame": 98
+              "start_frame": 75,
+              "end_frame": 93
             },
             {
               "word": "DISCOVERY",
-              "start_frame": 98,
-              "end_frame": 114
+              "start_frame": 93,
+              "end_frame": 109
             },
             {
               "word": "REVEALS",
-              "start_frame": 115,
-              "end_frame": 128
+              "start_frame": 110,
+              "end_frame": 122
             }
           ]
         },
         {
           "chunk_id": 3,
           "text": "A HIDDEN ANOMALY",
-          "start_frame": 128,
-          "end_frame": 155,
+          "start_frame": 122,
+          "end_frame": 147,
           "words": [
             {
               "word": "A",
-              "start_frame": 128,
-              "end_frame": 130
+              "start_frame": 122,
+              "end_frame": 123
             },
             {
               "word": "HIDDEN",
-              "start_frame": 130,
-              "end_frame": 139
+              "start_frame": 124,
+              "end_frame": 132
             },
             {
               "word": "ANOMALY",
-              "start_frame": 139,
-              "end_frame": 154
+              "start_frame": 133,
+              "end_frame": 147
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "THAT MIGHT JUST",
-          "start_frame": 155,
-          "end_frame": 175,
+          "start_frame": 147,
+          "end_frame": 166,
           "words": [
             {
               "word": "THAT",
-              "start_frame": 155,
-              "end_frame": 160
+              "start_frame": 147,
+              "end_frame": 152
             },
             {
               "word": "MIGHT",
-              "start_frame": 160,
-              "end_frame": 168
+              "start_frame": 153,
+              "end_frame": 159
             },
             {
               "word": "JUST",
-              "start_frame": 168,
-              "end_frame": 175
+              "start_frame": 160,
+              "end_frame": 166
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "HOLD THE KEY",
-          "start_frame": 175,
-          "end_frame": 194,
+          "start_frame": 166,
+          "end_frame": 185,
           "words": [
             {
               "word": "HOLD",
-              "start_frame": 175,
-              "end_frame": 182
+              "start_frame": 166,
+              "end_frame": 173
             },
             {
               "word": "THE",
-              "start_frame": 182,
-              "end_frame": 184
+              "start_frame": 173,
+              "end_frame": 176
             },
             {
               "word": "KEY",
-              "start_frame": 185,
-              "end_frame": 193
+              "start_frame": 176,
+              "end_frame": 184
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "TO OUR SURVIVAL",
-          "start_frame": 194,
-          "end_frame": 221,
+          "start_frame": 185,
+          "end_frame": 211,
           "words": [
             {
               "word": "TO",
-              "start_frame": 194,
-              "end_frame": 197
+              "start_frame": 185,
+              "end_frame": 188
             },
             {
               "word": "OUR",
-              "start_frame": 198,
-              "end_frame": 202
+              "start_frame": 188,
+              "end_frame": 192
             },
             {
               "word": "SURVIVAL",
-              "start_frame": 202,
-              "end_frame": 221
+              "start_frame": 193,
+              "end_frame": 211
             }
           ]
         }
@@ -3096,181 +3096,181 @@
       "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "sunset-drift",
-      "visual_prompt": "Cinematic sci-fi Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
+      "visual_prompt": "3D Pixar animation Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
       "scene_number": 5,
       "title": "45s Resolution Hook",
-      "image_url": "images/ep_4_beat_5.jpg",
+      "image_url": "images/ep_11_beat_5.jpg",
       "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 8.83,
-      "duration_in_frames": 587,
+      "audio_duration_sec": 8.93,
+      "duration_in_frames": 550,
       "words": [
         {
           "word": "Our",
-          "start_sec": 0.098083,
-          "end_sec": 0.350499,
+          "start_sec": 0.098541,
+          "end_sec": 0.353416,
           "start_frame": 3,
           "end_frame": 11
         },
         {
           "word": "world",
-          "start_sec": 0.3625,
-          "end_sec": 0.675,
+          "start_sec": 0.365541,
+          "end_sec": 0.681082,
           "start_frame": 11,
           "end_frame": 20
         },
         {
           "word": "is",
-          "start_sec": 0.687,
-          "end_sec": 0.807208,
+          "start_sec": 0.693208,
+          "end_sec": 0.8145830000000001,
           "start_frame": 21,
           "end_frame": 24
         },
         {
           "word": "far",
-          "start_sec": 0.81925,
-          "end_sec": 1.071666,
+          "start_sec": 0.826708,
+          "end_sec": 1.081583,
           "start_frame": 25,
           "end_frame": 32
         },
         {
           "word": "more",
-          "start_sec": 1.083666,
-          "end_sec": 1.275957,
+          "start_sec": 1.093708,
+          "end_sec": 1.287874,
           "start_frame": 33,
-          "end_frame": 38
+          "end_frame": 39
         },
         {
           "word": "fragile",
-          "start_sec": 1.288,
-          "end_sec": 1.7327080000000001,
+          "start_sec": 1.3,
+          "end_sec": 1.749041,
           "start_frame": 39,
           "end_frame": 52
         },
         {
           "word": "than",
-          "start_sec": 1.744708,
-          "end_sec": 1.876916,
-          "start_frame": 52,
-          "end_frame": 56
+          "start_sec": 1.761166,
+          "end_sec": 1.894666,
+          "start_frame": 53,
+          "end_frame": 57
         },
         {
           "word": "we",
-          "start_sec": 1.888958,
-          "end_sec": 1.9851239999999999,
+          "start_sec": 1.906791,
+          "end_sec": 2.0038739999999997,
           "start_frame": 57,
           "end_frame": 60
         },
         {
           "word": "dare",
-          "start_sec": 1.997125,
-          "end_sec": 2.2615410000000002,
+          "start_sec": 2.016,
+          "end_sec": 2.283,
           "start_frame": 60,
           "end_frame": 68
         },
         {
           "word": "to",
-          "start_sec": 2.273541,
-          "end_sec": 2.3937489999999997,
-          "start_frame": 68,
+          "start_sec": 2.295125,
+          "end_sec": 2.4165,
+          "start_frame": 69,
           "end_frame": 72
         },
         {
           "word": "admit",
-          "start_sec": 2.40575,
-          "end_sec": 2.826416,
-          "start_frame": 72,
-          "end_frame": 85
+          "start_sec": 2.428625,
+          "end_sec": 2.8533749999999998,
+          "start_frame": 73,
+          "end_frame": 86
         },
         {
           "word": "What",
-          "start_sec": 3.653833,
-          "end_sec": 3.870166,
-          "start_frame": 110,
-          "end_frame": 116
+          "start_sec": 3.689333,
+          "end_sec": 3.907791,
+          "start_frame": 111,
+          "end_frame": 117
         },
         {
           "word": "would",
-          "start_sec": 3.882208,
-          "end_sec": 4.002416,
-          "start_frame": 116,
-          "end_frame": 120
+          "start_sec": 3.919916,
+          "end_sec": 4.041291,
+          "start_frame": 118,
+          "end_frame": 121
         },
         {
           "word": "you",
-          "start_sec": 4.014416,
-          "end_sec": 4.098541,
-          "start_frame": 120,
-          "end_frame": 123
+          "start_sec": 4.053416,
+          "end_sec": 4.138374000000001,
+          "start_frame": 122,
+          "end_frame": 124
         },
         {
           "word": "do",
-          "start_sec": 4.110583,
-          "end_sec": 4.2788330000000006,
-          "start_frame": 123,
-          "end_frame": 128
+          "start_sec": 4.1505,
+          "end_sec": 4.320416,
+          "start_frame": 125,
+          "end_frame": 130
         },
         {
           "word": "first",
-          "start_sec": 4.290875,
-          "end_sec": 4.819707999999999,
-          "start_frame": 129,
-          "end_frame": 145
+          "start_sec": 4.332541,
+          "end_sec": 4.866541,
+          "start_frame": 130,
+          "end_frame": 146
         },
         {
           "word": "Drop",
-          "start_sec": 5.649041,
-          "end_sec": 5.949541,
-          "start_frame": 169,
-          "end_frame": 178
+          "start_sec": 5.703875,
+          "end_sec": 6.007291,
+          "start_frame": 171,
+          "end_frame": 180
         },
         {
           "word": "a",
-          "start_sec": 5.961541,
-          "end_sec": 6.033666,
-          "start_frame": 179,
-          "end_frame": 181
+          "start_sec": 6.019416,
+          "end_sec": 6.092249,
+          "start_frame": 181,
+          "end_frame": 183
         },
         {
           "word": "follow",
-          "start_sec": 6.045666,
-          "end_sec": 6.442291,
-          "start_frame": 181,
-          "end_frame": 193
+          "start_sec": 6.104375,
+          "end_sec": 6.504875,
+          "start_frame": 183,
+          "end_frame": 195
         },
         {
           "word": "right",
-          "start_sec": 6.454333,
-          "end_sec": 6.658666,
-          "start_frame": 194,
-          "end_frame": 200
+          "start_sec": 6.517,
+          "end_sec": 6.723291000000001,
+          "start_frame": 196,
+          "end_frame": 202
         },
         {
           "word": "now",
-          "start_sec": 6.670666,
-          "end_sec": 6.8990409999999995,
-          "start_frame": 200,
-          "end_frame": 207
+          "start_sec": 6.735416,
+          "end_sec": 6.965999,
+          "start_frame": 202,
+          "end_frame": 209
         },
         {
           "word": "for",
-          "start_sec": 6.911041,
-          "end_sec": 7.091332,
-          "start_frame": 207,
-          "end_frame": 213
+          "start_sec": 6.978166,
+          "end_sec": 7.160207,
+          "start_frame": 209,
+          "end_frame": 215
         },
         {
           "word": "Episode",
-          "start_sec": 7.103375,
-          "end_sec": 7.584125,
-          "start_frame": 213,
-          "end_frame": 228
+          "start_sec": 7.172333,
+          "end_sec": 7.657749,
+          "start_frame": 215,
+          "end_frame": 230
         },
         {
           "word": "Two",
-          "start_sec": 7.596166,
-          "end_sec": 7.980791,
-          "start_frame": 228,
-          "end_frame": 239
+          "start_sec": 7.669916,
+          "end_sec": 8.058249,
+          "start_frame": 230,
+          "end_frame": 242
         }
       ],
       "subtitle_chunks": [
@@ -3301,7 +3301,7 @@
           "chunk_id": 1,
           "text": "FAR MORE FRAGILE",
           "start_frame": 25,
-          "end_frame": 52,
+          "end_frame": 53,
           "words": [
             {
               "word": "FAR",
@@ -3311,7 +3311,7 @@
             {
               "word": "MORE",
               "start_frame": 33,
-              "end_frame": 38
+              "end_frame": 39
             },
             {
               "word": "FRAGILE",
@@ -3323,13 +3323,13 @@
         {
           "chunk_id": 2,
           "text": "THAN WE DARE",
-          "start_frame": 52,
-          "end_frame": 68,
+          "start_frame": 53,
+          "end_frame": 69,
           "words": [
             {
               "word": "THAN",
-              "start_frame": 52,
-              "end_frame": 56
+              "start_frame": 53,
+              "end_frame": 57
             },
             {
               "word": "WE",
@@ -3346,115 +3346,115 @@
         {
           "chunk_id": 3,
           "text": "TO ADMIT WHAT",
-          "start_frame": 68,
-          "end_frame": 116,
+          "start_frame": 69,
+          "end_frame": 118,
           "words": [
             {
               "word": "TO",
-              "start_frame": 68,
+              "start_frame": 69,
               "end_frame": 72
             },
             {
               "word": "ADMIT",
-              "start_frame": 72,
-              "end_frame": 85
+              "start_frame": 73,
+              "end_frame": 86
             },
             {
               "word": "WHAT",
-              "start_frame": 110,
-              "end_frame": 116
+              "start_frame": 111,
+              "end_frame": 117
             }
           ]
         },
         {
           "chunk_id": 4,
           "text": "WOULD YOU DO",
-          "start_frame": 116,
-          "end_frame": 129,
+          "start_frame": 118,
+          "end_frame": 130,
           "words": [
             {
               "word": "WOULD",
-              "start_frame": 116,
-              "end_frame": 120
+              "start_frame": 118,
+              "end_frame": 121
             },
             {
               "word": "YOU",
-              "start_frame": 120,
-              "end_frame": 123
+              "start_frame": 122,
+              "end_frame": 124
             },
             {
               "word": "DO",
-              "start_frame": 123,
-              "end_frame": 128
+              "start_frame": 125,
+              "end_frame": 130
             }
           ]
         },
         {
           "chunk_id": 5,
           "text": "FIRST DROP A",
-          "start_frame": 129,
-          "end_frame": 181,
+          "start_frame": 130,
+          "end_frame": 183,
           "words": [
             {
               "word": "FIRST",
-              "start_frame": 129,
-              "end_frame": 145
+              "start_frame": 130,
+              "end_frame": 146
             },
             {
               "word": "DROP",
-              "start_frame": 169,
-              "end_frame": 178
+              "start_frame": 171,
+              "end_frame": 180
             },
             {
               "word": "A",
-              "start_frame": 179,
-              "end_frame": 181
+              "start_frame": 181,
+              "end_frame": 183
             }
           ]
         },
         {
           "chunk_id": 6,
           "text": "FOLLOW RIGHT NOW",
-          "start_frame": 181,
-          "end_frame": 207,
+          "start_frame": 183,
+          "end_frame": 209,
           "words": [
             {
               "word": "FOLLOW",
-              "start_frame": 181,
-              "end_frame": 193
+              "start_frame": 183,
+              "end_frame": 195
             },
             {
               "word": "RIGHT",
-              "start_frame": 194,
-              "end_frame": 200
+              "start_frame": 196,
+              "end_frame": 202
             },
             {
               "word": "NOW",
-              "start_frame": 200,
-              "end_frame": 207
+              "start_frame": 202,
+              "end_frame": 209
             }
           ]
         },
         {
           "chunk_id": 7,
           "text": "FOR EPISODE TWO",
-          "start_frame": 207,
-          "end_frame": 239,
+          "start_frame": 209,
+          "end_frame": 242,
           "words": [
             {
               "word": "FOR",
-              "start_frame": 207,
-              "end_frame": 213
+              "start_frame": 209,
+              "end_frame": 215
             },
             {
               "word": "EPISODE",
-              "start_frame": 213,
-              "end_frame": 228
+              "start_frame": 215,
+              "end_frame": 230
             },
             {
               "word": "TWO",
-              "start_frame": 228,
-              "end_frame": 239
+              "start_frame": 230,
+              "end_frame": 242
             }
           ]
         }

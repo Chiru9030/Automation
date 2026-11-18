@@ -24,6 +24,11 @@ video-app/out/
 *.mp4
 .remotion/
 .cache/
+video-app/public/images/ep_*
+video-app/public/audio/beat_*
+video-app/public/audio/story_bg.wav
+story_pipeline/training_failures.jsonl
+story_pipeline/pipeline_calibration.json
 
 # OS Specific
 .DS_Store

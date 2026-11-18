@@ -1,66 +1,79 @@
-# Autonomous Story-to-Shorts Video Pipeline 📖🚀
+# Autonomous Story-to-Shorts Video Pipeline (v1.0.0 Production Release) 🎬🚀
 
-An automated, non-blocking AI video production pipeline powered by **Google Antigravity SDK**, **Remotion**, **edge-tts**, **YouTube Data API**, and **Instagram Reels**.
+An autonomous, production-grade AI short-form video generation pipeline powered by **Google Gemini 2.5/3.8 Flash**, **Hugging Face FLUX.1-schnell**, **Edge-TTS**, **FFmpeg Hardware Acceleration**, and the **YouTube Data API v3**.
 
-Every 8 hours, it ingests the next chapter of an uploaded storybook, synthesizes voice narration + background music, renders a 60-second vertical video (1080x1920), and publishes it to social media.
-
----
-
-## Supported Ebook Formats
-
-Drop any of the following file types into [`books/`](file:///Users/chiranjeevi/PROJECTS/remotion-video-pipeline/books/):
-- **`.epub`** (Standard EPUB ebooks with chapter detection)
-- **`.pdf`** (Digital storybooks & novels)
-- **`.txt`** (Raw story text)
-- **`.md`** (Markdown chapters)
+Runs automatically on a **5-hour scheduled cloud cron** (or 1-click cloud / local trigger), synthesizing gripping narrative scripts, cinema-grade 3D visuals, multi-plane continuous camera motion, multi-track audio with transition SFX at every cut, and frame-accurate kinetic subtitles.
 
 ---
 
-## System Architecture
+## 🛡️ Production Quality Standard (5 Auditor Gates)
+
+Every episode must pass all 5 multi-pillar quality gates before publishing. If any metric falls below the production threshold, the **Zero-Upload Safety Guard** immediately halts publication, alerts your mobile phone via Telegram, and retries generation:
+
+1. **Gate 1: Story Script & Hook Inspector**
+   - Beat 1 strictly requires a psychological curiosity hook trigger (*"What happens if...", "Imagine if...", "Did you know..."*).
+   - Word count strictly bounded to 105–138 words (locking duration to 52s–58.5s).
+   - Pacing verified with escalation markers and a satisfying narrative conclusion.
+
+2. **Gate 2: Computer Vision Aesthetics & Semantic Content Matcher**
+   - Evaluates actual pixel contrast ($\ge 20.0$), Hasler & Süsstrunk color vibrancy ($\ge 22.0$), and edge sharpness ($\ge 10.0$).
+   - **Semantic Relevance**: Validates scene chromatic and theme alignment (marine scenes require underwater blue/cyan tones; fire scenes require magma red/orange).
+   - **Uniqueness**: Enforces 64-bit difference hashing (`dhash`) between beats with Hamming distance $\ge 6$ to reject near-duplicate frames.
+
+3. **Gate 3: Neural Audio & Dynamic Range Auditor**
+   - Duration strictly verified between 50.0s and 58.5s (< 59.0s limit for YouTube Shorts).
+   - Neural word timestamp verification (monotonic with positive durations).
+
+4. **Gate 4: Kinetic Typography & Safe Lower-Third Subtitles**
+   - MarginV bounded between 180 and 260 to keep captions clear of YouTube Shorts UI buttons and header bars.
+   - At least 25 discrete word-highlight events per episode.
+
+5. **Gate 5: Pre-Flight Final Video Certification & Motion Differential**
+   - 5-point visual frame sampling (10%, 30%, 50%, 70%, 90% duration).
+   - FFmpeg `volumedetect` rejects silent or flatline audio tracks ($< -45\text{ dB}$).
+   - **Motion Differential**: Verifies continuous camera motion across frames to reject frozen videos.
+   - 0% blank screens, 0% frozen frames.
+
+---
+
+## 🧠 System Architecture (v1.0.0)
 
 ```
 remotion-video-pipeline/
-├── books/                                  # Drop .epub, .pdf, .txt storybooks here
 ├── story_pipeline/
-│   ├── story_extractor.py                  # EPUB/PDF/TXT chapter slicer & Gemini script adapter
-│   ├── voice_generator.py                  # edge-tts cinematic narration generator
-│   └── story_history.json                  # Episode & chapter progression tracker
-├── video-app/                              # Remotion project
-│   ├── src/StoryVideo.tsx                  # 60s vertical video (Ken Burns zoom + kinetic subtitles)
-│   ├── src/Root.tsx                        # Composition registry (1800 frames @ 30fps)
-│   └── public/audio/                       # Dual-track audio (voiceover.mp3 + ducked bg_music.wav)
-├── audio_generator.py                      # Genre-adaptive cinematic soundtrack synthesizer
-├── story_runner.py                         # Single-run execution with breakout & circuit breaker
-├── continuous_scheduler.py                 # 8-hour autonomous daemon
-└── Dockerfile                              # Headless Cloud Run / AWS Fargate container
+│   ├── viral_topic_engine.py         # Stage 1: Curiosity hook & topic generator
+│   ├── viral_script_engine.py        # Stage 2: 5-beat retention scriptwriter
+│   ├── hd_image_engine.py            # Stage 3: FLUX.1-schnell / Pollinations / Semantic visuals
+│   ├── neural_audio_engine.py        # Stage 4 & 5: Edge-TTS neural speech & exact word boundaries
+│   ├── kinetic_subtitle_engine.py    # Stage 6: ASS discrete word highlighting (Submagic style)
+│   ├── sfx_generator.py              # Foley audio synthesizer (impact booms, whooshes)
+│   ├── fast_video_engine.py          # Stage 7: Native hardware-accelerated video synthesis
+│   ├── strict_pipeline_auditor.py    # Multi-pillar 5-gate quality auditor
+│   ├── telegram_notifier.py          # Mobile dispatch (status reports, previews, error alerts)
+│   └── story_history.json            # Perpetual topic and episode history tracker
+├── video-app/                        # Remotion composition framework
+│   └── public/                       # Audio, visual, and SFX asset store
+├── story_runner.py                   # Master v1.0.0 pipeline runner with Zero-Upload Guard
+└── .github/workflows/
+    └── story_pipeline.yml            # 5-hour automated GitHub Actions workflow
 ```
 
 ---
 
-## Robust Loop & Crash Protection (Circuit Breakers)
+## 🚀 Running Pipeline v1.0.0
 
-1. **Subprocess Timeout (6 Minutes)**:
-   Remotion rendering has a strict 360-second timeout. If Chromium hangs or stalls, it is force-terminated.
-2. **Retry with Automatic Breakout**:
-   Retries up to 2 times. If both fail, it breaks out cleanly to avoid infinite loops and logs the error.
-3. **Daemon Cooldown**:
-   If 3 consecutive cycles fail, the continuous scheduler enters a 10-minute cooldown before safely resetting.
-
----
-
-## Quickstart
-
-### 1. Ingest a Story
-Place any `.epub`, `.pdf`, or `.txt` file into the `books/` folder.
-
-### 2. Test a Single Video Cycle
+### Run Locally in Sample Mode (Bypasses Social Upload)
 ```bash
-python3 story_runner.py
+python3 story_runner.py --sample
 ```
-*(Extracts the next chapter, synthesizes voiceover and background music, and exports `video-app/out/story_episode_X.mp4`).*
 
-### 3. Start the 8-Hour Continuous Daemon
+### Run with a Custom Topic
 ```bash
-python3 continuous_scheduler.py
+python3 story_runner.py --topic "The deepest creature discovered in the Mariana Trench"
 ```
-Runs continuously in the background, advancing chapter-by-chapter every 8 hours!
+
+### Run Production Cloud Pipeline
+The GitHub Actions workflow runs autonomously every 5 hours:
+```bash
+gh workflow run "5-Hour Autonomous Story Video Pipeline" --ref main
+```
