@@ -8,6 +8,7 @@ Delivers real-time notifications, upload logs, error alerts, and video previews 
 
 import html
 import os
+import subprocess
 import traceback
 from pathlib import Path
 from dotenv import load_dotenv
@@ -83,9 +84,26 @@ def send_telegram_video(
         return False
 
     file_size_mb = video_path.stat().st_size / 1_000_000
+    actual_upload_path = video_path
+    temp_mobile = None
+
     if file_size_mb > 49.0:
-        print(f"ℹ️ Video size ({file_size_mb:.1f}MB) exceeds Telegram's 50MB direct bot limit.")
-        return False
+        print(f"ℹ️ Video size ({file_size_mb:.1f}MB) exceeds Telegram's 50MB direct bot limit. Transcoding fast mobile preview...")
+        temp_mobile = video_path.with_name(f"mobile_{video_path.name}")
+        cmd_transcode = [
+            "ffmpeg", "-y", "-i", str(video_path),
+            "-vf", "scale=720:1280:force_original_aspect_ratio=decrease",
+            "-c:v", "libx264", "-preset", "ultrafast", "-crf", "26",
+            "-c:a", "aac", "-b:a", "128k",
+            str(temp_mobile),
+        ]
+        try:
+            subprocess.run(cmd_transcode, check=True, capture_output=True)
+            if temp_mobile.exists() and temp_mobile.stat().st_size < 49_000_000:
+                actual_upload_path = temp_mobile
+                print(f"📱 Compressed mobile preview ready: {temp_mobile.stat().st_size / 1_000_000:.1f} MB")
+        except Exception as e_tc:
+            print(f"⚠️ Mobile transcode note ({e_tc})")
 
     try:
         import requests
@@ -101,7 +119,7 @@ def send_telegram_video(
         if reply_markup:
             data["reply_markup"] = json.dumps(reply_markup)
 
-        with open(video_path, "rb") as vf:
+        with open(actual_upload_path, "rb") as vf:
             files = {"video": vf}
             res = requests.post(url, data=data, files=files, timeout=180)
             if res.status_code == 200:
@@ -113,6 +131,9 @@ def send_telegram_video(
     except Exception as e:
         print(f"⚠️ Telegram video dispatch error: {e}")
         return False
+    finally:
+        if temp_mobile and temp_mobile.exists():
+            temp_mobile.unlink(missing_ok=True)
 
 
 def notify_success(

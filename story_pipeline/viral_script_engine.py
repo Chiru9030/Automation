@@ -85,7 +85,7 @@ Output JSON ONLY:
 }}"""
             res = None
             active_model = None
-            candidate_models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
+            candidate_models = ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
             for model_id in candidate_models:
                 for attempt in range(1, 3):
                     try:

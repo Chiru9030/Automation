@@ -23,6 +23,9 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_IMAGES_DIR = BASE_DIR / "video-app" / "public" / "images"
 
+HF_ZEROGPU_ACTIVE = True
+POLLINATIONS_IMAGE_ACTIVE = True
+
 
 def call_with_timeout(func, args=(), kwargs=None, timeout_sec=25):
     """Executes a function inside a worker thread with a strict maximum timeout."""
@@ -58,6 +61,10 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
 
 def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bool:
     """Tier 1: Generates photorealistic 3D visuals using Hugging Face FLUX.1-schnell Space."""
+    global HF_ZEROGPU_ACTIVE
+    if not HF_ZEROGPU_ACTIVE:
+        return False
+
     hf_token = os.getenv("HF_TOKEN")
     if not hf_token:
         return False
@@ -96,12 +103,21 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
                 im_std.save(output_path, "JPEG", quality=95)
             return output_path.exists() and output_path.stat().st_size > 25_000
     except Exception as e:
-        print(f"[IMAGE-ENGINE] [TIER-1 Notice] FLUX.1-schnell note ({str(e)[:100]})")
+        err_s = str(e).lower()
+        if "zerogpu" in err_s or "quota" in err_s or "limit" in err_s:
+            HF_ZEROGPU_ACTIVE = False
+            print(f"[IMAGE-ENGINE] [TIER-1 Notice] ZeroGPU quota exceeded. Disabling for remainder of run.")
+        else:
+            print(f"[IMAGE-ENGINE] [TIER-1 Notice] FLUX.1-schnell note ({str(e)[:100]})")
     return False
 
 
 def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) -> bool:
     """Tier 2: Generates AI visuals using clean, non-paywalled Pollinations endpoint."""
+    global POLLINATIONS_IMAGE_ACTIVE
+    if not POLLINATIONS_IMAGE_ACTIVE:
+        return False
+
     try:
         clean_p = urllib.parse.quote(prompt[:300])
         url = f"https://image.pollinations.ai/prompt/{clean_p}?nologo=true"
@@ -118,7 +134,11 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
                 temp_raw.unlink(missing_ok=True)
                 return output_path.exists() and output_path.stat().st_size > 25_000
     except Exception as e:
-        print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations note ({str(e)[:100]})")
+        if "402" in str(e) or "payment" in str(e).lower():
+            POLLINATIONS_IMAGE_ACTIVE = False
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations returned 402 Payment Required. Disabling for remainder of run.")
+        else:
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations note ({str(e)[:100]})")
     return False
 
 

@@ -24,6 +24,8 @@ PUBLIC_DIR = BASE_DIR / "video-app" / "public"
 GENERATED_VIDEOS_DIR = BASE_DIR / "video-app" / "public" / "generated_videos"
 
 HAS_WARNED_CLOUD_FALLBACK = False
+REPLICATE_VIDEO_ENABLED = True
+POLLINATIONS_VIDEO_ENABLED = True
 
 
 def call_with_timeout(func, args=(), kwargs=None, timeout_sec=40):
@@ -82,7 +84,10 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
     - Tier 3: AnimateDiff-Lightning (bytedance/animatediff-lightning-4step)
     - Tier 4: Pollinations Video
     """
-    global HAS_WARNED_CLOUD_FALLBACK
+    global HAS_WARNED_CLOUD_FALLBACK, REPLICATE_VIDEO_ENABLED, POLLINATIONS_VIDEO_ENABLED
+
+    if not REPLICATE_VIDEO_ENABLED and not POLLINATIONS_VIDEO_ENABLED:
+        return False
 
     strong_prompt = build_strong_ai_video_prompt(prompt, camera_motion=camera_motion)
 
@@ -96,7 +101,7 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
     # -------------------------------------------------------------
     # Try Replicate Open-Source Suite (Wan 2.1 -> CogVideoX -> AnimateDiff)
     # -------------------------------------------------------------
-    if api_token:
+    if api_token and REPLICATE_VIDEO_ENABLED:
         try:
             import replicate
             client = replicate.Client(api_token=api_token)
@@ -186,36 +191,46 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                         print("✅ [Cloud AI Video] Successfully generated & normalized via Replicate!")
                         return True
         except Exception as e_rep:
-            print(f"Notice: Replicate open-source suite note ({e_rep})")
+            err_rep_s = str(e_rep).lower()
+            if "402" in err_rep_s or "credit" in err_rep_s or "billing" in err_rep_s:
+                REPLICATE_VIDEO_ENABLED = False
+                print("ℹ️ [Cloud AI Video] Replicate credit depleted (402). Disabling cloud video for this run.")
+            else:
+                print(f"Notice: Replicate open-source suite note ({e_rep})")
 
     # -------------------------------------------------------------
     # Try Model 4: Pollinations Video (Free Open-Source Generative Video)
     # -------------------------------------------------------------
-    try:
-        encoded_prompt = urllib.parse.quote(strong_prompt[:250])
-        poll_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?model=flux&video=true&width=1080&height=1920&nologo=true"
-        print(f"🌐 [Pollinations Video] Attempting open generative video...")
-        req_poll = urllib.request.Request(poll_url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req_poll, timeout=25) as resp:
-            content_type = resp.headers.get("Content-Type", "")
-            if "video" in content_type or "mp4" in content_type:
-                temp_cloud.write_bytes(resp.read())
-                if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
-                    cmd_norm = [
-                        "ffmpeg", "-y", "-i", str(temp_cloud),
-                        "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
-                        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
-                        "-pix_fmt", "yuv420p",
-                        "-an",
-                        str(output_video_path),
-                    ]
-                    subprocess.run(cmd_norm, check=True, capture_output=True)
-                    temp_cloud.unlink(missing_ok=True)
-                    if output_video_path.exists() and output_video_path.stat().st_size > 50_000:
-                        print("✅ [Pollinations Video] Successfully generated & normalized!")
-                        return True
-    except Exception as e_poll:
-        print(f"Notice: Pollinations video note ({e_poll})")
+    if POLLINATIONS_VIDEO_ENABLED:
+        try:
+            encoded_prompt = urllib.parse.quote(strong_prompt[:250])
+            poll_url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?model=flux&video=true&width=1080&height=1920&nologo=true"
+            print(f"🌐 [Pollinations Video] Attempting open generative video...")
+            req_poll = urllib.request.Request(poll_url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req_poll, timeout=25) as resp:
+                content_type = resp.headers.get("Content-Type", "")
+                if "video" in content_type or "mp4" in content_type:
+                    temp_cloud.write_bytes(resp.read())
+                    if temp_cloud.exists() and temp_cloud.stat().st_size > 50_000:
+                        cmd_norm = [
+                            "ffmpeg", "-y", "-i", str(temp_cloud),
+                            "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
+                            "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
+                            "-pix_fmt", "yuv420p",
+                            "-an",
+                            str(output_video_path),
+                        ]
+                        subprocess.run(cmd_norm, check=True, capture_output=True)
+                        temp_cloud.unlink(missing_ok=True)
+                        if output_video_path.exists() and output_video_path.stat().st_size > 50_000:
+                            print("✅ [Pollinations Video] Successfully generated & normalized!")
+                            return True
+        except Exception as e_poll:
+            if "402" in str(e_poll) or "payment" in str(e_poll).lower():
+                POLLINATIONS_VIDEO_ENABLED = False
+                print("ℹ️ [Pollinations Video] Pollinations returned 402 Payment Required. Disabling for this run.")
+            else:
+                print(f"Notice: Pollinations video note ({e_poll})")
 
     # Send one throttled warning if falling back to local hardware 3D motion
     if not HAS_WARNED_CLOUD_FALLBACK:

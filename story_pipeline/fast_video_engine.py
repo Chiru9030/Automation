@@ -198,7 +198,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     # Step 5: Final Composite (Visuals + Subtitles + Audio)
     print("  🚀 Compositing final 1080x1920 video with libass subtitles & audio mix...")
     encoder = "h264_videotoolbox" if os.uname().sysname == "Darwin" else "libx264"
-    extra_enc = ["-b:v", "6M"] if encoder == "h264_videotoolbox" else ["-preset", "ultrafast", "-crf", "22"]
+    extra_enc = ["-b:v", "6M"] if encoder == "h264_videotoolbox" else ["-preset", "veryfast", "-crf", "24"]
 
     escaped_ass = str(ass_path.resolve()).replace(":", "\\:")
 
@@ -234,8 +234,8 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             "-map", "[vout]",
             "-map", "[aout]",
             "-c:v", "libx264",
-            "-preset", "ultrafast",
-            "-crf", "22",
+            "-preset", "veryfast",
+            "-crf", "24",
             "-c:a", "aac",
             "-b:a", "192k",
             "-t", f"{total_sec:.2f}",
