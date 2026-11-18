@@ -9,10 +9,11 @@
     "dynamic::What happens if your body starts turning into a living stone statue?::Ep9",
     "dynamic::What happens if your brain permanently loses the ability to sleep?::Ep10",
     "dynamic::The colossal megalodon that hunted prehistoric oceans::Ep11",
-    "dynamic::What if the Moon was replaced by Saturn?::Ep12"
+    "dynamic::What if the Moon was replaced by Saturn?::Ep12",
+    "dynamic::Dinosaurs never actually roared like in Jurassic Park::Ep13"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 12,
+  "episode_count": 13,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -22,20 +23,22 @@
     "What happens if your body starts turning into a living stone statue?",
     "What happens if your brain permanently loses the ability to sleep?",
     "The colossal megalodon that hunted prehistoric oceans",
-    "What if the Moon was replaced by Saturn?"
+    "What if the Moon was replaced by Saturn?",
+    "Dinosaurs never actually roared like in Jurassic Park"
   ],
   "used_topics": [
+    "The immortal jellyfish that can live forever",
+    "What happens if you drink boiling lava?",
+    "The Deep Sea Abyssal Creature",
     "The ancient monster that hunted Megalodons for breakfast",
     "What happens if your brain permanently loses the ability to sleep?",
-    "The immortal jellyfish that can live forever",
-    "What happens if your immune system discovers your eyes?",
-    "What if aliens land on Earth tomorrow?",
     "What happens if you never stop peeing forever?",
-    "What if the Moon was replaced by Saturn?",
-    "What happens if you drink boiling lava?",
-    "What if gravity suddenly doubled across the entire world?",
-    "The colossal megalodon that hunted prehistoric oceans",
     "What happens if your body starts turning into a living stone statue?",
-    "The Deep Sea Abyssal Creature"
+    "The colossal megalodon that hunted prehistoric oceans",
+    "Dinosaurs never actually roared like in Jurassic Park",
+    "What if the Moon was replaced by Saturn?",
+    "What happens if your immune system discovers your eyes?",
+    "What if gravity suddenly doubled across the entire world?",
+    "What if aliens land on Earth tomorrow?"
   ]
 }
