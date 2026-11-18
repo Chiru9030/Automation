@@ -10,6 +10,11 @@ on:
         description: 'Custom Topic or Story Idea (Leave blank for autonomous generation)'
         required: false
         default: ''
+      sample_mode:
+        description: 'Run in Sample Mode (Render & Audit without publishing to YouTube/Instagram)'
+        type: boolean
+        required: false
+        default: false
 
 concurrency:
   group: story-pipeline
@@ -90,6 +95,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}
+          SAMPLE_MODE: ${{ github.event.inputs.sample_mode }}
           RENDER_ENGINE: fast
           PYTHONUNBUFFERED: "1"
         run: |

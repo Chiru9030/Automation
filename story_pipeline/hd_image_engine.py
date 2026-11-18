@@ -13,6 +13,7 @@ import random
 import time
 import urllib.parse
 import urllib.request
+import concurrent.futures
 from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw, ImageFilter
@@ -21,6 +22,15 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_IMAGES_DIR = BASE_DIR / "video-app" / "public" / "images"
+
+
+def call_with_timeout(func, args=(), kwargs=None, timeout_sec=25):
+    """Executes a function inside a worker thread with a strict maximum timeout."""
+    if kwargs is None:
+        kwargs = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(func, *args, **kwargs)
+        return future.result(timeout=timeout_sec)
 
 
 def enrich_prompt(base_prompt: str) -> str:
@@ -59,15 +69,20 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
         print(f"[IMAGE-ENGINE] [TIER-1: FLUX.1-schnell] Dispatching prompt: '{prompt[:48]}...'")
         client = Client("black-forest-labs/FLUX.1-schnell", token=hf_token)
-        result, _ = client.predict(
-            prompt=prompt[:350],
-            seed=seed,
-            randomize_seed=True,
-            width=768,
-            height=1360,
-            num_inference_steps=4,
-            api_name="/infer",
-        )
+        
+        def _predict():
+            return client.predict(
+                prompt=prompt[:350],
+                seed=seed,
+                randomize_seed=True,
+                width=768,
+                height=1360,
+                num_inference_steps=4,
+                api_name="/infer",
+            )
+        
+        result_tuple = call_with_timeout(_predict, timeout_sec=25)
+        result = result_tuple[0] if isinstance(result_tuple, tuple) else result_tuple
 
         res_path = None
         if isinstance(result, dict) and "path" in result:

@@ -13,6 +13,7 @@ import subprocess
 import time
 import urllib.request
 import urllib.parse
+import concurrent.futures
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -20,9 +21,18 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_DIR = BASE_DIR / "video-app" / "public"
-GENERATED_VIDEOS_DIR = PUBLIC_DIR / "generated_videos"
+GENERATED_VIDEOS_DIR = BASE_DIR / "video-app" / "public" / "generated_videos"
 
 HAS_WARNED_CLOUD_FALLBACK = False
+
+
+def call_with_timeout(func, args=(), kwargs=None, timeout_sec=40):
+    """Executes a function inside a worker thread with a strict maximum timeout."""
+    if kwargs is None:
+        kwargs = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(func, *args, **kwargs)
+        return future.result(timeout=timeout_sec)
 
 
 def build_strong_ai_video_prompt(
@@ -97,13 +107,17 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
             # 1. Wan 2.1 (Alibaba Open-Source Text-to-Video)
             try:
                 print("   • Testing Model 1: Wan 2.1 (720p 9:16)...")
-                output = client.run(
-                    "wavespeedai/wan-2.1-t2v-720p",
-                    input={
-                        "prompt": strong_prompt,
-                        "aspect_ratio": "9:16",
-                        "fast_mode": True,
-                    }
+                output = call_with_timeout(
+                    client.run,
+                    args=("wavespeedai/wan-2.1-t2v-720p",),
+                    kwargs=dict(
+                        input={
+                            "prompt": strong_prompt,
+                            "aspect_ratio": "9:16",
+                            "fast_mode": True,
+                        }
+                    ),
+                    timeout_sec=40,
                 )
             except Exception as e_wan:
                 print(f"Notice: Wan 2.1 ({e_wan}), advancing to CogVideoX-5B...")
@@ -112,12 +126,16 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
             if not output:
                 try:
                     print("   • Testing Model 2: CogVideoX-5B...")
-                    output = client.run(
-                        "thudm/cogvideox-5b",
-                        input={
-                            "prompt": strong_prompt[:500],
-                            "num_frames": 49,
-                        }
+                    output = call_with_timeout(
+                        client.run,
+                        args=("thudm/cogvideox-5b",),
+                        kwargs=dict(
+                            input={
+                                "prompt": strong_prompt[:500],
+                                "num_frames": 49,
+                            }
+                        ),
+                        timeout_sec=40,
                     )
                 except Exception as e_cog:
                     print(f"Notice: CogVideoX-5B ({e_cog}), advancing to AnimateDiff-Lightning...")
@@ -126,11 +144,15 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
             if not output:
                 try:
                     print("   • Testing Model 3: AnimateDiff-Lightning...")
-                    output = client.run(
-                        "bytedance/animatediff-lightning-4step",
-                        input={
-                            "prompt": strong_prompt[:400],
-                        }
+                    output = call_with_timeout(
+                        client.run,
+                        args=("bytedance/animatediff-lightning-4step",),
+                        kwargs=dict(
+                            input={
+                                "prompt": strong_prompt[:400],
+                            }
+                        ),
+                        timeout_sec=40,
                     )
                 except Exception as e_anim:
                     print(f"Notice: AnimateDiff-Lightning ({e_anim})...")

@@ -102,7 +102,7 @@ def render_with_remotion(cmd: list, cwd: str, out_file: Path) -> bool:
     return False
 
 
-PIPELINE_VERSION = "v1.0.0"
+PIPELINE_VERSION = "v1.1.0"
 
 def process_next_story(custom_topic: str | None = None, publish: bool = True) -> dict:
     print("\n==================================================================")
@@ -363,7 +363,11 @@ if __name__ == "__main__":
     parser.add_argument("--no-upload", action="store_true", help="Skip uploading to YouTube/Instagram")
     args = parser.parse_args()
 
-    should_publish = not (args.sample or args.no_upload)
+    should_publish = not (
+        args.sample
+        or args.no_upload
+        or os.getenv("SAMPLE_MODE", "false").lower() in ("true", "1", "yes")
+    )
 
     try:
         process_next_story(

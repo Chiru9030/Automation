@@ -10,12 +10,22 @@ Generates gripping, high-retention stories strictly under 59 seconds:
 import json
 import os
 import time
+import concurrent.futures
 from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
 
 TARGET_DURATION_SECONDS = 58.0  # Strictly under 59.0s limit for YouTube Shorts / Reels
+
+
+def call_with_timeout(func, args=(), kwargs=None, timeout_sec=20):
+    """Executes a function inside a worker thread with a strict maximum timeout."""
+    if kwargs is None:
+        kwargs = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(func, *args, **kwargs)
+        return future.result(timeout=timeout_sec)
 
 
 def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: int = 1) -> dict:
@@ -75,22 +85,31 @@ Output JSON ONLY:
 }}"""
             res = None
             active_model = None
-            for model_id in ["gemini-3.8-flash", "gemini-2.0-flash-exp", "gemini-1.5-flash-8b", "gemini-1.5-flash"]:
+            candidate_models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
+            for model_id in candidate_models:
                 for attempt in range(1, 3):
                     try:
-                        res = client.models.generate_content(
-                            model=model_id,
-                            contents=prompt,
-                            config=dict(response_mime_type="application/json")
+                        print(f"⏳ [Script Engine] Querying Gemini ({model_id}, attempt {attempt}, timeout 20s)...")
+                        res = call_with_timeout(
+                            client.models.generate_content,
+                            kwargs=dict(
+                                model=model_id,
+                                contents=prompt,
+                                config=dict(response_mime_type="application/json"),
+                            ),
+                            timeout_sec=20,
                         )
                         if res and res.text:
                             active_model = model_id
                             break
+                    except concurrent.futures.TimeoutError:
+                        print(f"⏱️ [Script Engine] Model {model_id} timed out after 20s.")
+                        break
                     except Exception as m_err:
                         err_s = str(m_err).lower()
                         if "503" in err_s or "unavailable" in err_s or "demand" in err_s:
-                            print(f"⏳ {model_id} high demand. Waiting 3s (attempt {attempt})...")
-                            time.sleep(3)
+                            print(f"⏳ {model_id} high demand. Waiting 2s (attempt {attempt})...")
+                            time.sleep(2)
                         else:
                             print(f"⚠️ Model {model_id} script error: {m_err}")
                             break
