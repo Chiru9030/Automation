@@ -116,11 +116,26 @@ Output JSON ONLY:
                 if "beats" in data and len(data["beats"]) == 5:
                     word_count = sum(len(b['narration'].split()) for b in data['beats'])
                     print(f"📝 [Stage 2: Script Engine] Gemini AI ({active_model}) synthesized script for '{topic}' ({word_count} words)")
+                    try:
+                        from story_pipeline.telegram_notifier import RUN_TRACKER
+                        RUN_TRACKER.set_model_used("Script", "Gemini 3.8-Flash")
+                    except Exception:
+                        pass
                     return data
         except Exception as e:
             print(f"Notice: Gemini script generation note ({e})")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Gemini 3.8-Flash (Script)", f"Offline/error: {str(e)[:50]}")
+            except Exception:
+                pass
 
     # Procedural Fallback Engine (Guaranteed 5-Beat Structure with 10s Retention Hooks)
+    try:
+        from story_pipeline.telegram_notifier import RUN_TRACKER
+        RUN_TRACKER.set_model_used("Script", "Procedural Retention Engine")
+    except Exception:
+        pass
     return generate_procedural_script(topic, hook_premise, style, ep_num)
 
 

@@ -101,14 +101,30 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
             with Image.open(res_path) as im:
                 im_std = standardize_to_1080x1920(im.convert("RGB"))
                 im_std.save(output_path, "JPEG", quality=95)
-            return output_path.exists() and output_path.stat().st_size > 25_000
+            if output_path.exists() and output_path.stat().st_size > 25_000:
+                try:
+                    from story_pipeline.telegram_notifier import RUN_TRACKER
+                    RUN_TRACKER.set_model_used("Visuals", "HF FLUX.1-schnell")
+                except Exception:
+                    pass
+                return True
     except Exception as e:
         err_s = str(e).lower()
         if "zerogpu" in err_s or "quota" in err_s or "limit" in err_s:
             HF_ZEROGPU_ACTIVE = False
             print(f"[IMAGE-ENGINE] [TIER-1 Notice] ZeroGPU quota exceeded. Disabling for remainder of run.")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", "ZeroGPU queue limit / timeout")
+            except Exception:
+                pass
         else:
             print(f"[IMAGE-ENGINE] [TIER-1 Notice] FLUX.1-schnell note ({str(e)[:100]})")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", f"Inference note ({str(e)[:60]})")
+            except Exception:
+                pass
     return False
 
 
@@ -133,14 +149,30 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
                     im_std = im_std.filter(ImageFilter.UnsharpMask(radius=2, percent=160, threshold=3))
                     im_std.save(output_path, "JPEG", quality=95)
                 temp_raw.unlink(missing_ok=True)
-                return output_path.exists() and output_path.stat().st_size > 25_000
+                if output_path.exists() and output_path.stat().st_size > 25_000:
+                    try:
+                        from story_pipeline.telegram_notifier import RUN_TRACKER
+                        RUN_TRACKER.set_model_used("Visuals", "Pollinations AI Engine")
+                    except Exception:
+                        pass
+                    return True
     except Exception as e:
         s_err = str(e).lower()
         if any(k in s_err for k in ["402", "payment", "403", "forbidden"]):
             POLLINATIONS_IMAGE_ACTIVE = False
             print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Pollinations AI", "HTTP 402/403 Payment Required")
+            except Exception:
+                pass
         else:
             print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations note ({str(e)[:100]})")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Pollinations AI", f"Network error ({str(e)[:60]})")
+            except Exception:
+                pass
     return False
 
 
@@ -354,23 +386,22 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
 
         # Active quality audit loop (up to 3 attempts with dynamic prompt enhancement)
         beat_certified = False
+        beat_title = beat.get("title", f"Beat #{b_num}")
         for attempt in range(1, 4):
             generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
             try:
-                metrics = audit_single_visual_asset(out_file)
-                # Strict Semantic Relevance Inspection
-                audit_semantic_content_relevance(out_file, prompt, beat.get("title", f"Beat #{b_num}"))
+                metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
 
                 print(
                     f"[AUDITOR] [GATE-2] Beat #{b_num} Image Certified: {out_file.name} "
-                    f"(Vibrancy: {metrics['colorfulness']:.1f}, Contrast: {metrics['contrast']:.1f}, Sharpness: {metrics['sharpness']:.1f})"
+                    f"(Content: PASS, Quality: {metrics['quality']}, Clarity: {metrics['clarity']}, Relation: PASS)"
                 )
                 beat_certified = True
                 break
             except QualityAuditError as q_err:
                 print(f"[AUDITOR] [GATE-2 Rejection] Beat #{b_num} attempt {attempt}/3 rejected: {q_err}")
                 notify_audit_rejection(
-                    gate_name="Gate 2: Visual Quality & Content Matching",
+                    gate_name="Gate 2: Visual Assets",
                     item_name=out_file.name,
                     reason=str(q_err),
                     attempt=attempt,
@@ -382,7 +413,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
 
         if not beat_certified:
             generate_semantic_procedural_visual(prompt, out_file, seed=seed, beat_num=b_num)
-            audit_single_visual_asset(out_file)
+            audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
 
         beat["image_url"] = f"images/{out_file.name}"
 

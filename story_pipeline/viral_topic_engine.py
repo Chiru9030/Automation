@@ -230,11 +230,26 @@ Return JSON format ONLY:
                     history["episode_count"] = ep_count
                     save_history(history)
                     print(f"💡 [Stage 1: Topic Engine] Gemini AI ({active_model}) generated Topic #{ep_count}: '{data['topic']}'")
+                    try:
+                        from story_pipeline.telegram_notifier import RUN_TRACKER
+                        RUN_TRACKER.set_model_used("Topic", "Gemini 3.8-Flash")
+                    except Exception:
+                        pass
                     return data
         except Exception as e:
             print(f"Notice: Gemini topic generation note: {e}")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Gemini 3.8-Flash (Topic)", f"Offline/timeout: {str(e)[:50]}")
+            except Exception:
+                pass
 
     # Fallback to curated pool
+    try:
+        from story_pipeline.telegram_notifier import RUN_TRACKER
+        RUN_TRACKER.set_model_used("Topic", "Curated Viral Pool")
+    except Exception:
+        pass
     available = [t for t in VIRAL_TOPIC_POOL if t["topic"] not in used_topics]
     if not available:
         # Reset if exhausted

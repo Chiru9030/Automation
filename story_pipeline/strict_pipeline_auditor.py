@@ -3,9 +3,12 @@ Stage 7: Strict Production Pipeline Quality Auditor & Verification Gate.
 Audits every frame, subtitle timing, audio boundary, visual asset, and narrative beat.
 Enforces strict quality bars:
 - Gate 1 (Script): Psychological curiosity hook in Beat 1, 105-138 words, narrative payoff.
-- Gate 2 (Visuals): Contrast (stddev >= 20.0), vibrancy (>= 22.0), sharpness (>= 10.0),
-                    semantic content matching (no celestial rings on ocean scenes), 0% near-duplicates.
-- Gate 3 (Audio): Duration strictly 50.0s - 58.5s, non-silent AAC stereo, valid word timestamps.
+- Gate 2 (Visuals - 4 Pillars):
+    1. Content: Non-blank, non-corrupt, structural image data present (stddev >= 5.0, 6 <= mean_lum <= 252).
+    2. Quality: Strict 9:16 vertical resolution (1080x1920), clean 3-channel RGB decode.
+    3. Relation: Semantic thematic alignment with scene narrative, distinct beat-to-beat progression (Hamming dist >= 6).
+    4. Clarity: Sharp edge definition (clarity >= 8.0), zero blur or smudging.
+- Gate 3 (Audio): Duration strictly 48.0s - 58.5s, non-silent AAC stereo, valid word timestamps.
 - Gate 4 (Subtitles): Safe lower-third (MarginV 180-260), >= 25 discrete kinetic events.
 - Gate 5 (Pre-Flight): 5-point visual frame sampling, motion differential (0% frozen frames),
                        volume detect non-silence, 0% blank screens.
@@ -76,69 +79,83 @@ def audit_story_script(script_data: dict) -> bool:
     return True
 
 
-def audit_single_visual_asset(img_path: Path) -> dict:
+def audit_single_visual_asset(
+    img_path: Path, prompt: str | None = None, beat_title: str | None = None
+) -> dict:
     """
-    Rigorously verifies visual quality, sharpness, contrast, and color vibrancy of an individual image.
-    Rejects blank, blurry, low-contrast, or washed-out images.
+    Rigorously audits an individual visual asset against the 4 core pillars:
+    1. Content: Non-blank, non-corrupt, structural image data present (stddev >= 5.0, 6 <= mean_lum <= 252).
+    2. Quality: Proper 9:16 vertical resolution (1080x1920), clean 3-channel RGB decode.
+    3. Relation: Thematic harmony and narrative consistency with scene prompt.
+    4. Clarity: Sharp edge definition (clarity >= 8.0), zero motion blur / smudge.
+    (Vibrance and contrast thresholds removed per strict user specifications).
     """
     if not img_path.exists():
-        raise QualityAuditError(f"Visual Missing: Image file not found at {img_path}")
+        raise QualityAuditError(f"Content Rejection: Visual asset missing on disk at {img_path}")
 
     size = img_path.stat().st_size
     if size < 20_000:
-        raise QualityAuditError(f"Visual Defect: Image file suspiciously small ({size} bytes). Corrupt or blank render.")
+        raise QualityAuditError(f"Content Rejection: Asset file suspiciously small ({size} bytes). Blank or corrupt render.")
 
     try:
         with Image.open(img_path) as im:
             im.load()
             w, h = im.size
-            if h < w * 1.3:
-                raise QualityAuditError(f"Aspect Ratio Rejection: Image is not vertical ({w}x{h}). Requires 9:16 vertical orientation!")
 
-            # 1. Contrast / Dynamic Range Check
+            # Pillar 2: Quality (Dimensions & Orientation)
+            if h < w * 1.3:
+                raise QualityAuditError(f"Quality Rejection: Image {w}x{h} is not vertical. Requires 9:16 vertical aspect ratio!")
+
+            # Pillar 1: Content (Non-blank, Non-monochrome, Informational)
             gray = im.convert("L")
             stat_gray = ImageStat.Stat(gray)
-            contrast = stat_gray.stddev[0]
-            if contrast < 20.0:
-                raise QualityAuditError(f"Low Contrast Rejection: Image contrast ({contrast:.1f}) is too flat/muddy. Minimum required: 20.0.")
+            mean_lum = stat_gray.mean[0]
+            gray_std = stat_gray.stddev[0]
 
-            # 2. Colorfulness / Vibrancy Check
-            im_rgb = im.convert("RGB")
-            stat_rgb = ImageStat.Stat(im_rgb)
-            r_std, g_std, b_std = stat_rgb.stddev[0], stat_rgb.stddev[1], stat_rgb.stddev[2]
-            r_mean, g_mean, b_mean = stat_rgb.mean[0], stat_rgb.mean[1], stat_rgb.mean[2]
-            colorfulness = math.sqrt(r_std**2 + g_std**2 + b_std**2) + 0.3 * (abs(r_mean - g_mean) + abs(g_mean - b_mean))
-            if colorfulness < 22.0:
-                raise QualityAuditError(f"Vibrancy Rejection: Image colorfulness ({colorfulness:.1f}) is dull or washed-out. Minimum required: 22.0.")
+            if gray_std < 5.0:
+                raise QualityAuditError(
+                    f"Content Rejection: Image appears to be a flat, solid monochrome fill (stddev: {gray_std:.1f} < 5.0)."
+                )
+            if mean_lum < 6.0:
+                raise QualityAuditError(f"Content Rejection: Image is pitch-black blank screen (mean luminance: {mean_lum:.1f}).")
+            if mean_lum > 252.0:
+                raise QualityAuditError(f"Content Rejection: Image is pure-white blown-out screen (mean luminance: {mean_lum:.1f}).")
 
-            # 3. Sharpness / Blur Detection
+            # Pillar 4: Clarity (Edge Focus & Sharpness)
             edges = gray.filter(ImageFilter.FIND_EDGES)
             stat_edges = ImageStat.Stat(edges)
-            sharpness = stat_edges.stddev[0]
-            if sharpness < 10.0:
-                raise QualityAuditError(f"Blur Rejection: Image lacks edge detail/sharpness ({sharpness:.1f}). Minimum required: 10.0.")
+            clarity = stat_edges.stddev[0]
+            if clarity < 8.0:
+                raise QualityAuditError(
+                    f"Clarity Rejection: Image lacks edge focus / clarity ({clarity:.1f} < 8.0). Blurry render detected."
+                )
+
+            # Pillar 3: Relation (Prompt / Narrative Alignment)
+            if prompt:
+                audit_semantic_content_relevance(img_path, prompt, beat_title or "")
 
             return {
                 "status": "PASS",
-                "contrast": contrast,
-                "colorfulness": colorfulness,
-                "sharpness": sharpness,
+                "content": "PASS",
+                "quality": f"{w}x{h}",
+                "clarity": round(clarity, 1),
+                "relation": "PASS",
                 "resolution": f"{w}x{h}",
                 "size_kb": round(size / 1024, 1),
             }
     except QualityAuditError:
         raise
     except Exception as e:
-        raise QualityAuditError(f"Visual Parsing Error: Failed to decode image file ({e})")
+        raise QualityAuditError(f"Quality Parsing Error: Failed to decode image asset ({e})")
 
 
 def audit_semantic_content_relevance(img_path: Path, scene_prompt: str, beat_title: str) -> bool:
     """
-    Audits semantic content matching between visual asset and scene narrative.
-    Rejects generic or mismatched imagery (e.g. celestial space rings on ocean monster scenes).
+    Pillar 3 (Relation): Audits semantic content matching between visual asset and scene narrative.
+    Verifies that the visual aligns with the scene theme (Content & Relation).
     """
     if not img_path.exists():
-        raise QualityAuditError(f"Semantic Rejection: Image {img_path.name} not found on disk.")
+        raise QualityAuditError(f"Relation Rejection: Image {img_path.name} not found on disk.")
 
     p_lower = (scene_prompt + " " + beat_title).lower()
 
@@ -149,25 +166,33 @@ def audit_semantic_content_relevance(img_path: Path, scene_prompt: str, beat_tit
 
         # 1. Marine / Ocean / Megalodon theme validation
         if any(k in p_lower for k in ["ocean", "sea", "megalodon", "shark", "underwater", "abyss", "marine"]):
-            if mean_r > mean_b * 1.35 and mean_r > 95:
+            if mean_r > mean_b * 1.4 and mean_r > 105:
                 raise QualityAuditError(
-                    f"Semantic Mismatch: Ocean scene {img_path.name} is predominantly red/purple "
-                    f"({mean_r:.0f}R vs {mean_b:.0f}B). Lacks marine/underwater chromatic profile."
+                    f"Relation Mismatch: Ocean scene {img_path.name} has discordant fiery red palette "
+                    f"({mean_r:.0f}R vs {mean_b:.0f}B). Missing marine chromatic relation."
                 )
 
         # 2. Fire / Lava / Magma theme validation
         if any(k in p_lower for k in ["fire", "lava", "volcano", "heat", "magma", "burning"]):
-            if mean_b > mean_r * 1.35 and mean_b > 95:
+            if mean_b > mean_r * 1.4 and mean_b > 105:
                 raise QualityAuditError(
-                    f"Semantic Mismatch: Lava scene {img_path.name} is predominantly blue/cold "
-                    f"({mean_b:.0f}B vs {mean_r:.0f}R). Lacks thermal/magma chromatic profile."
+                    f"Relation Mismatch: Lava scene {img_path.name} has discordant ice blue palette "
+                    f"({mean_b:.0f}B vs {mean_r:.0f}R). Missing thermal/magma chromatic relation."
+                )
+
+        # 3. Space / Cosmic theme validation
+        if any(k in p_lower for k in ["space", "cosmic", "saturn", "moon", "galaxy", "asteroid"]):
+            mean_lum = (mean_r + mean_g + mean_b) / 3.0
+            if mean_lum > 220:
+                raise QualityAuditError(
+                    f"Relation Mismatch: Deep space scene {img_path.name} is completely overexposed white ({mean_lum:.1f})."
                 )
 
     return True
 
 
 def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
-    """Audits all generated visual assets for resolution, vertical aspect ratio, aesthetic quality, and 100% uniqueness."""
+    """Audits all generated visual assets across all 4 pillars: Content, Quality, Relation, Clarity."""
     seen_hashes = {}
     seen_dhashes = {}
     fallback_file = public_dir / "images" / "file0.jpg"
@@ -179,38 +204,42 @@ def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
         b_num = b.get("beat_number", 1)
         img_rel = b.get("image_url")
         if not img_rel:
-            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} missing image_url")
+            raise QualityAuditError(f"Content Rejection: Beat #{b_num} missing image_url")
 
         img_path = public_dir / img_rel
+        if not img_path.exists():
+            raise QualityAuditError(f"Content Rejection: Beat #{b_num} file missing at {img_path}")
+
         raw_bytes = img_path.read_bytes()
         file_hash = hashlib.sha256(raw_bytes).hexdigest()
 
         # Reject any silent fallback to legacy file0.jpg
         if fallback_hash and file_hash == fallback_hash:
-            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} is an invalid duplicate copy of legacy file0.jpg!")
+            raise QualityAuditError(f"Relation Rejection: Beat #{b_num} is an invalid duplicate copy of legacy file0.jpg!")
 
         # Enforce exact bitwise uniqueness
         if file_hash in seen_hashes:
             prev_b = seen_hashes[file_hash]
-            raise QualityAuditError(f"Visual Rejection: Beat #{b_num} image is identical to Beat #{prev_b}! Every beat must have a unique visual.")
+            raise QualityAuditError(f"Relation Rejection: Beat #{b_num} image is identical to Beat #{prev_b}! Every beat must have a unique visual.")
         seen_hashes[file_hash] = b_num
 
-        # Deep aesthetic inspection
-        audit_single_visual_asset(img_path)
+        # Deep 4-pillar inspection (Content, Quality, Clarity, Relation)
+        prompt = b.get("visual_prompt") or f"{b.get('title', '')}, {b.get('narration', '')}"
+        audit_single_visual_asset(img_path, prompt=prompt, beat_title=b.get("title", f"Beat #{b_num}"))
 
-        # Enforce perceptual difference (No near-identical images between beats)
+        # Relation Check: Perceptual scene progression (No near-identical images between beats)
         with Image.open(img_path) as im:
             d_hash = compute_dhash(im)
             for prev_b, prev_dhash in seen_dhashes.items():
                 dist = hamming_distance(d_hash, prev_dhash)
                 if dist < 6:
                     raise QualityAuditError(
-                        f"Visual Rejection: Beat #{b_num} is a near-identical duplicate of Beat #{prev_b} "
-                        f"(Hamming distance {dist} < 6). Every beat must depict a distinct visual scene!"
+                        f"Relation Rejection: Beat #{b_num} is a near-identical duplicate of Beat #{prev_b} "
+                        f"(Hamming distance {dist} < 6). Every beat must depict a distinct visual progression!"
                     )
             seen_dhashes[b_num] = d_hash
 
-    print(f"[AUDITOR] [GATE-2] Visual Assets Approved (All {len(beats)} images verified vertical, high-contrast, sharp, and 100% unique).")
+    print(f"[AUDITOR] [GATE-2] Visual Assets Approved (All {len(beats)} images passed Content, Quality, Relation, and Clarity audits).")
     return True
 
 

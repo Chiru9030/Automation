@@ -15,10 +15,11 @@ Every episode must pass all 5 multi-pillar quality gates before publishing. If a
    - Word count strictly bounded to 105–138 words (locking duration to 52s–58.5s).
    - Pacing verified with escalation markers and a satisfying narrative conclusion.
 
-2. **Gate 2: Computer Vision Aesthetics & Semantic Content Matcher**
-   - Evaluates actual pixel contrast ($\ge 20.0$), Hasler & Süsstrunk color vibrancy ($\ge 22.0$), and edge sharpness ($\ge 10.0$).
-   - **Semantic Relevance**: Validates scene chromatic and theme alignment (marine scenes require underwater blue/cyan tones; fire scenes require magma red/orange).
-   - **Uniqueness**: Enforces 64-bit difference hashing (`dhash`) between beats with Hamming distance $\ge 6$ to reject near-duplicate frames.
+2. **Gate 2: 4-Pillar Visual Quality Auditor (Content, Quality, Relation, Clarity)**
+   - **Content**: Non-blank, non-corrupt, structural information check (grayscale stddev $\ge 5.0$, $6.0 \le \text{mean\_lum} \le 252.0$).
+   - **Quality**: Strict 9:16 vertical resolution (1080x1920), clean 3-channel RGB decode.
+   - **Relation**: Thematic narrative alignment (marine scenes require underwater blue/cyan tones; fire scenes require magma red/orange) and distinct beat-to-beat visual progression (Hamming distance $\ge 6$).
+   - **Clarity**: Sharp edge definition and focus ($\ge 8.0$) to prevent blurry or smudged renders without penalizing artistic low-saturation palettes.
 
 3. **Gate 3: Neural Audio & Dynamic Range Auditor**
    - Duration strictly verified between 50.0s and 58.5s (< 59.0s limit for YouTube Shorts).

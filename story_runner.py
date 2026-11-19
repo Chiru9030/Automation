@@ -62,6 +62,7 @@ from story_pipeline.telegram_notifier import (
     notify_fallback,
     notify_zero_upload_blocked,
     notify_audit_rejection,
+    RUN_TRACKER,
 )
 from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
@@ -102,9 +103,10 @@ def render_with_remotion(cmd: list, cwd: str, out_file: Path) -> bool:
     return False
 
 
-PIPELINE_VERSION = "v1.3.0"
+PIPELINE_VERSION = "v1.4.0"
 
 def process_next_story(custom_topic: str | None = None, publish: bool = True) -> dict:
+    RUN_TRACKER.reset()
     print("\n==================================================================")
     print(f" 🚀 Autonomous 7-Stage Viral Story Video Pipeline ({PIPELINE_VERSION}) Initiated")
     print("==================================================================")
