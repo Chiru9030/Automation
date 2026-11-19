@@ -78,7 +78,7 @@ def enrich_prompt(base_prompt: str) -> str:
 
 
 def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
-    """Standardizes any source image to exact 1080x1920 vertical 9:16 using high-quality Lanczos resampling."""
+    """Standardizes any source image to exact 1080x1920 vertical 9:16 using high-quality Lanczos resampling and subtle edge sharpening."""
     w, h = im.size
     target_w, target_h = 1080, 1920
     scale = max(target_w / w, target_h / h)
@@ -87,7 +87,7 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
     left = (new_w - target_w) // 2
     top = (new_h - target_h) // 2
     im_cropped = im_scaled.crop((left, top, left + target_w, top + target_h))
-    return im_cropped
+    return im_cropped.filter(ImageFilter.UnsharpMask(radius=2, percent=140, threshold=3))
 
 
 def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> bool:
@@ -281,7 +281,6 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
 
         image = call_with_timeout(_run_diffusion, timeout_sec=30)
         im_std = standardize_to_1080x1920(image.convert("RGB"))
-        im_std = im_std.filter(ImageFilter.UnsharpMask(radius=2, percent=140, threshold=3))
         im_std.save(output_path, "JPEG", quality=95)
 
         if output_path.exists() and output_path.stat().st_size > 25_000:
@@ -331,7 +330,6 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
                 temp_raw.write_bytes(data)
                 with Image.open(temp_raw) as im:
                     im_std = standardize_to_1080x1920(im.convert("RGB"))
-                    im_std = im_std.filter(ImageFilter.UnsharpMask(radius=2, percent=160, threshold=3))
                     im_std.save(output_path, "JPEG", quality=95)
                 temp_raw.unlink(missing_ok=True)
                 if output_path.exists() and output_path.stat().st_size > 25_000:

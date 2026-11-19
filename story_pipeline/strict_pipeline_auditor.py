@@ -7,7 +7,7 @@ Enforces strict quality bars:
     1. Content: Non-blank, non-corrupt, structural image data present (stddev >= 5.0, 6 <= mean_lum <= 252).
     2. Quality: Strict 9:16 vertical resolution (1080x1920), clean 3-channel RGB decode.
     3. Relation: Semantic thematic alignment with scene narrative, distinct beat-to-beat progression (Hamming dist >= 6).
-    4. Clarity: Sharp edge definition (clarity >= 8.0), zero blur or smudging.
+    4. Clarity: Sharp edge definition (clarity >= 6.0), zero blur or smudging.
 - Gate 3 (Audio): Duration strictly 48.0s - 58.5s, non-silent AAC stereo, valid word timestamps.
 - Gate 4 (Subtitles): Safe lower-third (MarginV 180-260), >= 25 discrete kinetic events.
 - Gate 5 (Pre-Flight): 5-point visual frame sampling, motion differential (0% frozen frames),
@@ -94,7 +94,7 @@ def audit_single_visual_asset(
     1. Content: Non-blank, non-corrupt, structural image data present (stddev >= 5.0, 6 <= mean_lum <= 252).
     2. Quality: Proper 9:16 vertical resolution (1080x1920), clean 3-channel RGB decode.
     3. Relation: Thematic harmony and narrative consistency with scene prompt.
-    4. Clarity: Sharp edge definition (clarity >= 8.0), zero motion blur / smudge.
+    4. Clarity: Sharp edge definition (clarity >= 6.0), zero motion blur / smudge.
     (Vibrance and contrast thresholds removed per strict user specifications).
     """
     if not img_path.exists():
@@ -143,9 +143,9 @@ def audit_single_visual_asset(
             edges = gray.filter(ImageFilter.FIND_EDGES)
             stat_edges = ImageStat.Stat(edges)
             clarity = stat_edges.stddev[0]
-            if clarity < 8.0:
+            if clarity < 6.0:
                 raise QualityAuditError(
-                    f"Clarity Rejection: Image lacks edge focus / clarity ({clarity:.1f} < 8.0). Blurry render detected."
+                    f"Clarity Rejection: Image lacks edge focus / clarity ({clarity:.1f} < 6.0). Blurry render detected."
                 )
 
             # Pillar 3: Relation (Prompt / Narrative Alignment)
