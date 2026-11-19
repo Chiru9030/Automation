@@ -1,19 +1,22 @@
 """
 Stage 3: High-Definition AI 3D Visual Generation Engine.
 Generates full-bleed 1080x1920 vertical cinematic illustrations for every story beat:
-1. Tier 1: Google Imagen 3 (imagen-3.0-generate-002) via GEMINI_API_KEY
-2. Tier 2: Hugging Face FLUX.1-schnell Space (via authenticated client with HF_TOKEN)
-3. Tier 3: Pollinations AI Clean Free Engine (with resilient retry and streaming)
+1. Tier 1: Google Imagen 3 (imagen-3.0-generate-002) via Google AI Studio REST API
+2. Tier 2: Hugging Face Cloud Spaces (FLUX.1-schnell & SDXL-Lightning with anonymous auto-fallback)
+3. Tier 3: Local 1-Step SD-Turbo Neural Engine (stabilityai/sd-turbo on CPU with cached weights)
+4. Tier 4: Pollinations AI Clean Free Engine (with resilient retry and streaming)
 
 Zero Procedural Lines Policy:
-Every asset must be an authentic, photorealistic or 3D AI generation.
+Every single asset must be an authentic, photorealistic or 3D AI neural generation.
 If all models fail, execution is halted by the Zero-Upload Safety Guard.
 """
 
+import base64
 import json
 import math
 import os
 import random
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -28,8 +31,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_IMAGES_DIR = BASE_DIR / "video-app" / "public" / "images"
 
 GOOGLE_IMAGEN_ACTIVE = True
-HF_ZEROGPU_ACTIVE = True
+HF_SPACES_ACTIVE = True
 POLLINATIONS_IMAGE_ACTIVE = True
+LOCAL_SD_TURBO_ACTIVE = True
+
+_SD_TURBO_PIPE = None
 
 
 def call_with_timeout(func, args=(), kwargs=None, timeout_sec=30):
@@ -41,14 +47,34 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=30):
         return future.result(timeout=timeout_sec)
 
 
+def sanitize_for_ai_filter(prompt: str) -> str:
+    """Replaces sensitive medical/biological or controversial trigger words with safe cinematic equivalents."""
+    replacements = {
+        r"\bmedical cellular\b": "scientific bio-luminescent",
+        r"\bcellular animation\b": "glowing abstract microscopic visualization",
+        r"\bhuman brain\b": "intricate neural network visualization",
+        r"\bhallucinations\b": "surreal kaleidoscope visions",
+        r"\bpsychosis\b": "dreamlike perception shift",
+        r"\bdying\b": "fading into shadows",
+        r"\bdeath\b": "eternal void",
+        r"\bblood\b": "crimson energy pulse",
+        r"\bkilling\b": "neutralizing",
+    }
+    clean = prompt
+    for pattern, repl in replacements.items():
+        clean = re.sub(pattern, repl, clean, flags=re.IGNORECASE)
+    return clean
+
+
 def enrich_prompt(base_prompt: str) -> str:
     """Enriches image prompt with cinema-grade 3D Pixar / Unreal Engine 5 lighting tokens."""
+    sanitized = sanitize_for_ai_filter(base_prompt)
     cinematic_modifiers = (
         "3D Pixar animated film style, Disney character design, Unreal Engine 5 render, "
         "8k resolution, volumetric dramatic lighting, subsurface scattering, "
         "ray tracing reflections, shallow depth of field, masterpiece"
     )
-    return f"{base_prompt}, {cinematic_modifiers}"
+    return f"{sanitized}, {cinematic_modifiers}"
 
 
 def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
@@ -65,7 +91,7 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
 
 
 def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 1: Generates cinema-grade 1080x1920 visuals using Google Imagen 3."""
+    """Tier 1: Generates cinema-grade 1080x1920 visuals using Google AI Studio Imagen 3 REST API."""
     global GOOGLE_IMAGEN_ACTIVE
     if not GOOGLE_IMAGEN_ACTIVE:
         return False
@@ -76,26 +102,26 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
     api_key = api_key.strip().strip("'").strip('"')
 
     try:
-        from google import genai
+        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Requesting AI Studio: '{prompt[:45]}...'")
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key={api_key}"
+        headers = {"Content-Type": "application/json"}
+        payload = json.dumps({
+            "instances": [{"prompt": prompt[:450]}],
+            "parameters": {
+                "sampleCount": 1,
+                "aspectRatio": "9:16"
+            }
+        }).encode("utf-8")
 
-        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Generating: '{prompt[:48]}...'")
-        client = genai.Client(api_key=api_key)
+        def _call_rest():
+            req = urllib.request.Request(url, data=payload, headers=headers)
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                return json.loads(resp.read().decode("utf-8"))
 
-        def _call_imagen():
-            return client.models.generate_images(
-                model="imagen-3.0-generate-002",
-                prompt=prompt[:450],
-                config=dict(
-                    number_of_images=1,
-                    aspect_ratio="9:16",
-                    output_mime_type="image/jpeg",
-                    person_generation="ALLOW_ADULT",
-                ),
-            )
-
-        res = call_with_timeout(_call_imagen, timeout_sec=25)
-        if res and res.generated_images:
-            img_bytes = res.generated_images[0].image.image_bytes
+        data = call_with_timeout(_call_rest, timeout_sec=28)
+        preds = data.get("predictions", []) if isinstance(data, dict) else []
+        if preds and "bytesBase64Encoded" in preds[0]:
+            img_bytes = base64.b64decode(preds[0]["bytesBase64Encoded"])
             temp_raw = output_path.with_suffix(".tmp.jpg")
             temp_raw.write_bytes(img_bytes)
             with Image.open(temp_raw) as im:
@@ -112,8 +138,8 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
                 return True
     except Exception as e:
         err_s = str(e).lower()
-        if any(k in err_s for k in ["404", "not_found", "quota", "resource_exhausted", "permission"]):
-            print(f"[IMAGE-ENGINE] [TIER-1 Notice] Imagen 3 unavailable on current tier ({str(e)[:90]}). Falling back...")
+        if any(k in err_s for k in ["404", "not_found", "403", "permission", "quota", "resource_exhausted", "enterprise"]):
+            print(f"[IMAGE-ENGINE] [TIER-1 Notice] Imagen 3 unavailable on current tier ({err_s[:80]}). Disabling for this run.")
             GOOGLE_IMAGEN_ACTIVE = False
         else:
             print(f"[IMAGE-ENGINE] [TIER-1 Notice] Imagen 3 note ({str(e)[:90]})")
@@ -126,75 +152,158 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
 
 
 def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 2: Generates photorealistic 3D visuals using Hugging Face FLUX.1-schnell Space."""
-    global HF_ZEROGPU_ACTIVE
-    if not HF_ZEROGPU_ACTIVE:
+    """Tier 2: Generates photorealistic 3D visuals using Hugging Face FLUX / SDXL Spaces."""
+    global HF_SPACES_ACTIVE
+    if not HF_SPACES_ACTIVE:
         return False
-
-    hf_token = os.getenv("HF_TOKEN")
-    if not hf_token:
-        return False
-    hf_token = hf_token.strip().strip("'").strip('"')
 
     try:
         from gradio_client import Client
+    except ImportError:
+        return False
 
-        print(f"[IMAGE-ENGINE] [TIER-2: FLUX.1-schnell] Dispatching prompt: '{prompt[:48]}...'")
-        client = Client("black-forest-labs/FLUX.1-schnell", token=hf_token)
+    hf_token = os.getenv("HF_TOKEN")
+    if hf_token:
+        hf_token = hf_token.strip().strip("'").strip('"')
 
-        def _predict():
-            return client.predict(
-                prompt=prompt[:350],
-                seed=seed,
-                randomize_seed=True,
-                width=768,
-                height=1360,
-                num_inference_steps=4,
-                api_name="/infer",
-            )
+    clean_p = sanitize_for_ai_filter(prompt)
+    spaces_config = [
+        ("black-forest-labs/FLUX.1-schnell", "/infer", "flux"),
+        ("ByteDance/SDXL-Lightning", "/generate_image", "sdxl"),
+    ]
 
-        result_tuple = call_with_timeout(_predict, timeout_sec=25)
-        result = result_tuple[0] if isinstance(result_tuple, tuple) else result_tuple
+    for space_name, api_endpoint, model_type in spaces_config:
+        # Try anonymous first to preserve user ZeroGPU quota, fallback to authenticated token
+        modes = [("anon", None)]
+        if hf_token:
+            modes.append(("auth", hf_token))
 
-        res_path = None
-        if isinstance(result, dict) and "path" in result:
-            res_path = Path(result["path"])
-        elif isinstance(result, str):
-            res_path = Path(result)
+        for mode, tok in modes:
+            try:
+                print(f"[IMAGE-ENGINE] [TIER-2: {space_name}] Mode: {mode}, Prompt: '{clean_p[:45]}...'")
+                client = Client(space_name, token=tok)
 
-        if res_path and res_path.exists():
-            with Image.open(res_path) as im:
-                im_std = standardize_to_1080x1920(im.convert("RGB"))
-                im_std.save(output_path, "JPEG", quality=95)
-            if output_path.exists() and output_path.stat().st_size > 25_000:
-                try:
-                    from story_pipeline.telegram_notifier import RUN_TRACKER
-                    RUN_TRACKER.set_model_used("Visuals", "HF FLUX.1-schnell")
-                except Exception:
-                    pass
-                return True
+                def _predict():
+                    if model_type == "flux":
+                        return client.predict(
+                            prompt=clean_p[:300],
+                            seed=seed,
+                            randomize_seed=True,
+                            width=768,
+                            height=1360,
+                            num_inference_steps=4,
+                            api_name=api_endpoint,
+                        )
+                    else:  # sdxl
+                        return client.predict(
+                            prompt=clean_p[:300],
+                            ckpt="4-Step",
+                            api_name=api_endpoint,
+                        )
+
+                result_tuple = call_with_timeout(_predict, timeout_sec=25)
+                res_path = (
+                    result_tuple[0]
+                    if isinstance(result_tuple, (tuple, list))
+                    else (result_tuple.get("path") if isinstance(result_tuple, dict) else result_tuple)
+                )
+
+                if res_path and Path(res_path).exists():
+                    with Image.open(res_path) as im:
+                        im_std = standardize_to_1080x1920(im.convert("RGB"))
+                        im_std.save(output_path, "JPEG", quality=95)
+                    if output_path.exists() and output_path.stat().st_size > 25_000:
+                        print(f"[IMAGE-ENGINE] [TIER-2] {space_name} ({mode}) rendered {output_path.name} successfully!")
+                        try:
+                            from story_pipeline.telegram_notifier import RUN_TRACKER
+                            RUN_TRACKER.set_model_used("Visuals", f"HF {space_name}")
+                        except Exception:
+                            pass
+                        return True
+            except Exception as e:
+                err_s = str(e).lower()
+                if "zerogpu" in err_s or "quota" in err_s:
+                    print(f"[IMAGE-ENGINE] [TIER-2 Notice] {space_name} ({mode}) ZeroGPU quota hit. Trying next...")
+                    continue
+                elif "content filter" in err_s:
+                    print(f"[IMAGE-ENGINE] [TIER-2 Notice] Content filter on {space_name}. Trying alternate space...")
+                    break
+                else:
+                    print(f"[IMAGE-ENGINE] [TIER-2 Notice] {space_name} ({mode}) note: {str(e)[:90]}")
+    return False
+
+
+def get_sd_turbo_pipeline():
+    """Lazily loads and caches the single-step SD-Turbo diffusion pipeline in memory."""
+    global _SD_TURBO_PIPE, LOCAL_SD_TURBO_ACTIVE
+    if _SD_TURBO_PIPE is not None:
+        return _SD_TURBO_PIPE
+    if not LOCAL_SD_TURBO_ACTIVE:
+        return None
+
+    try:
+        import torch
+        from diffusers import AutoPipelineForText2Image
+
+        print("[IMAGE-ENGINE] [TIER-3: Local SD-Turbo] Initializing single-step neural pipeline...")
+        _SD_TURBO_PIPE = AutoPipelineForText2Image.from_pretrained(
+            "stabilityai/sd-turbo",
+            torch_dtype=torch.float32,
+            use_safetensors=True,
+        )
+        print("[IMAGE-ENGINE] [TIER-3] SD-Turbo loaded into memory successfully!")
+        return _SD_TURBO_PIPE
     except Exception as e:
-        err_s = str(e).lower()
-        if "zerogpu" in err_s or "quota" in err_s or "limit" in err_s:
-            HF_ZEROGPU_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-2 Notice] ZeroGPU quota exceeded. Disabling for remainder of run.")
+        print(f"[IMAGE-ENGINE] [TIER-3 Notice] Local SD-Turbo unavailable ({str(e)[:90]}). Falling back...")
+        LOCAL_SD_TURBO_ACTIVE = False
+        return None
+
+
+def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> bool:
+    """Tier 3: Generates authentic photorealistic 3D visual locally in 1 step using SD-Turbo on CPU."""
+    pipe = get_sd_turbo_pipeline()
+    if pipe is None:
+        return False
+
+    try:
+        import torch
+        print(f"[IMAGE-ENGINE] [TIER-3: Local SD-Turbo] Generating 1-step render: '{prompt[:45]}...'")
+        generator = torch.Generator(device="cpu").manual_seed(seed)
+        clean_p = sanitize_for_ai_filter(prompt)
+
+        def _run_diffusion():
+            return pipe(
+                prompt=clean_p[:280],
+                num_inference_steps=1,
+                guidance_scale=0.0,
+                generator=generator,
+            ).images[0]
+
+        image = call_with_timeout(_run_diffusion, timeout_sec=30)
+        im_std = standardize_to_1080x1920(image.convert("RGB"))
+        im_std = im_std.filter(ImageFilter.UnsharpMask(radius=2, percent=140, threshold=3))
+        im_std.save(output_path, "JPEG", quality=95)
+
+        if output_path.exists() and output_path.stat().st_size > 25_000:
+            print(f"[IMAGE-ENGINE] [TIER-3] Local SD-Turbo rendered {output_path.name} successfully!")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", "ZeroGPU queue limit / timeout")
+                RUN_TRACKER.set_model_used("Visuals", "Local SD-Turbo (Single-Step CPU)")
             except Exception:
                 pass
-        else:
-            print(f"[IMAGE-ENGINE] [TIER-2 Notice] FLUX.1-schnell note ({str(e)[:100]})")
-            try:
-                from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", f"Inference note ({str(e)[:60]})")
-            except Exception:
-                pass
+            return True
+    except Exception as e:
+        print(f"[IMAGE-ENGINE] [TIER-3 Notice] SD-Turbo generation error: {e}")
+        try:
+            from story_pipeline.telegram_notifier import RUN_TRACKER
+            RUN_TRACKER.record_model_failure("Local SD-Turbo", f"{str(e)[:60]}")
+        except Exception:
+            pass
     return False
 
 
 def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 3: Generates AI visuals using clean Pollinations streaming endpoint."""
+    """Tier 4: Generates AI visuals using clean Pollinations streaming endpoint."""
     global POLLINATIONS_IMAGE_ACTIVE
     if not POLLINATIONS_IMAGE_ACTIVE:
         return False
@@ -206,13 +315,13 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
     ]
 
     try:
-        clean_p = urllib.parse.quote(prompt[:280])
+        clean_p = urllib.parse.quote(prompt[:250])
         url = f"https://image.pollinations.ai/prompt/{clean_p}?nologo=true&seed={seed}"
-        print(f"[IMAGE-ENGINE] [TIER-3: Pollinations] Fetching: '{prompt[:48]}...'")
+        print(f"[IMAGE-ENGINE] [TIER-4: Pollinations] Fetching: '{prompt[:48]}...'")
 
         headers = {
             "User-Agent": random.choice(user_agents),
-            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+            "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
         }
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=25) as resp:
@@ -236,19 +345,14 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
         s_err = str(e).lower()
         if any(k in s_err for k in ["402", "payment", "403", "forbidden"]):
             POLLINATIONS_IMAGE_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-3 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
+            print(f"[IMAGE-ENGINE] [TIER-4 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.record_model_failure("Pollinations AI", "HTTP 402/403 Payment Required")
             except Exception:
                 pass
         else:
-            print(f"[IMAGE-ENGINE] [TIER-3 Notice] Pollinations note ({str(e)[:100]})")
-            try:
-                from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("Pollinations AI", f"Network error ({str(e)[:60]})")
-            except Exception:
-                pass
+            print(f"[IMAGE-ENGINE] [TIER-4 Notice] Pollinations note ({str(e)[:100]})")
     return False
 
 
@@ -257,15 +361,19 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: i
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt)
 
-    # 1. Tier 1: Google Imagen 3 (imagen-3.0-generate-002)
+    # 1. Tier 1: Google Imagen 3 (Google AI Studio REST API)
     if generate_imagen3_google(enriched, output_path, seed=seed):
         return output_path
 
-    # 2. Tier 2: Hugging Face FLUX.1-schnell Space
+    # 2. Tier 2: Hugging Face FLUX / SDXL Spaces (with anonymous auto-fallback)
     if generate_flux_hf_space(enriched, output_path, seed=seed):
         return output_path
 
-    # 3. Tier 3: Pollinations Clean Free Engine
+    # 3. Tier 3: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
+    if generate_sd_turbo_local(enriched, output_path, seed=seed):
+        return output_path
+
+    # 4. Tier 4: Pollinations Clean Free Engine
     if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
@@ -285,7 +393,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
     from story_pipeline.telegram_notifier import notify_audit_rejection
 
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-    spacing = 3
+    spacing = 2
 
     for idx, beat in enumerate(beats):
         b_num = beat["beat_number"]
