@@ -11,10 +11,11 @@
     "dynamic::The colossal megalodon that hunted prehistoric oceans::Ep11",
     "dynamic::What if the Moon was replaced by Saturn?::Ep12",
     "dynamic::Dinosaurs never actually roared like in Jurassic Park::Ep13",
-    "dynamic::The sound of the Sun would be deafening if sound traveled in space::Ep14"
+    "dynamic::The sound of the Sun would be deafening if sound traveled in space::Ep14",
+    "dynamic::What if you fell into Jupiter's atmosphere?::Ep15"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 14,
+  "episode_count": 15,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -26,22 +27,24 @@
     "The colossal megalodon that hunted prehistoric oceans",
     "What if the Moon was replaced by Saturn?",
     "Dinosaurs never actually roared like in Jurassic Park",
-    "The sound of the Sun would be deafening if sound traveled in space"
+    "The sound of the Sun would be deafening if sound traveled in space",
+    "What if you fell into Jupiter's atmosphere?"
   ],
   "used_topics": [
-    "The immortal jellyfish that can live forever",
-    "What if aliens land on Earth tomorrow?",
     "What if the Moon was replaced by Saturn?",
-    "The Deep Sea Abyssal Creature",
-    "The ancient monster that hunted Megalodons for breakfast",
-    "What happens if you never stop peeing forever?",
-    "What happens if your brain permanently loses the ability to sleep?",
-    "What if gravity suddenly doubled across the entire world?",
-    "What happens if your body starts turning into a living stone statue?",
-    "What happens if you drink boiling lava?",
     "The colossal megalodon that hunted prehistoric oceans",
-    "The sound of the Sun would be deafening if sound traveled in space",
+    "What if you fell into Jupiter's atmosphere?",
     "Dinosaurs never actually roared like in Jurassic Park",
-    "What happens if your immune system discovers your eyes?"
+    "The sound of the Sun would be deafening if sound traveled in space",
+    "What happens if your immune system discovers your eyes?",
+    "What if aliens land on Earth tomorrow?",
+    "The immortal jellyfish that can live forever",
+    "What happens if you never stop peeing forever?",
+    "What happens if your body starts turning into a living stone statue?",
+    "What if gravity suddenly doubled across the entire world?",
+    "What happens if you drink boiling lava?",
+    "What happens if your brain permanently loses the ability to sleep?",
+    "The ancient monster that hunted Megalodons for breakfast",
+    "The Deep Sea Abyssal Creature"
   ]
 }
