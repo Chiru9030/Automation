@@ -77,22 +77,22 @@ class PipelineRunTracker:
             self.sfx = sfx
 
     def build_report(self) -> str:
-        esc_topic = html.escape(self.topic or f"Episode #{self.episode_num}")
+        esc_topic = html.escape(self.topic or f"Episode #{self.episode_num}")[:70]
         status_icon = "✅" if self.status == "SUCCESS" else ("🛑" if self.status == "BLOCKED" else "🚨")
 
         models_lines = []
         for stage, name in self.models_used.items():
-            models_lines.append(f"• <b>{stage}:</b> {html.escape(name)}")
+            models_lines.append(f"• <b>{stage}:</b> {html.escape(name[:50])}")
         models_block = "\n".join(models_lines)
 
         if self.failed_models:
-            f_mod_lines = [f"• <b>{html.escape(m)}:</b> {html.escape(r)}" for m, r in self.failed_models[:3]]
+            f_mod_lines = [f"• <b>{html.escape(m[:25])}:</b> {html.escape(r[:60])}" for m, r in self.failed_models[:2]]
             failed_models_block = "\n".join(f_mod_lines)
         else:
             failed_models_block = "• <i>None (All primary models operational)</i>"
 
         if self.failed_steps:
-            f_step_lines = [f"• <b>{html.escape(s)}:</b> {html.escape(r)}" for s, r in self.failed_steps[:3]]
+            f_step_lines = [f"• <b>{html.escape(s[:25])}:</b> {html.escape(r[:60])}" for s, r in self.failed_steps[:2]]
             failed_steps_block = "\n".join(f_step_lines)
         else:
             failed_steps_block = "• <i>None (Zero step failures / 100% clean)</i>"
@@ -102,8 +102,8 @@ class PipelineRunTracker:
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🎯 <b>Topic:</b> {esc_topic}\n"
             f"⏱️ <b>Duration:</b> {self.duration:.1f}s | 📦 <b>Size:</b> {self.size_mb:.1f} MB\n"
-            f"🎙️ <b>Voice:</b> {html.escape(self.voice)}\n"
-            f"🔊 <b>SFX:</b> {html.escape(self.sfx)}\n"
+            f"🎙️ <b>Voice:</b> {html.escape(self.voice[:35])}\n"
+            f"🔊 <b>SFX:</b> {html.escape(self.sfx[:35])}\n"
             f"🛡️ <b>Audit:</b> Content, Quality, Relation, Clarity (Certified)\n"
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🤖 <b>Models Used:</b>\n"
@@ -117,9 +117,6 @@ class PipelineRunTracker:
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🔗 <b>Link:</b> {self.link}"
         )
-
-        if len(report) > 1000:
-            report = report[:990] + "..."
         return report
 
 
