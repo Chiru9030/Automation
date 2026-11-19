@@ -95,7 +95,7 @@ Output JSON ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=35,
+                        timeout_sec=18,
                     )
                     if res and res.text:
                         break
@@ -271,24 +271,31 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         ]
     else:
         # Universal Dynamic 5-Beat Script (Calibrated to exactly 130 words)
+        topic_core = topic.rstrip("?.!").replace("What if ", "").replace("What happens if ", "").strip()
+        words_list = topic_core.split()
+        if len(words_list) > 7:
+            topic_core = " ".join(words_list[:7])
+
+        beat1_narration = f"What if {topic_core.lower()}? Most people assume civilization would carry on normally, but the sudden reality would plunge our entire world into catastrophic chaos."
+
         beats = [
             {
                 "beat_number": 1,
                 "time_window": "0-10s",
                 "hook_trigger": "Opening Shock Hook",
-                "narration": f"What if {topic.lower()}? Most people assume civilization would carry on, but the immediate reality would plunge our entire world into catastrophic chaos.",
+                "narration": beat1_narration,
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
                 "camera_motion": "smooth-zoom-in",
-                "visual_prompt": f"{style}, dramatic epic opening cinematic of {topic}, vibrant volumetric lighting, Unreal Engine 5, 8k",
+                "visual_prompt": f"{style}, dramatic epic opening cinematic of {topic_core}, vibrant volumetric lighting, Unreal Engine 5, 8k",
             },
             {
                 "beat_number": 2,
                 "time_window": "10-22s",
                 "hook_trigger": "10s Escalation Hook",
-                "narration": "Within seconds, supersonic kinetic shockwaves ripple across the globe at one thousand miles per hour, completely collapsing the entire world's electrical power grid.",
+                "narration": "Within seconds, supersonic kinetic shockwaves ripple across the globe at one thousand miles per hour, completely collapsing every single electrical power grid across the continents.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -300,7 +307,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, leaving survivors scrambling through howling atmospheric winds toward underground military shelters.",
+                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, leaving survivors scrambling through howling atmospheric winds toward secure underground military shelters.",
                 "speaker": "character_hero",
                 "speaker_name": "Commander",
                 "speaker_avatar": "🚨",
@@ -312,7 +319,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, releasing deafening vibrations shaking your very bones.",
+                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, releasing deafening acoustic vibrations shaking the very marrow of your bones.",
                 "speaker": "character_guide",
                 "speaker_name": "Scientist",
                 "speaker_avatar": "🔬",

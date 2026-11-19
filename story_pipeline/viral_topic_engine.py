@@ -205,7 +205,7 @@ Return JSON format ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=35,
+                        timeout_sec=15,
                     )
                     if res and res.text:
                         break
