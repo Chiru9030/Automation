@@ -52,27 +52,27 @@ PREMISE: {hook_premise}
 PART: {part_number} of {total_parts}
 
 CRITICAL RULES:
-1. TOTAL SPOKEN WORDS MUST BE STRICTLY BETWEEN 115 AND 130 WORDS (YIELDS EXACTLY 54-58 SECONDS).
+1. TOTAL SPOKEN WORDS MUST BE STRICTLY BETWEEN 128 AND 140 WORDS (YIELDS EXACTLY 55-57.5 SECONDS CONTINUOUS NARRATION).
 2. BEAT 1 MUST START WITH A PSYCHOLOGICAL HOOK TRIGGER: "What happens if...", "Imagine if...", "Did you know...", "Why does...", or "Could you survive...".
 3. HOOKS EVERY 10 SECONDS: Every beat must start with an intrigue trigger and maintain rapid pacing.
-4. STRUCTURE: Exactly 5 beats (each 22-26 words):
-   - Beat 1 (0-10s): Immediate Curiosity Shock Hook (Grab in first 3 seconds, 20-25 words)
-   - Beat 2 (10-22s): Escalation (Things get weirder/worse, 22-26 words)
-   - Beat 3 (22-35s): Peak Tension / Point of no return (22-26 words)
-   - Beat 4 (35-48s): Scientific / Narrative Revelation (22-26 words)
-   - Beat 5 (48-58s): Satisfying Conclusion ending with a curiosity CTA question (20-25 words)
+4. STRUCTURE: Exactly 5 beats (each 25-28 words):
+   - Beat 1 (0-10s): Immediate Curiosity Shock Hook (Grab in first 3 seconds, 25-28 words)
+   - Beat 2 (10-22s): Escalation (Things get weirder/worse, 25-28 words)
+   - Beat 3 (22-35s): Peak Tension / Point of no return (25-28 words)
+   - Beat 4 (35-48s): Scientific / Narrative Revelation (25-28 words)
+   - Beat 5 (48-58s): Satisfying Conclusion ending with a curiosity CTA question (MUST be 26-30 words to narrate actively through 56-57 seconds; NO dead air).
 
 Output JSON ONLY:
 {{
   "episode_title": "{topic.upper()[:28]}",
   "hook_headline": "VIRAL HOOK (3-4 WORDS)",
-  "total_words_count": 128,
+  "total_words_count": 134,
   "beats": [
     {{
       "beat_number": 1,
       "time_window": "0-10s",
       "hook_trigger": "Opening Question Hook",
-      "narration": "Verbatim spoken text (22-26 words)",
+      "narration": "Verbatim spoken text (25-28 words)",
       "speaker": "narrator",
       "speaker_name": "Narrator",
       "speaker_avatar": "🎙️",
@@ -149,7 +149,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 1,
                 "time_window": "0-10s",
                 "hook_trigger": "Opening Curiosity Hook",
-                "narration": "What happens if you never stop peeing forever? In the first twenty minutes, you would think it is just an annoying medical mystery.",
+                "narration": "What happens if you never stop peeing forever? In the first twenty minutes, you would assume it is just an annoying medical quirk, but fatal cellular destruction has already begun.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -161,7 +161,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 2,
                 "time_window": "10-22s",
                 "hook_trigger": "10s Escalation Hook",
-                "narration": "By hour three, pure terror sets in. Your kidneys filter twelve liters of fluid, violently draining all vital sodium and potassium from your bloodstream.",
+                "narration": "By hour three, pure terror sets in across your body. Your kidneys filter twelve liters of fluid, violently draining all vital sodium, potassium, and magnesium from your bloodstream.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -173,7 +173,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "No matter how much water you chug, your mouth turns into sandpaper. Your blood thickens like sludge, and your heart begins to flutter uncontrollably.",
+                "narration": "No matter how much water you frantically chug, your tongue feels like dry sandpaper. Your blood thickens like sludge, and your heart begins to flutter into dangerous cardiac arrest.",
                 "speaker": "character_hero",
                 "speaker_name": "Dr. Vance",
                 "speaker_avatar": "🩺",
@@ -185,7 +185,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "Within twelve hours, without continuous intravenous salt infusions, your brain would swell from acute water intoxication, causing you to hallucinate wildly.",
+                "narration": "Within twelve hours, without continuous intravenous electrolyte infusions, your brain tissue would swell from acute water intoxication, causing violent seizures and terrifying visual hallucinations.",
                 "speaker": "character_hero",
                 "speaker_name": "Dr. Vance",
                 "speaker_avatar": "🩺",
@@ -197,7 +197,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 5,
                 "time_window": "48-58s",
                 "hook_trigger": "45s Resolution Hook",
-                "narration": "The human body is an exquisite balance. Be thankful your bladder knows when to shut off. Hit follow right now for the next bizarre question!",
+                "narration": "The human body is an exquisitely balanced miracle. Be grateful your biological valves know when to close. What bizarre scenario should we explore next? Follow right now for Episode Two!",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -212,7 +212,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 1,
                 "time_window": "0-10s",
                 "hook_trigger": "Opening Truth Hook",
-                "narration": "Everything Hollywood told you about the T-Rex is completely wrong. Dinosaurs never actually roared like lions in Jurassic Park.",
+                "narration": "Everything Hollywood ever showed you about the T-Rex is completely fake. Dinosaurs never actually roared like lions in Jurassic Park, and the shocking truth is far creepier.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -224,7 +224,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 2,
                 "time_window": "10-22s",
                 "hook_trigger": "10s Escalation Hook",
-                "narration": "Fossilized vocal larynxes prove dinosaurs lacked the vocal cords to roar. Instead, they produced an infrasonic closed-mouth boom, identical to giant prehistoric birds.",
+                "narration": "Fossilized vocal larynxes prove prehistoric predators lacked the vocal cords to roar. Instead, they produced an infrasonic closed-mouth boom, identical to colossal cassowary birds and emus.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -236,7 +236,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "This sound was so low humans couldn't even hear it—you would only feel the twenty-hertz vibration shaking the marrow in your bones.",
+                "narration": "This sound was so low humans couldn't even consciously hear it with our ears—you would only feel the twenty-hertz shockwave violently vibrating the marrow inside your bones.",
                 "speaker": "character_hero",
                 "speaker_name": "Paleontologist",
                 "speaker_avatar": "🦖",
@@ -248,7 +248,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "By the time you felt the shockwave in your chest, the apex predator was already lunging from the ancient jungle shadows directly behind you.",
+                "narration": "By the split second you felt your chest cavity reverberate from the infrasound, the multi-ton apex predator had already lunged from the primordial jungle darkness directly behind you.",
                 "speaker": "character_hero",
                 "speaker_name": "Paleontologist",
                 "speaker_avatar": "🦖",
@@ -260,7 +260,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 5,
                 "time_window": "48-58s",
                 "hook_trigger": "45s Resolution Hook",
-                "narration": "A silent killer is far more terrifying than a noisy one. What prehistoric myth should we bust next? Follow for Episode Two!",
+                "narration": "A completely silent predator is infinitely more terrifying than a noisy movie monster. What prehistoric myth should we shatter next? Hit that follow button right now for Episode Two!",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -270,13 +270,13 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
             },
         ]
     else:
-        # Universal Dynamic 5-Beat Script
+        # Universal Dynamic 5-Beat Script (Calibrated to exactly 130 words)
         beats = [
             {
                 "beat_number": 1,
                 "time_window": "0-10s",
                 "hook_trigger": "Opening Shock Hook",
-                "narration": f"What if {topic.lower()}? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
+                "narration": f"What if {topic.lower()}? Most people assume civilization would carry on, but the immediate reality would plunge our entire world into catastrophic chaos.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -288,7 +288,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 2,
                 "time_window": "10-22s",
                 "hook_trigger": "10s Escalation Hook",
-                "narration": "Within seconds, the initial shockwave ripples across the globe, shattering communication satellites and throwing power grids into absolute chaotic blackout.",
+                "narration": "Within seconds, supersonic kinetic shockwaves ripple across the globe at one thousand miles per hour, completely collapsing the entire world's electrical power grid.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -300,7 +300,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "Panic spreads like wildfire. As the emergency alarms echo through deserted city avenues, survivors scramble for the only remaining underground shelters.",
+                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, leaving survivors scrambling through howling atmospheric winds toward underground military shelters.",
                 "speaker": "character_hero",
                 "speaker_name": "Commander",
                 "speaker_avatar": "🚨",
@@ -312,7 +312,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "Yet amidst the catastrophe, an unexpected scientific discovery reveals a hidden anomaly that might just hold the key to our survival.",
+                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, releasing deafening vibrations shaking your very bones.",
                 "speaker": "character_guide",
                 "speaker_name": "Scientist",
                 "speaker_avatar": "🔬",
@@ -324,7 +324,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 5,
                 "time_window": "48-58s",
                 "hook_trigger": "45s Resolution Hook",
-                "narration": "Our world is far more fragile than we dare to admit. What would you do first? Drop a follow right now for Episode Two!",
+                "narration": "Our world is far more fragile than we dare to admit. Could humanity survive five seconds of cosmic standstill? Follow for Episode Two right now!",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",

@@ -1,9 +1,13 @@
 """
-Stage 3: High-Definition 3D Visual Generation Engine.
+Stage 3: High-Definition AI 3D Visual Generation Engine.
 Generates full-bleed 1080x1920 vertical cinematic illustrations for every story beat:
-1. Tier 1: Hugging Face FLUX.1-schnell (via authenticated client with HF_TOKEN)
-2. Tier 2: Pollinations Clean Free Engine (non-paywalled default AI model)
-3. Tier 3: Theme-Specific Semantic Procedural Synthesis (guarantees 100% theme-matching uptime)
+1. Tier 1: Google Imagen 3 (imagen-3.0-generate-002) via GEMINI_API_KEY
+2. Tier 2: Hugging Face FLUX.1-schnell Space (via authenticated client with HF_TOKEN)
+3. Tier 3: Pollinations AI Clean Free Engine (with resilient retry and streaming)
+
+Zero Procedural Lines Policy:
+Every asset must be an authentic, photorealistic or 3D AI generation.
+If all models fail, execution is halted by the Zero-Upload Safety Guard.
 """
 
 import json
@@ -16,18 +20,19 @@ import urllib.request
 import concurrent.futures
 from pathlib import Path
 from dotenv import load_dotenv
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageFilter
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_IMAGES_DIR = BASE_DIR / "video-app" / "public" / "images"
 
+GOOGLE_IMAGEN_ACTIVE = True
 HF_ZEROGPU_ACTIVE = True
 POLLINATIONS_IMAGE_ACTIVE = True
 
 
-def call_with_timeout(func, args=(), kwargs=None, timeout_sec=25):
+def call_with_timeout(func, args=(), kwargs=None, timeout_sec=30):
     """Executes a function inside a worker thread with a strict maximum timeout."""
     if kwargs is None:
         kwargs = {}
@@ -59,8 +64,69 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
     return im_cropped
 
 
+def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> bool:
+    """Tier 1: Generates cinema-grade 1080x1920 visuals using Google Imagen 3."""
+    global GOOGLE_IMAGEN_ACTIVE
+    if not GOOGLE_IMAGEN_ACTIVE:
+        return False
+
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        return False
+    api_key = api_key.strip().strip("'").strip('"')
+
+    try:
+        from google import genai
+
+        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Generating: '{prompt[:48]}...'")
+        client = genai.Client(api_key=api_key)
+
+        def _call_imagen():
+            return client.models.generate_images(
+                model="imagen-3.0-generate-002",
+                prompt=prompt[:450],
+                config=dict(
+                    number_of_images=1,
+                    aspect_ratio="9:16",
+                    output_mime_type="image/jpeg",
+                    person_generation="ALLOW_ADULT",
+                ),
+            )
+
+        res = call_with_timeout(_call_imagen, timeout_sec=25)
+        if res and res.generated_images:
+            img_bytes = res.generated_images[0].image.image_bytes
+            temp_raw = output_path.with_suffix(".tmp.jpg")
+            temp_raw.write_bytes(img_bytes)
+            with Image.open(temp_raw) as im:
+                im_std = standardize_to_1080x1920(im.convert("RGB"))
+                im_std.save(output_path, "JPEG", quality=95)
+            temp_raw.unlink(missing_ok=True)
+            if output_path.exists() and output_path.stat().st_size > 25_000:
+                print(f"[IMAGE-ENGINE] [TIER-1] Google Imagen 3 rendered {output_path.name} successfully!")
+                try:
+                    from story_pipeline.telegram_notifier import RUN_TRACKER
+                    RUN_TRACKER.set_model_used("Visuals", "Google Imagen 3 (imagen-3.0-generate-002)")
+                except Exception:
+                    pass
+                return True
+    except Exception as e:
+        err_s = str(e).lower()
+        if any(k in err_s for k in ["404", "not_found", "quota", "resource_exhausted", "permission"]):
+            print(f"[IMAGE-ENGINE] [TIER-1 Notice] Imagen 3 unavailable on current tier ({str(e)[:90]}). Falling back...")
+            GOOGLE_IMAGEN_ACTIVE = False
+        else:
+            print(f"[IMAGE-ENGINE] [TIER-1 Notice] Imagen 3 note ({str(e)[:90]})")
+        try:
+            from story_pipeline.telegram_notifier import RUN_TRACKER
+            RUN_TRACKER.record_model_failure("Google Imagen 3", f"{str(e)[:60]}")
+        except Exception:
+            pass
+    return False
+
+
 def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 1: Generates photorealistic 3D visuals using Hugging Face FLUX.1-schnell Space."""
+    """Tier 2: Generates photorealistic 3D visuals using Hugging Face FLUX.1-schnell Space."""
     global HF_ZEROGPU_ACTIVE
     if not HF_ZEROGPU_ACTIVE:
         return False
@@ -72,11 +138,10 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
     try:
         from gradio_client import Client
-        import shutil
 
-        print(f"[IMAGE-ENGINE] [TIER-1: FLUX.1-schnell] Dispatching prompt: '{prompt[:48]}...'")
+        print(f"[IMAGE-ENGINE] [TIER-2: FLUX.1-schnell] Dispatching prompt: '{prompt[:48]}...'")
         client = Client("black-forest-labs/FLUX.1-schnell", token=hf_token)
-        
+
         def _predict():
             return client.predict(
                 prompt=prompt[:350],
@@ -87,7 +152,7 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
                 num_inference_steps=4,
                 api_name="/infer",
             )
-        
+
         result_tuple = call_with_timeout(_predict, timeout_sec=25)
         result = result_tuple[0] if isinstance(result_tuple, tuple) else result_tuple
 
@@ -112,14 +177,14 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
         err_s = str(e).lower()
         if "zerogpu" in err_s or "quota" in err_s or "limit" in err_s:
             HF_ZEROGPU_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-1 Notice] ZeroGPU quota exceeded. Disabling for remainder of run.")
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] ZeroGPU quota exceeded. Disabling for remainder of run.")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", "ZeroGPU queue limit / timeout")
             except Exception:
                 pass
         else:
-            print(f"[IMAGE-ENGINE] [TIER-1 Notice] FLUX.1-schnell note ({str(e)[:100]})")
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] FLUX.1-schnell note ({str(e)[:100]})")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.record_model_failure("HF FLUX.1-schnell", f"Inference note ({str(e)[:60]})")
@@ -129,16 +194,27 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
 
 def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 2: Generates AI visuals using clean, non-paywalled Pollinations endpoint."""
+    """Tier 3: Generates AI visuals using clean Pollinations streaming endpoint."""
     global POLLINATIONS_IMAGE_ACTIVE
     if not POLLINATIONS_IMAGE_ACTIVE:
         return False
 
+    user_agents = [
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    ]
+
     try:
-        clean_p = urllib.parse.quote(prompt[:300])
-        url = f"https://image.pollinations.ai/prompt/{clean_p}?nologo=true"
-        print(f"[IMAGE-ENGINE] [TIER-2: Pollinations] Fetching prompt: '{prompt[:48]}...'")
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+        clean_p = urllib.parse.quote(prompt[:280])
+        url = f"https://image.pollinations.ai/prompt/{clean_p}?nologo=true&seed={seed}"
+        print(f"[IMAGE-ENGINE] [TIER-3: Pollinations] Fetching: '{prompt[:48]}...'")
+
+        headers = {
+            "User-Agent": random.choice(user_agents),
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        }
+        req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=25) as resp:
             data = resp.read()
             if len(data) > 15_000:
@@ -160,14 +236,14 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
         s_err = str(e).lower()
         if any(k in s_err for k in ["402", "payment", "403", "forbidden"]):
             POLLINATIONS_IMAGE_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
+            print(f"[IMAGE-ENGINE] [TIER-3 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.record_model_failure("Pollinations AI", "HTTP 402/403 Payment Required")
             except Exception:
                 pass
         else:
-            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations note ({str(e)[:100]})")
+            print(f"[IMAGE-ENGINE] [TIER-3 Notice] Pollinations note ({str(e)[:100]})")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.record_model_failure("Pollinations AI", f"Network error ({str(e)[:60]})")
@@ -176,207 +252,40 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
     return False
 
 
-def generate_semantic_procedural_visual(prompt: str, output_path: Path, seed: int = 42, beat_num: int = 1) -> Path:
-    """
-    Tier 3: Theme-Specific Semantic Procedural Synthesis.
-    Generates high-contrast vertical compositions matching the exact scene theme.
-    Guarantees that each beat has a structurally distinct geometry, perspective, and composition.
-    """
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    random.seed(seed)
-    p_lower = prompt.lower()
-
-    img = Image.new("RGB", (1080, 1920), color=(10, 15, 30))
-    draw = ImageDraw.Draw(img)
-
-    # -------------------------------------------------------------
-    # Theme 1: Ocean / Sea / Megalodon / Monster / Abyss
-    # -------------------------------------------------------------
-    if any(k in p_lower for k in ["ocean", "sea", "megalodon", "shark", "monster", "underwater", "abyss", "water", "beast"]):
-        # Abyssal deep ocean gradient
-        for y in range(1920):
-            factor = y / 1920.0
-            r = int(5 * (1 - factor) + 2 * factor)
-            g = int(35 * (1 - factor) + 12 * factor)
-            b = int(75 * (1 - factor) + 28 * factor)
-            draw.line([(0, y), (1080, y)], fill=(r, g, b))
-
-        # Dynamic perspective based on beat_num
-        if beat_num == 1:
-            # Central massive silhouette rising
-            cy = 960
-            draw.ellipse([180, cy - 280, 900, cy + 280], fill=(8, 22, 45))
-            draw.polygon([(460, cy - 270), (620, cy - 560), (680, cy - 270)], fill=(6, 18, 38))
-            draw.ellipse([760, cy - 40, 796, cy - 4], fill=(255, 230, 80))
-        elif beat_num == 2:
-            # Diagonal attack vector (upper-left to lower-right)
-            draw.polygon([(0, 300), (900, 1600), (400, 1900), (0, 1000)], fill=(12, 30, 58))
-            draw.ellipse([650, 1200, 700, 1250], fill=(255, 200, 50))
-        elif beat_num == 3:
-            # High-tension close-up predatory jaws
-            draw.polygon([(200, 600), (880, 960), (200, 1320)], fill=(6, 18, 38))
-            draw.polygon([(240, 640), (820, 960), (240, 1280)], fill=(180, 20, 40))
-        elif beat_num == 4:
-            # Expansive subterranean abyssal trench
-            draw.rectangle([0, 1100, 1080, 1920], fill=(4, 12, 28))
-            draw.ellipse([340, 500, 740, 900], fill=(20, 140, 220))
-        else:
-            # Outro: Ascent towards the sunlit ocean surface
-            draw.rectangle([460, 0, 620, 1920], fill=(80, 210, 255))
-            draw.ellipse([300, 800, 780, 1280], fill=(10, 26, 52))
-
-        # Volumetric caustic light rays
-        for ray in range(8):
-            start_x = random.randint(100, 980)
-            end_x = start_x + random.randint(-250, 250)
-            alpha_b = random.randint(120, 210)
-            draw.line([(start_x, 0), (end_x, 1400)], fill=(20, 130, alpha_b), width=random.randint(15, 45))
-
-    # -------------------------------------------------------------
-    # Theme 2: Fire / Lava / Volcano / Heat / Thermal
-    # -------------------------------------------------------------
-    elif any(k in p_lower for k in ["fire", "lava", "volcano", "heat", "burn", "flame", "magma"]):
-        for y in range(1920):
-            factor = y / 1920.0
-            r = int(75 * (1 - factor) + 120 * factor)
-            g = int(15 * (1 - factor) + 30 * factor)
-            b = int(8 * (1 - factor) + 5 * factor)
-            draw.line([(0, y), (1080, y)], fill=(r, g, b))
-
-        if beat_num == 1:
-            draw.ellipse([200, 1100, 880, 1780], fill=(255, 110, 25))
-            draw.ellipse([340, 1240, 740, 1640], fill=(255, 230, 80))
-        elif beat_num == 2:
-            draw.polygon([(0, 600), (1080, 1400), (1080, 1920), (0, 1920)], fill=(240, 90, 20))
-        elif beat_num == 3:
-            draw.ellipse([100, 800, 980, 1680], fill=(255, 60, 10))
-            draw.ellipse([300, 1000, 780, 1480], fill=(255, 240, 100))
-        elif beat_num == 4:
-            draw.rectangle([0, 1000, 1080, 1920], fill=(200, 50, 10))
-            draw.ellipse([350, 400, 730, 780], fill=(255, 180, 40))
-        else:
-            draw.rectangle([440, 0, 640, 1920], fill=(255, 230, 100))
-            draw.ellipse([250, 750, 830, 1330], fill=(220, 70, 15))
-
-    # -------------------------------------------------------------
-    # Theme 3: Cellular / Medicine / Human Biology / Brain
-    # -------------------------------------------------------------
-    elif any(k in p_lower for k in ["sleep", "brain", "body", "cell", "medical", "blood", "human", "biology"]):
-        for y in range(1920):
-            factor = y / 1920.0
-            r = int(45 * (1 - factor) + 15 * factor)
-            g = int(12 * (1 - factor) + 40 * factor)
-            b = int(60 * (1 - factor) + 85 * factor)
-            draw.line([(0, y), (1080, y)], fill=(r, g, b))
-
-        if beat_num == 1:
-            draw.ellipse([260, 680, 820, 1240], fill=(255, 120, 190))
-            draw.ellipse([380, 800, 700, 1120], fill=(40, 220, 255))
-        elif beat_num == 2:
-            draw.polygon([(0, 400), (1080, 1200), (1080, 1920), (0, 1920)], fill=(180, 40, 120))
-        elif beat_num == 3:
-            draw.ellipse([100, 850, 980, 1730], fill=(255, 60, 140))
-        elif beat_num == 4:
-            draw.rectangle([0, 960, 1080, 1920], fill=(80, 20, 140))
-        else:
-            draw.rectangle([450, 0, 630, 1920], fill=(255, 215, 90))
-
-    # -------------------------------------------------------------
-    # Theme 4: Space / Cosmic (ONLY for actual space topics)
-    # -------------------------------------------------------------
-    elif any(k in p_lower for k in ["space", "moon", "saturn", "alien", "cosmic", "star", "jupiter", "gravity"]):
-        for y in range(1920):
-            factor = y / 1920.0
-            draw.line([(0, y), (1080, y)], fill=(int(18 + 25 * factor), int(12 + 15 * factor), int(60 + 35 * factor)))
-
-        if beat_num == 1:
-            draw.ellipse([240, 660, 840, 1260], fill=(180, 80, 255))
-            draw.ellipse([360, 780, 720, 1140], fill=(255, 215, 110))
-        elif beat_num == 2:
-            draw.polygon([(0, 500), (1080, 1500), (1080, 1920), (0, 1920)], fill=(120, 40, 200))
-        elif beat_num == 3:
-            draw.ellipse([120, 900, 960, 1740], fill=(220, 100, 255))
-        elif beat_num == 4:
-            draw.rectangle([0, 1000, 1080, 1920], fill=(60, 20, 140))
-        else:
-            draw.rectangle([440, 0, 640, 1920], fill=(255, 240, 160))
-
-    # -------------------------------------------------------------
-    # Theme 5: General Dramatic Primordial / Prehistoric / Fact Atmosphere
-    # -------------------------------------------------------------
-    else:
-        for y in range(1920):
-            factor = y / 1920.0
-            draw.line([(0, y), (1080, y)], fill=(int(25 + 35 * factor), int(25 + 40 * factor), int(45 + 50 * factor)))
-
-        if beat_num == 1:
-            # Hero Subject Centered
-            draw.ellipse([200, 700, 880, 1380], fill=(240, 140, 40))
-            draw.ellipse([350, 850, 730, 1230], fill=(255, 220, 90))
-        elif beat_num == 2:
-            # Dramatic Diagonal Split
-            draw.polygon([(0, 400), (1080, 1400), (1080, 1920), (0, 1920)], fill=(180, 40, 60))
-            draw.ellipse([100, 200, 500, 600], fill=(255, 180, 60))
-        elif beat_num == 3:
-            # High-Tension Radial Burst
-            draw.ellipse([150, 1100, 930, 1880], fill=(30, 220, 180))
-            draw.ellipse([300, 1250, 780, 1730], fill=(220, 255, 230))
-        elif beat_num == 4:
-            # Expansive Split Horizon
-            draw.rectangle([0, 960, 1080, 1920], fill=(120, 40, 200))
-            draw.ellipse([400, 600, 680, 880], fill=(255, 240, 150))
-        else:
-            # Vertical Ascending Beam
-            draw.rectangle([440, 0, 640, 1920], fill=(255, 240, 120))
-            draw.ellipse([300, 800, 780, 1280], fill=(255, 160, 40))
-
-    # Dynamic Atmospheric Particles & Dust Motes (Guarantees Sharpness >= 18.0)
-    for _ in range(800):
-        px = random.randint(0, 1080)
-        py = random.randint(0, 1920)
-        pr = random.randint(2, 5)
-        p_color = (
-            random.randint(180, 255),
-            random.randint(160, 255),
-            random.randint(120, 255),
-        )
-        draw.ellipse([px, py, px + pr, py + pr], fill=p_color)
-
-    # Unsharp Masking for Tack-Sharp Edge Definition
-    img = img.filter(ImageFilter.UnsharpMask(radius=2, percent=180, threshold=2))
-    img.save(str(output_path), quality=95)
-    print(f"[IMAGE-ENGINE] [TIER-3] Synthesized Theme-Matched Visual: {output_path.name}")
-    return output_path
-
-
 def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: int = 1) -> Path:
-    """Generates an enhanced 9:16 vertical 1080x1920 visual with strict multi-tier failover."""
+    """Generates an authentic 9:16 vertical 1080x1920 visual with strict multi-tier AI model failover."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt)
 
-    # 1. Tier 1: Hugging Face FLUX.1-schnell Space
+    # 1. Tier 1: Google Imagen 3 (imagen-3.0-generate-002)
+    if generate_imagen3_google(enriched, output_path, seed=seed):
+        return output_path
+
+    # 2. Tier 2: Hugging Face FLUX.1-schnell Space
     if generate_flux_hf_space(enriched, output_path, seed=seed):
         return output_path
 
-    # 2. Tier 2: Pollinations Clean Free Engine
+    # 3. Tier 3: Pollinations Clean Free Engine
     if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
-    # 3. Tier 3: Theme-Specific Semantic Procedural Synthesis (Beat-Distinct Geometry)
-    return generate_semantic_procedural_visual(prompt, output_path, seed=seed, beat_num=beat_num)
+    # Hard Failure: Zero-upload safety guard strictly prohibits fake or missing images!
+    raise RuntimeError(
+        f"All AI image generation models failed for Beat #{beat_num} ('{prompt[:50]}...'). "
+        f"Zero-upload safety guard strictly rejects crude drawings or missing images."
+    )
 
 
 def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
     """Generates enhanced visuals for all beats with active quality auditing and retry loops."""
     from story_pipeline.strict_pipeline_auditor import (
         audit_single_visual_asset,
-        audit_semantic_content_relevance,
         QualityAuditError,
     )
     from story_pipeline.telegram_notifier import notify_audit_rejection
 
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-    spacing = 4
+    spacing = 3
 
     for idx, beat in enumerate(beats):
         b_num = beat["beat_number"]
@@ -388,8 +297,8 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
         beat_certified = False
         beat_title = beat.get("title", f"Beat #{b_num}")
         for attempt in range(1, 4):
-            generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
             try:
+                generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
                 metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
 
                 print(
@@ -410,10 +319,16 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
                 )
                 out_file.unlink(missing_ok=True)
                 prompt += ", dramatic cinematic focus, 3D Pixar character action, highly detailed subject, volumetric lighting"
+            except Exception as gen_err:
+                print(f"⚠️ [Image Engine Error] Beat #{b_num} generation attempt {attempt}/3 error: {gen_err}")
+                if attempt == 3:
+                    raise
 
         if not beat_certified:
-            generate_semantic_procedural_visual(prompt, out_file, seed=seed, beat_num=b_num)
-            audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
+            raise QualityAuditError(
+                f"Visual Asset Hard Block: Beat #{b_num} failed all AI generation attempts and strict auditor inspection. "
+                f"Publication halted by Zero-Upload Safety Guard."
+            )
 
         beat["image_url"] = f"images/{out_file.name}"
 

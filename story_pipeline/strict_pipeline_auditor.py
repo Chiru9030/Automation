@@ -51,10 +51,13 @@ def audit_story_script(script_data: dict) -> bool:
         raise QualityAuditError(f"Engagement Rejection: Expected exactly 5 story beats, found {len(beats)}")
 
     total_words = sum(len(b["narration"].split()) for b in beats)
-    if total_words < 105:
-        raise QualityAuditError(f"Pacing Rejection: Script too short ({total_words} words). Risk of low audience retention.")
-    if total_words > 138:
-        raise QualityAuditError(f"Duration Rejection: Script too long ({total_words} words). Exceeds 58.5s Shorts safety ceiling!")
+    if total_words < 124:
+        raise QualityAuditError(
+            f"Pacing Rejection: Script too short ({total_words} words < 124). "
+            f"Insufficient dialogue will leave dead air and no content in the final 10 seconds!"
+        )
+    if total_words > 146:
+        raise QualityAuditError(f"Duration Rejection: Script too long ({total_words} words > 146). Exceeds 58.5s Shorts safety ceiling!")
 
     # Verify opening psychological hook in Beat 1
     first_beat = beats[0]["narration"].lower()
@@ -67,15 +70,19 @@ def audit_story_script(script_data: dict) -> bool:
         raise QualityAuditError("Hook Rejection: Beat 1 lacks an immediate curiosity hook trigger word!")
 
     beat1_words = len(beats[0]["narration"].split())
-    if beat1_words > 32:
-        raise QualityAuditError(f"Hook Rejection: Beat 1 is too wordy ({beat1_words} words). Must be punchy (< 30 words) for 3-second retention.")
+    if beat1_words > 34:
+        raise QualityAuditError(f"Hook Rejection: Beat 1 is too wordy ({beat1_words} words). Must be punchy (< 32 words) for 3-second retention.")
 
     # Verify concluding payoff in Beat 5
     last_beat = beats[-1]["narration"]
-    if len(last_beat.split()) < 14:
-        raise QualityAuditError("Payoff Rejection: Beat 5 conclusion is too abrupt.")
+    last_beat_words = len(last_beat.split())
+    if last_beat_words < 22:
+        raise QualityAuditError(
+            f"Payoff Rejection: Beat 5 narration is too short ({last_beat_words} words < 22). "
+            f"Ending will terminate prematurely leaving empty dead air from 50s-58s!"
+        )
 
-    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook).")
+    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook & tail density).")
     return True
 
 
@@ -106,20 +113,31 @@ def audit_single_visual_asset(
             if h < w * 1.3:
                 raise QualityAuditError(f"Quality Rejection: Image {w}x{h} is not vertical. Requires 9:16 vertical aspect ratio!")
 
-            # Pillar 1: Content (Non-blank, Non-monochrome, Informational)
+            # Pillar 1: Content (Non-blank, Non-monochrome, Real Photographic/3D AI Texture)
             gray = im.convert("L")
             stat_gray = ImageStat.Stat(gray)
             mean_lum = stat_gray.mean[0]
             gray_std = stat_gray.stddev[0]
 
-            if gray_std < 5.0:
+            if gray_std < 6.0:
                 raise QualityAuditError(
-                    f"Content Rejection: Image appears to be a flat, solid monochrome fill (stddev: {gray_std:.1f} < 5.0)."
+                    f"Content Rejection: Image appears to be a flat, solid monochrome fill (stddev: {gray_std:.1f} < 6.0)."
                 )
             if mean_lum < 6.0:
                 raise QualityAuditError(f"Content Rejection: Image is pitch-black blank screen (mean luminance: {mean_lum:.1f}).")
             if mean_lum > 252.0:
                 raise QualityAuditError(f"Content Rejection: Image is pure-white blown-out screen (mean luminance: {mean_lum:.1f}).")
+
+            # Real AI Render Complexity: Check unique color entropy and texture
+            # Genuine photorealistic and 3D renders have thousands of unique micro-gradients.
+            # Flat geometric procedural line drawings or missing textures have < 1200 unique colors.
+            small = im.resize((120, 213), Image.Resampling.NEAREST)
+            unique_colors = len(set(small.get_flattened_data())) // 3
+            if unique_colors < 1400:
+                raise QualityAuditError(
+                    f"Content Rejection: Image lacks photographic/3D visual complexity ({unique_colors} colors < 1400). "
+                    f"Crude geometric lines, flat drawings, or missing image detected! Strict audit rejects fake assets."
+                )
 
             # Pillar 4: Clarity (Edge Focus & Sharpness)
             edges = gray.filter(ImageFilter.FIND_EDGES)
@@ -268,24 +286,52 @@ def audit_audio_sync(beats: list[dict], public_dir: Path) -> bool:
             if w["end_frame"] < w["start_frame"]:
                 raise QualityAuditError(f"Subtitle Rejection: Negative word duration detected on '{w['word']}'")
 
-    print(f"[AUDITOR] [GATE-3] Audio & Timings Approved (Duration: {total_sec:.2f}s, strictly < 58.5s).")
+    # Tail Content Check: Speech must actively extend past second 52.0 (no dead air in final 10s)
+    last_words = beats[-1].get("words", [])
+    if last_words:
+        last_beat_end = last_words[-1].get("end_sec", 0.0)
+        prior_frames = sum(b.get("duration_in_frames", 0) for b in beats[:-1])
+        prior_sec = prior_frames / fps
+        speech_end_sec = prior_sec + last_beat_end
+        if speech_end_sec < 52.0:
+            raise QualityAuditError(
+                f"Tail Speech Rejection: Narration finishes prematurely at {speech_end_sec:.1f}s, "
+                f"leaving {total_sec - speech_end_sec:.1f}s of dead air/no content at the end! "
+                f"Narration must actively extend to at least 53.0s."
+            )
+
+    print(f"[AUDITOR] [GATE-3] Audio & Timings Approved (Duration: {total_sec:.2f}s, speech active through {speech_end_sec:.1f}s).")
     return True
 
 
 def audit_subtitles_file(ass_path: Path) -> bool:
-    """Audits the generated ASS subtitle file for syntax, lower-third placement, and event coverage."""
+    """Audits the generated ASS subtitle file for syntax, lower-third placement, event coverage, and tail presence."""
     if not ass_path.exists():
         raise QualityAuditError(f"Subtitle Rejection: Subtitle file missing at {ass_path}")
 
     text = ass_path.read_text(encoding="utf-8")
-    dialogue_count = text.count("Dialogue:")
-    if dialogue_count < 25:
-        raise QualityAuditError(f"Subtitle Rejection: Insufficient subtitle events ({dialogue_count} found).")
+    dialogue_lines = [l for l in text.splitlines() if l.startswith("Dialogue:")]
+    if len(dialogue_lines) < 25:
+        raise QualityAuditError(f"Subtitle Rejection: Insufficient subtitle events ({len(dialogue_lines)} found).")
 
     if "MarginV" not in text or "Alignment" not in text:
         raise QualityAuditError("Subtitle Rejection: Missing ASS formatting style headers!")
 
-    print(f"[AUDITOR] [GATE-4] Subtitles File Approved ({dialogue_count} discrete kinetic events in safe lower-third).")
+    # Tail Subtitle Check: Subtitles must actively display past second 52.0
+    import re
+    last_d = dialogue_lines[-1]
+    matches = re.findall(r"\d+:\d+:\d+\.\d+", last_d)
+    if len(matches) >= 2:
+        end_s_str = matches[1]
+        parts = end_s_str.split(":")
+        sub_end_sec = int(parts[0]) * 3600 + int(parts[1]) * 60 + float(parts[2])
+        if sub_end_sec < 52.0:
+            raise QualityAuditError(
+                f"Tail Subtitle Rejection: Subtitles terminate prematurely at {sub_end_sec:.1f}s, "
+                f"leaving screen devoid of subtitles for {58.0 - sub_end_sec:.1f}s at video tail!"
+            )
+
+    print(f"[AUDITOR] [GATE-4] Subtitles File Approved ({len(dialogue_lines)} events, verified active through {sub_end_sec:.1f}s).")
     return True
 
 
@@ -336,7 +382,7 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
     if not has_audio:
         raise QualityAuditError("Audio Rejection: Video lacks a valid AAC stereo audio stream!")
 
-    # 3. Audio Silence / Flatline Detection
+    # 3. Audio Silence & Tail Activity Detection
     try:
         vol_cmd = [
             "ffmpeg", "-i", str(mp4_path),
@@ -353,13 +399,32 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
                     max_vol = float(val_str)
                     if max_vol < -45.0:
                         raise QualityAuditError(f"Audio Silence Rejection: Audio track is silent or near-inaudible ({max_vol} dB)!")
+
+        # Tail Silence Check (Final 5.0 seconds from 53s to 58s)
+        tail_vol_cmd = [
+            "ffmpeg", "-ss", f"{max(0, duration - 5.0):.2f}", "-i", str(mp4_path),
+            "-af", "volumedetect",
+            "-vn", "-sn", "-dn",
+            "-f", "null", "/dev/null"
+        ]
+        t_vol_res = subprocess.run(tail_vol_cmd, capture_output=True, text=True)
+        t_output = t_vol_res.stderr or ""
+        if "max_volume:" in t_output:
+            for line in t_output.splitlines():
+                if "max_volume:" in line:
+                    t_val = float(line.split("max_volume:")[-1].replace("dB", "").strip())
+                    if t_val < -40.0:
+                        raise QualityAuditError(
+                            f"Tail Silence Rejection: Final 5 seconds of video is silent ({t_val} dB)! "
+                            f"Dead air detected in 53s-58s window."
+                        )
     except Exception as e_vol:
         if isinstance(e_vol, QualityAuditError):
             raise
         print(f"Notice: Volume detect check ({e_vol})")
 
-    # 4. Multi-Point Visual Sampling & Motion Differential
-    sample_points = [duration * 0.10, duration * 0.30, duration * 0.50, duration * 0.70, duration * 0.90]
+    # 4. Multi-Point Visual Sampling & Motion Differential (including 95% tail mark)
+    sample_points = [duration * 0.10, duration * 0.30, duration * 0.50, duration * 0.70, duration * 0.95]
     all_black = True
     temp_frame = mp4_path.parent / "temp_audit_frame.jpg"
     frame_hashes = []
@@ -382,8 +447,19 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
                     std_dev = sum(stat.stddev[:3]) / 3.0
                     if mean_lum > 14.0 or std_dev > 10.0:
                         all_black = False
+
+                    # Check visual color complexity at this point
+                    small = im.resize((120, 213), Image.Resampling.NEAREST)
+                    unique_colors = len(set(small.get_flattened_data())) // 3
+                    if unique_colors < 1000:
+                        raise QualityAuditError(
+                            f"Visual Defect Rejection: Frame at {t_pt:.1f}s is blank, monochromatic, or lacks visual content "
+                            f"({unique_colors} colors < 1000)!"
+                        )
                     frame_hashes.append(compute_dhash(im))
                 temp_frame.unlink(missing_ok=True)
+        except QualityAuditError:
+            raise
         except Exception:
             pass
 

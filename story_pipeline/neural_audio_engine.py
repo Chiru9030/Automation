@@ -14,7 +14,7 @@ PUBLIC_AUDIO_DIR = BASE_DIR / "video-app" / "public" / "audio"
 # Single Deep Cinematic Voice with Crazy Bass
 SINGLE_BASS_VOICE = {
     "voice": "en-US-ChristopherNeural",
-    "rate": "+3%",
+    "rate": "+0%",  # Natural dramatic speed, avoids rushing through narration
     "pitch": "-4Hz",  # Deep, resonant cinematic voice
 }
 
@@ -149,8 +149,13 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
     target_frames = 1740  # 58.0s (strictly < 59s limit)
     if total_frames < target_frames:
         diff = target_frames - total_frames
-        beats[-1]["duration_in_frames"] += diff
-        print(f"⏱️ Adjusted final beat by +{diff} frames to lock total duration to strictly 58.0s (1740 frames).")
+        # Distribute remaining frames evenly across all 5 beats as gentle pauses between cuts (avoids empty tail)
+        per_beat = diff // len(beats)
+        for b in beats:
+            b["duration_in_frames"] += per_beat
+        # Remainder frames on last beat
+        beats[-1]["duration_in_frames"] += (diff - per_beat * len(beats))
+        print(f"⏱️ Distributed +{diff} frames evenly across all 5 beats (+{per_beat}f/beat) to lock timeline to 58.0s.")
     elif total_frames > target_frames:
         scale = target_frames / total_frames
         for b in beats:
