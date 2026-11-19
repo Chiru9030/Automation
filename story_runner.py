@@ -102,7 +102,7 @@ def render_with_remotion(cmd: list, cwd: str, out_file: Path) -> bool:
     return False
 
 
-PIPELINE_VERSION = "v1.2.0"
+PIPELINE_VERSION = "v1.3.0"
 
 def process_next_story(custom_topic: str | None = None, publish: bool = True) -> dict:
     print("\n==================================================================")

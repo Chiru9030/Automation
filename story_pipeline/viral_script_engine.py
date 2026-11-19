@@ -84,37 +84,32 @@ Output JSON ONLY:
   ]
 }}"""
             res = None
-            active_model = None
-            candidate_models = ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
-            for model_id in candidate_models:
-                for attempt in range(1, 3):
-                    try:
-                        print(f"⏳ [Script Engine] Querying Gemini ({model_id}, attempt {attempt}, timeout 20s)...")
-                        res = call_with_timeout(
-                            client.models.generate_content,
-                            kwargs=dict(
-                                model=model_id,
-                                contents=prompt,
-                                config=dict(response_mime_type="application/json"),
-                            ),
-                            timeout_sec=20,
-                        )
-                        if res and res.text:
-                            active_model = model_id
-                            break
-                    except concurrent.futures.TimeoutError:
-                        print(f"⏱️ [Script Engine] Model {model_id} timed out after 20s.")
+            active_model = "gemini-3.8-flash"
+            for attempt in range(1, 4):
+                try:
+                    print(f"⏳ [Script Engine] Querying Gemini (gemini-3.8-flash, attempt {attempt}, timeout 35s)...")
+                    res = call_with_timeout(
+                        client.models.generate_content,
+                        kwargs=dict(
+                            model="gemini-3.8-flash",
+                            contents=prompt,
+                            config=dict(response_mime_type="application/json"),
+                        ),
+                        timeout_sec=35,
+                    )
+                    if res and res.text:
                         break
-                    except Exception as m_err:
-                        err_s = str(m_err).lower()
-                        if "503" in err_s or "unavailable" in err_s or "demand" in err_s:
-                            print(f"⏳ {model_id} high demand. Waiting 2s (attempt {attempt})...")
-                            time.sleep(2)
-                        else:
-                            print(f"⚠️ Model {model_id} script error: {m_err}")
-                            break
-                if res and res.text:
-                    break
+                except concurrent.futures.TimeoutError:
+                    print(f"⏱️ [Script Engine] gemini-3.8-flash timed out after 35s (attempt {attempt})...")
+                except Exception as m_err:
+                    err_s = str(m_err).lower()
+                    if any(k in err_s for k in ["503", "unavailable", "demand", "429", "quota"]):
+                        backoff = 2 ** attempt
+                        print(f"⏳ gemini-3.8-flash high demand/rate-limit. Waiting {backoff}s (attempt {attempt})...")
+                        time.sleep(backoff)
+                    else:
+                        print(f"⚠️ Model gemini-3.8-flash script error: {m_err}")
+                        break
 
             if res and res.text:
                 data = json.loads(res.text)

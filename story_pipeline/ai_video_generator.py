@@ -102,6 +102,15 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
     # Try Replicate Open-Source Suite (Wan 2.1 -> CogVideoX -> AnimateDiff)
     # -------------------------------------------------------------
     if api_token and REPLICATE_VIDEO_ENABLED:
+        def _check_replicate_billing(err):
+            global REPLICATE_VIDEO_ENABLED
+            s = str(err).lower()
+            if any(k in s for k in ["402", "credit", "billing", "payment method", "throttled", "rate limit", "unauthenticated", "401"]):
+                REPLICATE_VIDEO_ENABLED = False
+                print(f"ℹ️ [Cloud AI Video] Replicate billing/credit limit reached. Disabling Replicate for this run.")
+                return True
+            return False
+
         try:
             import replicate
             client = replicate.Client(api_token=api_token)
@@ -125,10 +134,13 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                     timeout_sec=40,
                 )
             except Exception as e_wan:
-                print(f"Notice: Wan 2.1 ({e_wan}), advancing to CogVideoX-5B...")
+                if _check_replicate_billing(e_wan):
+                    output = None
+                else:
+                    print(f"Notice: Wan 2.1 ({e_wan}), advancing to CogVideoX-5B...")
 
             # 2. CogVideoX-5B (THUDM Leading Open-Source)
-            if not output:
+            if not output and REPLICATE_VIDEO_ENABLED:
                 try:
                     print("   • Testing Model 2: CogVideoX-5B...")
                     output = call_with_timeout(
@@ -143,10 +155,13 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                         timeout_sec=40,
                     )
                 except Exception as e_cog:
-                    print(f"Notice: CogVideoX-5B ({e_cog}), advancing to AnimateDiff-Lightning...")
+                    if _check_replicate_billing(e_cog):
+                        output = None
+                    else:
+                        print(f"Notice: CogVideoX-5B ({e_cog}), advancing to AnimateDiff-Lightning...")
 
             # 3. AnimateDiff-Lightning (ByteDance High-Speed Distilled)
-            if not output:
+            if not output and REPLICATE_VIDEO_ENABLED:
                 try:
                     print("   • Testing Model 3: AnimateDiff-Lightning...")
                     output = call_with_timeout(
@@ -160,7 +175,10 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                         timeout_sec=40,
                     )
                 except Exception as e_anim:
-                    print(f"Notice: AnimateDiff-Lightning ({e_anim})...")
+                    if _check_replicate_billing(e_anim):
+                        output = None
+                    else:
+                        print(f"Notice: AnimateDiff-Lightning ({e_anim})...")
 
             # Process output stream / URL if successful
             if output:
@@ -226,9 +244,10 @@ def generate_ai_video_replicate(prompt: str, image_path: Path, output_video_path
                             print("✅ [Pollinations Video] Successfully generated & normalized!")
                             return True
         except Exception as e_poll:
-            if "402" in str(e_poll) or "payment" in str(e_poll).lower():
+            s_poll = str(e_poll).lower()
+            if any(k in s_poll for k in ["402", "payment", "forbidden", "403"]):
                 POLLINATIONS_VIDEO_ENABLED = False
-                print("ℹ️ [Pollinations Video] Pollinations returned 402 Payment Required. Disabling for this run.")
+                print("ℹ️ [Pollinations Video] Pollinations payment required (402). Disabling for remainder of run.")
             else:
                 print(f"Notice: Pollinations video note ({e_poll})")
 

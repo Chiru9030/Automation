@@ -130,13 +130,15 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
                 temp_raw.write_bytes(data)
                 with Image.open(temp_raw) as im:
                     im_std = standardize_to_1080x1920(im.convert("RGB"))
+                    im_std = im_std.filter(ImageFilter.UnsharpMask(radius=2, percent=160, threshold=3))
                     im_std.save(output_path, "JPEG", quality=95)
                 temp_raw.unlink(missing_ok=True)
                 return output_path.exists() and output_path.stat().st_size > 25_000
     except Exception as e:
-        if "402" in str(e) or "payment" in str(e).lower():
+        s_err = str(e).lower()
+        if any(k in s_err for k in ["402", "payment", "403", "forbidden"]):
             POLLINATIONS_IMAGE_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations returned 402 Payment Required. Disabling for remainder of run.")
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
         else:
             print(f"[IMAGE-ENGINE] [TIER-2 Notice] Pollinations note ({str(e)[:100]})")
     return False

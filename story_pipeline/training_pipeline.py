@@ -29,7 +29,7 @@ def load_calibration() -> dict:
         "max_script_words": 135,
         "min_script_words": 105,
         "image_retry_delay_seconds": 25,
-        "primary_gemini_model": "gemini-1.5-flash",
+        "primary_gemini_model": "gemini-3.8-flash",
         "audio_speed_rate": "-3%",
         "total_failures_triaged": 0,
         "last_failure_timestamp": None,
@@ -50,8 +50,8 @@ def diagnose_root_cause(stage_name: str, error: Exception, payload: dict | None 
 
     if "404" in err_str or "not_found" in err_str or "no longer available" in err_str:
         diagnosis = "Deprecated or unavailable AI model endpoint."
-        calibration["primary_gemini_model"] = "gemini-1.5-flash"
-        remedy = {"action": "fallback_model_redirect", "model": "gemini-1.5-flash"}
+        calibration["primary_gemini_model"] = "gemini-3.8-flash"
+        remedy = {"action": "fallback_model_redirect", "model": "gemini-3.8-flash"}
     elif "429" in err_str or "resource_exhausted" in err_str or "quota" in err_str or "rate limit" in err_str:
         diagnosis = "API Rate Limit Exhaustion / Concurrency Quota hit."
         calibration["image_retry_delay_seconds"] = max(25, calibration.get("image_retry_delay_seconds", 20) + 10)
