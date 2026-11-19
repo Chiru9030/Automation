@@ -15,10 +15,11 @@
     "dynamic::What if you fell into Jupiter's atmosphere?::Ep15",
     "dynamic::What lies beneath Antarctica's 2-mile thick ice sheet?::Ep16",
     "dynamic::What happens if Earth stops spinning for just 5 seconds?::Ep17",
-    "dynamic::What happens if a nuclear submarine sinks to Mariana Trench?::Ep18"
+    "dynamic::What happens if a nuclear submarine sinks to Mariana Trench?::Ep18",
+    "dynamic::The secret Soviet borehole that dug 40,000 feet into Earth::Ep19"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 18,
+  "episode_count": 19,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -34,26 +35,28 @@
     "What if you fell into Jupiter's atmosphere?",
     "What lies beneath Antarctica's 2-mile thick ice sheet?",
     "What happens if Earth stops spinning for just 5 seconds?",
-    "What happens if a nuclear submarine sinks to Mariana Trench?"
+    "What happens if a nuclear submarine sinks to Mariana Trench?",
+    "The secret Soviet borehole that dug 40,000 feet into Earth"
   ],
   "used_topics": [
-    "What happens if you drink boiling lava?",
-    "What if aliens land on Earth tomorrow?",
-    "The sound of the Sun would be deafening if sound traveled in space",
-    "What happens if your brain permanently loses the ability to sleep?",
     "The immortal jellyfish that can live forever",
-    "What if the Moon was replaced by Saturn?",
-    "The ancient monster that hunted Megalodons for breakfast",
-    "Dinosaurs never actually roared like in Jurassic Park",
-    "What happens if Earth stops spinning for just 5 seconds?",
     "What happens if you never stop peeing forever?",
-    "What happens if your immune system discovers your eyes?",
-    "The Deep Sea Abyssal Creature",
-    "What happens if a nuclear submarine sinks to Mariana Trench?",
-    "What if you fell into Jupiter's atmosphere?",
-    "What if gravity suddenly doubled across the entire world?",
-    "The colossal megalodon that hunted prehistoric oceans",
+    "What if the Moon was replaced by Saturn?",
     "What lies beneath Antarctica's 2-mile thick ice sheet?",
-    "What happens if your body starts turning into a living stone statue?"
+    "What happens if a nuclear submarine sinks to Mariana Trench?",
+    "What happens if you drink boiling lava?",
+    "Dinosaurs never actually roared like in Jurassic Park",
+    "What if gravity suddenly doubled across the entire world?",
+    "What happens if your brain permanently loses the ability to sleep?",
+    "What happens if your immune system discovers your eyes?",
+    "What happens if your body starts turning into a living stone statue?",
+    "The sound of the Sun would be deafening if sound traveled in space",
+    "What if you fell into Jupiter's atmosphere?",
+    "What if aliens land on Earth tomorrow?",
+    "The colossal megalodon that hunted prehistoric oceans",
+    "What happens if Earth stops spinning for just 5 seconds?",
+    "The Deep Sea Abyssal Creature",
+    "The ancient monster that hunted Megalodons for breakfast",
+    "The secret Soviet borehole that dug 40,000 feet into Earth"
   ]
 }
