@@ -320,7 +320,7 @@ Return ONLY a valid JSON object matching this schema:
   ]
 }}"""
         resp = client.models.generate_content(
-            model="gemini-3.8-flash",
+            model="gemini-2.0-flash",
             contents=prompt,
             config=dict(response_mime_type="application/json")
         )

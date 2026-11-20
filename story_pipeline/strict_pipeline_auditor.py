@@ -131,7 +131,7 @@ def audit_scientific_factuality(script_data: dict) -> bool:
             # Query Gemini with Google Search Tool Grounding
             topic = script_data.get("topic", "")
             verify_prompt = f"Fact-check this short-form science script topic '{topic}'. Script: '{full_text[:400]}'. Is this claim scientifically plausible or a total debunked fabrication? Answer YES if plausible, or NO followed by the exact error."
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={api_key}"
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
             payload = json.dumps({
                 "contents": [{"parts": [{"text": verify_prompt}]}],
                 "tools": [{"google_search": {}}]

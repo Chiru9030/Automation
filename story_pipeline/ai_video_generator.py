@@ -32,9 +32,12 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=40):
     """Executes a function inside a worker thread with a strict maximum timeout."""
     if kwargs is None:
         kwargs = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    try:
         future = executor.submit(func, *args, **kwargs)
         return future.result(timeout=timeout_sec)
+    finally:
+        executor.shutdown(wait=False, cancel_futures=True)
 
 
 def build_strong_ai_video_prompt(

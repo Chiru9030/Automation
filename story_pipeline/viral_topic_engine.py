@@ -25,9 +25,12 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=15):
     """Executes a function inside a worker thread with a strict maximum timeout."""
     if kwargs is None:
         kwargs = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    try:
         future = executor.submit(func, *args, **kwargs)
         return future.result(timeout=timeout_sec)
+    finally:
+        executor.shutdown(wait=False, cancel_futures=True)
 
 # Extensive Curated Pool of High-CTR "What If" & Shocking Curiosity Topics
 VIRAL_TOPIC_POOL = [
@@ -180,7 +183,8 @@ def generate_unique_viral_topic() -> dict:
         api_key = api_key.strip().strip("'").strip('"')
         try:
             from google import genai
-            client = genai.Client(api_key=api_key)
+            from google.genai import types
+            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=12000))
 
             prompt = f"""Generate ONE unique, viral, mind-blowing YouTube Shorts topic.
 Examples: 'What happens if you never stop peeing forever?', 'What if aliens land tomorrow?', 'T-Rex actually purred like birds'.
@@ -194,11 +198,11 @@ Return JSON format ONLY:
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash"]
+            active_model = "gemini-2.0-flash"
+            models_to_try = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
             for candidate_model in models_to_try:
                 try:
-                    print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, timeout 15s)...")
+                    print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, timeout 12s)...")
                     res = call_with_timeout(
                         client.models.generate_content,
                         kwargs=dict(
@@ -206,13 +210,13 @@ Return JSON format ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=15,
+                        timeout_sec=12,
                     )
                     if res and res.text:
                         active_model = candidate_model
                         break
                 except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Topic Engine] {candidate_model} timed out after 15s. Trying next candidate...")
+                    print(f"⏱️ [Topic Engine] {candidate_model} timed out after 12s. Trying next candidate...")
                 except Exception as m_err:
                     print(f"⚠️ Model {candidate_model} note: {m_err}")
 
@@ -227,7 +231,7 @@ Return JSON format ONLY:
                     print(f"💡 [Stage 1: Topic Engine] Gemini AI ({active_model}) generated Topic #{ep_count}: '{data['topic']}'")
                     try:
                         from story_pipeline.telegram_notifier import RUN_TRACKER
-                        RUN_TRACKER.set_model_used("Topic", "Gemini 3.8-Flash")
+                        RUN_TRACKER.set_model_used("Topic", f"Gemini ({active_model})")
                     except Exception:
                         pass
                     return data
@@ -235,7 +239,7 @@ Return JSON format ONLY:
             print(f"Notice: Gemini topic generation note: {e}")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("Gemini 3.8-Flash (Topic)", f"Offline/timeout: {str(e)[:50]}")
+                RUN_TRACKER.record_model_failure("Gemini (Topic)", f"Offline/timeout: {str(e)[:50]}")
             except Exception:
                 pass
 

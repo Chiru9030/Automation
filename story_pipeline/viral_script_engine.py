@@ -19,13 +19,16 @@ load_dotenv()
 TARGET_DURATION_SECONDS = 58.0  # Strictly under 59.0s limit for YouTube Shorts / Reels
 
 
-def call_with_timeout(func, args=(), kwargs=None, timeout_sec=20):
+def call_with_timeout(func, args=(), kwargs=None, timeout_sec=15):
     """Executes a function inside a worker thread with a strict maximum timeout."""
     if kwargs is None:
         kwargs = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    try:
         future = executor.submit(func, *args, **kwargs)
         return future.result(timeout=timeout_sec)
+    finally:
+        executor.shutdown(wait=False, cancel_futures=True)
 
 
 def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: int = 1) -> dict:
@@ -69,7 +72,8 @@ def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: i
     if api_key:
         try:
             from google import genai
-            client = genai.Client(api_key=api_key)
+            from google.genai import types
+            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=12000))
 
             prompt = f"""You are an elite viral short-form director for YouTube Shorts and TikTok.
 Write a gripping, high-retention video script for:
@@ -115,11 +119,11 @@ Output JSON ONLY:
   }}
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash"]
+            active_model = "gemini-2.0-flash"
+            models_to_try = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
             for candidate_model in models_to_try:
                 try:
-                    print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 15s)...")
+                    print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 12s)...")
                     res = call_with_timeout(
                         client.models.generate_content,
                         kwargs=dict(
@@ -127,13 +131,13 @@ Output JSON ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=15,
+                        timeout_sec=12,
                     )
                     if res and res.text:
                         active_model = candidate_model
                         break
                 except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Script Engine] {candidate_model} timed out after 15s. Trying next candidate...")
+                    print(f"⏱️ [Script Engine] {candidate_model} timed out after 12s. Trying next candidate...")
                 except Exception as m_err:
                     print(f"⚠️ Model {candidate_model} script note: {m_err}")
 
@@ -144,7 +148,7 @@ Output JSON ONLY:
                     print(f"📝 [Stage 2: Script Engine] Gemini AI ({active_model}) synthesized script for '{topic}' ({word_count} words)")
                     try:
                         from story_pipeline.telegram_notifier import RUN_TRACKER
-                        RUN_TRACKER.set_model_used("Script", "Gemini 3.8-Flash")
+                        RUN_TRACKER.set_model_used("Script", f"Gemini ({active_model})")
                     except Exception:
                         pass
                     return data
@@ -152,7 +156,7 @@ Output JSON ONLY:
             print(f"Notice: Gemini script generation note ({e})")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("Gemini 3.8-Flash (Script)", f"Offline/error: {str(e)[:50]}")
+                RUN_TRACKER.record_model_failure("Gemini (Script)", f"Offline/error: {str(e)[:50]}")
             except Exception:
                 pass
 
