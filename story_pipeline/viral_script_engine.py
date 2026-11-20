@@ -119,8 +119,8 @@ Output JSON ONLY:
   }}
 }}"""
             res = None
-            active_model = "gemini-2.0-flash"
-            models_to_try = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
+            active_model = "gemini-3.8-flash"
+            models_to_try = ["gemini-3.8-flash"]
             for candidate_model in models_to_try:
                 try:
                     print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 12s)...")
