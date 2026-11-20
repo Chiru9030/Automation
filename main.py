@@ -17,7 +17,14 @@ BASE_DIR = Path(__file__).resolve().parent
 VIDEO_APP_DIR = BASE_DIR / "video-app"
 
 
-def upload_to_youtube(video_path: str, title: str, description: str, tags: list[str]) -> str:
+def upload_to_youtube(
+    video_path: str,
+    title: str,
+    description: str,
+    tags: list[str],
+    thumbnail_path: str | None = None,
+    privacy_status: str | None = None,
+) -> str:
     """Uploads a rendered MP4 video to YouTube and returns the Video ID.
 
     Args:
@@ -25,6 +32,8 @@ def upload_to_youtube(video_path: str, title: str, description: str, tags: list[
         title: Title of the video.
         description: Description of the video.
         tags: List of keywords/tags for the video.
+        thumbnail_path: Optional path to custom high-CTR thumbnail JPG.
+        privacy_status: 'private', 'unlisted', or 'public' (defaults to YOUTUBE_PRIVACY_STATUS or 'private').
     """
     token_path = BASE_DIR / "youtube_tokens.json"
     if not token_path.exists():
@@ -36,19 +45,34 @@ def upload_to_youtube(video_path: str, title: str, description: str, tags: list[
     credentials = Credentials.from_authorized_user_file(str(token_path))
     youtube = build("youtube", "v3", credentials=credentials)
 
+    chosen_privacy = privacy_status or os.getenv("YOUTUBE_PRIVACY_STATUS", "private")
+
     body = {
         "snippet": {
             "title": title,
             "description": description,
             "tags": tags,
-            "categoryId": "22",  # People & Blogs
+            "categoryId": "28",  # Science & Technology
         },
-        "status": {"privacyStatus": "public"},
+        "status": {
+            "privacyStatus": chosen_privacy,
+            "selfDeclaredMadeForKids": False,
+            "containsSyntheticMedia": True,  # YouTube 2025/2026 AI disclosure compliance
+        },
     }
     media = MediaFileUpload(video_path, chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(part=",".join(body.keys()), body=body, media_body=media)
     response = request.execute()
     video_id = response.get("id")
+
+    # Set custom high-CTR thumbnail if provided
+    if video_id and thumbnail_path and Path(thumbnail_path).exists():
+        try:
+            thumb_media = MediaFileUpload(str(thumbnail_path), mimetype="image/jpeg")
+            youtube.thumbnails().set(videoId=video_id, media_body=thumb_media).execute()
+            print(f"📸 Custom High-CTR Thumbnail applied to YouTube Short: {Path(thumbnail_path).name}")
+        except Exception as e_thumb:
+            print(f"Notice: Custom thumbnail set note ({e_thumb})")
 
     # Post engagement booster comment
     if video_id:
@@ -58,7 +82,7 @@ def upload_to_youtube(video_path: str, title: str, description: str, tags: list[
                     "videoId": video_id,
                     "topLevelComment": {
                         "snippet": {
-                            "textOriginal": "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for new episodes every 5 hours! 🚀"
+                            "textOriginal": "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀"
                         }
                     }
                 }
@@ -68,7 +92,7 @@ def upload_to_youtube(video_path: str, title: str, description: str, tags: list[
         except Exception as e_comm:
             print(f"Notice: Auto-comment note ({e_comm})")
 
-    return f"Successfully uploaded to YouTube! Video ID: {video_id}"
+    return f"Successfully uploaded to YouTube! Video ID: {video_id} (Privacy: {chosen_privacy}, SyntheticMedia: True)"
 
 
 def upload_to_instagram(video_path: str, caption: str) -> str:

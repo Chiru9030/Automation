@@ -1,9 +1,10 @@
-name: 5-Hour Autonomous Story Video Pipeline
+name: Autonomous Daily Story Video Pipeline
 
 on:
   schedule:
-    # Trigger automatically every 5 hours (00:00, 05:00, 10:00, 15:00, 20:00 UTC)
-    - cron: '0 */5 * * *'
+    # Trigger automatically once per day (14:00 UTC / 9:00 AM EST / 7:30 PM IST)
+    # Recommended by YouTube Inauthentic Content Policy & Shorts Viewership Research
+    - cron: '0 14 * * *'
   workflow_dispatch:
     inputs:
       custom_topic:
@@ -15,6 +16,14 @@ on:
         type: boolean
         required: false
         default: false
+      privacy_status:
+        description: 'YouTube Privacy Status (private, unlisted, or public)'
+        type: choice
+        options:
+          - private
+          - unlisted
+          - public
+        default: 'private'
 
 concurrency:
   group: story-pipeline
@@ -103,10 +112,12 @@ jobs:
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           FAL_KEY: ${{ secrets.FAL_KEY }}
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}
           SAMPLE_MODE: ${{ github.event.inputs.sample_mode }}
+          YOUTUBE_PRIVACY_STATUS: ${{ github.event.inputs.privacy_status || 'private' }}
           RENDER_ENGINE: fast
           PYTHONUNBUFFERED: "1"
         run: |

@@ -314,7 +314,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
 
         if publish:
             print("\n📤 Publishing to social platforms...")
-            yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags)
+            yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags, thumbnail_path=str(thumb_path))
             print(f"YouTube: {yt_res}")
 
             ig_res = upload_to_instagram(str(out_mp4), ig_caption)
