@@ -17,13 +17,13 @@ on:
         required: false
         default: false
       privacy_status:
-        description: 'YouTube Privacy Status (private, unlisted, or public)'
+        description: 'YouTube Privacy Status (public, unlisted, or private)'
         type: choice
         options:
-          - private
-          - unlisted
           - public
-        default: 'private'
+          - unlisted
+          - private
+        default: 'public'
 
 concurrency:
   group: story-pipeline
@@ -114,7 +114,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CUSTOM_TOPIC: ${{ github.event.inputs.custom_topic }}
           SAMPLE_MODE: ${{ github.event.inputs.sample_mode }}
-          YOUTUBE_PRIVACY_STATUS: ${{ github.event.inputs.privacy_status || 'private' }}
+          YOUTUBE_PRIVACY_STATUS: ${{ github.event.inputs.privacy_status || 'public' }}
           RENDER_ENGINE: fast
           PYTHONUNBUFFERED: "1"
         run: |

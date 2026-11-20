@@ -45,7 +45,7 @@ def upload_to_youtube(
     credentials = Credentials.from_authorized_user_file(str(token_path))
     youtube = build("youtube", "v3", credentials=credentials)
 
-    chosen_privacy = privacy_status or os.getenv("YOUTUBE_PRIVACY_STATUS", "private")
+    chosen_privacy = privacy_status or os.getenv("YOUTUBE_PRIVACY_STATUS", "public")
 
     body = {
         "snippet": {
