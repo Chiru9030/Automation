@@ -35,7 +35,7 @@ permissions:
 jobs:
   generate-and-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
@@ -68,14 +68,6 @@ jobs:
           key: pip-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             pip-${{ runner.os }}-
-
-      - name: Cache Hugging Face Hub Models
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface/hub
-          key: hf-hub-${{ runner.os }}-v1
-          restore-keys: |
-            hf-hub-${{ runner.os }}-
 
       - name: Install Python Requirements
         run: |

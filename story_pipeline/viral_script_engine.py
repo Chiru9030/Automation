@@ -116,31 +116,26 @@ Output JSON ONLY:
 }}"""
             res = None
             active_model = "gemini-3.8-flash"
-            for attempt in range(1, 4):
+            models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash"]
+            for candidate_model in models_to_try:
                 try:
-                    print(f"⏳ [Script Engine] Querying Gemini (gemini-3.8-flash, attempt {attempt}, timeout 35s)...")
+                    print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 15s)...")
                     res = call_with_timeout(
                         client.models.generate_content,
                         kwargs=dict(
-                            model="gemini-3.8-flash",
+                            model=candidate_model,
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=18,
+                        timeout_sec=15,
                     )
                     if res and res.text:
+                        active_model = candidate_model
                         break
                 except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Script Engine] gemini-3.8-flash timed out after 35s (attempt {attempt})...")
+                    print(f"⏱️ [Script Engine] {candidate_model} timed out after 15s. Trying next candidate...")
                 except Exception as m_err:
-                    err_s = str(m_err).lower()
-                    if any(k in err_s for k in ["503", "unavailable", "demand", "429", "quota"]):
-                        backoff = 2 ** attempt
-                        print(f"⏳ gemini-3.8-flash high demand/rate-limit. Waiting {backoff}s (attempt {attempt})...")
-                        time.sleep(backoff)
-                    else:
-                        print(f"⚠️ Model gemini-3.8-flash script error: {m_err}")
-                        break
+                    print(f"⚠️ Model {candidate_model} script note: {m_err}")
 
             if res and res.text:
                 data = json.loads(res.text)
