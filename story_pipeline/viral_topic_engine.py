@@ -184,7 +184,7 @@ def generate_unique_viral_topic() -> dict:
         try:
             from google import genai
             from google.genai import types
-            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=12000))
+            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=30000))
 
             prompt = f"""Generate ONE unique, viral, mind-blowing YouTube Shorts topic.
 Examples: 'What happens if you never stop peeing forever?', 'What if aliens land tomorrow?', 'T-Rex actually purred like birds'.
@@ -198,11 +198,11 @@ Return JSON format ONLY:
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash"]
+            active_model = "gemini-2.0-flash"
+            models_to_try = ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
             for candidate_model in models_to_try:
                 try:
-                    print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, timeout 12s)...")
+                    print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, timeout 25s)...")
                     res = call_with_timeout(
                         client.models.generate_content,
                         kwargs=dict(
@@ -210,13 +210,13 @@ Return JSON format ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=12,
+                        timeout_sec=25,
                     )
                     if res and res.text:
                         active_model = candidate_model
                         break
                 except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Topic Engine] {candidate_model} timed out after 12s. Trying next candidate...")
+                    print(f"⏱️ [Topic Engine] {candidate_model} timed out after 25s. Trying next candidate...")
                 except Exception as m_err:
                     print(f"⚠️ Model {candidate_model} note: {m_err}")
 

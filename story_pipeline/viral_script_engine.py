@@ -73,7 +73,7 @@ def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: i
         try:
             from google import genai
             from google.genai import types
-            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=12000))
+            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=30000))
 
             prompt = f"""You are an elite viral short-form director for YouTube Shorts and TikTok.
 Write a gripping, high-retention video script for:
@@ -83,31 +83,31 @@ NARRATIVE FORMAT: {format_name} ({selected_format['style_guide']})
 EPISODE: #{ep_num}
 
 CRITICAL RETENTION & VISUAL RULES:
-1. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 78 AND 96 WORDS (Yields 28-36 seconds of optimal high-retention speech; APV > 110%).
+1. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 126 AND 138 WORDS (Yields 52-56 seconds of optimal high-retention speech; APV > 105%).
 2. CADENCE: NEVER use ellipses (...), em-dashes, or semicolons. Use short punchy sentences (<12 words) for continuous, relentless speech flow with zero pauses > 0.3s.
-3. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler.
-4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically connect directly into the very first word of Beat 1. Beat 5's visual_prompt MUST match Beat 1's palette and subject to complete a seamless visual loop.
+3. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler. Beat 1 must be between 24 and 30 words.
+4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically connect directly into the very first word of Beat 1. Beat 5's visual_prompt MUST match Beat 1's palette and subject to complete a seamless visual loop. Beat 5 must be between 23 and 28 words.
 5. LITERAL IMAGE GROUNDING: Every 'visual_prompt' MUST literally depict the exact subject, action, and environment spoken in that beat's 'narration'. NO generic corridors, NO abstract devices, NO random crowd scenes.
-6. STRUCTURE: Exactly 5 rapid beats (each 15-20 words):
-   - Beat 1 (0-6s): Shock Hook & Impossible Paradox (Grab in first 2 seconds, 15-18 words)
-   - Beat 2 (6-14s): Escalating Tension / The Hidden Truth (16-19 words)
-   - Beat 3 (14-22s): Scientific Climax / The Extreme Anomaly (16-19 words)
-   - Beat 4 (22-30s): The Revelation / Mind-Blowing Detail (16-19 words)
-   - Beat 5 (30-36s): The Seamless Loop Connector (Flows into Beat 1, matching Beat 1 visual, 14-18 words)
+6. STRUCTURE: Exactly 5 rapid beats (each 24-28 words):
+   - Beat 1 (0-10s): Shock Hook & Impossible Paradox (Grab in first 2 seconds, 24-28 words)
+   - Beat 2 (10-22s): Escalating Tension / The Hidden Truth (24-28 words)
+   - Beat 3 (22-34s): Scientific Climax / The Extreme Anomaly (24-28 words)
+   - Beat 4 (34-46s): The Revelation / Mind-Blowing Detail (24-28 words)
+   - Beat 5 (46-55s): The Seamless Loop Connector (Flows into Beat 1, matching Beat 1 visual, 23-28 words)
 
 Output JSON ONLY:
 {{
   "episode_title": "{topic.upper()[:28]}",
   "narrative_format": "{format_name}",
   "hook_headline": "VIRAL HOOK (3-4 WORDS)",
-  "total_words_count": 86,
+  "total_words_count": 130,
   "loop_lead_in": "Last words connecting to Beat 1",
   "beats": [
     {{
       "beat_number": 1,
-      "time_window": "0-6s",
+      "time_window": "0-10s",
       "hook_trigger": "Shock Hook",
-      "narration": "First spoken beat (15-18 words)",
+      "narration": "First spoken beat (24-28 words)",
       "speaker": "anchor",
       "sfx": "whoosh",
       "visual_prompt": "3D Pixar cinematic prompt, highly detailed, 8k, Unreal Engine 5 render"
@@ -121,11 +121,11 @@ Output JSON ONLY:
   }}
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash"]
+            active_model = "gemini-2.0-flash"
+            models_to_try = ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
             for candidate_model in models_to_try:
                 try:
-                    print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 12s)...")
+                    print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, timeout 25s)...")
                     res = call_with_timeout(
                         client.models.generate_content,
                         kwargs=dict(
@@ -133,13 +133,13 @@ Output JSON ONLY:
                             contents=prompt,
                             config=dict(response_mime_type="application/json"),
                         ),
-                        timeout_sec=12,
+                        timeout_sec=25,
                     )
                     if res and res.text:
                         active_model = candidate_model
                         break
                 except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Script Engine] {candidate_model} timed out after 12s. Trying next candidate...")
+                    print(f"⏱️ [Script Engine] {candidate_model} timed out after 25s. Trying next candidate...")
                 except Exception as m_err:
                     print(f"⚠️ Model {candidate_model} script note: {m_err}")
 
@@ -308,7 +308,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         if len(words_list) > 7:
             topic_core = " ".join(words_list[:7])
 
-        beat1_narration = f"What if {topic_core.lower()}? Most people assume civilization would carry on normally, but the sudden reality would plunge our entire world into catastrophic chaos."
+        beat1_narration = f"What if {topic_core.lower()}? Most people assume our planet would carry on normally, but this sudden cosmic shockwave would instantly plunge modern civilization into complete catastrophic chaos."
 
         beats = [
             {
@@ -327,7 +327,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 2,
                 "time_window": "10-22s",
                 "hook_trigger": "10s Escalation Hook",
-                "narration": "Within seconds, supersonic kinetic shockwaves ripple across the globe at one thousand miles per hour, completely collapsing every single electrical power grid across the continents.",
+                "narration": "Within seconds, supersonic kinetic shockwaves ripple across the globe at one thousand miles per hour, completely collapsing electrical power grids and shattering modern communication networks across every continent.",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
@@ -339,7 +339,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, sweeping coastal cities under towering walls of churning saltwater.",
+                "narration": "Pure terror erupts across major coastlines as colossal ocean tsunamis surge inland, sweeping coastal cities under towering walls of churning saltwater while ferocious atmospheric winds violently tear through skyscrapers.",
                 "speaker": "character_hero",
                 "speaker_name": "Commander",
                 "speaker_avatar": "🚨",
@@ -351,7 +351,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, tearing glowing tectonic fissures across the ground.",
+                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, tearing glowing tectonic magma fissures that permanently reshape the entire global landscape.",
                 "speaker": "character_guide",
                 "speaker_name": "Scientist",
                 "speaker_avatar": "🔬",
@@ -363,7 +363,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 5,
                 "time_window": "48-58s",
                 "hook_trigger": "45s Resolution Hook",
-                "narration": "Our world balances on an extraordinarily fragile razor's edge. The terrifying reality is, the moment cosmic balance breaks, you realize...",
+                "narration": "Our world balances on an extraordinarily fragile razor's edge. The terrifying reality is, the exact split second cosmic balance breaks, you instantly realize...",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",

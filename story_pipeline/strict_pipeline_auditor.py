@@ -137,44 +137,43 @@ def audit_scientific_factuality(script_data: dict) -> bool:
             "Is this claim scientifically plausible or a total debunked fabrication? "
             "Answer YES if plausible, or NO followed by the exact error."
         )
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={api_key}"
-        payload = json.dumps({
-            "contents": [{"parts": [{"text": verify_prompt}]}],
-            "tools": [{"google_search": {}}]
-        }).encode("utf-8")
-
+        grounding_models = ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
         grounded = False
         last_error = None
-        for attempt in range(1, 3):
-            try:
-                req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
-                with urllib.request.urlopen(req, timeout=12) as resp:
-                    g_res = json.loads(resp.read().decode("utf-8"))
-                    candidate = g_res.get("candidates", [{}])[0]
-                    ans = candidate.get("content", {}).get("parts", [{}])[0].get("text", "")
-                    grounding = candidate.get("groundingMetadata", {})
-                    web_queries = grounding.get("webSearchQueries", [])
-                    chunks = grounding.get("groundingChunks", [])
-                    sources = [c.get("web", {}).get("uri") for c in chunks if c.get("web", {}).get("uri")]
+        for g_model in grounding_models:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{g_model}:generateContent?key={api_key}"
+            for attempt in range(1, 3):
+                try:
+                    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+                    with urllib.request.urlopen(req, timeout=15) as resp:
+                        g_res = json.loads(resp.read().decode("utf-8"))
+                        candidate = g_res.get("candidates", [{}])[0]
+                        ans = candidate.get("content", {}).get("parts", [{}])[0].get("text", "")
+                        grounding = candidate.get("groundingMetadata", {})
+                        web_queries = grounding.get("webSearchQueries", [])
+                        chunks = grounding.get("groundingChunks", [])
+                        sources = [c.get("web", {}).get("uri") for c in chunks if c.get("web", {}).get("uri")]
 
-                    print(f"🌐 [Gate 6: Grounding] Search Queries Used: {web_queries}")
-                    print(f"🌐 [Gate 6: Grounding] Citations / Sources ({len(sources)} found): {sources[:3]}")
+                        print(f"🌐 [Gate 6: Grounding ({g_model})] Search Queries: {web_queries}")
+                        print(f"🌐 [Gate 6: Grounding ({g_model})] Citations ({len(sources)} found): {sources[:3]}")
 
-                    if ans.strip().upper().startswith("NO"):
-                        raise QualityAuditError(f"Factuality Rejection: Grounded Fact-Checker debunked script claim: {ans[:150]}")
+                        if ans.strip().upper().startswith("NO"):
+                            raise QualityAuditError(f"Factuality Rejection: Grounded Fact-Checker debunked script claim: {ans[:150]}")
 
-                    if not sources and not web_queries:
-                        raise QualityAuditError(f"Factuality Rejection: Grounding returned no external web sources for topic '{topic}'!")
+                        if not sources and not web_queries:
+                            raise QualityAuditError(f"Factuality Rejection: Grounding returned no external web sources for topic '{topic}'!")
 
-                    print(f"✅ [Gate 6: Grounded Verification] Scientifically verified with {len(sources)} live web sources.")
-                    grounded = True
-                    break
-            except QualityAuditError:
-                raise
-            except Exception as e_ground:
-                last_error = e_ground
-                print(f"⚠️ [Gate 6 Notice] Grounding attempt {attempt}/2 encountered: {e_ground}")
-                time.sleep(1.5)
+                        print(f"✅ [Gate 6: Grounded Verification] Scientifically verified with {len(sources)} live web sources using {g_model}.")
+                        grounded = True
+                        break
+                except QualityAuditError:
+                    raise
+                except Exception as e_ground:
+                    last_error = e_ground
+                    print(f"⚠️ [Gate 6 Notice] Grounding with {g_model} attempt {attempt}/2 encountered: {e_ground}")
+                    time.sleep(1.0)
+            if grounded:
+                break
 
         if not grounded:
             raise QualityAuditError(f"Factuality Rejection: Gate 6 live search grounding failed after retries: {last_error}")
