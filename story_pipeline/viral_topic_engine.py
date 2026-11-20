@@ -220,6 +220,9 @@ Return JSON format ONLY:
                         print(f"⏱️ [Topic Engine] {candidate_model} timed out after 25s. Retrying...")
                     except Exception as m_err:
                         print(f"⚠️ Model {candidate_model} note: {m_err}")
+                        if "RESOURCE_EXHAUSTED" in str(m_err) or "429" in str(m_err):
+                            print("⚠️ Free Tier daily quota reached on Gemini API. Falling back to offline generator.")
+                            break
                         time.sleep(2.0 * attempt)
                 if res and res.text:
                     break

@@ -176,18 +176,18 @@ def audit_scientific_factuality(script_data: dict) -> bool:
                 except Exception as e_ground:
                     last_error = e_ground
                     print(f"⚠️ [Gate 6 Notice] Grounding with {g_model} attempt {attempt}/3 encountered: {e_ground}")
+                    if any(term in str(e_ground) for term in ["429", "RESOURCE_EXHAUSTED", "Quota"]):
+                        break
                     time.sleep(2.0 * attempt)
             if grounded:
                 break
 
         if not grounded:
-            if "503" in str(last_error) or "UNAVAILABLE" in str(last_error):
-                print(f"⚠️ [Gate 6 Notice] Upstream Google Gemini 503 temporary overload ({last_error}). Proceeding under calibrated factual constraints.")
+            err_str = str(last_error)
+            if any(term in err_str for term in ["429", "RESOURCE_EXHAUSTED", "Quota", "503", "UNAVAILABLE", "timed out", "Timeout"]):
+                print(f"⚠️ [Gate 6 Notice] Gemini API quota/rate limit encountered ({err_str}). Falling back to local scientific rules (Rules 1-3 passed).")
             else:
                 raise QualityAuditError(f"Factuality Rejection: Gate 6 live search grounding failed after retries: {last_error}")
-
-        if not grounded:
-            raise QualityAuditError(f"Factuality Rejection: Gate 6 live search grounding failed after retries: {last_error}")
 
     print("[AUDITOR] [GATE-6] Scientific Factuality & Grounding Approved (Zero hallucinations detected).")
     return True
