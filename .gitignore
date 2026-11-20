@@ -27,6 +27,7 @@ video-app/out/
 video-app/public/images/ep_*
 video-app/public/audio/beat_*
 video-app/public/audio/story_bg.wav
+video-app/public/audio/ambient_bed.wav
 story_pipeline/training_failures.jsonl
 story_pipeline/pipeline_calibration.json
 

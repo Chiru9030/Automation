@@ -11,12 +11,25 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_AUDIO_DIR = BASE_DIR / "video-app" / "public" / "audio"
 
-# Single Deep Cinematic Voice with Crazy Bass
-SINGLE_BASS_VOICE = {
+# Dual-Speaker Cinema Narration Suite (Anchor & Specialist)
+VOICE_ANCHOR = {
     "voice": "en-US-ChristopherNeural",
     "rate": "+0%",  # Natural dramatic speed, avoids rushing through narration
-    "pitch": "-4Hz",  # Deep, resonant cinematic voice
+    "pitch": "-3Hz",  # Deep, resonant cinematic voice
+    "name": "Anchor Narrator",
 }
+
+VOICE_ANALYST = {
+    "voice": "en-US-EricNeural",
+    "rate": "+0%",  # Engaging, crisp analytical pacing
+    "pitch": "+0Hz",  # Clean documentary specialist
+    "name": "Science Specialist",
+}
+
+
+def get_voice_for_beat(beat_number: int) -> dict:
+    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4)."""
+    return VOICE_ANCHOR if beat_number % 2 == 1 else VOICE_ANALYST
 
 
 def get_audio_duration(file_path: Path) -> float:
@@ -46,7 +59,8 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
     for i, beat in enumerate(beats):
         b_num = beat["beat_number"]
         narration = beat["narration"]
-        cfg = SINGLE_BASS_VOICE
+        cfg = get_voice_for_beat(b_num)
+        speaker_name = cfg.get("name", "Narrator")
 
         audio_filename = f"beat_{b_num}.mp3"
         audio_path = PUBLIC_AUDIO_DIR / audio_filename
@@ -143,7 +157,7 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
         beat["words"] = raw_words
 
         total_frames += dur_frames
-        print(f"🎙️ [Stage 4/5: Audio Engine] Beat #{b_num} [CrazyBass Narrator]: {dur_sec:.2f}s ({dur_frames}f, {len(raw_words)} words) -> {audio_filename}")
+        print(f"🎙️ [Stage 4/5: Audio Engine] Beat #{b_num} [{speaker_name}]: {dur_sec:.2f}s ({dur_frames}f, {len(raw_words)} words) -> {audio_filename}")
 
     # Lock composition to strictly 1740 frames (58.0 seconds @ 30fps)
     target_frames = 1740  # 58.0s (strictly < 59s limit)

@@ -347,6 +347,12 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         "hook_headline": f"WHAT IF {clean_title[:18]}?!",
         "total_words_count": total_words,
         "beats": beats,
+        "branching_decision": {
+            "prompt": f"What should happen next with {clean_title.title()}?",
+            "choice_a": "Emergency purge to surface and survive",
+            "choice_b": "Dive deeper into the unexplored abyss",
+            "vote_callout": "COMMENT 'A' or 'B' to decide the next episode!",
+        },
     }
 
 

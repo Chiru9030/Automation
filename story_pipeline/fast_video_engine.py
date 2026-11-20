@@ -13,7 +13,7 @@ import subprocess
 import time
 from pathlib import Path
 from story_pipeline.ai_video_generator import generate_scene_video_clip
-from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles
+from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles, get_word_highlight_tags
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 VIDEO_APP_DIR = BASE_DIR / "video-app"
@@ -74,7 +74,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 parts = []
                 for j, w in enumerate(words):
                     if j == i:
-                        parts.append(r"{\c&H0000E6FF&}" + w["word"] + r"{\c&H00FFFFFF&}")
+                        pop_pfx, emo, rst_sfx = get_word_highlight_tags(w["word"])
+                        parts.append(pop_pfx + w["word"] + emo + rst_sfx)
                     else:
                         parts.append(w["word"])
                 line_text = " ".join(parts)
@@ -90,6 +91,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
     output_ass_path.parent.mkdir(parents=True, exist_ok=True)
     output_ass_path.write_text(header + "\n".join(events), encoding="utf-8")
+    try:
+        from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
+        append_hud_and_progress_to_ass(output_ass_path)
+    except Exception:
+        pass
     return output_ass_path
 
 
@@ -166,16 +172,36 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     # Opening impact sound at 0.0s
     boom_file = PUBLIC_DIR / "sfx" / "impact_boom.wav"
     whoosh_file = PUBLIC_DIR / "sfx" / "whoosh.wav"
+    riser_file = PUBLIC_DIR / "sfx" / "riser.wav"
+    ambient_file = PUBLIC_DIR / "audio" / "ambient_bed.wav"
 
-    if boom_file.exists():
-        audio_inputs.extend(["-i", str(boom_file)])
-        label = f"[sfx_{audio_stream_idx}]"
-        filter_inputs.append(f"[{audio_stream_idx}:a]adelay=0|0,volume=0.55{label}")
+    # Layer 1: Atmospheric Thematic Ambience
+    if ambient_file.exists():
+        audio_inputs.extend(["-i", str(ambient_file)])
+        label = f"[amb_{audio_stream_idx}]"
+        filter_inputs.append(f"[{audio_stream_idx}:a]volume=0.28{label}")
         sfx_labels.append(label)
         audio_stream_idx += 1
 
-    # Sound effect at every cut between scenes
+    # Layer 2: Opening Sub-Bass Hook Impact
+    if boom_file.exists():
+        audio_inputs.extend(["-i", str(boom_file)])
+        label = f"[sfx_{audio_stream_idx}]"
+        filter_inputs.append(f"[{audio_stream_idx}:a]adelay=0|0,volume=0.60{label}")
+        sfx_labels.append(label)
+        audio_stream_idx += 1
+
+    # Layer 3: Dynamic Cuts, Whooshes & Climax Tension Riser
     for cut_sec, cut_idx in cut_timestamps:
+        if cut_idx == 3 and riser_file.exists():
+            # Climax tension riser building into Beat 4
+            riser_offset_ms = max(0, int((cut_sec - 2.2) * 1000))
+            audio_inputs.extend(["-i", str(riser_file)])
+            label = f"[riser_{audio_stream_idx}]"
+            filter_inputs.append(f"[{audio_stream_idx}:a]adelay={riser_offset_ms}|{riser_offset_ms},volume=0.45{label}")
+            sfx_labels.append(label)
+            audio_stream_idx += 1
+
         offset_ms = max(0, int((cut_sec - 0.12) * 1000))  # Start 120ms before visual cut for seamless impact
         sfx_target = whoosh_file if cut_idx % 2 == 1 else boom_file
         if not sfx_target.exists():

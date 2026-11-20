@@ -52,30 +52,71 @@ def build_subtitle_chunks(words: list[dict], max_words_per_chunk: int = 3) -> li
     return chunks
 
 
-def get_word_highlight_color(word: str) -> str:
-    """Returns dynamic Hormozi/MrBeast highlight colors based on word emotion and category."""
+def get_word_highlight_tags(word: str) -> tuple[str, str]:
+    """
+    Returns Hormozi/MrBeast active word formatting:
+    - (prefix_tags, suffix_suffix_with_emoji)
+    - Active word pops in scale (116%) with dynamic emotion colors:
+      * Neon Green (&H0066FF00&) for numbers & metrics
+      * Neon Crimson Red (&H003333FF&) for danger & destruction
+      * Neon Cyan (&H00FFFF00&) for mystery & questions
+      * Neon Golden Yellow (&H0000E6FF&) for default impact
+    """
     w_clean = word.lower().strip(".,!?;:\"'")
-    # 1. Numbers / Statistics / Quantities -> Neon Emerald Green (&H0066FF00&)
+    emoji = ""
+
+    # Contextual Emoji Injection
+    if any(k in w_clean for k in ["ocean", "sea", "trench", "water", "dive", "submarine"]):
+        emoji = " 🌊"
+    elif any(k in w_clean for k in ["crush", "crushed", "shatter", "explode", "implode", "blast"]):
+        emoji = " 💥"
+    elif any(k in w_clean for k in ["nuclear", "reactor", "radiation", "radioactive", "atomic"]):
+        emoji = " ☢️"
+    elif any(k in w_clean for k in ["second", "seconds", "minute", "time", "clock"]):
+        emoji = " ⏱️"
+    elif any(k in w_clean for k in ["space", "saturn", "moon", "planet", "galaxy", "asteroid"]):
+        emoji = " 🪐"
+    elif any(k in w_clean for k in ["dinosaur", "monster", "shark", "megalodon", "predator"]):
+        emoji = " 🦈"
+    elif any(k in w_clean for k in ["brain", "mind", "sleep", "dream"]):
+        emoji = " 🧠"
+    elif any(k in w_clean for k in ["fire", "lava", "volcano", "heat", "burn"]):
+        emoji = " 🔥"
+
+    # Color Determination
+    # 1. Numbers / Statistics / Quantities -> Neon Emerald Green
     if any(c.isdigit() for c in w_clean) or w_clean in [
         "hundred", "thousand", "million", "billion", "trillion", "zero",
         "percent", "years", "hours", "seconds", "liters", "miles", "gravity", "double"
     ]:
-        return r"{\c&H0066FF00&}"
-    # 2. Danger / Shock / Catastrophe -> Neon Crimson Red (&H003333FF&)
-    if w_clean in [
+        color = r"{\c&H0066FF00&}"
+    # 2. Danger / Shock / Catastrophe -> Neon Crimson Red
+    elif w_clean in [
         "die", "death", "kill", "destroyed", "terror", "crushed", "shattered",
         "exploded", "fatal", "suffocate", "warning", "catastrophe", "violently",
         "radiation", "lethal", "toxic", "fall", "collapse", "danger"
     ]:
-        return r"{\c&H003333FF&}"
-    # 3. Curiosity / Questions / Mystery -> Neon Cyan (&H00FFFF00&)
-    if w_clean in [
+        color = r"{\c&H003333FF&}"
+    # 3. Curiosity / Questions / Mystery -> Neon Cyan
+    elif w_clean in [
         "what", "why", "how", "secret", "never", "mystery", "shocking",
         "hidden", "truth", "discovered", "impossible", "imagine", "if"
     ]:
-        return r"{\c&H00FFFF00&}"
-    # Default active highlight -> Neon Golden Yellow (&H0000E6FF&)
-    return r"{\c&H0000E6FF&}"
+        color = r"{\c&H00FFFF00&}"
+    else:
+        # Default active highlight -> Neon Golden Yellow
+        color = r"{\c&H0000E6FF&}"
+
+    # Hormozi Scale Pop: Active word expands to 116% scale with bold stroke
+    pop_prefix = color + r"{\fscx116\fscy116}"
+    reset_suffix = r"{\fscx100\fscy100\c&H00FFFFFF&}"
+    return pop_prefix, emoji, reset_suffix
+
+
+def get_word_highlight_color(word: str) -> str:
+    """Backward compatibility shim."""
+    prefix, _, _ = get_word_highlight_tags(word)
+    return prefix
 
 
 def compile_kinetic_subtitles(beats: list[dict], output_ass_path: Path) -> Path:
@@ -116,8 +157,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 parts = []
                 for j, w in enumerate(chunk_words):
                     if j == i:
-                        h_col = get_word_highlight_color(w["word"])
-                        parts.append(h_col + w["word"] + r"{\c&H00FFFFFF&}")
+                        pop_pfx, emo, rst_sfx = get_word_highlight_tags(w["word"])
+                        parts.append(pop_pfx + w["word"] + emo + rst_sfx)
                     else:
                         parts.append(w["word"])
                 line_text = " ".join(parts)

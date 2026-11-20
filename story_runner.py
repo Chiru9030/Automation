@@ -47,6 +47,7 @@ from story_pipeline.neural_audio_engine import build_audio_and_timings_sync
 from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles
 from story_pipeline.strict_pipeline_auditor import (
     audit_story_script,
+    audit_scientific_factuality,
     audit_visual_assets,
     audit_audio_sync,
     audit_subtitles_file,
@@ -155,6 +156,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
                 script_data["genre"] = genre
                 script_data["title"] = chapter_title
                 audit_story_script(script_data)
+                audit_scientific_factuality(script_data)
                 break
             except QualityAuditError as s_err:
                 print(f"⚠️ [Gate 1 Rejection] Script attempt {script_attempt}/3 failed: {s_err}")
@@ -218,16 +220,17 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         print("\n✨ [Stage 6/7] Compiling discrete kinetic karaoke subtitles (safe lower-third)...")
         ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
         compile_kinetic_subtitles(beats, ass_path)
+        from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
+        append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=58.0)
 
         # Gate 4: Subtitles Verification Audit
         current_stage = "Gate 4: Subtitles Verification Audit"
         audit_subtitles_file(ass_path)
 
-        # Generate genre-tailored background music (58.0s)
+        # Generate genre-tailored sound design & dynamic 3-act audio arc (58.0s)
         current_stage = "Audio Mixing & BGM Engine"
-        bg_music_path = PUBLIC_AUDIO_DIR / "story_bg.wav"
-        print(f"🎵 Generating dynamic background music for '{genre}' (58.0s)...")
-        generate_music_for_genre(genre, bg_music_path, duration=58.0)
+        print(f"🎵 Generating dynamic sound design & 3-act audio arc for '{genre}' (58.0s)...")
+        generate_all_sfx(category=genre)
 
         # Save complete story data
         with open(DATA_JSON_PATH, "w", encoding="utf-8") as f:
@@ -283,9 +286,33 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         # High-CTR Thumbnail Generation
         # -------------------------------------------------------------
         current_stage = "Thumbnail Generation"
-        print("\n📸 Generating High-CTR Thumbnail...")
+        print("\n📸 Generating High-CTR A/B/C Thumbnail Suite...")
         hook_hl = script_data.get("hook_headline", "WHAT HAPPENS NEXT?!")
-        thumb_path = generate_high_ctr_thumbnail(ep_num, hook_hl, video_path=out_mp4)
+        from story_pipeline.thumbnail_generator import generate_abc_thumbnail_suite
+        thumb_suite = generate_abc_thumbnail_suite(ep_num, hook_hl, category=genre, video_path=out_mp4)
+        thumb_path = thumb_suite["variant_a"]
+
+        # -------------------------------------------------------------
+        # TikTok & Instagram Swipeable Carousel Generation (Item 19)
+        # -------------------------------------------------------------
+        try:
+            from story_pipeline.carousel_generator import generate_swipeable_carousel
+            generate_swipeable_carousel(script_data, ep_num)
+        except Exception as e_car:
+            print(f"Notice: Carousel generation skipped ({e_car})")
+
+        # -------------------------------------------------------------
+        # Automated Long-Form Master Documentary Compilation (Item 16)
+        # -------------------------------------------------------------
+        if ep_num % 5 == 0:
+            print(f"\n🎥 [Milestone Reached: Ep #{ep_num}] Triggering Automated 16:9 Long-Form Compilation...")
+            try:
+                from story_pipeline.longform_compiler import compile_longform_documentary
+                doc_path = compile_longform_documentary(min_episodes=5, custom_title=f"Curiosity Universe Anthology (Episodes {ep_num-4}-{ep_num})")
+                if doc_path:
+                    print(f"✅ Master 16:9 Documentary compiled: {doc_path.name}")
+            except Exception as e_doc:
+                print(f"Notice: Longform compilation skipped ({e_doc})")
 
         # -------------------------------------------------------------
         # Automated Social Media Publishing (Skipped if publish=False)
@@ -293,10 +320,16 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         current_stage = "Stage 7: Multi-Platform Publishing"
         yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
         full_text = " ".join([b["narration"] for b in beats])
-        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
+
+        branch = script_data.get("branching_decision", {})
+        branch_text = ""
+        if branch:
+            branch_text = f"\n\n❓ DECIDE NEXT EPISODE:\n🅰️ {branch.get('choice_a')}\n🅱️ {branch.get('choice_b')}\n{branch.get('vote_callout')}\n"
+
+        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}{branch_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
         yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
 
-        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
+        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}{branch_text}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
 
         if publish:
             print("\n📤 Publishing to social platforms...")
@@ -363,7 +396,17 @@ if __name__ == "__main__":
     parser.add_argument("--topic", type=str, default="", help="Custom topic or story prompt to render immediately")
     parser.add_argument("--sample", action="store_true", help="Generate sample video locally without publishing")
     parser.add_argument("--no-upload", action="store_true", help="Skip uploading to YouTube/Instagram")
+    parser.add_argument("--documentary", action="store_true", help="Compile past episodes into a 16:9 master documentary")
     args = parser.parse_args()
+
+    if args.documentary:
+        from story_pipeline.longform_compiler import compile_longform_documentary
+        res = compile_longform_documentary(min_episodes=2)
+        if res:
+            print(f"🎉 16:9 Master Documentary compiled successfully: {res}")
+        else:
+            print("⚠️ Not enough episodes available to compile documentary.")
+        sys.exit(0)
 
     should_publish = not (
         args.sample

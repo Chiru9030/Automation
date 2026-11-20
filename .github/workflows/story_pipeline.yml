@@ -116,14 +116,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: story-episode-mp4
-          path: video-app/out/*.mp4
+          path: video-app/out/**/*.mp4
           retention-days: 7
 
       - name: Upload Generated Thumbnail Artifact
         uses: actions/upload-artifact@v4
         with:
           name: story-thumbnail-jpg
-          path: video-app/out/*.jpg
+          path: video-app/out/**/*.jpg
           retention-days: 7
 
       - name: Commit Updated Story History
