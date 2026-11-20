@@ -70,9 +70,15 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
         audio_bytes = bytearray()
         raw_words = []
 
+        # Sanitize narration to prevent artificial 1-second TTS pauses
+        import re
+        clean_narration = re.sub(r'\.{2,}', '.', narration)
+        clean_narration = re.sub(r'—|–', ', ', clean_narration)
+        clean_narration = re.sub(r'\s+', ' ', clean_narration).strip()
+
         try:
             comm = edge_tts.Communicate(
-                narration,
+                clean_narration,
                 voice=cfg["voice"],
                 rate=cfg["rate"],
                 pitch=cfg["pitch"],
@@ -118,13 +124,13 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
 
         audio_path.write_bytes(audio_bytes)
 
-        # Apply Crazy Bass DSP Audio Mastering (Heavy cinema sub-bass boost)
+        # Apply Crazy Bass DSP Audio Mastering & Silence Trimming (Zero dead air)
         temp_raw = audio_path.with_suffix(".raw.mp3")
         try:
             audio_path.rename(temp_raw)
             cmd_bass = [
                 "ffmpeg", "-y", "-i", str(temp_raw),
-                "-af", "bass=g=16:f=95:w=0.6,equalizer=f=60:t=q:w=1.5:g=12,volume=1.2,loudnorm=I=-14:TP=-1.5:LRA=7",
+                "-af", "silenceremove=start_periods=1:start_duration=0.03:start_threshold=-42dB:stop_periods=1:stop_duration=0.03:stop_threshold=-42dB,bass=g=16:f=95:w=0.6,equalizer=f=60:t=q:w=1.5:g=12,volume=1.2,loudnorm=I=-14:TP=-1.5:LRA=7",
                 str(audio_path),
             ]
             subprocess.run(cmd_bass, check=True, capture_output=True)
@@ -137,7 +143,7 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
 
         # Fallback word timestamps if boundaries missing
         if not raw_words:
-            words_list = narration.split()
+            words_list = clean_narration.split()
             step = dur_sec / max(1, len(words_list))
             for idx, w in enumerate(words_list):
                 s_s = idx * step
@@ -150,8 +156,8 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
                     "end_frame": max(1, int(round(e_s * fps))),
                 })
 
-        # Padding between beats: 0.25s tight viral pacing (no dead air)
-        dur_frames = max(45, int(round((dur_sec + 0.25) * fps)))
+        # Padding between beats: 0.05s ultra-tight viral pacing (eliminates dead air)
+        dur_frames = max(30, int(round((dur_sec + 0.05) * fps)))
 
         beat["audio_url"] = f"audio/{audio_filename}"
         beat["audio_duration_sec"] = round(dur_sec, 2)

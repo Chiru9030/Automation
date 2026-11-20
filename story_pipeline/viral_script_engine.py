@@ -82,16 +82,18 @@ PREMISE: {hook_premise}
 NARRATIVE FORMAT: {format_name} ({selected_format['style_guide']})
 EPISODE: #{ep_num}
 
-CRITICAL RETENTION RULES:
+CRITICAL RETENTION & VISUAL RULES:
 1. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 78 AND 96 WORDS (Yields 28-36 seconds of optimal high-retention speech; APV > 110%).
-2. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler.
-3. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically and logically connect directly into the very first word of Beat 1, creating a seamless hypnotic loop for re-watches.
-4. STRUCTURE: Exactly 5 rapid beats (each 15-20 words):
+2. CADENCE: NEVER use ellipses (...), em-dashes, or semicolons. Use short punchy sentences (<12 words) for continuous, relentless speech flow with zero pauses > 0.3s.
+3. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler.
+4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically connect directly into the very first word of Beat 1. Beat 5's visual_prompt MUST match Beat 1's palette and subject to complete a seamless visual loop.
+5. LITERAL IMAGE GROUNDING: Every 'visual_prompt' MUST literally depict the exact subject, action, and environment spoken in that beat's 'narration'. NO generic corridors, NO abstract devices, NO random crowd scenes.
+6. STRUCTURE: Exactly 5 rapid beats (each 15-20 words):
    - Beat 1 (0-6s): Shock Hook & Impossible Paradox (Grab in first 2 seconds, 15-18 words)
    - Beat 2 (6-14s): Escalating Tension / The Hidden Truth (16-19 words)
    - Beat 3 (14-22s): Scientific Climax / The Extreme Anomaly (16-19 words)
    - Beat 4 (22-30s): The Revelation / Mind-Blowing Detail (16-19 words)
-   - Beat 5 (30-36s): The Seamless Loop Connector (Ends mid-thought or with a connector that flows into Beat 1, 14-18 words)
+   - Beat 5 (30-36s): The Seamless Loop Connector (Flows into Beat 1, matching Beat 1 visual, 14-18 words)
 
 Output JSON ONLY:
 {{
@@ -337,37 +339,37 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "beat_number": 3,
                 "time_window": "22-35s",
                 "hook_trigger": "20s Danger Hook",
-                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, leaving survivors scrambling through howling atmospheric winds toward secure underground military shelters.",
+                "narration": "Pure terror erupts across major continents as colossal ocean tsunamis surge inland, sweeping coastal cities under towering walls of churning saltwater.",
                 "speaker": "character_hero",
                 "speaker_name": "Commander",
                 "speaker_avatar": "🚨",
                 "sfx": "impact_boom",
                 "camera_motion": "dramatic-pulse",
-                "visual_prompt": f"{style}, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
+                "visual_prompt": f"{style}, colossal ocean tsunami surging over coastal skyline, violent turbulent waves, atmospheric storm lighting, Unreal Engine 5 render, 8k",
             },
             {
                 "beat_number": 4,
                 "time_window": "35-48s",
                 "hook_trigger": "30s Climax Hook",
-                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, releasing deafening acoustic vibrations shaking the very marrow of your bones.",
+                "narration": "Deep beneath the surface, emergency seismic sensors detect the earth's crust fracturing under immense tidal friction, tearing glowing tectonic fissures across the ground.",
                 "speaker": "character_guide",
                 "speaker_name": "Scientist",
                 "speaker_avatar": "🔬",
                 "sfx": "pop",
                 "camera_motion": "warm-dolly",
-                "visual_prompt": f"{style}, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
+                "visual_prompt": f"{style}, earth crust violently fracturing open with glowing red and orange molten magma fissures, seismic devastation, cinematic 8k",
             },
             {
                 "beat_number": 5,
                 "time_window": "48-58s",
                 "hook_trigger": "45s Resolution Hook",
-                "narration": "Our world is far more fragile than we dare to admit. Could humanity survive five seconds of cosmic standstill? Follow for Episode Two right now!",
+                "narration": "Our world balances on an extraordinarily fragile razor's edge. The terrifying reality is, the moment cosmic balance breaks, you realize...",
                 "speaker": "narrator",
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
                 "camera_motion": "sunset-drift",
-                "visual_prompt": f"{style}, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
+                "visual_prompt": f"{style}, dramatic epic panoramic opening cinematic of {topic_core}, matching Beat 1 opening frame for a seamless visual infinite loop, 8k",
             },
         ]
 

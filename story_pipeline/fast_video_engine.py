@@ -139,10 +139,10 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     audio_inputs = []
     filter_inputs = []
 
-    # Input 1: Background music
+    # Input 1: Background music (ducked under dialogue)
     bg_music = PUBLIC_DIR / "audio" / "story_bg.wav"
     audio_inputs.extend(["-i", str(bg_music)])
-    filter_inputs.append("[1:a]volume=0.15[bgm]")
+    filter_inputs.append("[1:a]volume=0.08[bgm]")
 
     # Inputs 2..N: Scene Voiceovers
     audio_stream_idx = 2
@@ -215,9 +215,19 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             sfx_labels.append(label)
             audio_stream_idx += 1
 
-    all_tracks = ["[bgm]"] + voice_mix_labels + sfx_labels
-    num_tracks = len(all_tracks)
-    filter_inputs.append(f"{''.join(all_tracks)}amix=inputs={num_tracks}:duration=first:dropout_transition=2[aout]")
+    # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Ducked SFX Bus + EBU R128 Loudnorm)
+    # 1. Voice Bus: Sequential dialogue mixed with normalize=0 so speech is never attenuated!
+    if voice_mix_labels:
+        filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0[voice_bus]")
+    else:
+        filter_inputs.append("aevalsrc=0:d=1[voice_bus]")
+
+    # 2. SFX & Background Music Bus (Ducked background layer)
+    sfx_bgm_tracks = ["[bgm]"] + sfx_labels
+    filter_inputs.append(f"{''.join(sfx_bgm_tracks)}amix=inputs={len(sfx_bgm_tracks)}:normalize=0:dropout_transition=0,volume=0.55[sfx_bgm_bus]")
+
+    # 3. Master Bus: Voice Priority Mix + Strict ITU-R BS.1770 / EBU R128 Normalization (-14 LUFS, TP -1.5 dBFS)
+    filter_inputs.append("[voice_bus][sfx_bgm_bus]amix=inputs=2:normalize=0:dropout_transition=0,loudnorm=I=-14:TP=-1.5:LRA=11[aout]")
 
     audio_filter_graph = ";".join(filter_inputs)
 
@@ -229,8 +239,6 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     escaped_ass = str(ass_path.resolve()).replace(":", "\\:")
 
     total_sec = min(sum(sc.get("duration_in_frames", 348) for sc in scenes) / 30.0, 58.0)
-    if total_sec < 50.0:
-        total_sec = 56.0
 
     cmd_final = [
         "ffmpeg", "-y",

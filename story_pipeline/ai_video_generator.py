@@ -290,44 +290,41 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
         print(f"🎬 Successfully retrieved Cloud AI Video: {output_video_path.name}")
         return output_video_path
 
-    # Continuous Full-Timeline 1080x1920 3D Cinematic Motion Synthesis
+    # High-Energy Multi-Framing Cuts (Cuts every 2.5-3.5s per scene to maximize retention)
     fps = 30
-    dur_frames = scene.get("duration_in_frames", 360)
+    dur_frames = max(scene.get("duration_in_frames", 360), 30)
     duration_sec = dur_frames / fps
-    dur = max(dur_frames, 30)
 
-    if motion == "pan-right":
-        # Continuous horizontal tracking pan across entire scene
-        zoom_expr = "'1.22'"
-        x_expr = f"'(iw-ow) * (on/{dur})'"
-        y_expr = "'ih/2-(ih/zoom/2) + sin(on/22)*12'"
-    elif motion == "dramatic-pulse":
-        # Dynamic high-tension zoom with continuous harmonic camera breath
-        zoom_expr = f"'1.08 + 0.24*(on/{dur}) + 0.03*sin(on/10)'"
-        x_expr = "'iw/2-(iw/zoom/2) + sin(on/18)*18'"
-        y_expr = "'ih/2-(ih/zoom/2) + cos(on/22)*14'"
-    elif motion == "warm-dolly":
-        # Continuous cinematic dolly-out revealing epic scale
-        zoom_expr = f"'1.32 - 0.22*(on/{dur})'"
-        x_expr = "'iw/2-(iw/zoom/2) + sin(on/25)*15'"
-        y_expr = "'ih/2-(ih/zoom/2) + cos(on/30)*10'"
-    elif motion == "sunset-drift":
-        # Continuous sweeping vertical crane rise
-        zoom_expr = "'1.20'"
-        x_expr = "'iw/2-(iw/zoom/2) + sin(on/24)*12'"
-        y_expr = f"'(ih-oh) * (1.0 - (on/{dur}))'"
+    if dur_frames >= 180:
+        # 3 Rapid Camera Cuts (Establishing Wide -> Punch-In Crop -> Dramatic Angle)
+        d1 = max(60, int(dur_frames * 0.35))
+        d2 = max(60, int(dur_frames * 0.35))
+        d3 = dur_frames - d1 - d2
+        filter_complex = (
+            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,split=3[s0][s1][s2];"
+            f"[s0]zoompan=z='1.05+0.16*(on/{d1})':x='iw/2-(iw/zoom/2)+sin(on/20)*10':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0];"
+            f"[s1]zoompan=z='1.42+0.14*(on/{d2})':x='(iw-ow)*(on/{d2})':y='ih/2-(ih/zoom/2)+cos(on/22)*12':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1];"
+            f"[s2]zoompan=z='1.28-0.14*(on/{d3})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{d3})':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2];"
+            f"[v0][v1][v2]concat=n=3:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02[outv]"
+        )
+    elif dur_frames >= 100:
+        # 2 Rapid Camera Cuts (Wide -> Punch-In)
+        d1 = int(dur_frames * 0.5)
+        d2 = dur_frames - d1
+        filter_complex = (
+            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,split=2[s0][s1];"
+            f"[s0]zoompan=z='1.06+0.18*(on/{d1})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0];"
+            f"[s1]zoompan=z='1.40+0.15*(on/{d2})':x='(iw-ow)*(on/{d2})':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1];"
+            f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02[outv]"
+        )
     else:
-        # Default: Continuous immersive dolly push-in with organic handheld camera sway
-        zoom_expr = f"'1.06 + 0.26*(on/{dur})'"
-        x_expr = "'iw/2-(iw/zoom/2) + sin(on/20)*16'"
-        y_expr = "'ih/2-(ih/zoom/2) + cos(on/26)*12'"
-
-    # Full-Bleed 1080x1920 vertical filter (NO letterboxing, continuous dynamic 3D motion, enhanced vibrance)
-    filter_complex = (
-        f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
-        f"zoompan=z={zoom_expr}:x={x_expr}:y={y_expr}:d={dur_frames}:s=1080x1920:fps={fps},"
-        f"eq=saturation=1.22:contrast=1.12:brightness=0.02[outv]"
-    )
+        # Fast Single Shot for short scenes
+        filter_complex = (
+            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
+            f"zoompan=z='1.08+0.22*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps},"
+            f"trim=start_frame=0:end_frame={dur_frames},setpts=PTS-STARTPTS,"
+            f"eq=saturation=1.22:contrast=1.12:brightness=0.02[outv]"
+        )
 
     cmd = [
         "ffmpeg", "-y",

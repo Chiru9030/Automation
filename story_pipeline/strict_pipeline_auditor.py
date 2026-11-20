@@ -126,27 +126,58 @@ def audit_scientific_factuality(script_data: dict) -> bool:
     # Rule 4: Deep Gemini Live Search Grounding Verification (5,000 free monthly requests)
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
-        try:
-            import urllib.request
-            import urllib.parse
-            # Query Gemini with Google Search Tool Grounding
-            topic = script_data.get("topic", "")
-            verify_prompt = f"Fact-check this short-form science script topic '{topic}'. Script: '{full_text[:400]}'. Is this claim scientifically plausible or a total debunked fabrication? Answer YES if plausible, or NO followed by the exact error."
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={api_key}"
-            payload = json.dumps({
-                "contents": [{"parts": [{"text": verify_prompt}]}],
-                "tools": [{"google_search": {}}]
-            }).encode("utf-8")
-            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                g_res = json.loads(resp.read().decode("utf-8"))
-                ans = g_res.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-                if ans.strip().upper().startswith("NO"):
-                    print(f"⚠️ [Gate 6 Warning] Grounded Fact-Checker flagged potential inaccuracy: {ans[:120]}")
-                else:
-                    print(f"🌐 [Gate 6: Grounded Verification] Factuality verified against live Google Search grounding.")
-        except Exception as e_ground:
-            print(f"Notice: Gemini live search grounding check note ({e_ground})")
+        import urllib.request
+        import urllib.parse
+        import time
+
+        topic = script_data.get("topic", "")
+        verify_prompt = (
+            f"Fact-check this short-form science script topic '{topic}'. Script: '{full_text[:400]}'. "
+            "Use Google Search to verify the physics/biology/history claims. "
+            "Is this claim scientifically plausible or a total debunked fabrication? "
+            "Answer YES if plausible, or NO followed by the exact error."
+        )
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={api_key}"
+        payload = json.dumps({
+            "contents": [{"parts": [{"text": verify_prompt}]}],
+            "tools": [{"google_search": {}}]
+        }).encode("utf-8")
+
+        grounded = False
+        last_error = None
+        for attempt in range(1, 3):
+            try:
+                req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=12) as resp:
+                    g_res = json.loads(resp.read().decode("utf-8"))
+                    candidate = g_res.get("candidates", [{}])[0]
+                    ans = candidate.get("content", {}).get("parts", [{}])[0].get("text", "")
+                    grounding = candidate.get("groundingMetadata", {})
+                    web_queries = grounding.get("webSearchQueries", [])
+                    chunks = grounding.get("groundingChunks", [])
+                    sources = [c.get("web", {}).get("uri") for c in chunks if c.get("web", {}).get("uri")]
+
+                    print(f"🌐 [Gate 6: Grounding] Search Queries Used: {web_queries}")
+                    print(f"🌐 [Gate 6: Grounding] Citations / Sources ({len(sources)} found): {sources[:3]}")
+
+                    if ans.strip().upper().startswith("NO"):
+                        raise QualityAuditError(f"Factuality Rejection: Grounded Fact-Checker debunked script claim: {ans[:150]}")
+
+                    if not sources and not web_queries:
+                        raise QualityAuditError(f"Factuality Rejection: Grounding returned no external web sources for topic '{topic}'!")
+
+                    print(f"✅ [Gate 6: Grounded Verification] Scientifically verified with {len(sources)} live web sources.")
+                    grounded = True
+                    break
+            except QualityAuditError:
+                raise
+            except Exception as e_ground:
+                last_error = e_ground
+                print(f"⚠️ [Gate 6 Notice] Grounding attempt {attempt}/2 encountered: {e_ground}")
+                time.sleep(1.5)
+
+        if not grounded:
+            raise QualityAuditError(f"Factuality Rejection: Gate 6 live search grounding failed after retries: {last_error}")
 
     print("[AUDITOR] [GATE-6] Scientific Factuality & Grounding Approved (Zero hallucinations detected).")
     return True
@@ -480,6 +511,31 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
                             f"Tail Silence Rejection: Final 5 seconds of video is silent ({t_val} dB)! "
                             f"Dead air detected in 53s-58s window."
                         )
+
+        # 3.2 EBU R128 Integrated Loudness Gate (-16 to -12 LUFS, target -14.0 LUFS)
+        ebur_cmd = [
+            "ffmpeg", "-i", str(mp4_path),
+            "-af", "ebur128=framelog=verbose",
+            "-vn", "-sn", "-dn",
+            "-f", "null", "/dev/null"
+        ]
+        ebur_res = subprocess.run(ebur_cmd, capture_output=True, text=True)
+        ebur_out = ebur_res.stderr or ""
+        integrated_lufs = None
+        for line in ebur_out.splitlines():
+            if "I:" in line and "LUFS" in line:
+                try:
+                    integrated_lufs = float(line.split("I:")[-1].replace("LUFS", "").strip())
+                    break
+                except ValueError:
+                    pass
+        if integrated_lufs is not None:
+            print(f"🔊 [Gate 5: Loudness Gate] Integrated Loudness: {integrated_lufs:.1f} LUFS (Target: -14.0 LUFS)")
+            if integrated_lufs < -16.0 or integrated_lufs > -12.0:
+                raise QualityAuditError(
+                    f"Audio Loudness Rejection: Integrated loudness is {integrated_lufs:.1f} LUFS! "
+                    f"Must sit strictly within [-16.0, -12.0] LUFS for YouTube Shorts broadcast compliance."
+                )
     except Exception as e_vol:
         if isinstance(e_vol, QualityAuditError):
             raise
