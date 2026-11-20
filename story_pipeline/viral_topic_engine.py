@@ -198,27 +198,31 @@ Return JSON format ONLY:
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
             res = None
-            active_model = "gemini-2.0-flash"
-            models_to_try = ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
+            active_model = "gemini-3.8-flash"
+            models_to_try = ["gemini-3.8-flash"]
             for candidate_model in models_to_try:
-                try:
-                    print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, timeout 25s)...")
-                    res = call_with_timeout(
-                        client.models.generate_content,
-                        kwargs=dict(
-                            model=candidate_model,
-                            contents=prompt,
-                            config=dict(response_mime_type="application/json"),
-                        ),
-                        timeout_sec=25,
-                    )
-                    if res and res.text:
-                        active_model = candidate_model
-                        break
-                except concurrent.futures.TimeoutError:
-                    print(f"⏱️ [Topic Engine] {candidate_model} timed out after 25s. Trying next candidate...")
-                except Exception as m_err:
-                    print(f"⚠️ Model {candidate_model} note: {m_err}")
+                for attempt in range(1, 4):
+                    try:
+                        print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, attempt {attempt}/3, timeout 25s)...")
+                        res = call_with_timeout(
+                            client.models.generate_content,
+                            kwargs=dict(
+                                model=candidate_model,
+                                contents=prompt,
+                                config=dict(response_mime_type="application/json"),
+                            ),
+                            timeout_sec=25,
+                        )
+                        if res and res.text:
+                            active_model = candidate_model
+                            break
+                    except concurrent.futures.TimeoutError:
+                        print(f"⏱️ [Topic Engine] {candidate_model} timed out after 25s. Retrying...")
+                    except Exception as m_err:
+                        print(f"⚠️ Model {candidate_model} note: {m_err}")
+                        time.sleep(2.0 * attempt)
+                if res and res.text:
+                    break
 
             if res and res.text:
                 data = json.loads(res.text)
