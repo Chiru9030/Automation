@@ -302,34 +302,15 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             print(f"Notice: Carousel generation skipped ({e_car})")
 
         # -------------------------------------------------------------
-        # Automated Long-Form Master Documentary Compilation (Item 16)
-        # -------------------------------------------------------------
-        if ep_num % 5 == 0:
-            print(f"\n🎥 [Milestone Reached: Ep #{ep_num}] Triggering Automated 16:9 Long-Form Compilation...")
-            try:
-                from story_pipeline.longform_compiler import compile_longform_documentary
-                doc_path = compile_longform_documentary(min_episodes=5, custom_title=f"Curiosity Universe Anthology (Episodes {ep_num-4}-{ep_num})")
-                if doc_path:
-                    print(f"✅ Master 16:9 Documentary compiled: {doc_path.name}")
-            except Exception as e_doc:
-                print(f"Notice: Longform compilation skipped ({e_doc})")
-
-        # -------------------------------------------------------------
         # Automated Social Media Publishing (Skipped if publish=False)
         # -------------------------------------------------------------
         current_stage = "Stage 7: Multi-Platform Publishing"
         yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
         full_text = " ".join([b["narration"] for b in beats])
-
-        branch = script_data.get("branching_decision", {})
-        branch_text = ""
-        if branch:
-            branch_text = f"\n\n❓ DECIDE NEXT EPISODE:\n🅰️ {branch.get('choice_a')}\n🅱️ {branch.get('choice_b')}\n{branch.get('vote_callout')}\n"
-
-        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}{branch_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
+        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
         yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
 
-        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}{branch_text}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
+        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
 
         if publish:
             print("\n📤 Publishing to social platforms...")
@@ -396,17 +377,7 @@ if __name__ == "__main__":
     parser.add_argument("--topic", type=str, default="", help="Custom topic or story prompt to render immediately")
     parser.add_argument("--sample", action="store_true", help="Generate sample video locally without publishing")
     parser.add_argument("--no-upload", action="store_true", help="Skip uploading to YouTube/Instagram")
-    parser.add_argument("--documentary", action="store_true", help="Compile past episodes into a 16:9 master documentary")
     args = parser.parse_args()
-
-    if args.documentary:
-        from story_pipeline.longform_compiler import compile_longform_documentary
-        res = compile_longform_documentary(min_episodes=2)
-        if res:
-            print(f"🎉 16:9 Master Documentary compiled successfully: {res}")
-        else:
-            print("⚠️ Not enough episodes available to compile documentary.")
-        sys.exit(0)
 
     should_publish = not (
         args.sample

@@ -11,25 +11,27 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_AUDIO_DIR = BASE_DIR / "video-app" / "public" / "audio"
 
-# Dual-Speaker Cinema Narration Suite (Anchor & Specialist)
-VOICE_ANCHOR = {
-    "voice": "en-US-ChristopherNeural",
-    "rate": "+0%",  # Natural dramatic speed, avoids rushing through narration
-    "pitch": "-3Hz",  # Deep, resonant cinematic voice
-    "name": "Anchor Narrator",
-}
+# Rotating Dual-Speaker Character Suites (Defeats YouTube Inauthentic/Repetitive Audio Profile Detection)
+VOICE_SUITES = [
+    {
+        "anchor": {"voice": "en-US-ChristopherNeural", "rate": "+2%", "pitch": "-3Hz", "name": "Deep Anchor"},
+        "analyst": {"voice": "en-US-EricNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Science Specialist"}
+    },
+    {
+        "anchor": {"voice": "en-US-JennyNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Investigative Host"},
+        "analyst": {"voice": "en-GB-RyanNeural", "rate": "+2%", "pitch": "-2Hz", "name": "British Academic"}
+    },
+    {
+        "anchor": {"voice": "en-US-GuyNeural", "rate": "+4%", "pitch": "+0Hz", "name": "Curiosity Narrator"},
+        "analyst": {"voice": "en-US-AriaNeural", "rate": "+2%", "pitch": "+1Hz", "name": "Analyst"}
+    }
+]
 
-VOICE_ANALYST = {
-    "voice": "en-US-EricNeural",
-    "rate": "+0%",  # Engaging, crisp analytical pacing
-    "pitch": "+0Hz",  # Clean documentary specialist
-    "name": "Science Specialist",
-}
 
-
-def get_voice_for_beat(beat_number: int) -> dict:
-    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4)."""
-    return VOICE_ANCHOR if beat_number % 2 == 1 else VOICE_ANALYST
+def get_voice_for_beat(beat_number: int, episode_num: int = 1) -> dict:
+    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4) with suite rotation."""
+    suite = VOICE_SUITES[episode_num % len(VOICE_SUITES)]
+    return suite["anchor"] if beat_number % 2 == 1 else suite["analyst"]
 
 
 def get_audio_duration(file_path: Path) -> float:
@@ -48,7 +50,7 @@ def get_audio_duration(file_path: Path) -> float:
         return 4.0
 
 
-async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
+async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> list[dict]:
     """Generates voiceover for each beat with exact neural word timestamps."""
     import edge_tts
 
@@ -59,7 +61,7 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
     for i, beat in enumerate(beats):
         b_num = beat["beat_number"]
         narration = beat["narration"]
-        cfg = get_voice_for_beat(b_num)
+        cfg = get_voice_for_beat(b_num, episode_num)
         speaker_name = cfg.get("name", "Narrator")
 
         audio_filename = f"beat_{b_num}.mp3"
@@ -148,8 +150,8 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
                     "end_frame": max(1, int(round(e_s * fps))),
                 })
 
-        # Padding between beats: 0.4s
-        dur_frames = max(60, int(round((dur_sec + 0.40) * fps)))
+        # Padding between beats: 0.25s tight viral pacing (no dead air)
+        dur_frames = max(45, int(round((dur_sec + 0.25) * fps)))
 
         beat["audio_url"] = f"audio/{audio_filename}"
         beat["audio_duration_sec"] = round(dur_sec, 2)
@@ -159,26 +161,22 @@ async def synthesize_beat_audios(beats: list[dict]) -> list[dict]:
         total_frames += dur_frames
         print(f"🎙️ [Stage 4/5: Audio Engine] Beat #{b_num} [{speaker_name}]: {dur_sec:.2f}s ({dur_frames}f, {len(raw_words)} words) -> {audio_filename}")
 
-    # Lock composition to strictly 1740 frames (58.0 seconds @ 30fps)
-    target_frames = 1740  # 58.0s (strictly < 59s limit)
-    if total_frames < target_frames:
-        diff = target_frames - total_frames
-        # Distribute remaining frames evenly across all 5 beats as gentle pauses between cuts (avoids empty tail)
-        per_beat = diff // len(beats)
+    # High-retention natural timeline: No artificial padding to 58s!
+    # Max hard ceiling is 58.0s (1740 frames). Optimal viral window is 28-40s.
+    max_hard_ceiling = 1740  # 58.0s
+    if total_frames > max_hard_ceiling:
+        scale = max_hard_ceiling / total_frames
         for b in beats:
-            b["duration_in_frames"] += per_beat
-        # Remainder frames on last beat
-        beats[-1]["duration_in_frames"] += (diff - per_beat * len(beats))
-        print(f"⏱️ Distributed +{diff} frames evenly across all 5 beats (+{per_beat}f/beat) to lock timeline to 58.0s.")
-    elif total_frames > target_frames:
-        scale = target_frames / total_frames
-        for b in beats:
-            b["duration_in_frames"] = max(60, int(round(b["duration_in_frames"] * scale)))
+            b["duration_in_frames"] = max(45, int(round(b["duration_in_frames"] * scale)))
         now_total = sum(b["duration_in_frames"] for b in beats)
-        beats[-1]["duration_in_frames"] += (target_frames - now_total)
+        beats[-1]["duration_in_frames"] += (max_hard_ceiling - now_total)
+        print(f"⏱️ Clamped total duration to 58.0s hard ceiling ({sum(b['duration_in_frames'] for b in beats)} frames).")
+    else:
+        actual_sec = total_frames / fps
+        print(f"⚡ [Pacing Engine] Optimized high-retention video duration: {actual_sec:.2f}s ({total_frames} frames).")
 
     return beats
 
 
-def build_audio_and_timings_sync(beats: list[dict]) -> list[dict]:
-    return asyncio.run(synthesize_beat_audios(beats))
+def build_audio_and_timings_sync(beats: list[dict], episode_num: int = 1) -> list[dict]:
+    return asyncio.run(synthesize_beat_audios(beats, episode_num))

@@ -39,49 +39,80 @@ def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: i
     style = topic_data.get("style", "3D Pixar animation")
     ep_num = topic_data.get("episode", 1)
 
+    # Format Archetype Rotation (Beats YouTube Inauthentic/Repetitive Content Policy)
+    FORMAT_ARCHETYPES = [
+        {
+            "format": "MIND-BENDING WHAT-IF",
+            "hook_formula": "What happens if...",
+            "style_guide": "Extreme hypothetical science paradox. Focus on physical catastrophe and cosmic wonder."
+        },
+        {
+            "format": "MYTH VS REALITY",
+            "hook_formula": "Everything you were taught about...",
+            "style_guide": "Expose a widespread scientific misconception. Immediate shocking truth in the first 2 seconds."
+        },
+        {
+            "format": "TOP 3 COUNTDOWN",
+            "hook_formula": "Three terrifying discoveries that...",
+            "style_guide": "Rapid countdown of 3 anomalous scientific discoveries. Fast pacing, 1 item per beat."
+        },
+        {
+            "format": "EXTREME SCALE COMPARISON",
+            "hook_formula": "If you shrunk down to the size of...",
+            "style_guide": "Dramatic scale progression from human perspective to micro or macro cosmic extremes."
+        }
+    ]
+    selected_format = FORMAT_ARCHETYPES[ep_num % len(FORMAT_ARCHETYPES)]
+    format_name = selected_format["format"]
+
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
         try:
             from google import genai
             client = genai.Client(api_key=api_key)
 
-            prompt = f"""You are a world-class viral short-form scriptwriter for YouTube Shorts and TikTok.
-Write an intensely gripping, educational, or shocking story for:
+            prompt = f"""You are an elite viral short-form director for YouTube Shorts and TikTok.
+Write a gripping, high-retention video script for:
 TOPIC: {topic}
 PREMISE: {hook_premise}
-PART: {part_number} of {total_parts}
+NARRATIVE FORMAT: {format_name} ({selected_format['style_guide']})
+EPISODE: #{ep_num}
 
-CRITICAL RULES:
-1. TOTAL SPOKEN WORDS MUST BE STRICTLY BETWEEN 128 AND 140 WORDS (YIELDS EXACTLY 55-57.5 SECONDS CONTINUOUS NARRATION).
-2. BEAT 1 MUST START WITH A PSYCHOLOGICAL HOOK TRIGGER: "What happens if...", "Imagine if...", "Did you know...", "Why does...", or "Could you survive...".
-3. HOOKS EVERY 10 SECONDS: Every beat must start with an intrigue trigger and maintain rapid pacing.
-4. STRUCTURE: Exactly 5 beats (each 25-28 words):
-   - Beat 1 (0-10s): Immediate Curiosity Shock Hook (Grab in first 3 seconds, 25-28 words)
-   - Beat 2 (10-22s): Escalation (Things get weirder/worse, 25-28 words)
-   - Beat 3 (22-35s): Peak Tension / Point of no return (25-28 words)
-   - Beat 4 (35-48s): Scientific / Narrative Revelation (25-28 words)
-   - Beat 5 (48-58s): Satisfying Conclusion ending with a curiosity CTA question (MUST be 26-30 words to narrate actively through 56-57 seconds; NO dead air).
+CRITICAL RETENTION RULES:
+1. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 78 AND 96 WORDS (Yields 28-36 seconds of optimal high-retention speech; APV > 110%).
+2. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler.
+3. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically and logically connect directly into the very first word of Beat 1, creating a seamless hypnotic loop for re-watches.
+4. STRUCTURE: Exactly 5 rapid beats (each 15-20 words):
+   - Beat 1 (0-6s): Shock Hook & Impossible Paradox (Grab in first 2 seconds, 15-18 words)
+   - Beat 2 (6-14s): Escalating Tension / The Hidden Truth (16-19 words)
+   - Beat 3 (14-22s): Scientific Climax / The Extreme Anomaly (16-19 words)
+   - Beat 4 (22-30s): The Revelation / Mind-Blowing Detail (16-19 words)
+   - Beat 5 (30-36s): The Seamless Loop Connector (Ends mid-thought or with a connector that flows into Beat 1, 14-18 words)
 
 Output JSON ONLY:
 {{
   "episode_title": "{topic.upper()[:28]}",
+  "narrative_format": "{format_name}",
   "hook_headline": "VIRAL HOOK (3-4 WORDS)",
-  "total_words_count": 134,
+  "total_words_count": 86,
+  "loop_lead_in": "Last words connecting to Beat 1",
   "beats": [
     {{
       "beat_number": 1,
-      "time_window": "0-10s",
-      "hook_trigger": "Opening Question Hook",
-      "narration": "Verbatim spoken text (25-28 words)",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "🎙️",
+      "time_window": "0-6s",
+      "hook_trigger": "Shock Hook",
+      "narration": "First spoken beat (15-18 words)",
+      "speaker": "anchor",
       "sfx": "whoosh",
-      "camera_motion": "smooth-zoom-in",
       "visual_prompt": "3D Pixar cinematic prompt, highly detailed, 8k, Unreal Engine 5 render"
     }},
-    ... (exactly 5 beats)
-  ]
+    ... (exactly 5 beats alternating speaker 'anchor' and 'specialist')
+  ],
+  "branching_decision": {{
+    "choice_a": "Option A for next episode",
+    "choice_b": "Option B for next episode",
+    "vote_callout": "Which paradox should we decode next? Vote A or B in comments!"
+  }}
 }}"""
             res = None
             active_model = "gemini-3.8-flash"
