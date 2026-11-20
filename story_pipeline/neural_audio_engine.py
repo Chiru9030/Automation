@@ -130,7 +130,7 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
             audio_path.rename(temp_raw)
             cmd_bass = [
                 "ffmpeg", "-y", "-i", str(temp_raw),
-                "-af", "silenceremove=start_periods=1:start_duration=0.03:start_threshold=-42dB:stop_periods=1:stop_duration=0.03:stop_threshold=-42dB,bass=g=16:f=95:w=0.6,equalizer=f=60:t=q:w=1.5:g=12,volume=1.2,loudnorm=I=-14:TP=-1.5:LRA=7",
+                "-af", "bass=g=16:f=95:w=0.6,equalizer=f=60:t=q:w=1.5:g=12,volume=1.2,loudnorm=I=-14:TP=-1.5:LRA=7",
                 str(audio_path),
             ]
             subprocess.run(cmd_bass, check=True, capture_output=True)
