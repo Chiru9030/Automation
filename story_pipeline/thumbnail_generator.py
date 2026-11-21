@@ -160,6 +160,11 @@ def generate_abc_thumbnail_suite(
     sticker = get_sticker_badge(category, episode_num)
 
     clean_headline = headline.strip().rstrip("?!.").upper()
+    for prefix in ["WHAT IF WHAT HAPPENS IF ", "WHAT HAPPENS IF WHAT IF ", "WHAT HAPPENS IF ", "WHAT IF "]:
+        if clean_headline.startswith(prefix):
+            clean_headline = clean_headline[len(prefix):].strip()
+            clean_headline = f"WHAT IF {clean_headline}"
+            break
     lines = wrap_text_into_lines(clean_headline, max_words_per_line=3, max_chars_per_line=16)
 
     font_large = get_impact_font(110)
