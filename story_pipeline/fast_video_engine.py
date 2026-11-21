@@ -253,7 +253,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
         filter_inputs.append("aevalsrc=0:d=1,asplit=2[voice_bus][voice_ctrl]")
 
     # 2. Sidechain Ducking: Voice Control signal automatically ducks background music when speaking
-    filter_inputs.append("[bgm][voice_ctrl]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=350[ducked_bgm]")
+    filter_inputs.append("[bgm][voice_ctrl]sidechaincompress=threshold=0.03:ratio=10:attack=10:release=280[ducked_bgm]")
 
     # 3. SFX & Background Music Bus
     sfx_bgm_tracks = ["[ducked_bgm]"] + sfx_labels

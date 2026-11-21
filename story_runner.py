@@ -69,6 +69,30 @@ from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
 
+
+def get_category_weighted_tags(genre: str, chapter_title: str, base_seo_tags: list) -> list:
+    """Dynamically weights and injects category-specific keywords for maximum search reach."""
+    genre_lower = (genre or "").lower()
+    title_lower = (chapter_title or "").lower()
+
+    cat_tags = []
+    if any(k in genre_lower or k in title_lower for k in ["space", "astronomy", "black hole", "galaxy", "planet", "solar", "alien", "cosmos"]):
+        cat_tags = ["space exploration", "astrophysics", "black hole paradox", "cosmic mysteries", "nasa", "james webb", "astronomy facts"]
+    elif any(k in genre_lower or k in title_lower for k in ["ocean", "deep sea", "megalodon", "mariana", "underwater", "creature", "shark", "monster"]):
+        cat_tags = ["deep sea creatures", "ocean mysteries", "mariana trench", "prehistoric monsters", "marine biology", "ancient predators"]
+    elif any(k in genre_lower or k in title_lower for k in ["biology", "human body", "medical", "brain", "body", "dna", "pee", "heart", "organ", "sleep"]):
+        cat_tags = ["human body facts", "medical mysteries", "biology what if", "anatomy facts", "science experiments", "health bizarre"]
+    elif any(k in genre_lower or k in title_lower for k in ["earth", "geology", "volcano", "lava", "tsunami", "earthquake", "weather", "atmosphere"]):
+        cat_tags = ["geology facts", "natural disasters", "supervolcano", "earth science", "planet earth", "extreme conditions"]
+    elif any(k in genre_lower or k in title_lower for k in ["quantum", "physics", "time", "dimension", "multiverse", "relativity"]):
+        cat_tags = ["quantum physics", "time travel paradox", "parallel universe", "physics mind blown", "quantum mechanics"]
+    else:
+        cat_tags = ["mind blowing science", "unsolved mysteries", "crazy facts", "hypothetical scenario", "bizarre phenomena"]
+
+    combined = list(dict.fromkeys(base_seo_tags + cat_tags + ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]))
+    return combined[:25]
+
+
 USE_DYNAMIC_TOPICS = os.getenv("USE_DYNAMIC_TOPICS", "true").lower() == "true"
 RENDER_ENGINE = os.getenv("RENDER_ENGINE", "fast")
 MAX_RENDER_RETRIES = 2
@@ -367,7 +391,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             f"{' '.join(hashtags)}\n\n"
             f"Subscribe for new mind-bending episodes every day!"
         )
-        yt_tags = list(dict.fromkeys(seo_tags + ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]))[:25]
+        yt_tags = get_category_weighted_tags(genre, chapter_title, seo_tags)
 
         ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every day! 🎬✨ {' '.join(hashtags)}"
 
