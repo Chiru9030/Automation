@@ -197,6 +197,20 @@ def send_telegram_message(text: str, parse_mode: str | None = "HTML", reply_mark
         return False
 
 
+def format_safe_telegram_caption(caption: str, max_chars: int = 1000) -> str:
+    """Safely bounds caption length for Telegram without severing HTML tags."""
+    if len(caption) <= max_chars:
+        return caption
+
+    truncated = caption[:max_chars].rsplit("\n", 1)[0]
+    for tag in ["b", "i", "code", "pre"]:
+        open_count = truncated.count(f"<{tag}>")
+        close_count = truncated.count(f"</{tag}>")
+        if open_count > close_count:
+            truncated += f"</{tag}>" * (open_count - close_count)
+    return truncated
+
+
 def send_telegram_video(
     video_path: Path, caption: str, protect_content: bool = True, reply_markup: dict | None = None
 ) -> bool:
@@ -238,7 +252,7 @@ def send_telegram_video(
         url = f"https://api.telegram.org/bot{bot_token}/sendVideo"
         data = {
             "chat_id": chat_id,
-            "caption": caption[:1000],
+            "caption": format_safe_telegram_caption(caption),
             "parse_mode": "HTML",
             "supports_streaming": True,
             "protect_content": protect_content,
