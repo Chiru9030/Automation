@@ -97,6 +97,13 @@ class PipelineRunTracker:
         else:
             failed_steps_block = "• <i>None (Zero step failures / 100% clean)</i>"
 
+        link_block = f"🔗 <b>Link:</b> {self.link}"
+        if getattr(self, "studio_link", None):
+            link_block += (
+                f"\n🎬 <b>Studio Manager:</b> {self.studio_link}\n"
+                f"ℹ️ <i>If public link says 'unavailable', open Studio Manager to verify privacy mode.</i>"
+            )
+
         report = (
             f"🎬 <b>Episode #{self.episode_num} — {status_icon} {self.status}</b>\n"
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -115,7 +122,7 @@ class PipelineRunTracker:
             f"🔄 <b>Failed Steps & Retries:</b>\n"
             f"{failed_steps_block}\n"
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"🔗 <b>Link:</b> {self.link}"
+            f"{link_block}"
         )
         return report
 
@@ -276,10 +283,11 @@ def send_unified_telegram_dispatch(video_path: Path | None = None) -> bool:
 
     buttons = None
     if RUN_TRACKER.link.startswith("http"):
+        studio_url = getattr(RUN_TRACKER, "studio_link", "https://studio.youtube.com")
         buttons = {
             "inline_keyboard": [
                 [{"text": "📺 Watch Short on YouTube", "url": RUN_TRACKER.link}],
-                [{"text": "🚀 Open YouTube Studio", "url": "https://studio.youtube.com"}],
+                [{"text": "🎬 Direct Studio Video Manager", "url": studio_url}],
             ]
         }
 
@@ -310,12 +318,16 @@ def notify_success(
     video_path: Path | None = None,
 ) -> bool:
     """Updates run tracker metrics and delivers the single final Telegram dispatch."""
+    import re
     yt_link = "N/A"
-    if "Video ID:" in youtube_res:
-        vid_id = youtube_res.split("Video ID:")[-1].strip()
-        yt_link = f"https://youtube.com/shorts/{vid_id}"
+    vid_match = re.search(r"Video ID:\s*([a-zA-Z0-9_-]+)", youtube_res)
+    if vid_match:
+        vid_id = vid_match.group(1).strip()
+        yt_link = f"https://www.youtube.com/shorts/{vid_id}"
+        RUN_TRACKER.studio_link = f"https://studio.youtube.com/video/{vid_id}/edit"
     elif "LOCAL SAMPLE" in youtube_res:
         yt_link = "Local Sample (Verified & Certified)"
+        RUN_TRACKER.studio_link = None
 
     RUN_TRACKER.set_topic(title, episode_num)
     RUN_TRACKER.set_metrics(duration, size_mb, yt_link)
