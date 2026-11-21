@@ -66,8 +66,14 @@ def upload_to_youtube(
     }
     media = MediaFileUpload(video_path, chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(part=",".join(body.keys()), body=body, media_body=media)
-    response = request.execute()
-    video_id = response.get("id")
+    try:
+        response = request.execute()
+        video_id = response.get("id")
+    except Exception as e_upload:
+        if "uploadLimitExceeded" in str(e_upload):
+            print("\n⚠️ [YouTube 24h Quota Exceeded] Daily upload limit reached on channel account.")
+            return "[QUOTA_EXCEEDED] Daily YouTube upload quota reached (uploadLimitExceeded). Video is certified & preserved in artifacts."
+        raise e_upload
 
     # Set custom high-CTR thumbnail if provided
     if video_id and thumbnail_path and Path(thumbnail_path).exists():

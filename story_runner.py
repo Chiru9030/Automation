@@ -63,6 +63,7 @@ from story_pipeline.telegram_notifier import (
     notify_fallback,
     notify_zero_upload_blocked,
     notify_audit_rejection,
+    notify_quota_exceeded,
     RUN_TRACKER,
 )
 from story_pipeline.training_pipeline import trigger_failure_training
@@ -406,6 +407,24 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
                 pinned_comment=pinned_comm,
             )
             print(f"YouTube: {yt_res}")
+
+            if yt_res.startswith("[QUOTA_EXCEEDED]"):
+                print("\n⚠️ [YOUTUBE QUOTA LIMIT REACHED] Daily upload limit exceeded.")
+                print("   Holding history counter at current episode. Preserving certified video in artifacts.")
+                notify_quota_exceeded(
+                    episode_num=ep_num,
+                    title=chapter_title,
+                    duration=cert["duration"],
+                    size_mb=cert["size_mb"],
+                    video_path=out_mp4,
+                )
+                return {
+                    "status": "QUOTA_EXCEEDED",
+                    "episode": ep_num,
+                    "title": chapter_title,
+                    "video_path": str(out_mp4),
+                    "reason": yt_res,
+                }
 
             ig_res = upload_to_instagram(str(out_mp4), ig_caption)
             print(f"Instagram: {ig_res}")

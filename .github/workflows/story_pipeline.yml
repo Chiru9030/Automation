@@ -132,6 +132,7 @@ jobs:
           python3 story_runner.py
 
       - name: Upload Generated Video Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: story-episode-mp4
@@ -139,6 +140,7 @@ jobs:
           retention-days: 7
 
       - name: Upload Generated Thumbnail Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: story-thumbnail-jpg

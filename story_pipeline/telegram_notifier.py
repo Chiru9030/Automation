@@ -82,7 +82,14 @@ class PipelineRunTracker:
 
     def build_report(self) -> str:
         esc_topic = html.escape(self.topic or f"Episode #{self.episode_num}")[:70]
-        status_icon = "✅" if self.status == "SUCCESS" else ("🛑" if self.status == "BLOCKED" else "🚨")
+        if self.status == "SUCCESS":
+            status_icon = "✅"
+        elif self.status == "QUOTA_EXCEEDED":
+            status_icon = "⚠️"
+        elif self.status == "BLOCKED":
+            status_icon = "🛑"
+        else:
+            status_icon = "🚨"
 
         models_lines = []
         for stage, name in self.models_used.items():
@@ -309,9 +316,16 @@ def send_unified_telegram_dispatch(video_path: Path | None = None) -> bool:
                 [{"text": "🎬 Direct Studio Video Manager", "url": studio_url}],
             ]
         }
+    elif RUN_TRACKER.status == "QUOTA_EXCEEDED":
+        buttons = {
+            "inline_keyboard": [
+                [{"text": "📦 GitHub Workflow Artifacts", "url": "https://github.com/Chiru9030/Automation/actions"}],
+                [{"text": "📺 YouTube Studio Dashboard", "url": "https://studio.youtube.com"}],
+            ]
+        }
 
     # 1. Try single dispatch with video + caption
-    if video_path and Path(video_path).exists() and RUN_TRACKER.status == "SUCCESS":
+    if video_path and Path(video_path).exists() and RUN_TRACKER.status in ["SUCCESS", "QUOTA_EXCEEDED"]:
         print("📱 Sending single unified Telegram video with logging report caption...")
         success = send_telegram_video(
             Path(video_path),
@@ -326,6 +340,25 @@ def send_unified_telegram_dispatch(video_path: Path | None = None) -> bool:
     # 2. Fallback or non-video dispatch: exactly 1 text message
     print("📱 Sending single unified Telegram text report...")
     return send_telegram_message(report, reply_markup=buttons)
+
+
+def notify_quota_exceeded(
+    episode_num: int,
+    title: str,
+    duration: float,
+    size_mb: float,
+    video_path: Path | None = None,
+) -> bool:
+    """Delivers single Telegram video preview when YouTube rolling daily quota is reached."""
+    RUN_TRACKER.set_topic(title, episode_num)
+    RUN_TRACKER.set_metrics(duration, size_mb, "Quota Exceeded (Saved in Artifacts)")
+    RUN_TRACKER.status = "QUOTA_EXCEEDED"
+    RUN_TRACKER.record_step_failure(
+        "Stage 7: YouTube Upload",
+        "YouTube 24h upload limit reached (uploadLimitExceeded). Video certified & preserved in artifacts."
+    )
+    print(f"[RUN_TRACKER] YouTube upload quota reached for Ep #{episode_num}. Video saved to artifacts.")
+    return send_unified_telegram_dispatch(video_path=video_path)
 
 
 def notify_success(
