@@ -217,9 +217,12 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         # STAGE 6: Kinetic Subtitles & Typography Compilation
         # -------------------------------------------------------------
         current_stage = "Stage 6: Kinetic Subtitles Compilation"
-        print("\n✨ [Stage 6/7] Compiling discrete kinetic karaoke subtitles (safe lower-third)...")
+        print(f"\n✨ [Stage 6/7] Compiling discrete kinetic subtitles (safe lower-third MarginV=420, Ep #{ep_num})...")
         ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
-        compile_kinetic_subtitles(beats, ass_path)
+        from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles, get_typography_preset
+        active_preset = get_typography_preset(episode_num=ep_num)
+        RUN_TRACKER.set_typography(f"{active_preset['name']} ({active_preset['font']})")
+        compile_kinetic_subtitles(beats, ass_path, episode_num=ep_num)
         from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
         append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=58.0, episode_num=ep_num)
 

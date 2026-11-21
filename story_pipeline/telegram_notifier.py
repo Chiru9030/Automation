@@ -30,6 +30,7 @@ class PipelineRunTracker:
         self.size_mb: float = 0.0
         self.voice: str = "Edge-TTS ChristopherNeural (Bass Boost)"
         self.sfx: str = "Foley Dynamic Suite"
+        self.typography_style: str = "Hormozi Punch"
         self.link: str = "N/A"
         self.models_used: dict[str, str] = {
             "Topic/Script": "Gemini 3.8-Flash",
@@ -76,6 +77,9 @@ class PipelineRunTracker:
         if sfx:
             self.sfx = sfx
 
+    def set_typography(self, typography_style: str):
+        self.typography_style = typography_style
+
     def build_report(self) -> str:
         esc_topic = html.escape(self.topic or f"Episode #{self.episode_num}")[:70]
         status_icon = "✅" if self.status == "SUCCESS" else ("🛑" if self.status == "BLOCKED" else "🚨")
@@ -111,6 +115,7 @@ class PipelineRunTracker:
             f"⏱️ <b>Duration:</b> {self.duration:.1f}s | 📦 <b>Size:</b> {self.size_mb:.1f} MB\n"
             f"🎙️ <b>Voice:</b> {html.escape(self.voice[:35])}\n"
             f"🔊 <b>SFX:</b> {html.escape(self.sfx[:35])}\n"
+            f"✨ <b>Typography:</b> {html.escape(self.typography_style[:35])}\n"
             f"🛡️ <b>Audit:</b> Content, Quality, Relation, Clarity (Certified)\n"
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🤖 <b>Models Used:</b>\n"

@@ -305,7 +305,7 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
             f"[s0]zoompan=z='1.05+0.16*(on/{d1})':x='iw/2-(iw/zoom/2)+sin(on/20)*10':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0];"
             f"[s1]zoompan=z='1.42+0.14*(on/{d2})':x='(iw-ow)*(on/{d2})':y='ih/2-(ih/zoom/2)+cos(on/22)*12':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1];"
             f"[s2]zoompan=z='1.28-0.14*(on/{d3})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{d3})':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2];"
-            f"[v0][v1][v2]concat=n=3:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5[outv]"
+            f"[v0][v1][v2]concat=n=3:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
         )
     elif dur_frames >= 100:
         # 2 Rapid Camera Cuts (Wide -> Punch-In)
@@ -315,7 +315,7 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
             f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,split=2[s0][s1];"
             f"[s0]zoompan=z='1.06+0.18*(on/{d1})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0];"
             f"[s1]zoompan=z='1.40+0.15*(on/{d2})':x='(iw-ow)*(on/{d2})':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1];"
-            f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5[outv]"
+            f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
         )
     else:
         # Fast Single Shot for short scenes
@@ -323,7 +323,7 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path) -> Path:
             f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
             f"zoompan=z='1.08+0.22*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps},"
             f"trim=start_frame=0:end_frame={dur_frames},setpts=PTS-STARTPTS,"
-            f"eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5[outv]"
+            f"eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
         )
 
     cmd = [

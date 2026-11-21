@@ -130,10 +130,11 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     ]
     subprocess.run(cmd_concat, check=True, capture_output=True)
 
-    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting)
+    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting & Rotating Presets)
     ass_path = temp_dir / "subtitles.ass"
-    compile_kinetic_subtitles(scenes, ass_path)
-    print(f"  ✨ Frame-Accurate discrete karaoke subtitles generated: {ass_path.name}")
+    ep_num = script_data.get("episode", 1)
+    compile_kinetic_subtitles(scenes, ass_path, episode_num=ep_num)
+    print(f"  ✨ Frame-Accurate discrete kinetic subtitles generated (Ep #{ep_num}): {ass_path.name}")
 
     # Step 4: Multi-Track Audio Mixing (Voiceovers + Ducked Music + SFX)
     audio_inputs = []

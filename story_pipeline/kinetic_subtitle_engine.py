@@ -1,13 +1,63 @@
 """
 Stage 6: Kinetic Subtitle & Frame-Accurate Typography Engine.
-Compiles broadcast-grade Submagic / Alex Hormozi style subtitles:
+Compiles broadcast-grade Submagic / Alex Hormozi style subtitles with dynamic style rotation:
+- 3 Rotating Typography Presets: Hormozi Punch (Impact/Gold), MrBeast Lime (Arial Black/Lime), Cyber Cyan (Trebuchet/Cyan)
 - Grouped into punchy 2-3 word chunks (optimal mobile reading pace)
-- Millisecond-accurate discrete word highlighting in glowing neon yellow (&H0000E6FF&)
-- Sized at 58px with 5px black stroke (perfect visual balance: visible, readable, non-obtrusive)
-- Positioned in the lower-third safe zone (MarginV=240) above YouTube Shorts UI.
+- Millisecond-accurate discrete word highlighting with contextual emotion color tags
+- Dynamic scale bounce pop (115% - 118%)
+- Strictly anchored in the safe lower-third zone (MarginV=420) above all YouTube Shorts UI overlays.
 """
 
 from pathlib import Path
+
+TYPOGRAPHY_PRESETS = [
+    {
+        "id": "hormozi_punch",
+        "name": "Hormozi Punch",
+        "font": "Impact",
+        "size": 58,
+        "primary": "&H00FFFFFF&",     # Pure White
+        "secondary": "&H0000E6FF&",   # Neon Gold Yellow
+        "default_highlight": r"{\c&H0000E6FF&}",
+        "outline": 5,
+        "shadow": 3,
+        "scale_pop": 116,
+    },
+    {
+        "id": "mrbeast_lime",
+        "name": "MrBeast Lime",
+        "font": "Arial Black",
+        "size": 56,
+        "primary": "&H00FFFFFF&",     # Pure White
+        "secondary": "&H0033FF33&",   # Neon Electric Lime Green
+        "default_highlight": r"{\c&H0033FF33&}",
+        "outline": 6,
+        "shadow": 4,
+        "scale_pop": 118,
+    },
+    {
+        "id": "cyber_cyan",
+        "name": "Cyber Cyan",
+        "font": "Trebuchet MS",
+        "size": 55,
+        "primary": "&H00FFFFFF&",     # Ice White
+        "secondary": "&H00FFFF00&",   # High-Voltage Cyan
+        "default_highlight": r"{\c&H00FFFF00&}",
+        "outline": 5,
+        "shadow": 3,
+        "scale_pop": 115,
+    },
+]
+
+
+def get_typography_preset(episode_num: int = 1, preset_id: str | None = None) -> dict:
+    """Selects the typography preset, rotating across episodes to eliminate viewer visual fatigue."""
+    if preset_id:
+        for p in TYPOGRAPHY_PRESETS:
+            if p["id"] == preset_id:
+                return p
+    idx = episode_num % len(TYPOGRAPHY_PRESETS)
+    return TYPOGRAPHY_PRESETS[idx]
 
 
 def format_ass_time(seconds: float) -> str:
@@ -52,15 +102,19 @@ def build_subtitle_chunks(words: list[dict], max_words_per_chunk: int = 3) -> li
     return chunks
 
 
-def get_word_highlight_tags(word: str) -> tuple[str, str]:
+def get_word_highlight_tags(
+    word: str,
+    default_highlight: str = r"{\c&H0000E6FF&}",
+    scale_pop: int = 116,
+) -> tuple[str, str, str]:
     """
-    Returns Hormozi/MrBeast active word formatting:
-    - (prefix_tags, suffix_suffix_with_emoji)
-    - Active word pops in scale (116%) with dynamic emotion colors:
+    Returns dynamic kinetic active word formatting:
+    - (prefix_tags, emoji, reset_suffix)
+    - Active word pops in scale (115-118%) with dynamic emotion colors:
       * Neon Green (&H0066FF00&) for numbers & metrics
       * Neon Crimson Red (&H003333FF&) for danger & destruction
       * Neon Cyan (&H00FFFF00&) for mystery & questions
-      * Neon Golden Yellow (&H0000E6FF&) for default impact
+      * Active preset highlight color for default punch
     """
     w_clean = word.lower().strip(".,!?;:\"'")
     emoji = ""
@@ -104,11 +158,11 @@ def get_word_highlight_tags(word: str) -> tuple[str, str]:
     ]:
         color = r"{\c&H00FFFF00&}"
     else:
-        # Default active highlight -> Neon Golden Yellow
-        color = r"{\c&H0000E6FF&}"
+        # Default active highlight from active typography preset
+        color = default_highlight
 
-    # Hormozi Scale Pop: Active word expands to 116% scale with bold stroke
-    pop_prefix = color + r"{\fscx116\fscy116}"
+    # Scale Pop: Active word expands with bold stroke
+    pop_prefix = color + rf"{{\fscx{scale_pop}\fscy{scale_pop}}}"
     reset_suffix = r"{\fscx100\fscy100\c&H00FFFFFF&}"
     return pop_prefix, emoji, reset_suffix
 
@@ -119,9 +173,17 @@ def get_word_highlight_color(word: str) -> str:
     return prefix
 
 
-def compile_kinetic_subtitles(beats: list[dict], output_ass_path: Path) -> Path:
-    """Compiles exact frame-accurate ASS subtitles for the entire video (clean lower-third, NO top header text)."""
-    header = """[Script Info]
+def compile_kinetic_subtitles(
+    beats: list[dict],
+    output_ass_path: Path,
+    episode_num: int = 1,
+    preset_id: str | None = None,
+) -> Path:
+    """Compiles exact frame-accurate ASS subtitles for the entire video (clean lower-third safe zone MarginV=420)."""
+    preset = get_typography_preset(episode_num=episode_num, preset_id=preset_id)
+    print(f"  ✨ [Typography Engine] Active Subtitle Style: '{preset['name']}' (Font: {preset['font']}, Size: {preset['size']}px, Pop: {preset['scale_pop']}%)")
+
+    header = f"""[Script Info]
 Title: Kinetic Viral Story Subtitles
 ScriptType: v4.00+
 WrapStyle: 0
@@ -132,7 +194,7 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: KineticSub,Impact,58,&H00FFFFFF,&H0000E6FF,&H00000000,&H90000000,-1,0,0,0,100,100,2,0,1,5,3,2,60,60,420,1
+Style: KineticSub,{preset['font']},{preset['size']},{preset['primary']},{preset['secondary']},{preset['outline_color'] if 'outline_color' in preset else '&H00000000&'},&H90000000,-1,0,0,0,100,100,2,0,1,{preset['outline']},{preset['shadow']},2,60,60,420,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -147,7 +209,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         chunks = build_subtitle_chunks(words, max_words_per_chunk=3)
         beat["subtitle_chunks"] = chunks
 
-        # Active Word Karaoke Events with Emotion Color Highlighting (Zero top header clutter)
+        # Active Word Karaoke Events with Emotion Color Highlighting & Active Preset Theme
         for chunk in chunks:
             chunk_words = chunk["words"]
             for i, target_word in enumerate(chunk_words):
@@ -157,7 +219,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 parts = []
                 for j, w in enumerate(chunk_words):
                     if j == i:
-                        pop_pfx, emo, rst_sfx = get_word_highlight_tags(w["word"])
+                        pop_pfx, emo, rst_sfx = get_word_highlight_tags(
+                            w["word"],
+                            default_highlight=preset["default_highlight"],
+                            scale_pop=preset["scale_pop"],
+                        )
                         parts.append(pop_pfx + w["word"] + emo + rst_sfx)
                     else:
                         parts.append(w["word"])
