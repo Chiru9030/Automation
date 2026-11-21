@@ -137,33 +137,36 @@ def get_word_highlight_tags(
     elif any(k in w_clean for k in ["fire", "lava", "volcano", "heat", "burn"]):
         emoji = " 🔥"
 
-    # Color Determination
+    # Color & Glow Determination (Kinetic 2.0 Contextual Neon Aura)
     # 1. Numbers / Statistics / Quantities -> Neon Emerald Green
     if any(c.isdigit() for c in w_clean) or w_clean in [
         "hundred", "thousand", "million", "billion", "trillion", "zero",
         "percent", "years", "hours", "seconds", "liters", "miles", "gravity", "double"
     ]:
-        color = r"{\c&H0066FF00&}"
+        glow_color = "&H0066FF00&"
     # 2. Danger / Shock / Catastrophe -> Neon Crimson Red
     elif w_clean in [
         "die", "death", "kill", "destroyed", "terror", "crushed", "shattered",
         "exploded", "fatal", "suffocate", "warning", "catastrophe", "violently",
         "radiation", "lethal", "toxic", "fall", "collapse", "danger"
     ]:
-        color = r"{\c&H003333FF&}"
+        glow_color = "&H003333FF&"
     # 3. Curiosity / Questions / Mystery -> Neon Cyan
     elif w_clean in [
         "what", "why", "how", "secret", "never", "mystery", "shocking",
         "hidden", "truth", "discovered", "impossible", "imagine", "if"
     ]:
-        color = r"{\c&H00FFFF00&}"
+        glow_color = "&H00FFFF00&"
     else:
         # Default active highlight from active typography preset
-        color = default_highlight
+        glow_color = default_highlight.replace(r"{\c", "").replace("}", "") if r"{\c" in default_highlight else "&H0000E6FF&"
 
-    # Scale Pop: Active word expands with bold stroke
-    pop_prefix = color + rf"{{\fscx{scale_pop}\fscy{scale_pop}}}"
-    reset_suffix = r"{\fscx100\fscy100\c&H00FFFFFF&}"
+    # Elastic Spring Physics Bounce + Neon Aura Glow:
+    # Scale peaks at (scale_pop + 12)% in 80ms, easing smoothly to scale_pop% over the next 100ms
+    peak_pop = scale_pop + 12
+    bounce_tags = rf"\t(0,80,\fscx{peak_pop}\fscy{peak_pop})\t(80,180,\fscx{scale_pop}\fscy{scale_pop})"
+    pop_prefix = rf"{{\c{glow_color}\3c{glow_color}\blur3{bounce_tags}}}"
+    reset_suffix = r"{\r\fscx100\fscy100\c&H00FFFFFF&}"
     return pop_prefix, emoji, reset_suffix
 
 
