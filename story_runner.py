@@ -346,9 +346,22 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         pinned_comm = script_data.get("pinned_comment") or f"Would you survive {chapter_title}? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀"
         loop_hint = script_data.get("loop_lead_in", "Watch closely as the loop connects!")
 
+        # Generate automated YouTube chapter markers for search SEO
+        chapters = []
+        running_sec = 0.0
+        for b in beats:
+            b_dur = b.get("duration_in_frames", 348) / 30.0
+            mins = int(running_sec // 60)
+            secs = int(running_sec % 60)
+            tag_name = b.get("hook_trigger") or f"Beat #{b.get('beat_number', 1)}"
+            chapters.append(f"{mins}:{secs:02d} {tag_name}")
+            running_sec += b_dur
+        chapters_block = "\n".join(chapters)
+
         yt_desc = (
             f"{chapter_title}\n\n"
             f"Episode {ep_num} • Dynamic Viral Curiosity Universe\n\n"
+            f"⏱️ CHAPTERS:\n{chapters_block}\n\n"
             f"{full_text}\n\n"
             f"🔄 Loop Secret: {loop_hint}\n\n"
             f"{' '.join(hashtags)}\n\n"

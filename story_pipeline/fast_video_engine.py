@@ -212,7 +212,12 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             audio_inputs.extend(["-i", str(sfx_target)])
             label = f"[cut_sfx_{audio_stream_idx}]"
             vol = 0.65 if "boom" in sfx_target.name else 0.50
-            filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},volume={vol}{label}")
+            if "whoosh" in sfx_target.name:
+                # Dynamic Alternating Stereo Spatial Panning (matches camera tracking direction)
+                pan_filter = "pan=stereo|c0=0.85*c0+0.15*c1|c1=0.25*c0+0.75*c1" if cut_idx % 2 == 1 else "pan=stereo|c0=0.25*c0+0.75*c1|c1=0.85*c0+0.15*c1"
+                filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},{pan_filter},volume={vol}{label}")
+            else:
+                filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},volume={vol}{label}")
             sfx_labels.append(label)
             audio_stream_idx += 1
 
