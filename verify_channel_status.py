@@ -62,6 +62,8 @@ def check_channel_status():
         print("\n--------------------------------------------------")
         print(" 🔗 Direct Management Links for Recent Episodes:")
         print("--------------------------------------------------")
+        print(" • Episode 30: https://www.youtube.com/shorts/We-dNNNOeA0")
+        print("   Studio Edit: https://studio.youtube.com/video/We-dNNNOeA0/edit")
         print(" • Episode 29: https://www.youtube.com/shorts/lKy9hosv1W0")
         print("   Studio Edit: https://studio.youtube.com/video/lKy9hosv1W0/edit")
         print(" • Episode 28: https://www.youtube.com/shorts/z1PndO3K_Yk")
