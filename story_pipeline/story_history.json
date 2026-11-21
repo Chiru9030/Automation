@@ -27,10 +27,11 @@
     "dynamic::What happens if you drink boiling lava?::Ep27",
     "dynamic::The ancient monster that hunted Megalodons for breakfast::Ep28",
     "dynamic::What happens if you never stop peeing forever?::Ep29",
-    "dynamic::The immortal jellyfish that can live forever::Ep30"
+    "dynamic::The immortal jellyfish that can live forever::Ep30",
+    "dynamic::What lies beneath Antarctica's 2-mile thick ice sheet?::Ep31"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 30,
+  "episode_count": 31,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -58,9 +59,11 @@
     "What happens if you drink boiling lava?",
     "The ancient monster that hunted Megalodons for breakfast",
     "What happens if you never stop peeing forever?",
-    "The immortal jellyfish that can live forever"
+    "The immortal jellyfish that can live forever",
+    "What lies beneath Antarctica's 2-mile thick ice sheet?"
   ],
   "used_topics": [
-    "The immortal jellyfish that can live forever"
+    "The immortal jellyfish that can live forever",
+    "What lies beneath Antarctica's 2-mile thick ice sheet?"
   ]
 }
