@@ -290,7 +290,11 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         hook_hl = script_data.get("hook_headline", "WHAT HAPPENS NEXT?!")
         from story_pipeline.thumbnail_generator import generate_abc_thumbnail_suite
         thumb_suite = generate_abc_thumbnail_suite(ep_num, hook_hl, category=genre, video_path=out_mp4)
-        thumb_path = thumb_suite["variant_a"]
+        variant_keys = ["variant_a", "variant_b", "variant_c"]
+        chosen_variant_key = variant_keys[ep_num % len(variant_keys)]
+        thumb_path = thumb_suite[chosen_variant_key]
+        print(f"🎯 Selected Production Thumbnail Split-Test: {chosen_variant_key.upper()} ({Path(thumb_path).name})")
+        script_data["thumbnail_variant"] = chosen_variant_key
 
         # -------------------------------------------------------------
         # TikTok & Instagram Swipeable Carousel Generation (Item 19)

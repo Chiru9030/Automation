@@ -139,10 +139,10 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     audio_inputs = []
     filter_inputs = []
 
-    # Input 1: Background music (ducked under dialogue)
+    # Input 1: Background music (dynamic sidechain ducking under dialogue)
     bg_music = PUBLIC_DIR / "audio" / "story_bg.wav"
     audio_inputs.extend(["-i", str(bg_music)])
-    filter_inputs.append("[1:a]volume=0.08[bgm]")
+    filter_inputs.append("[1:a]volume=0.22[bgm]")
 
     # Inputs 2..N: Scene Voiceovers
     audio_stream_idx = 2
@@ -215,18 +215,21 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             sfx_labels.append(label)
             audio_stream_idx += 1
 
-    # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Ducked SFX Bus + EBU R128 Loudnorm)
+    # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Dynamic Sidechain Ducking + EBU R128 Loudnorm)
     # 1. Voice Bus: Sequential dialogue mixed with normalize=0 so speech is never attenuated!
     if voice_mix_labels:
         filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0[voice_bus]")
     else:
         filter_inputs.append("aevalsrc=0:d=1[voice_bus]")
 
-    # 2. SFX & Background Music Bus (Ducked background layer)
-    sfx_bgm_tracks = ["[bgm]"] + sfx_labels
-    filter_inputs.append(f"{''.join(sfx_bgm_tracks)}amix=inputs={len(sfx_bgm_tracks)}:normalize=0:dropout_transition=0,volume=0.55[sfx_bgm_bus]")
+    # 2. Sidechain Ducking: Voice Bus automatically ducks background music when speaking
+    filter_inputs.append("[bgm][voice_bus]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=350[ducked_bgm]")
 
-    # 3. Master Bus: Voice Priority Mix + Strict ITU-R BS.1770 / EBU R128 Normalization (-14 LUFS, TP -1.5 dBFS)
+    # 3. SFX & Background Music Bus
+    sfx_bgm_tracks = ["[ducked_bgm]"] + sfx_labels
+    filter_inputs.append(f"{''.join(sfx_bgm_tracks)}amix=inputs={len(sfx_bgm_tracks)}:normalize=0:dropout_transition=0,volume=0.75[sfx_bgm_bus]")
+
+    # 4. Master Bus: Voice Priority Mix + Strict ITU-R BS.1770 / EBU R128 Normalization (-14 LUFS, TP -1.5 dBFS)
     filter_inputs.append("[voice_bus][sfx_bgm_bus]amix=inputs=2:normalize=0:dropout_transition=0,loudnorm=I=-14:TP=-1.5:LRA=11[aout]")
 
     audio_filter_graph = ";".join(filter_inputs)
