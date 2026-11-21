@@ -218,12 +218,12 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Dynamic Sidechain Ducking + EBU R128 Loudnorm)
     # 1. Voice Bus: Sequential dialogue mixed with normalize=0 so speech is never attenuated!
     if voice_mix_labels:
-        filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0[voice_bus]")
+        filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0,asplit=2[voice_bus][voice_ctrl]")
     else:
-        filter_inputs.append("aevalsrc=0:d=1[voice_bus]")
+        filter_inputs.append("aevalsrc=0:d=1,asplit=2[voice_bus][voice_ctrl]")
 
-    # 2. Sidechain Ducking: Voice Bus automatically ducks background music when speaking
-    filter_inputs.append("[bgm][voice_bus]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=350[ducked_bgm]")
+    # 2. Sidechain Ducking: Voice Control signal automatically ducks background music when speaking
+    filter_inputs.append("[bgm][voice_ctrl]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=350[ducked_bgm]")
 
     # 3. SFX & Background Music Bus
     sfx_bgm_tracks = ["[ducked_bgm]"] + sfx_labels
