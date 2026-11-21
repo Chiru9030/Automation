@@ -112,7 +112,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     clip_paths = []
     for i, sc in enumerate(scenes):
         clip_p = temp_dir / f"clip_{i+1}.mp4"
-        generate_scene_video_clip(sc, clip_p)
+        generate_scene_video_clip(sc, clip_p, beat_number=sc.get("beat_number", i + 1))
         clip_paths.append(clip_p)
         print(f"  🎬 Scene {i+1}/5 clip ready ({sc['duration_in_frames']/30:.1f}s)")
 
@@ -176,30 +176,30 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     riser_file = PUBLIC_DIR / "sfx" / "riser.wav"
     ambient_file = PUBLIC_DIR / "audio" / "ambient_bed.wav"
 
-    # Layer 1: Atmospheric Thematic Ambience
+    # Layer 1: Atmospheric Thematic Ambience (3D Expansive Stereo Field)
     if ambient_file.exists():
         audio_inputs.extend(["-i", str(ambient_file)])
         label = f"[amb_{audio_stream_idx}]"
-        filter_inputs.append(f"[{audio_stream_idx}:a]volume=0.28{label}")
+        filter_inputs.append(f"[{audio_stream_idx}:a]stereowiden=delay=18:feedback=0.25:crossfeed=0.2:drymix=0.85,volume=0.28{label}")
         sfx_labels.append(label)
         audio_stream_idx += 1
 
-    # Layer 2: Opening Sub-Bass Hook Impact
+    # Layer 2: Opening Sub-Bass Hook Impact (Haas Spatial Reflection on Sub-Bass Transient)
     if boom_file.exists():
         audio_inputs.extend(["-i", str(boom_file)])
         label = f"[sfx_{audio_stream_idx}]"
-        filter_inputs.append(f"[{audio_stream_idx}:a]adelay=0|0,volume=0.60{label}")
+        filter_inputs.append(f"[{audio_stream_idx}:a]adelay=0|0,haas,volume=0.60{label}")
         sfx_labels.append(label)
         audio_stream_idx += 1
 
-    # Layer 3: Dynamic Cuts, Whooshes & Climax Tension Riser
+    # Layer 3: Dynamic Cuts, Whooshes & Climax Tension Riser (3D Binaural Movement)
     for cut_sec, cut_idx in cut_timestamps:
         if cut_idx == 3 and riser_file.exists():
-            # Climax tension riser building into Beat 4
+            # Climax tension riser building into Beat 4 with expanding stereo field
             riser_offset_ms = max(0, int((cut_sec - 2.2) * 1000))
             audio_inputs.extend(["-i", str(riser_file)])
             label = f"[riser_{audio_stream_idx}]"
-            filter_inputs.append(f"[{audio_stream_idx}:a]adelay={riser_offset_ms}|{riser_offset_ms},volume=0.45{label}")
+            filter_inputs.append(f"[{audio_stream_idx}:a]adelay={riser_offset_ms}|{riser_offset_ms},stereowiden=delay=25:feedback=0.3:crossfeed=0.2:drymix=0.80,volume=0.45{label}")
             sfx_labels.append(label)
             audio_stream_idx += 1
 
@@ -213,11 +213,11 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             label = f"[cut_sfx_{audio_stream_idx}]"
             vol = 0.65 if "boom" in sfx_target.name else 0.50
             if "whoosh" in sfx_target.name:
-                # Dynamic Alternating Stereo Spatial Panning (matches camera tracking direction)
+                # Dynamic Alternating Stereo Spatial Panning (L->R vs R->L)
                 pan_filter = "pan=stereo|c0=0.85*c0+0.15*c1|c1=0.25*c0+0.75*c1" if cut_idx % 2 == 1 else "pan=stereo|c0=0.25*c0+0.75*c1|c1=0.85*c0+0.15*c1"
                 filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},{pan_filter},volume={vol}{label}")
             else:
-                filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},volume={vol}{label}")
+                filter_inputs.append(f"[{audio_stream_idx}:a]adelay={offset_ms}|{offset_ms},haas,volume={vol}{label}")
             sfx_labels.append(label)
             audio_stream_idx += 1
 
