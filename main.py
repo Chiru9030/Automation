@@ -48,10 +48,12 @@ def upload_to_youtube(
     youtube = build("youtube", "v3", credentials=credentials)
 
     chosen_privacy = privacy_status or os.getenv("YOUTUBE_PRIVACY_STATUS", "public")
+    # YouTube Data API enforces a strict hard ceiling of 100 characters for video titles
+    safe_title = (title or "Mind-Blowing Curiosity Facts #shorts").strip()[:95]
 
     body = {
         "snippet": {
-            "title": title,
+            "title": safe_title,
             "description": description,
             "tags": tags,
             "categoryId": "28",  # Science & Technology

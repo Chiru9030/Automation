@@ -313,12 +313,14 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         # -------------------------------------------------------------
         current_stage = "Stage 7: Multi-Platform Publishing"
         
-        # High-CTR Title A/B/C Split-Testing Suite
+        # High-CTR Title A/B/C Split-Testing Suite (Strictly <= 95 characters for YouTube API compliance)
         clean_concept = chapter_title.replace("What happens if you ", "").replace("What happens if ", "").replace("What if you ", "").replace("What if ", "").strip("?!. ")
+        short_concept = clean_concept[:45].strip()
+        short_chapter = chapter_title[:55].strip()
         title_variants = [
-            f"{chapter_title} (Ep {ep_num}) #shorts",
-            f"The Terrifying Secret Behind {clean_concept} (Part {ep_num}) #shorts",
-            f"What Happens If {clean_concept}? (Ep {ep_num}) #shorts",
+            f"{short_chapter} (Ep {ep_num}) #shorts"[:95],
+            f"The Secret Behind {short_concept} (Part {ep_num}) #shorts"[:95],
+            f"What If: {short_concept}? (Ep {ep_num}) #shorts"[:95],
         ]
         variant_labels = ["VARIANT_A (Question Hook)", "VARIANT_B (Revelation)", "VARIANT_C (Hypothetical Paradox)"]
         chosen_title_idx = ep_num % len(title_variants)
