@@ -245,10 +245,10 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
                         break  # Limit to 1 tactile accent per scene for optimal acoustic elegance
             accent_running_offset += sc_dur
 
-    # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Dynamic Sidechain Ducking + EBU R128 Loudnorm)
-    # 1. Voice Bus: Sequential dialogue mixed with normalize=0 so speech is never attenuated!
+    # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Speech EQ + Dynamic Sidechain Ducking + EBU R128 Loudnorm)
+    # 1. Voice Bus: Sequential dialogue mixed with speech presence EQ (80Hz highpass + 3.2kHz presence) & normalize=0
     if voice_mix_labels:
-        filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0,asplit=2[voice_bus][voice_ctrl]")
+        filter_inputs.append(f"{''.join(voice_mix_labels)}amix=inputs={len(voice_mix_labels)}:normalize=0:dropout_transition=0,highpass=f=80,equalizer=f=3200:t=q:w=1.2:g=2.2,asplit=2[voice_bus][voice_ctrl]")
     else:
         filter_inputs.append("aevalsrc=0:d=1,asplit=2[voice_bus][voice_ctrl]")
 
