@@ -66,6 +66,11 @@ from story_pipeline.telegram_notifier import (
     notify_quota_exceeded,
     RUN_TRACKER,
 )
+from story_pipeline.backlog_publisher import (
+    enqueue_backlog_episode,
+    get_pending_backlog,
+    dequeue_backlog_episode,
+)
 from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
@@ -139,6 +144,61 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
 
     current_stage = "Stage 1: Dynamic Viral Topic Generator"
     try:
+        # -------------------------------------------------------------
+        # STAGE 0: Pre-Flight Backlog Queue Drainage (Self-Healing Publishing)
+        # -------------------------------------------------------------
+        if publish:
+            pending_backlog = get_pending_backlog()
+            if pending_backlog:
+                item = pending_backlog[0]
+                queued_ep = item.get("episode_num")
+                vid_p = Path(item.get("video_path", ""))
+                thumb_p = Path(item.get("thumbnail_path", ""))
+                if vid_p.exists():
+                    print(f"\n📦 [Backlog Queue Engine] Found certified pending Episode #{queued_ep}: '{item.get('title')}'")
+                    print("   Attempting upload to resolve backlog...")
+                    yt_res = upload_to_youtube(
+                        str(vid_p),
+                        item.get("title"),
+                        item.get("description"),
+                        item.get("tags", []),
+                        thumbnail_path=str(thumb_p) if thumb_p.exists() else None,
+                        pinned_comment=item.get("pinned_comment"),
+                    )
+                    if not yt_res.startswith("[QUOTA_EXCEEDED]"):
+                        print(f"🎉 [Backlog Queue Engine] Successfully published queued Episode #{queued_ep}!")
+                        dequeue_backlog_episode(queued_ep)
+                        history = load_history()
+                        proc_list = history.get("processed_chapters", [])
+                        proc_list.append(item.get("chapter_id"))
+                        history["processed_chapters"] = proc_list
+                        history["episode_count"] = queued_ep
+                        topics = history.get("generated_topics", [])
+                        topics.append(item.get("title"))
+                        history["used_topics"] = list(set(history.get("used_topics", []) + [item.get("title")]))
+                        save_history(history)
+                        notify_success(
+                            episode_num=queued_ep,
+                            title=item.get("title"),
+                            duration=item.get("duration", 58.0),
+                            size_mb=item.get("size_mb", 50.0),
+                            youtube_res=yt_res,
+                            video_path=vid_p,
+                        )
+                        return {
+                            "status": "BACKLOG_PUBLISHED",
+                            "episode": queued_ep,
+                            "title": item.get("title"),
+                            "youtube_res": yt_res,
+                        }
+                    else:
+                        print(f"⚠️ [Backlog Queue Engine] YouTube quota is still cooling down for Episode #{queued_ep}.")
+                        print("   Preserving runner minutes. Exiting cleanly until 24h reset.")
+                        return {
+                            "status": "QUOTA_STILL_ACTIVE",
+                            "episode": queued_ep,
+                            "reason": yt_res,
+                        }
         # -------------------------------------------------------------
         # STAGE 1: Dynamic Viral Topic Generator or Custom User Topic
         # -------------------------------------------------------------
@@ -410,7 +470,19 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
 
             if yt_res.startswith("[QUOTA_EXCEEDED]"):
                 print("\n⚠️ [YOUTUBE QUOTA LIMIT REACHED] Daily upload limit exceeded.")
-                print("   Holding history counter at current episode. Preserving certified video in artifacts.")
+                print("   Holding history counter at current episode. Enqueuing into backlog_queue.json.")
+                enqueue_backlog_episode(
+                    episode_num=ep_num,
+                    chapter_id=chapter_id,
+                    title=yt_title,
+                    description=yt_desc,
+                    tags=yt_tags,
+                    pinned_comment=pinned_comm,
+                    video_path=str(out_mp4),
+                    thumbnail_path=str(thumb_path),
+                    duration=cert["duration"],
+                    size_mb=cert["size_mb"],
+                )
                 notify_quota_exceeded(
                     episode_num=ep_num,
                     title=chapter_title,

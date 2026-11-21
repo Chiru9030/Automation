@@ -25,6 +25,7 @@ def upload_to_youtube(
     thumbnail_path: str | None = None,
     privacy_status: str | None = None,
     pinned_comment: str | None = None,
+    publish_at: str | None = None,
 ) -> str:
     """Uploads a rendered MP4 video to YouTube and returns the Video ID.
 
@@ -36,6 +37,7 @@ def upload_to_youtube(
         thumbnail_path: Optional path to custom high-CTR thumbnail JPG.
         privacy_status: 'private', 'unlisted', or 'public' (defaults to YOUTUBE_PRIVACY_STATUS or 'private').
         pinned_comment: Optional engagement booster comment to automatically pin on the video.
+        publish_at: Optional ISO 8601 UTC string for scheduled release (e.g. '2026-11-22T18:00:00.000Z').
     """
     token_path = BASE_DIR / "youtube_tokens.json"
     if not token_path.exists():
@@ -59,11 +61,14 @@ def upload_to_youtube(
             "categoryId": "28",  # Science & Technology
         },
         "status": {
-            "privacyStatus": chosen_privacy,
+            "privacyStatus": chosen_privacy if not publish_at else "private",
             "selfDeclaredMadeForKids": False,
             "containsSyntheticMedia": True,  # YouTube 2025/2026 AI disclosure compliance
         },
     }
+    if publish_at:
+        body["status"]["publishAt"] = publish_at
+
     media = MediaFileUpload(video_path, chunksize=-1, resumable=True, mimetype="video/mp4")
     request = youtube.videos().insert(part=",".join(body.keys()), body=body, media_body=media)
     try:
@@ -73,7 +78,15 @@ def upload_to_youtube(
         if "uploadLimitExceeded" in str(e_upload):
             print("\n⚠️ [YouTube 24h Quota Exceeded] Daily upload limit reached on channel account.")
             return "[QUOTA_EXCEEDED] Daily YouTube upload quota reached (uploadLimitExceeded). Video is certified & preserved in artifacts."
-        raise e_upload
+        if publish_at and ("invalidPrivacyStatus" in str(e_upload) or "unauthorizedSchedule" in str(e_upload)):
+            print(f"⚠️ Notice: Scheduled publishing rejected ({e_upload}), falling back to direct {chosen_privacy} upload...")
+            body["status"]["privacyStatus"] = chosen_privacy
+            body["status"].pop("publishAt", None)
+            request = youtube.videos().insert(part=",".join(body.keys()), body=body, media_body=media)
+            response = request.execute()
+            video_id = response.get("id")
+        else:
+            raise e_upload
 
     # Set custom high-CTR thumbnail if provided
     if video_id and thumbnail_path and Path(thumbnail_path).exists():
