@@ -11,27 +11,64 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_AUDIO_DIR = BASE_DIR / "video-app" / "public" / "audio"
 
-# Rotating Dual-Speaker Character Suites (Defeats YouTube Inauthentic/Repetitive Audio Profile Detection)
+# 8 Rotating Multi-Accent Character Suites (Defeats YouTube Inauthentic/Repetitive Audio Profile Detection)
 VOICE_SUITES = [
     {
-        "anchor": {"voice": "en-US-ChristopherNeural", "rate": "+2%", "pitch": "-3Hz", "name": "Deep Anchor"},
-        "analyst": {"voice": "en-US-EricNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Science Specialist"}
+        "anchor": {"voice": "en-US-ChristopherNeural", "rate": "+2%", "pitch": "-3Hz", "name": "Deep Anchor (US)"},
+        "analyst": {"voice": "en-US-EricNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Science Specialist (US)"}
     },
     {
-        "anchor": {"voice": "en-US-JennyNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Investigative Host"},
-        "analyst": {"voice": "en-GB-RyanNeural", "rate": "+2%", "pitch": "-2Hz", "name": "British Academic"}
+        "anchor": {"voice": "en-US-JennyNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Investigative Host (US)"},
+        "analyst": {"voice": "en-GB-RyanNeural", "rate": "+2%", "pitch": "-2Hz", "name": "British Academic (GB)"}
     },
     {
-        "anchor": {"voice": "en-US-GuyNeural", "rate": "+4%", "pitch": "+0Hz", "name": "Curiosity Narrator"},
-        "analyst": {"voice": "en-US-AriaNeural", "rate": "+2%", "pitch": "+1Hz", "name": "Analyst"}
+        "anchor": {"voice": "en-US-GuyNeural", "rate": "+4%", "pitch": "+0Hz", "name": "Curiosity Narrator (US)"},
+        "analyst": {"voice": "en-US-AriaNeural", "rate": "+2%", "pitch": "+1Hz", "name": "Analyst (US)"}
+    },
+    {
+        "anchor": {"voice": "en-US-AndrewNeural", "rate": "+3%", "pitch": "-1Hz", "name": "Dynamic Explainer (US)"},
+        "analyst": {"voice": "en-US-AvaNeural", "rate": "+3%", "pitch": "+1Hz", "name": "Science Journalist (US)"}
+    },
+    {
+        "anchor": {"voice": "en-GB-ThomasNeural", "rate": "+2%", "pitch": "-2Hz", "name": "Documentarian (GB)"},
+        "analyst": {"voice": "en-GB-SoniaNeural", "rate": "+3%", "pitch": "+0Hz", "name": "UK Researcher (GB)"}
+    },
+    {
+        "anchor": {"voice": "en-AU-WilliamNeural", "rate": "+2%", "pitch": "-1Hz", "name": "Explorer (AU)"},
+        "analyst": {"voice": "en-AU-NatashaNeural", "rate": "+3%", "pitch": "+1Hz", "name": "Outback Analyst (AU)"}
+    },
+    {
+        "anchor": {"voice": "en-US-BrianNeural", "rate": "+3%", "pitch": "-2Hz", "name": "Resonant Investigator (US)"},
+        "analyst": {"voice": "en-US-EmmaNeural", "rate": "+2%", "pitch": "+0Hz", "name": "Tech Analyst (US)"}
+    },
+    {
+        "anchor": {"voice": "en-IE-ConnorNeural", "rate": "+2%", "pitch": "-1Hz", "name": "Storyteller (IE)"},
+        "analyst": {"voice": "en-IE-EmilyNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Historian (IE)"}
     }
 ]
 
 
 def get_voice_for_beat(beat_number: int, episode_num: int = 1) -> dict:
-    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4) with suite rotation."""
+    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4) with suite rotation and micro-jitter."""
     suite = VOICE_SUITES[episode_num % len(VOICE_SUITES)]
-    return suite["anchor"] if beat_number % 2 == 1 else suite["analyst"]
+    base = suite["anchor"] if beat_number % 2 == 1 else suite["analyst"]
+
+    # Subtle deterministic acoustic jitter (+/- 1Hz pitch, +/- 1% rate) to prevent audio fingerprinting
+    rate_val = int(base["rate"].replace("%", "").replace("+", ""))
+    pitch_val = int(base["pitch"].replace("Hz", "").replace("+", ""))
+
+    rate_jitter = ((episode_num * 3 + beat_number * 7) % 3) - 1  # -1, 0, or +1 %
+    pitch_jitter = ((episode_num * 5 + beat_number * 11) % 3) - 1  # -1, 0, or +1 Hz
+
+    final_rate = f"{rate_val + rate_jitter:+d}%"
+    final_pitch = f"{pitch_val + pitch_jitter:+d}Hz"
+
+    return {
+        "voice": base["voice"],
+        "rate": final_rate,
+        "pitch": final_pitch,
+        "name": base["name"],
+    }
 
 
 def get_audio_duration(file_path: Path) -> float:

@@ -103,9 +103,20 @@ jobs:
             echo "✅ Configured Instagram session"
           fi
 
+      - name: Apply Organic Schedule Jitter
+        if: github.event_name == 'schedule'
+        run: |
+          python3 -c "
+          import random, time
+          jitter_sec = random.randint(60, 900)
+          print(f'🎲 [Organic Schedule Jitter] Sleeping {jitter_sec}s ({jitter_sec/60:.1f}m) to defeat automated bot detection...')
+          time.sleep(jitter_sec)
+          "
+
       - name: Run Autonomous Story Pipeline
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           FAL_KEY: ${{ secrets.FAL_KEY }}
           HF_TOKEN: ${{ secrets.HF_TOKEN }}

@@ -48,18 +48,99 @@ def extract_video_still(video_path: Path, timestamp_sec: float, output_path: Pat
 
 
 def get_impact_font(size: int):
-    """Loads Impact font with safe fallbacks across OS environments."""
-    for path in [
+    """Loads Anton or Impact font with safe fallbacks across OS environments."""
+    anton_bundled = BASE_DIR / "video-app" / "public" / "fonts" / "Anton.ttf"
+    candidates = [
+        str(anton_bundled),
         "/System/Library/Fonts/Supplemental/Impact.ttf",
         "/usr/share/fonts/truetype/msttcorefonts/Impact.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
         "/Library/Fonts/Impact.ttf",
-    ]:
+    ]
+    for path in candidates:
         try:
             return ImageFont.truetype(path, size)
         except Exception:
             continue
     return ImageFont.load_default()
+
+
+def wrap_text_into_lines(text: str, max_words_per_line: int = 3, max_chars_per_line: int = 16) -> list[str]:
+    """Wraps headline text into 2-3 punchy viral lines for 1080x1920 mobile screens."""
+    words = text.split()
+    if not words:
+        return [text]
+    lines = []
+    current_line = []
+    for w in words:
+        test_line = " ".join(current_line + [w])
+        if len(current_line) < max_words_per_line and len(test_line) <= max_chars_per_line:
+            current_line.append(w)
+        else:
+            if current_line:
+                lines.append(" ".join(current_line))
+            current_line = [w]
+    if current_line:
+        lines.append(" ".join(current_line))
+    return lines[:3]  # Maximum 3 lines for high CTR legibility
+
+
+def get_sticker_badge(category: str, episode_num: int) -> str:
+    c = category.lower()
+    if "biology" in c or "human" in c:
+        return f"🚨 MEDICAL ANOMALY #{episode_num}"
+    if "space" in c or "cosmic" in c:
+        return f"🪐 COSMIC PARADOX #{episode_num}"
+    if "ocean" in c or "trench" in c:
+        return f"🌊 DEEP SEA SECRETS #{episode_num}"
+    if "prehistoric" in c or "dinosaur" in c:
+        return f"🦖 PREHISTORIC TRUTH #{episode_num}"
+    return f"⚡ VIRAL PARADOX #{episode_num}"
+
+
+def draw_backed_text_lines(
+    draw: ImageDraw.ImageDraw,
+    lines: list[str],
+    font: ImageFont.ImageFont,
+    start_y: int,
+    canvas_w: int,
+    text_color=(255, 230, 0, 255),
+    box_color=(0, 0, 0, 240),
+    box_outline=(255, 230, 0, 255),
+    outline_width=4,
+    pad_x=32,
+    pad_y=16,
+    line_spacing=20,
+) -> int:
+    """Draws multiple lines of 110px+ text with high-contrast individual backing pill boxes."""
+    curr_y = start_y
+    for line in lines:
+        bbox = draw.textbbox((0, 0), line, font=font)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+        box_w = tw + pad_x * 2
+        box_h = th + pad_y * 2
+        box_left = (canvas_w - box_w) // 2
+        box_top = curr_y
+        box_right = box_left + box_w
+        box_bottom = box_top + box_h
+
+        draw.rounded_rectangle(
+            [box_left, box_top, box_right, box_bottom],
+            radius=24,
+            fill=box_color,
+            outline=box_outline,
+            width=outline_width,
+        )
+        draw.text(
+            (canvas_w // 2, box_top + box_h // 2),
+            line,
+            fill=text_color,
+            font=font,
+            anchor="mm",
+        )
+        curr_y += box_h + line_spacing
+    return curr_y
 
 
 def generate_high_ctr_thumbnail(
@@ -73,16 +154,17 @@ def generate_high_ctr_thumbnail(
 def generate_abc_thumbnail_suite(
     episode_num: int, headline: str, category: str = "Science", video_path: Path = None
 ) -> dict:
-    """Generates 3 distinct high-CTR thumbnail variants for A/B/C testing."""
+    """Generates 3 distinct high-CTR thumbnail variants for A/B/C testing with 110-120px Anton typography."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     emoji = get_category_emoji(category)
+    sticker = get_sticker_badge(category, episode_num)
 
     clean_headline = headline.strip().rstrip("?!.").upper()
-    if len(clean_headline) > 28:
-        clean_headline = clean_headline[:25] + "..."
+    lines = wrap_text_into_lines(clean_headline, max_words_per_line=3, max_chars_per_line=16)
 
-    font_large = get_impact_font(58)
-    font_badge = get_impact_font(44)
+    font_large = get_impact_font(110)
+    font_badge = get_impact_font(50)
+    font_sticker = get_impact_font(38)
 
     results = {}
 
@@ -98,31 +180,44 @@ def generate_abc_thumbnail_suite(
     w, h = img_a.size
 
     # Neon Yellow Outer Border
-    draw_a.rectangle([12, 12, w - 12, h - 12], outline=(255, 230, 0, 245), width=18)
+    draw_a.rectangle([12, 12, w - 12, h - 12], outline=(255, 230, 0, 245), width=20)
 
-    # Top Viral Hook Pill
-    pill_w = 880
-    pill_h = 135
+    # Top Category Sticker Badge
+    badge_w = 580
+    badge_h = 75
     draw_a.rounded_rectangle(
-        [(w - pill_w) // 2, 120, (w + pill_w) // 2, 120 + pill_h],
-        radius=35,
-        fill=(0, 0, 0, 230),
-        outline=(255, 230, 0, 255),
-        width=6,
+        [(w - badge_w) // 2, 80, (w + badge_w) // 2, 80 + badge_h],
+        radius=20,
+        fill=(255, 230, 0, 255),
+        outline=(0, 0, 0, 255),
+        width=4,
     )
-    draw_a.text((w // 2, 120 + pill_h // 2), f"{emoji} {clean_headline}", fill=(255, 230, 0, 255), font=font_large, anchor="mm")
+    draw_a.text((w // 2, 80 + badge_h // 2), sticker, fill=(0, 0, 0, 255), font=font_sticker, anchor="mm")
+
+    # High-CTR 110px Backed Text Lines (Center Upper Third)
+    draw_backed_text_lines(
+        draw_a,
+        lines,
+        font_large,
+        start_y=210,
+        canvas_w=w,
+        text_color=(255, 230, 0, 255),
+        box_color=(0, 0, 0, 240),
+        box_outline=(255, 230, 0, 255),
+        outline_width=6,
+    )
 
     # Bottom Callout Badge
-    badge_w = 900
-    badge_h = 150
+    callout_w = 920
+    callout_h = 140
     draw_a.rounded_rectangle(
-        [(w - badge_w) // 2, h - 330, (w + badge_w) // 2, h - 180],
-        radius=40,
+        [(w - callout_w) // 2, h - 300, (w + callout_w) // 2, h - 160],
+        radius=35,
         fill=(235, 30, 60, 245),
         outline=(255, 255, 255, 255),
         width=8,
     )
-    draw_a.text((w // 2, h - 255), f"EPISODE #{episode_num} • WATCH NOW! 🔥", fill=(255, 255, 255, 255), font=font_badge, anchor="mm")
+    draw_a.text((w // 2, h - 230), f"EPISODE #{episode_num} • WATCH NOW! 🔥", fill=(255, 255, 255, 255), font=font_badge, anchor="mm")
 
     path_a = OUTPUT_DIR / f"thumbnail_episode_{episode_num}.jpg"
     Image.alpha_composite(img_a, overlay_a).convert("RGB").save(path_a, "JPEG", quality=95)
@@ -140,27 +235,40 @@ def generate_abc_thumbnail_suite(
     draw_b = ImageDraw.Draw(overlay_b)
 
     # Neon Cyan Outer Border
-    draw_b.rectangle([12, 12, w - 12, h - 12], outline=(0, 230, 255, 245), width=18)
+    draw_b.rectangle([12, 12, w - 12, h - 12], outline=(0, 230, 255, 245), width=20)
 
-    # Top Shock Pill
+    # Top Shock Sticker
     draw_b.rounded_rectangle(
-        [(w - pill_w) // 2, 120, (w + pill_w) // 2, 120 + pill_h],
-        radius=35,
-        fill=(0, 0, 0, 235),
-        outline=(0, 230, 255, 255),
-        width=6,
+        [(w - badge_w) // 2, 80, (w + badge_w) // 2, 80 + badge_h],
+        radius=20,
+        fill=(0, 230, 255, 255),
+        outline=(0, 0, 0, 255),
+        width=4,
     )
-    draw_b.text((w // 2, 120 + pill_h // 2), f"⚠️ WHAT THEY HIDDEN!", fill=(0, 230, 255, 255), font=font_large, anchor="mm")
+    draw_b.text((w // 2, 80 + badge_h // 2), "⚠️ CLASSIFIED FACT", fill=(0, 0, 0, 255), font=font_sticker, anchor="mm")
+
+    # High-CTR Cyan/White Text Lines
+    draw_backed_text_lines(
+        draw_b,
+        lines,
+        font_large,
+        start_y=210,
+        canvas_w=w,
+        text_color=(0, 240, 255, 255),
+        box_color=(0, 0, 0, 240),
+        box_outline=(0, 230, 255, 255),
+        outline_width=6,
+    )
 
     # Bottom Yellow CTA
     draw_b.rounded_rectangle(
-        [(w - badge_w) // 2, h - 330, (w + badge_w) // 2, h - 180],
-        radius=40,
+        [(w - callout_w) // 2, h - 300, (w + callout_w) // 2, h - 160],
+        radius=35,
         fill=(255, 220, 0, 245),
         outline=(0, 0, 0, 255),
         width=8,
     )
-    draw_b.text((w // 2, h - 255), f"DON'T LOOK AWAY ⚡", fill=(0, 0, 0, 255), font=font_badge, anchor="mm")
+    draw_b.text((w // 2, h - 230), f"DON'T LOOK AWAY ⚡", fill=(0, 0, 0, 255), font=font_badge, anchor="mm")
 
     path_b = OUTPUT_DIR / f"thumbnail_episode_{episode_num}_B.jpg"
     Image.alpha_composite(img_b, overlay_b).convert("RGB").save(path_b, "JPEG", quality=95)
@@ -177,16 +285,28 @@ def generate_abc_thumbnail_suite(
     overlay_c = Image.new("RGBA", img_c.size, (0, 0, 0, 0))
     draw_c = ImageDraw.Draw(overlay_c)
 
-    # Heavy dark vignette band in middle
+    # Heavy dark cinematic vignette band across center
     mid_y = h // 2
-    draw_c.rectangle([0, mid_y - 180, w, mid_y + 180], fill=(0, 0, 0, 210))
-    draw_c.text((w // 2, mid_y - 40), f"{emoji} {clean_headline}", fill=(255, 230, 0, 255), font=font_large, anchor="mm")
-    draw_c.text((w // 2, mid_y + 50), "THE SCIENTIFIC TRUTH", fill=(255, 255, 255, 240), font=font_badge, anchor="mm")
+    draw_c.rectangle([0, mid_y - 320, w, mid_y + 320], fill=(0, 0, 0, 220))
+
+    # Center Backed Text
+    draw_backed_text_lines(
+        draw_c,
+        lines,
+        font_large,
+        start_y=mid_y - 200,
+        canvas_w=w,
+        text_color=(255, 230, 0, 255),
+        box_color=(20, 20, 20, 240),
+        box_outline=(255, 255, 255, 200),
+        outline_width=4,
+    )
+    draw_c.text((w // 2, mid_y + 240), "THE SCIENTIFIC TRUTH", fill=(255, 255, 255, 240), font=font_badge, anchor="mm")
 
     path_c = OUTPUT_DIR / f"thumbnail_episode_{episode_num}_C.jpg"
     Image.alpha_composite(img_c, overlay_c).convert("RGB").save(path_c, "JPEG", quality=95)
     still_c.unlink(missing_ok=True)
     results["variant_c"] = path_c
 
-    print(f"🌟 High-CTR A/B/C Thumbnail Suite generated: {path_a.name}, {path_b.name}, {path_c.name}")
+    print(f"🌟 High-CTR A/B/C Anton 110px Thumbnail Suite generated: {path_a.name}, {path_b.name}, {path_c.name}")
     return results

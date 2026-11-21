@@ -24,6 +24,7 @@ def upload_to_youtube(
     tags: list[str],
     thumbnail_path: str | None = None,
     privacy_status: str | None = None,
+    pinned_comment: str | None = None,
 ) -> str:
     """Uploads a rendered MP4 video to YouTube and returns the Video ID.
 
@@ -34,6 +35,7 @@ def upload_to_youtube(
         tags: List of keywords/tags for the video.
         thumbnail_path: Optional path to custom high-CTR thumbnail JPG.
         privacy_status: 'private', 'unlisted', or 'public' (defaults to YOUTUBE_PRIVACY_STATUS or 'private').
+        pinned_comment: Optional engagement booster comment to automatically pin on the video.
     """
     token_path = BASE_DIR / "youtube_tokens.json"
     if not token_path.exists():
@@ -77,18 +79,19 @@ def upload_to_youtube(
     # Post engagement booster comment
     if video_id:
         try:
+            comm_text = pinned_comment or "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀"
             comment_body = {
                 "snippet": {
                     "videoId": video_id,
                     "topLevelComment": {
                         "snippet": {
-                            "textOriginal": "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀"
+                            "textOriginal": comm_text
                         }
                     }
                 }
             }
             youtube.commentThreads().insert(part="snippet", body=comment_body).execute()
-            print("💬 Automatically posted engagement comment on YouTube Short!")
+            print(f"💬 Automatically posted engagement comment on YouTube Short: '{comm_text[:60]}...'")
         except Exception as e_comm:
             print(f"Notice: Auto-comment note ({e_comm})")
 

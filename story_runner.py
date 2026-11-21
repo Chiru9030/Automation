@@ -205,7 +205,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         current_stage = "Stage 4 & 5: Neural Audio & Exact Word Boundaries"
         print("\n🎙️ [Stage 4 & 5/7] Synthesizing multi-speaker neural voiceovers & word boundaries...")
         PUBLIC_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-        beats = build_audio_and_timings_sync(beats)
+        beats = build_audio_and_timings_sync(beats, episode_num=ep_num)
         script_data["beats"] = beats
         script_data["scenes"] = beats
 
@@ -221,7 +221,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         ass_path = OUTPUT_DIR / "fast_render_tmp" / "subtitles.ass"
         compile_kinetic_subtitles(beats, ass_path)
         from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
-        append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=58.0)
+        append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=58.0, episode_num=ep_num)
 
         # Gate 4: Subtitles Verification Audit
         current_stage = "Gate 4: Subtitles Verification Audit"
@@ -307,14 +307,39 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         current_stage = "Stage 7: Multi-Platform Publishing"
         yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
         full_text = " ".join([b["narration"] for b in beats])
-        yt_desc = f"{chapter_title}\n\nEpisode {ep_num}\n\n{full_text}\n\nSubscribe for new episodes every 5 hours! #shorts #viral #story"
-        yt_tags = ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]
 
-        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every 5 hours! 🎬✨ #reels #viral #explorepage #animation #whatif"
+        # Dynamic Topic SEO & Viral Hashtag Injection
+        seo_tags = script_data.get("seo_tags") or [
+            "what if", "mind blowing facts", "science experiment", "universe facts",
+            "viral shorts", "did you know", "space paradox", "unsolved mystery",
+            "shocking revelation", "educational shorts", "science animation", "curiosity"
+        ]
+        hashtags = script_data.get("hashtags") or ["#shorts", "#viral", "#science", "#curiosity", "#whatif"]
+        pinned_comm = script_data.get("pinned_comment") or f"Would you survive {chapter_title}? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀"
+        loop_hint = script_data.get("loop_lead_in", "Watch closely as the loop connects!")
+
+        yt_desc = (
+            f"{chapter_title}\n\n"
+            f"Episode {ep_num} • Dynamic Viral Curiosity Universe\n\n"
+            f"{full_text}\n\n"
+            f"🔄 Loop Secret: {loop_hint}\n\n"
+            f"{' '.join(hashtags)}\n\n"
+            f"Subscribe for new mind-bending episodes every day!"
+        )
+        yt_tags = list(dict.fromkeys(seo_tags + ["shorts", "viral", "facts", "whatif", "animation", "science", "story"]))[:25]
+
+        ig_caption = f"🚨 {chapter_title} (Part {ep_num})\n\n{hook_hl}\n\nFollow for more episodes every day! 🎬✨ {' '.join(hashtags)}"
 
         if publish:
             print("\n📤 Publishing to social platforms...")
-            yt_res = upload_to_youtube(str(out_mp4), yt_title, yt_desc, yt_tags, thumbnail_path=str(thumb_path))
+            yt_res = upload_to_youtube(
+                str(out_mp4),
+                yt_title,
+                yt_desc,
+                yt_tags,
+                thumbnail_path=str(thumb_path),
+                pinned_comment=pinned_comm,
+            )
             print(f"YouTube: {yt_res}")
 
             ig_res = upload_to_instagram(str(out_mp4), ig_caption)

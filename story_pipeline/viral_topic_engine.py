@@ -221,7 +221,7 @@ Return JSON format ONLY:
                     except Exception as m_err:
                         print(f"⚠️ Model {candidate_model} note: {m_err}")
                         if "RESOURCE_EXHAUSTED" in str(m_err) or "429" in str(m_err):
-                            print("⚠️ Free Tier daily quota reached on Gemini API. Falling back to offline generator.")
+                            print("⚠️ Free Tier daily quota reached on Gemini API. Checking Groq Cloud fallback...")
                             break
                         time.sleep(2.0 * attempt)
                 if res and res.text:
@@ -250,7 +250,68 @@ Return JSON format ONLY:
             except Exception:
                 pass
 
-    # Fallback to curated pool
+    # Secondary Cloud LLM Fallback: Groq Cloud (llama-3.3-70b-versatile, 14,400 req/day free)
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    if groq_api_key and groq_api_key.strip():
+        try:
+            print("⏳ [Topic Engine] Querying Groq Cloud API (llama-3.3-70b-versatile, timeout 20s)...")
+            import urllib.request
+            groq_prompt = f"""Generate ONE unique, viral, mind-blowing YouTube Shorts topic.
+Examples: 'What happens if you never stop peeing forever?', 'What if aliens land tomorrow?', 'T-Rex actually purred like birds'.
+Must be high-curiosity, shocking, and impossible to scroll past.
+Already used topics: {list(used_topics)[-20:]}
+Return JSON format ONLY:
+{{
+  "topic": "Shocking title as a question or paradox",
+  "hook_premise": "The shocking premise in 1 sentence",
+  "category": "Category name",
+  "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
+}}"""
+            groq_url = "https://api.groq.com/openai/v1/chat/completions"
+            groq_payload = json.dumps({
+                "model": "llama-3.3-70b-versatile",
+                "messages": [
+                    {"role": "system", "content": "You are an elite viral short-form director. Output JSON only."},
+                    {"role": "user", "content": groq_prompt}
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.8,
+            }).encode("utf-8")
+            groq_req = urllib.request.Request(
+                groq_url,
+                data=groq_payload,
+                headers={
+                    "Authorization": f"Bearer {groq_api_key.strip()}",
+                    "Content-Type": "application/json"
+                }
+            )
+            with urllib.request.urlopen(groq_req, timeout=20) as g_resp:
+                g_json = json.loads(g_resp.read().decode("utf-8"))
+                g_text = g_json.get("choices", [{}])[0].get("message", {}).get("content", "")
+                if g_text:
+                    g_data = json.loads(g_text)
+                    if g_data.get("topic") and g_data["topic"] not in used_topics:
+                        g_data["episode"] = ep_count
+                        used_topics.add(g_data["topic"])
+                        history["used_topics"] = list(used_topics)
+                        history["episode_count"] = ep_count
+                        save_history(history)
+                        print(f"💡 [Stage 1: Topic Engine] Groq AI (llama-3.3-70b-versatile) generated Topic #{ep_count}: '{g_data['topic']}'")
+                        try:
+                            from story_pipeline.telegram_notifier import RUN_TRACKER
+                            RUN_TRACKER.set_model_used("Topic", "Groq (llama-3.3-70b-versatile)")
+                        except Exception:
+                            pass
+                        return g_data
+        except Exception as e_groq:
+            print(f"Notice: Groq topic generation note: {e_groq}")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Groq (Topic)", f"Error: {str(e_groq)[:50]}")
+            except Exception:
+                pass
+
+    # Tertiary Fallback: Curated High-CTR Viral Pool
     try:
         from story_pipeline.telegram_notifier import RUN_TRACKER
         RUN_TRACKER.set_model_used("Topic", "Curated Viral Pool")

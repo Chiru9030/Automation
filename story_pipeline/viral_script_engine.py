@@ -114,6 +114,9 @@ Output JSON ONLY:
     }},
     ... (exactly 5 beats alternating speaker 'anchor' and 'specialist')
   ],
+  "seo_tags": ["what if", "mind blowing facts", "science experiment", "universe facts", "viral shorts", "did you know", "space paradox", "unsolved mystery", "shocking revelation", "educational shorts", "science animation", "extreme physics", "3d animation", "hypothetical scenario", "curiosity"],
+  "hashtags": ["#shorts", "#viral", "#science", "#curiosity", "#whatif"],
+  "pinned_comment": "Would you survive this scenario? Drop your theory in the comments! 👇 Subscribe for daily curiosity drops! 🚀",
   "branching_decision": {{
     "choice_a": "Option A for next episode",
     "choice_b": "Option B for next episode",
@@ -144,7 +147,7 @@ Output JSON ONLY:
                     except Exception as m_err:
                         print(f"⚠️ Model {candidate_model} script note: {m_err}")
                         if "RESOURCE_EXHAUSTED" in str(m_err) or "429" in str(m_err):
-                            print("⚠️ Free Tier daily quota reached on Gemini API. Falling back to calibrated script engine.")
+                            print("⚠️ Free Tier daily quota reached on Gemini API. Checking Groq Cloud fallback...")
                             break
                         time.sleep(2.0 * attempt)
                 if res and res.text:
@@ -169,7 +172,53 @@ Output JSON ONLY:
             except Exception:
                 pass
 
-    # Procedural Fallback Engine (Guaranteed 5-Beat Structure with 10s Retention Hooks)
+    # Secondary Cloud LLM Fallback: Groq Cloud (llama-3.3-70b-versatile, 14,400 req/day free)
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    if groq_api_key and groq_api_key.strip():
+        try:
+            print("⏳ [Script Engine] Querying Groq Cloud API (llama-3.3-70b-versatile, timeout 25s)...")
+            import urllib.request
+            groq_url = "https://api.groq.com/openai/v1/chat/completions"
+            groq_payload = json.dumps({
+                "model": "llama-3.3-70b-versatile",
+                "messages": [
+                    {"role": "system", "content": "You are an elite viral short-form director for YouTube Shorts. Output valid JSON only matching the schema exactly."},
+                    {"role": "user", "content": prompt}
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.7,
+            }).encode("utf-8")
+            groq_req = urllib.request.Request(
+                groq_url,
+                data=groq_payload,
+                headers={
+                    "Authorization": f"Bearer {groq_api_key.strip()}",
+                    "Content-Type": "application/json"
+                }
+            )
+            with urllib.request.urlopen(groq_req, timeout=25) as g_resp:
+                g_json = json.loads(g_resp.read().decode("utf-8"))
+                g_text = g_json.get("choices", [{}])[0].get("message", {}).get("content", "")
+                if g_text:
+                    g_data = json.loads(g_text)
+                    if "beats" in g_data and len(g_data["beats"]) == 5:
+                        w_count = sum(len(b['narration'].split()) for b in g_data['beats'])
+                        print(f"📝 [Stage 2: Script Engine] Groq AI (llama-3.3-70b-versatile) synthesized script for '{topic}' ({w_count} words)")
+                        try:
+                            from story_pipeline.telegram_notifier import RUN_TRACKER
+                            RUN_TRACKER.set_model_used("Script", "Groq (llama-3.3-70b-versatile)")
+                        except Exception:
+                            pass
+                        return g_data
+        except Exception as e_groq:
+            print(f"Notice: Groq script generation note: {e_groq}")
+            try:
+                from story_pipeline.telegram_notifier import RUN_TRACKER
+                RUN_TRACKER.record_model_failure("Groq (Script)", f"Error: {str(e_groq)[:50]}")
+            except Exception:
+                pass
+
+    # Tertiary Fallback: Procedural Retention Engine
     try:
         from story_pipeline.telegram_notifier import RUN_TRACKER
         RUN_TRACKER.set_model_used("Script", "Procedural Retention Engine")
@@ -386,6 +435,14 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         "hook_headline": f"WHAT IF {clean_title[:18]}?!",
         "total_words_count": total_words,
         "beats": beats,
+        "seo_tags": [
+            "what if", clean_title.lower(), "science experiment", "universe facts",
+            "viral shorts", "did you know", "space paradox", "unsolved mystery",
+            "shocking revelation", "educational shorts", "science animation",
+            "extreme physics", "3d animation", "hypothetical scenario", "curiosity"
+        ],
+        "hashtags": ["#shorts", "#viral", "#science", "#curiosity", "#whatif"],
+        "pinned_comment": f"Would you survive {clean_title.title()}? Drop your theory below! 👇 Subscribe for daily curiosity drops! 🚀",
         "branching_decision": {
             "prompt": f"What should happen next with {clean_title.title()}?",
             "choice_a": "Emergency purge to surface and survive",
