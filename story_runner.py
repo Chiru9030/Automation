@@ -312,7 +312,26 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         # Automated Social Media Publishing (Skipped if publish=False)
         # -------------------------------------------------------------
         current_stage = "Stage 7: Multi-Platform Publishing"
-        yt_title = f"{chapter_title} (Ep {ep_num}) #shorts"
+        
+        # High-CTR Title A/B/C Split-Testing Suite
+        clean_concept = chapter_title.replace("What happens if you ", "").replace("What happens if ", "").replace("What if you ", "").replace("What if ", "").strip("?!. ")
+        title_variants = [
+            f"{chapter_title} (Ep {ep_num}) #shorts",
+            f"The Terrifying Secret Behind {clean_concept} (Part {ep_num}) #shorts",
+            f"What Happens If {clean_concept}? (Ep {ep_num}) #shorts",
+        ]
+        variant_labels = ["VARIANT_A (Question Hook)", "VARIANT_B (Revelation)", "VARIANT_C (Hypothetical Paradox)"]
+        chosen_title_idx = ep_num % len(title_variants)
+        yt_title = title_variants[chosen_title_idx]
+        print(f"🎯 Selected Production Title Split-Test: {variant_labels[chosen_title_idx]} -> '{yt_title}'")
+        script_data["title_suite"] = {
+            "variant_a": title_variants[0],
+            "variant_b": title_variants[1],
+            "variant_c": title_variants[2],
+            "selected": variant_labels[chosen_title_idx],
+        }
+        RUN_TRACKER.set_model_used("Title Variant", variant_labels[chosen_title_idx])
+
         full_text = " ".join([b["narration"] for b in beats])
 
         # Dynamic Topic SEO & Viral Hashtag Injection

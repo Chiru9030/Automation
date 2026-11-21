@@ -216,6 +216,30 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
             sfx_labels.append(label)
             audio_stream_idx += 1
 
+    # Layer 4: Tactical Micro-SFX Accent Punctuation (Subtle Pop on Key Numbers & Curiosity Hooks)
+    pop_file = PUBLIC_DIR / "sfx" / "pop.wav"
+    if pop_file.exists():
+        accent_running_offset = 0.0
+        for sc in scenes:
+            sc_dur = sc.get("duration_in_frames", 360) / 30.0
+            words = sc.get("words", [])
+            for w in words:
+                w_clean = w.get("word", "").lower().strip(".,!?;:\"'")
+                if any(c.isdigit() for c in w_clean) or w_clean in [
+                    "million", "billion", "trillion", "thousand", "percent",
+                    "never", "secret", "impossible", "instantly", "danger", "exploded"
+                ]:
+                    w_start_sec = accent_running_offset + (w.get("start_frame", 0) / 30.0)
+                    pop_offset_ms = int(w_start_sec * 1000)
+                    if pop_offset_ms > 500:  # Avoid clashing with opening hook boom
+                        audio_inputs.extend(["-i", str(pop_file)])
+                        label = f"[pop_{audio_stream_idx}]"
+                        filter_inputs.append(f"[{audio_stream_idx}:a]adelay={pop_offset_ms}|{pop_offset_ms},volume=0.22{label}")
+                        sfx_labels.append(label)
+                        audio_stream_idx += 1
+                        break  # Limit to 1 tactile accent per scene for optimal acoustic elegance
+            accent_running_offset += sc_dur
+
     # Step 4.3: Professional Broadcast Audio Architecture (Voice Bus + Dynamic Sidechain Ducking + EBU R128 Loudnorm)
     # 1. Voice Bus: Sequential dialogue mixed with normalize=0 so speech is never attenuated!
     if voice_mix_labels:
