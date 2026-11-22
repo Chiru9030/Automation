@@ -2,9 +2,9 @@ name: Autonomous Daily Story Video Pipeline
 
 on:
   schedule:
-    # 5 automated runs per day: 03:00, 07:15, 11:00, 14:00, 17:15 UTC
-    # Spaced perfectly across global peak viewer hours (08:30, 12:45, 16:30, 19:30, 22:45 IST)
-    - cron: '0 3,7,11,14,17 * * *'
+    # 2 premier high-quality runs per day: 07:30 UTC & 14:30 UTC
+    # Spaced perfectly at peak global viral windows (13:00 IST / Lunch & 20:00 IST / Prime Evening)
+    - cron: '30 7,14 * * *'
   workflow_dispatch:
     inputs:
       custom_topic:

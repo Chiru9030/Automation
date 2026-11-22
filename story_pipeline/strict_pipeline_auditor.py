@@ -106,7 +106,8 @@ def audit_story_script(script_data: dict) -> bool:
         "rippling", "ripple", "lunging", "lunge", "sweeping", "sweep", "moving", "move",
         "pushing", "push", "running", "run", "descending", "descend", "accelerating", "accelerate",
         "drifting", "drift", "shattering", "shatter", "spinning", "spin", "plummeting", "plummet",
-        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover"
+        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover",
+        "turning", "turn", "stepping", "step", "walking", "walk", "reaching", "reach", "stumbling", "stumble"
     ]
 
     for b in beats:

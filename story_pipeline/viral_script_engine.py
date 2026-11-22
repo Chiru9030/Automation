@@ -261,7 +261,10 @@ def ensure_video_prompts_and_motion(script_data: dict) -> dict:
     vis_anchor = script_data.get("visual_anchor", "")
 
     if not char_dna or len(char_dna.strip()) < 25:
-        if any(k in t_lower for k in ["space", "jupiter", "saturn", "moon", "cosmic", "black hole", "universe", "orbit", "planet", "solar", "gravity", "meteor", "astronaut"]):
+        if any(k in t_lower for k in ["freeze time", "stop time", "time stop", "freeze", "telepathy", "mind", "power", "superpower"]):
+            char_dna = "Young protagonist in oversized black streetwear hoodie, modern sunglasses, dark messy hair, confident smirk, hand outstretched toward camera with dramatic foreshortening"
+            vis_anchor = "Midnight cyan-blue paused metropolis, floating cars and suspended pedestrians, shattered glowing temporal clock face in background, volumetric fog, Unreal Engine 5 render, 8k"
+        elif any(k in t_lower for k in ["space", "jupiter", "saturn", "moon", "cosmic", "black hole", "universe", "orbit", "planet", "solar", "gravity", "meteor", "astronaut"]):
             char_dna = "Astronaut in sleek matte-white NASA deep-space EVA suit with neon-amber shoulder striping, carbon-fiber joints, and a reflective gold-mirrored visor"
             vis_anchor = "Jupiter crimson-amber turbulent vortex atmosphere, dark cosmic space backdrop, violent electrical storm lighting, Unreal Engine 5 render"
         elif any(k in t_lower for k in ["peeing", "pee", "kidney", "brain", "body", "heart", "blood", "medical", "organ", "sleep", "cell"]):
@@ -303,7 +306,8 @@ def ensure_video_prompts_and_motion(script_data: dict) -> dict:
         "rippling", "ripple", "lunging", "lunge", "sweeping", "sweep", "moving", "move",
         "pushing", "push", "running", "run", "descending", "descend", "accelerating", "accelerate",
         "drifting", "drift", "shattering", "shatter", "spinning", "spin", "plummeting", "plummet",
-        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover"
+        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover",
+        "turning", "turn", "stepping", "step", "walking", "walk", "reaching", "reach", "stumbling", "stumble"
     ]
 
     for b in script_data.get("beats", []):
@@ -336,7 +340,77 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
     """Builds a guaranteed 5-beat viral script perfectly timed to 57 seconds with invariant character DNA and lens cinematography."""
     clean_title = topic.upper()[:26]
 
-    if "peeing" in topic.lower():
+    if "freeze time" in topic.lower() or "stop time" in topic.lower() or "time stop" in topic.lower():
+        char_dna = "Young protagonist in oversized black streetwear hoodie, modern sunglasses, dark messy hair, confident smirk, hand outstretched toward camera with dramatic foreshortening"
+        vis_anchor = "Midnight cyan-blue paused metropolis, floating cars and suspended pedestrians, shattered glowing temporal clock face in background, volumetric fog, Unreal Engine 5 render, 8k"
+        beats = [
+            {
+                "beat_number": 1,
+                "time_window": "0-10s",
+                "hook_trigger": "Opening Wish-Fulfillment Hook",
+                "narration": "What if you could freeze time across the entire world? In the first ten seconds, you would assume you are an untouchable god, but a horrifying physics nightmare has already begun.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": f"Extreme wide long shot from 24mm anamorphic lens, {char_dna} walking forward as time freezes, hand outstretched toward camera with dramatic foreshortening, suspended coffee droplets floating in mid-air, cars paused mid-intersection, cyan rim lighting, Unreal Engine 5 render, 8k",
+                "visual_prompt": f"24mm anamorphic shot of {char_dna} standing in paused metropolis with suspended coffee droplets and cars, cyan lighting, 8k",
+            },
+            {
+                "beat_number": 2,
+                "time_window": "10-22s",
+                "hook_trigger": "10s Escalation Hook",
+                "narration": "Within minutes, sheer euphoria sets in as you stroll past statue-frozen traffic and explore empty streets, but terrifying cosmic laws of physics are rapidly closing in on your body.",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": f"Low-angle 24mm anamorphic tracking pan, {char_dna} cutting through volumetric midnight fog past frozen pedestrians and levitating debris, confident smirk, cyan rim-lighting, 8k",
+                "visual_prompt": f"24mm anamorphic tracking shot of {char_dna} stepping past frozen people and cars in midnight city, 8k",
+            },
+            {
+                "beat_number": 3,
+                "time_window": "22-35s",
+                "hook_trigger": "20s Danger Hook",
+                "narration": "Because all time has stopped, light photons freeze in mid-air, plunging your eyes into pitch-black blindness, while stationary oxygen molecules refuse to enter your lungs, suffocating you in sixty seconds.",
+                "speaker": "character_hero",
+                "speaker_name": "Physicist",
+                "speaker_avatar": "⏳",
+                "sfx": "impact_boom",
+                "camera_motion": "vertical-tilt-reveal",
+                "video_prompt": f"Dutch-angle 35mm prime vertical tilt reveal, {char_dna} stumbling forward into darkness as light photons freeze into solid black mist, shattered glowing temporal clock face pulsing in sky, camera tilting upward, 8k",
+                "visual_prompt": f"35mm prime Dutch-angle shot of {char_dna} gasping in darkness beneath shattered glowing temporal clock, 8k",
+            },
+            {
+                "beat_number": 4,
+                "time_window": "35-48s",
+                "hook_trigger": "30s Climax Hook",
+                "narration": "As your consciousness slips away in frozen silence, you suddenly hear heavy footsteps echoing right behind you. If the entire universe is completely frozen, who is moving behind you?",
+                "speaker": "character_hero",
+                "speaker_name": "Physicist",
+                "speaker_avatar": "⏳",
+                "sfx": "pop",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": f"Extreme wide 10mm anamorphic epic scope pull-back, shadowy figure emerging and moving behind {char_dna} in frozen city, shockwaves rippling through temporal void, camera pulling backward rapidly, 8k",
+                "visual_prompt": f"10mm anamorphic wide shot of shadowy entity moving behind {char_dna} in frozen world, cinematic thriller, 8k",
+            },
+            {
+                "beat_number": 5,
+                "time_window": "48-58s",
+                "hook_trigger": "45s Resolution Hook",
+                "narration": "You turn around in absolute terror, only to discover that the moment you chose to freeze time, you trapped yourself inside a loop that always starts when...",
+                "speaker": "narrator",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": f"Centered 50mm portrait loop convergence shot, {char_dna} turning directly toward camera in shock with sunglasses reflecting the frozen city matching Beat 1 entry angle for seamless infinite loop, 8k",
+                "visual_prompt": f"50mm portrait shot of {char_dna} turning in shock with sunglasses reflecting paused reality, 8k",
+            },
+        ]
+    elif "peeing" in topic.lower():
         char_dna = "Subject in clinical modern attire with bioluminescent neural telemetry sensors and glowing bio-metric monitors"
         vis_anchor = "Microscopic cellular inner universe, glowing amber bio-luminescence, deep blue background, Unreal Engine 5 render, 8k"
         beats = [

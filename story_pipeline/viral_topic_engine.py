@@ -35,6 +35,24 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=15):
 # Extensive Curated Pool of High-CTR "What If" & Shocking Curiosity Topics
 VIRAL_TOPIC_POOL = [
     {
+        "topic": "What if you could freeze time for 24 hours?",
+        "hook_premise": "If you could pause all time on Earth, light photons would freeze in place, instantly blinding you, and frozen oxygen molecules would suffocate your lungs in sixty seconds.",
+        "category": "Dark Sci-Fi / Power Fantasy Paradox",
+        "style": "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k",
+    },
+    {
+        "topic": "What if gravity vanished for just 60 seconds?",
+        "hook_premise": "If gravity turned off for one minute, oceans, skyscrapers, and billions of people would violently catapult into outer space at one thousand miles an hour.",
+        "category": "Dark Sci-Fi / Power Fantasy Paradox",
+        "style": "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k",
+    },
+    {
+        "topic": "What if you could read everyone's minds?",
+        "hook_premise": "If you gained universal telepathy, the simultaneous sensory overload of eight billion screaming consciousnesses would fry your neural synapses in minutes.",
+        "category": "Dark Sci-Fi / Power Fantasy Paradox",
+        "style": "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k",
+    },
+    {
         "topic": "What happens if you never stop peeing forever?",
         "hook_premise": "If your body started peeing continuously without stopping, you would lose 1 liter of vital electrolytes every 40 minutes.",
         "category": "Human Biology Extreme",
