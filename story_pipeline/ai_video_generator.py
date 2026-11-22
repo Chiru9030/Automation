@@ -64,6 +64,11 @@ def build_strong_ai_video_prompt(
     """
     # 1. Translate camera motion token into explicit cinematography directions
     cam_directives = {
+        "rapid-push-in-shake": "rapid high-intensity 10mm camera push-in punch with subtle handheld micro-shake and motion blur",
+        "smooth-lateral-pan-right": "cinematic 24mm tracking pan shot moving smoothly from left to right across the turbulent environment",
+        "vertical-tilt-reveal": "Dutch-angle 35mm vertical tilt reveal moving dynamically from low to high to capture colossal scale",
+        "climax-pull-back": "high-velocity 10mm wide-angle epic scope pull-back revealing catastrophic scale",
+        "loop-convergence-zoom": "centered 50mm portrait camera convergence zoom matching opening framing for seamless infinite loop",
         "pan-right": "cinematic slow tracking pan shot moving smoothly from left to right across the vibrant environment",
         "dramatic-pulse": "suspenseful high-tension camera zoom with rapid focus pull and intense dynamic lighting",
         "warm-dolly": "epic scope revealing slow dolly-out camera shot pulling backward to reveal vast scale",

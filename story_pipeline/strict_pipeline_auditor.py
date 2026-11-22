@@ -83,7 +83,52 @@ def audit_story_script(script_data: dict) -> bool:
             f"Ending will terminate prematurely leaving empty dead air from 50s-58s!"
         )
 
-    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook & tail density).")
+    # Verify Invariant Character DNA & Visual Anchor (Zero-Drift Policy)
+    char_dna = script_data.get("character_dna", "")
+    if not char_dna or len(char_dna.strip()) < 25:
+        raise QualityAuditError(
+            f"Consistency Rejection: Script missing or insufficiently detailed 'character_dna' ({len(char_dna.strip())} chars < 25). "
+            f"A persistent visual subject definition is strictly required to prevent character drifting across scenes!"
+        )
+
+    vis_anchor = script_data.get("visual_anchor", "")
+    if not vis_anchor or len(vis_anchor.strip()) < 20:
+        raise QualityAuditError(
+            f"Consistency Rejection: Script missing or insufficiently detailed 'visual_anchor' ({len(vis_anchor.strip())} chars < 20). "
+            f"A unified environment and lighting anchor is strictly required!"
+        )
+
+    # Verify Optics Lenses & Active Physical Kinematics in every beat
+    lens_tokens = ["10mm", "12mm", "14mm", "16mm", "24mm", "28mm", "35mm", "50mm", "85mm", "anamorphic", "ultra-wide", "macro", "telephoto"]
+    kinematics_tokens = [
+        "falling", "fall", "tumbling", "tumble", "plunging", "plunge", "surging", "surge",
+        "filtering", "filter", "swirling", "swirl", "fracturing", "fracture", "collapsing", "collapse",
+        "rippling", "ripple", "lunging", "lunge", "sweeping", "sweep", "moving", "move",
+        "pushing", "push", "running", "run", "descending", "descend", "accelerating", "accelerate",
+        "drifting", "drift", "shattering", "shatter", "spinning", "spin", "plummeting", "plummet",
+        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover"
+    ]
+
+    for b in beats:
+        b_num = b.get("beat_number", 1)
+        vp = b.get("video_prompt", "")
+        if not vp or len(vp.strip()) < 50:
+            raise QualityAuditError(f"Cinematography Rejection: Beat #{b_num} missing detailed 'video_prompt' (>= 50 chars required).")
+
+        vp_lower = vp.lower()
+        if not any(tok in vp_lower for tok in lens_tokens):
+            raise QualityAuditError(
+                f"Cinematography Rejection: Beat #{b_num} video_prompt lacks explicit camera lens optics token "
+                f"(expected one of: 10mm, 24mm, 35mm, 50mm, anamorphic, ultra-wide, macro). Found: '{vp[:60]}...'"
+            )
+
+        if not any(tok in vp_lower for tok in kinematics_tokens):
+            raise QualityAuditError(
+                f"Cinematography Rejection: Beat #{b_num} video_prompt lacks dynamic physical kinematics motion verbs "
+                f"(expected active verbs like falling, tumbling, plunging, swirling, surging, drifting, lunging). Found: '{vp[:60]}...'"
+            )
+
+    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook, character DNA, lens optics & physical kinematics).")
     return True
 
 
@@ -246,13 +291,14 @@ def audit_single_visual_asset(
                     f"Crude geometric lines, flat drawings, or missing image detected! Strict audit rejects fake assets."
                 )
 
-            # Pillar 4: Clarity (Edge Focus & Sharpness)
+            # Pillar 4: Clarity (Edge Focus & Sharpness - Strict Zero-Blur Policy)
             edges = gray.filter(ImageFilter.FIND_EDGES)
             stat_edges = ImageStat.Stat(edges)
             clarity = stat_edges.stddev[0]
-            if clarity < 6.0:
+            if clarity < 16.0:
                 raise QualityAuditError(
-                    f"Clarity Rejection: Image lacks edge focus / clarity ({clarity:.1f} < 6.0). Blurry render detected."
+                    f"Clarity Rejection: Image lacks edge focus / clarity ({clarity:.1f} < 16.0). "
+                    f"Blurry, soft, or low-detail render detected! Strict pipeline auditor rejects substandard visuals."
                 )
 
             # Pillar 3: Relation (Prompt / Narrative Alignment)

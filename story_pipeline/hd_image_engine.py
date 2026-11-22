@@ -283,7 +283,7 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
     clean_p = sanitize_for_ai_filter(prompt)
     spaces_config = [
         ("black-forest-labs/FLUX.1-schnell", "/infer", "flux"),
-        ("ByteDance/SDXL-Lightning", "/generate_image", "sdxl"),
+        ("mrfakename/FLUX.1-schnell", "/infer", "flux"),
     ]
 
     for space_name, api_endpoint, model_type in spaces_config:
@@ -428,9 +428,9 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
     ]
 
     try:
-        clean_p = urllib.parse.quote(prompt[:250])
-        url = f"https://image.pollinations.ai/prompt/{clean_p}?nologo=true&seed={seed}"
-        print(f"[IMAGE-ENGINE] [TIER-4: Pollinations] Fetching: '{prompt[:48]}...'")
+        clean_p = urllib.parse.quote(prompt[:320])
+        url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=1080&height=1920&nologo=true&seed={seed}"
+        print(f"[IMAGE-ENGINE] [TIER-4: Pollinations FLUX] Fetching: '{prompt[:48]}...'")
 
         headers = {
             "User-Agent": random.choice(user_agents),
@@ -542,7 +542,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
                     action="Regenerating with enhanced subject-specific visual tokens...",
                 )
                 out_file.unlink(missing_ok=True)
-                prompt += ", dramatic cinematic focus, 3D Pixar character action, highly detailed subject, volumetric lighting"
+                prompt += ", extreme sharp edge definition, high-contrast micro-textures, ray tracing, Unreal Engine 5 render, 8k resolution, octane render"
             except Exception as gen_err:
                 print(f"⚠️ [Image Engine Error] Beat #{b_num} generation attempt {attempt}/3 error: {gen_err}")
                 if attempt == 3:

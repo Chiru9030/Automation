@@ -92,19 +92,25 @@ CRITICAL STORYTELLING & CINEMATOGRAPHY RULES:
 2. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 126 AND 138 WORDS (Yields 52-56 seconds of optimal high-retention speech; APV > 105%).
 3. CADENCE: Short punchy sentences (<12 words). Use active, vivid verbs and clear causal transitions ('Because of this...', 'Within seconds...', 'This instantly triggers...'). NO ellipses (...), NO em-dashes.
 4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically and visually fuse into the very first word of Beat 1.
-5. DYNAMIC AI VIDEO PROMPTS (NOT STATIC IMAGES):
+5. INVARIANT CHARACTER DNA & VISUAL ANCHOR (ZERO INCONSISTENCY POLICY):
+   - You MUST define an explicit, highly detailed 'character_dna' for the episode protagonist or central subject.
+     Example: "Astronaut in sleek matte-white NASA deep-space EVA suit with neon-amber shoulder striping, carbon-fiber joints, and a reflective gold-mirrored visor"
+   - You MUST define an explicit 'visual_anchor' specifying the unified environment, lighting, and palette.
+     Example: "Jupiter crimson-amber turbulent vortex atmosphere, dark cosmic space backdrop, violent electrical storm lighting"
+   - Every single beat's 'video_prompt' and 'visual_prompt' MUST explicitly include this EXACT 'character_dna' description! The character's suit, colors, and design must NEVER change between beats!
+6. ULTRA-SPECIFIC LENS & KINEMATIC CAMERA DIRECTIVES (NOT MOVING STILLS):
    For EVERY beat, generate both a 'video_prompt' and an explicit 'camera_motion'.
    - 'camera_motion' MUST be assigned based on narrative beat:
-     * Beat 1: "rapid-push-in-shake" (High-intensity hook punch-in)
-     * Beat 2: "smooth-lateral-pan-right" (Tracking pan across environment)
-     * Beat 3: "vertical-tilt-reveal" (Low-to-high dynamic reveal of scale)
-     * Beat 4: "climax-pull-back" (Epic scope pull-back revealing catastrophe)
-     * Beat 5: "loop-convergence-zoom" (Smooth centering zoom matching Beat 1 entry)
-   - 'video_prompt' MUST describe a cinematic shot in active motion:
-     * Camera angle & optics: (e.g. 'Low-angle 35mm anamorphic camera pushing rapidly forward...')
-     * Active physical kinematics: What is MOVING in the scene (e.g. 'Violent swirling vortex, debris flying past lens, character turning head in shock...')
-     * Volumetric lighting & atmosphere: (e.g. 'God rays, flickering neon embers, swirling atmospheric mist, motion blur...')
-     * Visual continuity: Environment, color palette, and character design must stay consistent across all 5 beats.
+     * Beat 1: "rapid-push-in-shake" (10mm ultra-wide lens extreme long shot)
+     * Beat 2: "smooth-lateral-pan-right" (24mm anamorphic lens medium tracking pan)
+     * Beat 3: "vertical-tilt-reveal" (35mm prime lens Dutch-angle vertical tilt reveal)
+     * Beat 4: "climax-pull-back" (10mm wide-angle epic scope pull-back)
+     * Beat 5: "loop-convergence-zoom" (50mm portrait lens centered loop convergence)
+   - 'video_prompt' MUST describe a cinematic shot with explicit optics and physical kinematics:
+     * Camera lens & shot type: (e.g. 'Extreme wide long shot from a 10mm ultra-wide lens...', 'Low-angle 24mm anamorphic tracking shot...')
+     * Invariant Character DNA: Embed the exact 'character_dna' description.
+     * Active Physical Kinematics: Describe how the character physically moves (e.g. 'falling headfirst through atmospheric cloud bands, arms flailing against violent crosswinds, body tumbling at terminal velocity, camera tracking downward with high velocity...')
+     * Volumetric lighting & atmosphere: (e.g. 'God rays, flickering neon embers, swirling atmospheric mist, motion blur, Unreal Engine 5, 8k')
    - Also generate 'visual_prompt' as a photorealistic keyframe description.
 
 Output JSON ONLY:
@@ -112,6 +118,8 @@ Output JSON ONLY:
   "episode_title": "{topic.upper()[:28]}",
   "narrative_format": "{format_name}",
   "hook_headline": "VIRAL HOOK (3-4 WORDS)",
+  "character_dna": "Detailed invariant character description (suit, colors, helmet, physical features)",
+  "visual_anchor": "Unified environment, atmospheric palette, and lighting style",
   "total_words_count": 130,
   "loop_lead_in": "Last words connecting to Beat 1",
   "beats": [
@@ -123,8 +131,8 @@ Output JSON ONLY:
       "speaker": "anchor",
       "sfx": "whoosh",
       "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Cinematic low-angle 35mm anamorphic camera pushing rapidly forward toward [subject], [dynamic physical action in motion], volumetric lighting with drifting embers, ray tracing, Unreal Engine 5 render, 8k, photorealistic motion",
-      "visual_prompt": "Low-angle heroic shot of [subject], volumetric amber lighting, 8k render"
+      "video_prompt": "Extreme wide long shot from a 10mm ultra-wide lens, [character_dna] falling headfirst through violent crimson storm clouds, arms flailing against intense crosswinds, body tumbling downward at terminal velocity, camera tracking downward with motion blur, volumetric god rays, Unreal Engine 5 render, 8k resolution",
+      "visual_prompt": "Extreme wide long shot from 10mm lens of [character_dna] falling into colossal storm vortex, volumetric amber lighting, 8k render"
     }},
     ... (exactly 5 beats alternating speaker 'anchor' and 'specialist')
   ],
@@ -244,7 +252,34 @@ Output JSON ONLY:
 
 
 def ensure_video_prompts_and_motion(script_data: dict) -> dict:
-    """Guarantees every beat carries both an explicit camera_motion vector and a cinematic video_prompt."""
+    """Guarantees every beat carries invariant character DNA, explicit lens optics, and physical kinematics."""
+    topic = script_data.get("episode_title") or script_data.get("topic") or "Cosmic Journey"
+    t_lower = topic.lower()
+
+    # 1. Synthesize or validate Invariant Character DNA & Visual Anchor
+    char_dna = script_data.get("character_dna", "")
+    vis_anchor = script_data.get("visual_anchor", "")
+
+    if not char_dna or len(char_dna.strip()) < 25:
+        if any(k in t_lower for k in ["space", "jupiter", "saturn", "moon", "cosmic", "black hole", "universe", "orbit", "planet", "solar", "gravity", "meteor", "astronaut"]):
+            char_dna = "Astronaut in sleek matte-white NASA deep-space EVA suit with neon-amber shoulder striping, carbon-fiber joints, and a reflective gold-mirrored visor"
+            vis_anchor = "Jupiter crimson-amber turbulent vortex atmosphere, dark cosmic space backdrop, violent electrical storm lighting, Unreal Engine 5 render"
+        elif any(k in t_lower for k in ["peeing", "pee", "kidney", "brain", "body", "heart", "blood", "medical", "organ", "sleep", "cell"]):
+            char_dna = "Subject in clinical modern attire with bioluminescent neural telemetry sensors and glowing bio-metric monitors"
+            vis_anchor = "Microscopic cellular inner universe, glowing amber bio-luminescence, deep blue background, Unreal Engine 5 render, 8k"
+        elif any(k in t_lower for k in ["ocean", "megalodon", "mariana", "sea", "shark", "abyss", "underwater", "trench"]):
+            char_dna = "Deep-sea explorer in specialized titanium diving exoskeleton with high-intensity halogen headlamps and reinforced aqua-helm"
+            vis_anchor = "Abyssal midnight ocean zone, bioluminescent marine particulate, deep indigo water, volumetric light shafts"
+        elif any(k in t_lower for k in ["dinosaur", "trex", "t-rex", "roar", "fossil", "prehistoric"]):
+            char_dna = "Colossal apex Tyrannosaurus Rex with obsidian-scaled hide, amber predatory eyes, and jagged battle scars"
+            vis_anchor = "Primordial misty Cretaceous jungle, atmospheric golden hour sun rays filtering through giant ferns"
+        else:
+            char_dna = "Protagonist explorer in tactical expedition suit with glowing HUD collar and telemetry gear"
+            vis_anchor = "Cinematic dramatic atmospheric environment, high-contrast volumetric lighting, Unreal Engine 5 render, 8k"
+
+    script_data["character_dna"] = char_dna
+    script_data["visual_anchor"] = vis_anchor
+
     default_cams = {
         1: "rapid-push-in-shake",
         2: "smooth-lateral-pan-right",
@@ -252,25 +287,58 @@ def ensure_video_prompts_and_motion(script_data: dict) -> dict:
         4: "climax-pull-back",
         5: "loop-convergence-zoom"
     }
+
+    lens_configs = {
+        1: ("10mm ultra-wide lens, extreme wide long shot", "falling headfirst through turbulent atmospheric cloud bands, body tumbling downward at terminal velocity, arms flailing against violent crosswinds"),
+        2: ("24mm anamorphic lens, low-angle tracking shot", "cutting through electrified atmospheric mist, body twisting against aerodynamic drag, camera tracking right"),
+        3: ("35mm prime lens, Dutch-angle vertical tilt reveal", "plunging into dense turbulent supercritical fluid layers, limbs stabilizing as camera tilts upward"),
+        4: ("10mm wide-angle anamorphic lens, epic scope pull-back", "engulfed in surging shockwaves and violent fracturing pressure waves, camera pulling backward at high speed"),
+        5: ("50mm portrait lens, centered loop convergence shot", "drifting and hovering in glowing core vortex, looking directly into camera with visor reflection matching Beat 1 entry angle for seamless infinite loop"),
+    }
+
+    lens_tokens = ["10mm", "12mm", "14mm", "16mm", "24mm", "28mm", "35mm", "50mm", "85mm", "anamorphic", "ultra-wide", "macro", "telephoto"]
+    kinematics_tokens = [
+        "falling", "fall", "tumbling", "tumble", "plunging", "plunge", "surging", "surge",
+        "filtering", "filter", "swirling", "swirl", "fracturing", "fracture", "collapsing", "collapse",
+        "rippling", "ripple", "lunging", "lunge", "sweeping", "sweep", "moving", "move",
+        "pushing", "push", "running", "run", "descending", "descend", "accelerating", "accelerate",
+        "drifting", "drift", "shattering", "shatter", "spinning", "spin", "plummeting", "plummet",
+        "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover"
+    ]
+
     for b in script_data.get("beats", []):
         b_num = b.get("beat_number", 1)
         if not b.get("camera_motion"):
             b["camera_motion"] = default_cams.get(b_num, "rapid-push-in-shake")
-        if not b.get("video_prompt"):
-            vp = b.get("visual_prompt", "")
+
+        vp = b.get("video_prompt", "")
+        lens_spec, motion_spec = lens_configs.get(b_num, lens_configs[1])
+
+        # If missing or lacking lens/kinematics/character_dna, rebuild high-fidelity prompt
+        has_lens = any(tok in vp.lower() for tok in lens_tokens)
+        has_kine = any(tok in vp.lower() for tok in kinematics_tokens)
+        has_dna = any(w in vp.lower() for w in char_dna.lower().split()[:3])
+
+        if not vp or not has_lens or not has_kine or not has_dna:
             cam = b.get("camera_motion")
             b["video_prompt"] = (
-                f"Cinematic {cam} camera motion, 35mm anamorphic lens, {vp}, "
-                f"dynamic physical kinematics, volumetric atmospheric god rays, Unreal Engine 5 render, 8k photorealistic motion"
+                f"Cinematic {cam} camera motion, {lens_spec}, {char_dna} {motion_spec}, "
+                f"set in {vis_anchor}, volumetric atmospheric god rays, ray tracing, Unreal Engine 5 render, 8k resolution photorealistic motion"
             )
+
+        if not b.get("visual_prompt"):
+            b["visual_prompt"] = f"Cinematic shot from {lens_spec} of {char_dna}, {vis_anchor}, 8k render"
+
     return script_data
 
 
 def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num: int) -> dict:
-    """Builds a guaranteed 5-beat viral script perfectly timed to 57 seconds."""
+    """Builds a guaranteed 5-beat viral script perfectly timed to 57 seconds with invariant character DNA and lens cinematography."""
     clean_title = topic.upper()[:26]
 
     if "peeing" in topic.lower():
+        char_dna = "Subject in clinical modern attire with bioluminescent neural telemetry sensors and glowing bio-metric monitors"
+        vis_anchor = "Microscopic cellular inner universe, glowing amber bio-luminescence, deep blue background, Unreal Engine 5 render, 8k"
         beats = [
             {
                 "beat_number": 1,
@@ -281,8 +349,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "smooth-zoom-in",
-                "visual_prompt": f"{style}, cute 3D character in hospital looking confused at bathroom door, glowing holographic medical monitors, 8k",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": f"Extreme wide long shot from 10mm ultra-wide lens, {char_dna} falling into disarray in medical telemetry chamber, pulsing warning monitors, volumetric god rays, Unreal Engine 5 render, 8k",
+                "visual_prompt": f"10mm ultra-wide shot of {char_dna} looking confused at bathroom door, glowing holographic medical monitors, 8k",
             },
             {
                 "beat_number": 2,
@@ -293,8 +362,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "pan-right",
-                "visual_prompt": f"{style}, 3D anatomical cross-section of glowing human kidneys working at hyper speed, pulsing blue and amber warning lights, cinematic",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": f"Low-angle 24mm anamorphic tracking pan, {char_dna} filtering biological fluids as anatomical cross-section reveals kidneys surging at hyper speed, pulsing amber warning lights, 8k",
+                "visual_prompt": f"24mm anamorphic shot of glowing human kidneys filtering fluid at hyper speed, pulsing amber warning lights, cinematic",
             },
             {
                 "beat_number": 3,
@@ -305,8 +375,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Dr. Vance",
                 "speaker_avatar": "🩺",
                 "sfx": "impact_boom",
-                "camera_motion": "dramatic-pulse",
-                "visual_prompt": f"{style}, dramatic close-up of a human heart glowing with red warning sparks, dark dramatic background, high stakes",
+                "camera_motion": "vertical-tilt-reveal",
+                "video_prompt": f"Dutch-angle 35mm prime vertical tilt reveal, {char_dna} collapsing against medical bed as human heart pulses with red warning sparks, camera tilting upward, Unreal Engine 5, 8k",
+                "visual_prompt": f"35mm prime dramatic close-up of a human heart glowing with red warning sparks, dark dramatic background, high stakes",
             },
             {
                 "beat_number": 4,
@@ -317,8 +388,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Dr. Vance",
                 "speaker_avatar": "🩺",
                 "sfx": "pop",
-                "camera_motion": "warm-dolly",
-                "visual_prompt": f"{style}, 3D animation of brain synapses firing with glowing neon pulses, surreal dreamscape floating in hospital room, Disney cinematic",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": f"Extreme wide 10mm anamorphic epic scope pull-back, {char_dna} engulfed in glowing neural hallucinations as brain synapses fire violently, camera pulling backward rapidly, 8k",
+                "visual_prompt": f"10mm anamorphic 3D visualization of brain synapses firing with glowing neon pulses, surreal dreamscape floating in hospital room, 8k",
             },
             {
                 "beat_number": 5,
@@ -329,11 +401,14 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "sunset-drift",
-                "visual_prompt": f"{style}, triumphant healthy character drinking pure glowing water at sunrise, golden sun rays, inspirational Disney masterpiece",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": f"Centered 50mm portrait loop convergence shot, {char_dna} drinking pure water at sunrise, golden sun rays filtering through window matching Beat 1 entry angle, 8k",
+                "visual_prompt": f"50mm portrait shot of healthy character drinking glowing water at sunrise, golden sun rays, inspirational masterpiece",
             },
         ]
     elif "dinosaur" in topic.lower() or "roar" in topic.lower():
+        char_dna = "Colossal apex Tyrannosaurus Rex with obsidian-scaled hide, amber predatory eyes, and jagged battle scars"
+        vis_anchor = "Primordial misty Cretaceous jungle, atmospheric golden hour sun rays filtering through giant ferns"
         beats = [
             {
                 "beat_number": 1,
@@ -344,8 +419,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "smooth-zoom-in",
-                "visual_prompt": f"{style}, massive majestic Tyrannosaurus Rex in prehistoric mist, amber eyes, cinematic jungle lighting, Unreal Engine 5 render, 8k",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": f"Extreme wide long shot from 10mm ultra-wide lens, {char_dna} lunging through prehistoric mist, amber eyes glowing, camera pushing rapidly forward with motion blur, Unreal Engine 5, 8k",
+                "visual_prompt": f"10mm ultra-wide shot of {char_dna} in prehistoric mist, amber eyes, cinematic jungle lighting, Unreal Engine 5 render, 8k",
             },
             {
                 "beat_number": 2,
@@ -356,8 +432,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "pan-right",
-                "visual_prompt": f"{style}, close-up of T-Rex throat vibrating with deep bass energy waves rippling through air, golden dust motes shaking, 8k",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": f"Low-angle 24mm anamorphic tracking pan, {char_dna} vibrating throat with deep infrasonic bass energy waves rippling through jungle air, camera panning smoothly, 8k",
+                "visual_prompt": f"24mm anamorphic close-up of {char_dna} throat vibrating with deep bass energy waves rippling through air, 8k",
             },
             {
                 "beat_number": 3,
@@ -368,8 +445,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Paleontologist",
                 "speaker_avatar": "🦖",
                 "sfx": "impact_boom",
-                "camera_motion": "dramatic-pulse",
-                "visual_prompt": f"{style}, prehistoric puddle with sonic water ripples forming geometric patterns as the earth tremors, dramatic suspense",
+                "camera_motion": "vertical-tilt-reveal",
+                "video_prompt": f"Dutch-angle 35mm prime vertical tilt reveal, puddle with sonic water ripples forming geometric patterns as the earth tremors from {char_dna} footsteps, camera tilting upward, 8k",
+                "visual_prompt": f"35mm prime shot of prehistoric puddle with sonic water ripples forming geometric patterns as earth tremors, 8k",
             },
             {
                 "beat_number": 4,
@@ -380,8 +458,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Paleontologist",
                 "speaker_avatar": "🦖",
                 "sfx": "pop",
-                "camera_motion": "warm-dolly",
-                "visual_prompt": f"{style}, gigantic dinosaur shadow looming over jungle trees, glowing predatory eyes in dark canopy, cinematic action, 8k",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": f"Extreme wide 10mm anamorphic epic scope pull-back, {char_dna} lunging from canopy darkness, jaws opening with terrifying speed, camera pulling backward rapidly, 8k",
+                "visual_prompt": f"10mm anamorphic shot of {char_dna} looming over jungle trees, glowing predatory eyes in dark canopy, cinematic action, 8k",
             },
             {
                 "beat_number": 5,
@@ -392,8 +471,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "sunset-drift",
-                "visual_prompt": f"{style}, majestic dinosaur silhouette standing atop a prehistoric mountain peak under a purple nebula sky, breathtaking Disney masterpiece",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": f"Centered 50mm portrait loop convergence shot, {char_dna} silhouette standing atop prehistoric mountain peak under purple nebula sky matching Beat 1 entry angle, 8k",
+                "visual_prompt": f"50mm portrait shot of {char_dna} standing atop mountain peak under nebula sky, breathtaking masterpiece",
             },
         ]
     else:
@@ -402,6 +482,13 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         words_list = topic_core.split()
         if len(words_list) > 7:
             topic_core = " ".join(words_list[:7])
+
+        if any(k in topic.lower() for k in ["space", "jupiter", "saturn", "moon", "cosmic", "planet"]):
+            char_dna = "Astronaut in sleek matte-white NASA deep-space EVA suit with neon-amber shoulder striping, carbon-fiber joints, and a reflective gold-mirrored visor"
+            vis_anchor = "Colossal planetary vortex atmosphere, dark cosmic space backdrop, violent electrical storm lighting, Unreal Engine 5 render"
+        else:
+            char_dna = "Protagonist explorer in tactical expedition suit with glowing HUD collar and telemetry gear"
+            vis_anchor = "Cinematic dramatic atmospheric environment, high-contrast volumetric lighting, Unreal Engine 5 render, 8k"
 
         beat1_narration = f"What if {topic_core.lower()}? Most people assume our planet would carry on normally, but this sudden cosmic shockwave would instantly plunge modern civilization into complete catastrophic chaos."
 
@@ -415,8 +502,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "smooth-zoom-in",
-                "visual_prompt": f"{style}, dramatic epic opening cinematic of {topic_core}, vibrant volumetric lighting, Unreal Engine 5, 8k",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": f"Extreme wide long shot from 10mm ultra-wide lens, {char_dna} falling headfirst into {topic_core.lower()} catastrophic anomaly, body tumbling at terminal velocity, camera pushing rapidly forward with motion blur, volumetric god rays, Unreal Engine 5 render, 8k resolution",
+                "visual_prompt": f"10mm ultra-wide shot of {char_dna} confronting {topic_core}, vibrant volumetric lighting, Unreal Engine 5, 8k",
             },
             {
                 "beat_number": 2,
@@ -427,8 +515,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "pan-right",
-                "visual_prompt": f"{style}, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": f"Low-angle 24mm anamorphic tracking pan, {char_dna} cutting through atmospheric drag as supersonic shockwaves ripple across continents and electrical grids collapse violently, camera tracking smoothly right, 8k",
+                "visual_prompt": f"24mm anamorphic shot of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
             },
             {
                 "beat_number": 3,
@@ -439,8 +528,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Commander",
                 "speaker_avatar": "🚨",
                 "sfx": "impact_boom",
-                "camera_motion": "dramatic-pulse",
-                "visual_prompt": f"{style}, colossal ocean tsunami surging over coastal skyline, violent turbulent waves, atmospheric storm lighting, Unreal Engine 5 render, 8k",
+                "camera_motion": "vertical-tilt-reveal",
+                "video_prompt": f"Dutch-angle 35mm prime vertical tilt reveal, colossal ocean tsunami surging over coastal skyline as {char_dna} watches churning saltwater tear through skyscrapers, camera tilting upward, 8k",
+                "visual_prompt": f"35mm prime shot of colossal ocean tsunami surging over coastal skyline, violent turbulent waves, atmospheric storm lighting, 8k",
             },
             {
                 "beat_number": 4,
@@ -451,8 +541,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Scientist",
                 "speaker_avatar": "🔬",
                 "sfx": "pop",
-                "camera_motion": "warm-dolly",
-                "visual_prompt": f"{style}, earth crust violently fracturing open with glowing red and orange molten magma fissures, seismic devastation, cinematic 8k",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": f"Extreme wide 10mm anamorphic epic scope pull-back, earth crust fracturing open with glowing red and orange molten magma fissures, {char_dna} illuminated by tectonic fury, camera pulling backward rapidly, 8k",
+                "visual_prompt": f"10mm anamorphic shot of earth crust violently fracturing open with glowing molten magma fissures, seismic devastation, cinematic 8k",
             },
             {
                 "beat_number": 5,
@@ -463,8 +554,9 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
                 "speaker_name": "Narrator",
                 "speaker_avatar": "🎙️",
                 "sfx": "whoosh",
-                "camera_motion": "sunset-drift",
-                "visual_prompt": f"{style}, dramatic epic panoramic opening cinematic of {topic_core}, matching Beat 1 opening frame for a seamless visual infinite loop, 8k",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": f"Centered 50mm portrait loop convergence shot, {char_dna} drifting and floating in glowing atmospheric vortex looking directly into camera with visor reflection matching Beat 1 entry angle for seamless infinite loop, 8k",
+                "visual_prompt": f"50mm portrait shot of {char_dna} in atmospheric vortex matching Beat 1 opening frame for seamless visual infinite loop, 8k",
             },
         ]
 
@@ -472,6 +564,8 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
     return {
         "episode_title": clean_title,
         "hook_headline": f"WHAT IF {clean_title[:18]}?!",
+        "character_dna": char_dna,
+        "visual_anchor": vis_anchor,
         "total_words_count": total_words,
         "beats": beats,
         "seo_tags": [
