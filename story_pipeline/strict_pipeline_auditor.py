@@ -142,7 +142,7 @@ def audit_scientific_factuality(script_data: dict) -> bool:
             "tools": [{"google_search": {}}]
         }).encode("utf-8")
 
-        grounding_models = ["gemini-3.8-flash"]
+        grounding_models = ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-flash-latest", "gemini-pro-latest"]
         grounded = False
         last_error = None
         for g_model in grounding_models:
