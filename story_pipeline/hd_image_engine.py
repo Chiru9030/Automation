@@ -514,7 +514,7 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
     for idx, beat in enumerate(beats):
         b_num = beat["beat_number"]
         out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_beat_{b_num}.jpg"
-        prompt = beat.get("visual_prompt") or f"{beat.get('title', 'Action')}, {beat.get('narration', '')}"
+        prompt = beat.get("video_prompt") or beat.get("visual_prompt") or f"{beat.get('title', 'Action')}, {beat.get('narration', '')}"
         seed = int(episode_num * 100 + b_num * 17)
 
         # Active quality audit loop (up to 3 attempts with dynamic prompt enhancement)

@@ -522,7 +522,7 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path, beat_number:
     if not img_path.exists():
         img_path = PUBLIC_DIR / "images" / "file0.jpg"
 
-    prompt = scene.get("visual_prompt") or f"{scene.get('title', 'action')}, {scene.get('narration', '')[:80]}"
+    prompt = scene.get("video_prompt") or scene.get("visual_prompt") or f"{scene.get('title', 'action')}, {scene.get('narration', '')[:80]}"
     motion = scene.get("camera_motion") or scene.get("camera_style", "smooth-zoom-in")
 
     # Try Frontier Cloud Video Cascade (Veo 2 -> Kling -> Seedance -> Wan 2.1 -> CogVideoX -> AnimateDiff -> Pollinations)

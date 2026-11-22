@@ -75,25 +75,37 @@ def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: i
             from google.genai import types
             client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=30000))
 
-            prompt = f"""You are an elite viral short-form director for YouTube Shorts and TikTok.
-Write a gripping, high-retention video script for:
+            prompt = f"""You are an elite Hollywood visual storyteller and viral short-form director for YouTube Shorts and TikTok.
+Write a gripping, highly coherent, cinema-grade narrative video script for:
 TOPIC: {topic}
 PREMISE: {hook_premise}
 NARRATIVE FORMAT: {format_name} ({selected_format['style_guide']})
 EPISODE: #{ep_num}
 
-CRITICAL RETENTION & VISUAL RULES:
-1. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 126 AND 138 WORDS (Yields 52-56 seconds of optimal high-retention speech; APV > 105%).
-2. CADENCE: NEVER use ellipses (...), em-dashes, or semicolons. Use short punchy sentences (<12 words) for continuous, relentless speech flow with zero pauses > 0.3s.
-3. IMMEDIATE 2-SECOND HOOK (Beat 1): Start directly with an intense hook (e.g. '{selected_format["hook_formula"]}'). NO greetings, NO intro filler. Beat 1 must be between 24 and 30 words.
-4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically connect directly into the very first word of Beat 1. Beat 5's visual_prompt MUST match Beat 1's palette and subject to complete a seamless visual loop. Beat 5 must be between 23 and 28 words.
-5. LITERAL IMAGE GROUNDING: Every 'visual_prompt' MUST literally depict the exact subject, action, and environment spoken in that beat's 'narration'. NO generic corridors, NO abstract devices, NO random crowd scenes.
-6. STRUCTURE: Exactly 5 rapid beats (each 24-28 words):
-   - Beat 1 (0-10s): Shock Hook & Impossible Paradox (Grab in first 2 seconds, 24-28 words)
-   - Beat 2 (10-22s): Escalating Tension / The Hidden Truth (24-28 words)
-   - Beat 3 (22-34s): Scientific Climax / The Extreme Anomaly (24-28 words)
-   - Beat 4 (34-46s): The Revelation / Mind-Blowing Detail (24-28 words)
-   - Beat 5 (46-55s): The Seamless Loop Connector (Flows into Beat 1, matching Beat 1 visual, 23-28 words)
+CRITICAL STORYTELLING & CINEMATOGRAPHY RULES:
+1. CLEAN, COHESIVE STORY ARC: Tell a captivating, continuous story across all 5 beats with zero disjointed facts or robotic trivia.
+   - Beat 1 (0-10s): The Shocking Hook & Anomaly (Grab in first 2 seconds, 24-28 words)
+   - Beat 2 (10-22s): Context & Hidden Tension (Unveil the hidden scientific reality, 24-28 words)
+   - Beat 3 (22-34s): Escalating Chain Reaction (The physical consequence in motion, 24-28 words)
+   - Beat 4 (34-46s): The Climax Revelation (Mind-blowing paradox or peak danger, 24-28 words)
+   - Beat 5 (46-55s): The Philosophical Twist & Seamless Loop (Connects directly into Beat 1, 23-28 words)
+2. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 126 AND 138 WORDS (Yields 52-56 seconds of optimal high-retention speech; APV > 105%).
+3. CADENCE: Short punchy sentences (<12 words). Use active, vivid verbs and clear causal transitions ('Because of this...', 'Within seconds...', 'This instantly triggers...'). NO ellipses (...), NO em-dashes.
+4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically and visually fuse into the very first word of Beat 1.
+5. DYNAMIC AI VIDEO PROMPTS (NOT STATIC IMAGES):
+   For EVERY beat, generate both a 'video_prompt' and an explicit 'camera_motion'.
+   - 'camera_motion' MUST be assigned based on narrative beat:
+     * Beat 1: "rapid-push-in-shake" (High-intensity hook punch-in)
+     * Beat 2: "smooth-lateral-pan-right" (Tracking pan across environment)
+     * Beat 3: "vertical-tilt-reveal" (Low-to-high dynamic reveal of scale)
+     * Beat 4: "climax-pull-back" (Epic scope pull-back revealing catastrophe)
+     * Beat 5: "loop-convergence-zoom" (Smooth centering zoom matching Beat 1 entry)
+   - 'video_prompt' MUST describe a cinematic shot in active motion:
+     * Camera angle & optics: (e.g. 'Low-angle 35mm anamorphic camera pushing rapidly forward...')
+     * Active physical kinematics: What is MOVING in the scene (e.g. 'Violent swirling vortex, debris flying past lens, character turning head in shock...')
+     * Volumetric lighting & atmosphere: (e.g. 'God rays, flickering neon embers, swirling atmospheric mist, motion blur...')
+     * Visual continuity: Environment, color palette, and character design must stay consistent across all 5 beats.
+   - Also generate 'visual_prompt' as a photorealistic keyframe description.
 
 Output JSON ONLY:
 {{
@@ -110,7 +122,9 @@ Output JSON ONLY:
       "narration": "First spoken beat (24-28 words)",
       "speaker": "anchor",
       "sfx": "whoosh",
-      "visual_prompt": "3D Pixar cinematic prompt, highly detailed, 8k, Unreal Engine 5 render"
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic low-angle 35mm anamorphic camera pushing rapidly forward toward [subject], [dynamic physical action in motion], volumetric lighting with drifting embers, ray tracing, Unreal Engine 5 render, 8k, photorealistic motion",
+      "visual_prompt": "Low-angle heroic shot of [subject], volumetric amber lighting, 8k render"
     }},
     ... (exactly 5 beats alternating speaker 'anchor' and 'specialist')
   ],
@@ -125,11 +139,11 @@ Output JSON ONLY:
 }}"""
             res = None
             active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-flash-latest", "gemini-pro-latest"]
+            models_to_try = ["gemini-3.8-flash"]
             for candidate_model in models_to_try:
-                for attempt in range(1, 4):
+                for attempt in range(1, 3):
                     try:
-                        print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, attempt {attempt}/3, timeout 25s)...")
+                        print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, attempt {attempt}/2, timeout 20s)...")
                         res = call_with_timeout(
                             client.models.generate_content,
                             kwargs=dict(
@@ -137,19 +151,21 @@ Output JSON ONLY:
                                 contents=prompt,
                                 config=dict(response_mime_type="application/json"),
                             ),
-                            timeout_sec=25,
+                            timeout_sec=20,
                         )
                         if res and res.text:
                             active_model = candidate_model
                             break
                     except concurrent.futures.TimeoutError:
-                        print(f"⏱️ [Script Engine] {candidate_model} timed out after 25s. Retrying...")
+                        print(f"⏱️ [Script Engine] {candidate_model} timed out after 20s. Retrying...")
                     except Exception as m_err:
                         print(f"⚠️ Model {candidate_model} script note: {m_err}")
-                        if "RESOURCE_EXHAUSTED" in str(m_err) or "429" in str(m_err):
-                            print("⚠️ Free Tier daily quota reached on Gemini API. Checking Groq Cloud fallback...")
+                        s_err = str(m_err).lower()
+                        if any(k in s_err for k in ["resource_exhausted", "429", "404", "not_found", "no longer available", "not found"]):
                             break
-                        time.sleep(2.0 * attempt)
+                        if "503" in s_err and attempt >= 2:
+                            break
+                        time.sleep(1.0 * attempt)
                 if res and res.text:
                     break
 
@@ -157,13 +173,13 @@ Output JSON ONLY:
                 data = json.loads(res.text)
                 if "beats" in data and len(data["beats"]) == 5:
                     word_count = sum(len(b['narration'].split()) for b in data['beats'])
-                    print(f"📝 [Stage 2: Script Engine] Gemini AI ({active_model}) synthesized script for '{topic}' ({word_count} words)")
+                    print(f"📝 [Stage 2: Script Engine] Gemini AI ({active_model}) synthesized clean story & video prompts for '{topic}' ({word_count} words)")
                     try:
                         from story_pipeline.telegram_notifier import RUN_TRACKER
                         RUN_TRACKER.set_model_used("Script", f"Gemini ({active_model})")
                     except Exception:
                         pass
-                    return data
+                    return ensure_video_prompts_and_motion(data)
         except Exception as e:
             print(f"Notice: Gemini script generation note ({e})")
             try:
@@ -182,7 +198,7 @@ Output JSON ONLY:
             groq_payload = json.dumps({
                 "model": "llama-3.3-70b-versatile",
                 "messages": [
-                    {"role": "system", "content": "You are an elite viral short-form director for YouTube Shorts. Output valid JSON only matching the schema exactly."},
+                    {"role": "system", "content": "You are an elite viral short-form director for YouTube Shorts. Output valid JSON only matching the schema exactly with video_prompt and camera_motion for every beat."},
                     {"role": "user", "content": prompt}
                 ],
                 "response_format": {"type": "json_object"},
@@ -203,13 +219,13 @@ Output JSON ONLY:
                     g_data = json.loads(g_text)
                     if "beats" in g_data and len(g_data["beats"]) == 5:
                         w_count = sum(len(b['narration'].split()) for b in g_data['beats'])
-                        print(f"📝 [Stage 2: Script Engine] Groq AI (llama-3.3-70b-versatile) synthesized script for '{topic}' ({w_count} words)")
+                        print(f"📝 [Stage 2: Script Engine] Groq AI (llama-3.3-70b-versatile) synthesized clean story & video prompts for '{topic}' ({w_count} words)")
                         try:
                             from story_pipeline.telegram_notifier import RUN_TRACKER
                             RUN_TRACKER.set_model_used("Script", "Groq (llama-3.3-70b-versatile)")
                         except Exception:
                             pass
-                        return g_data
+                        return ensure_video_prompts_and_motion(g_data)
         except Exception as e_groq:
             print(f"Notice: Groq script generation note: {e_groq}")
             try:
@@ -224,7 +240,30 @@ Output JSON ONLY:
         RUN_TRACKER.set_model_used("Script", "Procedural Retention Engine")
     except Exception:
         pass
-    return generate_procedural_script(topic, hook_premise, style, ep_num)
+    return ensure_video_prompts_and_motion(generate_procedural_script(topic, hook_premise, style, ep_num))
+
+
+def ensure_video_prompts_and_motion(script_data: dict) -> dict:
+    """Guarantees every beat carries both an explicit camera_motion vector and a cinematic video_prompt."""
+    default_cams = {
+        1: "rapid-push-in-shake",
+        2: "smooth-lateral-pan-right",
+        3: "vertical-tilt-reveal",
+        4: "climax-pull-back",
+        5: "loop-convergence-zoom"
+    }
+    for b in script_data.get("beats", []):
+        b_num = b.get("beat_number", 1)
+        if not b.get("camera_motion"):
+            b["camera_motion"] = default_cams.get(b_num, "rapid-push-in-shake")
+        if not b.get("video_prompt"):
+            vp = b.get("visual_prompt", "")
+            cam = b.get("camera_motion")
+            b["video_prompt"] = (
+                f"Cinematic {cam} camera motion, 35mm anamorphic lens, {vp}, "
+                f"dynamic physical kinematics, volumetric atmospheric god rays, Unreal Engine 5 render, 8k photorealistic motion"
+            )
+    return script_data
 
 
 def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num: int) -> dict:

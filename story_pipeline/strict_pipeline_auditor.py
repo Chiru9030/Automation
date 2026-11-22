@@ -349,7 +349,7 @@ def audit_visual_assets(beats: list[dict], public_dir: Path) -> bool:
         seen_hashes[file_hash] = b_num
 
         # Deep 4-pillar inspection (Content, Quality, Clarity, Relation)
-        prompt = b.get("visual_prompt") or f"{b.get('title', '')}, {b.get('narration', '')}"
+        prompt = b.get("video_prompt") or b.get("visual_prompt") or f"{b.get('title', '')}, {b.get('narration', '')}"
         audit_single_visual_asset(img_path, prompt=prompt, beat_title=b.get("title", f"Beat #{b_num}"))
 
         # Relation Check: Perceptual scene progression (No near-identical images between beats)
