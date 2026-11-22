@@ -25,12 +25,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image, ImageFilter
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_IMAGES_DIR = BASE_DIR / "video-app" / "public" / "images"
 
 GOOGLE_IMAGEN_ACTIVE = True
+REPLICATE_FLUX_ACTIVE = True
 HF_SPACES_ACTIVE = True
 POLLINATIONS_IMAGE_ACTIVE = True
 LOCAL_SD_TURBO_ACTIVE = True
@@ -94,7 +96,7 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
 
 
 def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 1: Generates cinema-grade 1080x1920 visuals using Google AI Studio Imagen 3 REST API."""
+    """Tier 1: Generates cinema-grade 1080x1920 visuals using Google AI Studio Imagen 3."""
     global GOOGLE_IMAGEN_ACTIVE
     if not GOOGLE_IMAGEN_ACTIVE:
         return False
@@ -104,15 +106,56 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
         return False
     api_key = api_key.strip().strip("'").strip('"')
 
+    # Method A: Try official google-genai SDK
     try:
-        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Requesting AI Studio: '{prompt[:45]}...'")
+        from google import genai
+        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Requesting via google-genai SDK: '{prompt[:45]}...'")
+        client = genai.Client(api_key=api_key)
+
+        def _call_sdk():
+            return client.models.generate_images(
+                model="imagen-3.0-generate-002",
+                prompt=prompt[:480],
+                config=dict(
+                    number_of_images=1,
+                    aspect_ratio="9:16",
+                    output_mime_type="image/jpeg",
+                    person_generation="ALLOW_ADULT",
+                ),
+            )
+
+        res = call_with_timeout(_call_sdk, timeout_sec=25)
+        if res and hasattr(res, "generated_images") and res.generated_images:
+            img_bytes = res.generated_images[0].image.image_bytes
+            temp_raw = output_path.with_suffix(".tmp.jpg")
+            temp_raw.write_bytes(img_bytes)
+            with Image.open(temp_raw) as im:
+                im_std = standardize_to_1080x1920(im.convert("RGB"))
+                im_std.save(output_path, "JPEG", quality=95)
+            temp_raw.unlink(missing_ok=True)
+            if output_path.exists() and output_path.stat().st_size > 25_000:
+                print(f"[IMAGE-ENGINE] [TIER-1] Google Imagen 3 (SDK) rendered {output_path.name} successfully!")
+                try:
+                    from story_pipeline.telegram_notifier import RUN_TRACKER
+                    RUN_TRACKER.set_model_used("Visuals", "Google Imagen 3 (imagen-3.0-generate-002)")
+                except Exception:
+                    pass
+                return True
+    except Exception as e_sdk:
+        print(f"[IMAGE-ENGINE] [TIER-1 Notice] SDK method notice ({str(e_sdk)[:80]}). Trying REST fallback...")
+
+    # Method B: Direct REST API Fallback
+    try:
+        print(f"[IMAGE-ENGINE] [TIER-1: Google Imagen 3] Requesting AI Studio REST: '{prompt[:45]}...'")
         url = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key={api_key}"
         headers = {"Content-Type": "application/json"}
         payload = json.dumps({
             "instances": [{"prompt": prompt[:450]}],
             "parameters": {
                 "sampleCount": 1,
-                "aspectRatio": "9:16"
+                "aspectRatio": "9:16",
+                "outputMimeType": "image/jpeg",
+                "personGeneration": "ALLOW_ADULT"
             }
         }).encode("utf-8")
 
@@ -132,7 +175,7 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
                 im_std.save(output_path, "JPEG", quality=95)
             temp_raw.unlink(missing_ok=True)
             if output_path.exists() and output_path.stat().st_size > 25_000:
-                print(f"[IMAGE-ENGINE] [TIER-1] Google Imagen 3 rendered {output_path.name} successfully!")
+                print(f"[IMAGE-ENGINE] [TIER-1] Google Imagen 3 (REST) rendered {output_path.name} successfully!")
                 try:
                     from story_pipeline.telegram_notifier import RUN_TRACKER
                     RUN_TRACKER.set_model_used("Visuals", "Google Imagen 3 (imagen-3.0-generate-002)")
@@ -149,6 +192,74 @@ def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> b
         try:
             from story_pipeline.telegram_notifier import RUN_TRACKER
             RUN_TRACKER.record_model_failure("Google Imagen 3", f"{str(e)[:60]}")
+        except Exception:
+            pass
+    return False
+
+
+def generate_replicate_flux(prompt: str, output_path: Path, seed: int = 42) -> bool:
+    """Tier 2: Generates cinema-grade visuals using Replicate FLUX.1-schnell."""
+    global REPLICATE_FLUX_ACTIVE
+    if not REPLICATE_FLUX_ACTIVE:
+        return False
+
+    rep_token = os.getenv("REPLICATE_API_TOKEN")
+    if not rep_token:
+        return False
+    rep_token = rep_token.strip().strip("'").strip('"')
+
+    try:
+        import replicate
+        print(f"[IMAGE-ENGINE] [TIER-2: Replicate FLUX.1] Requesting: '{prompt[:45]}...'")
+        client = replicate.Client(api_token=rep_token)
+        clean_p = sanitize_for_ai_filter(prompt)
+
+        def _call_rep():
+            return client.run(
+                "black-forest-labs/flux-schnell",
+                input={
+                    "prompt": clean_p[:450],
+                    "aspect_ratio": "9:16",
+                    "num_outputs": 1,
+                    "output_format": "jpg",
+                    "output_quality": 95,
+                    "seed": seed,
+                },
+            )
+
+        output = call_with_timeout(_call_rep, timeout_sec=28)
+        img_url = None
+        if isinstance(output, list) and len(output) > 0:
+            item = output[0]
+            img_url = str(item) if hasattr(item, "url") else str(item)
+        elif output:
+            img_url = str(output)
+
+        if img_url and (img_url.startswith("http://") or img_url.startswith("https://")):
+            temp_raw = output_path.with_suffix(".tmp.jpg")
+            urllib.request.urlretrieve(img_url, temp_raw)
+            with Image.open(temp_raw) as im:
+                im_std = standardize_to_1080x1920(im.convert("RGB"))
+                im_std.save(output_path, "JPEG", quality=95)
+            temp_raw.unlink(missing_ok=True)
+            if output_path.exists() and output_path.stat().st_size > 25_000:
+                print(f"[IMAGE-ENGINE] [TIER-2] Replicate FLUX.1 rendered {output_path.name} successfully!")
+                try:
+                    from story_pipeline.telegram_notifier import RUN_TRACKER
+                    RUN_TRACKER.set_model_used("Visuals", "Replicate FLUX.1-schnell")
+                except Exception:
+                    pass
+                return True
+    except Exception as e:
+        err_s = str(e).lower()
+        if any(k in err_s for k in ["unauthorized", "quota", "credit", "payment", "402"]):
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Replicate credits unavailable ({err_s[:70]}). Disabling.")
+            REPLICATE_FLUX_ACTIVE = False
+        else:
+            print(f"[IMAGE-ENGINE] [TIER-2 Notice] Replicate note ({str(e)[:90]})")
+        try:
+            from story_pipeline.telegram_notifier import RUN_TRACKER
+            RUN_TRACKER.record_model_failure("Replicate FLUX.1", f"{str(e)[:60]}")
         except Exception:
             pass
     return False
@@ -362,19 +473,23 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: i
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt)
 
-    # 1. Tier 1: Google Imagen 3 (Google AI Studio REST API)
+    # 1. Tier 1: Google Imagen 3 (Google AI Studio via GEMINI_API_KEY)
     if generate_imagen3_google(enriched, output_path, seed=seed):
         return output_path
 
-    # 2. Tier 2: Hugging Face FLUX / SDXL Spaces (with anonymous auto-fallback)
+    # 2. Tier 2: Replicate FLUX.1-schnell (via REPLICATE_API_TOKEN)
+    if generate_replicate_flux(enriched, output_path, seed=seed):
+        return output_path
+
+    # 3. Tier 3: Hugging Face FLUX / SDXL Spaces (with anonymous auto-fallback)
     if generate_flux_hf_space(enriched, output_path, seed=seed):
         return output_path
 
-    # 3. Tier 3: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
+    # 4. Tier 4: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
     if generate_sd_turbo_local(enriched, output_path, seed=seed):
         return output_path
 
-    # 4. Tier 4: Pollinations Clean Free Engine
+    # 5. Tier 5: Pollinations Clean Free Engine
     if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
