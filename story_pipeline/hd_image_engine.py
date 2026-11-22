@@ -83,7 +83,7 @@ def enrich_prompt(base_prompt: str) -> str:
 
 
 def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
-    """Standardizes any source image to exact 1080x1920 vertical 9:16 using high-quality Lanczos resampling and subtle edge sharpening."""
+    """Standardizes any source image to exact 1080x1920 vertical 9:16 using high-quality Lanczos resampling and cinematic 2-stage edge-focus sharpening."""
     w, h = im.size
     target_w, target_h = 1080, 1920
     scale = max(target_w / w, target_h / h)
@@ -92,7 +92,9 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
     left = (new_w - target_w) // 2
     top = (new_h - target_h) // 2
     im_cropped = im_scaled.crop((left, top, left + target_w, top + target_h))
-    return im_cropped.filter(ImageFilter.UnsharpMask(radius=2, percent=140, threshold=3))
+    return im_cropped.filter(ImageFilter.DETAIL).filter(
+        ImageFilter.UnsharpMask(radius=2, percent=220, threshold=1)
+    )
 
 
 def generate_imagen3_google(prompt: str, output_path: Path, seed: int = 42) -> bool:
@@ -282,8 +284,8 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
     clean_p = sanitize_for_ai_filter(prompt)
     spaces_config = [
+        ("evalstate/flux1_schnell", "/infer", "flux"),
         ("black-forest-labs/FLUX.1-schnell", "/infer", "flux"),
-        ("mrfakename/FLUX.1-schnell", "/infer", "flux"),
     ]
 
     for space_name, api_endpoint, model_type in spaces_config:
@@ -388,7 +390,7 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
         def _run_diffusion():
             return pipe(
                 prompt=clean_p[:280],
-                num_inference_steps=1,
+                num_inference_steps=2,
                 guidance_scale=0.0,
                 generator=generator,
             ).images[0]
