@@ -92,8 +92,10 @@ def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
     left = (new_w - target_w) // 2
     top = (new_h - target_h) // 2
     im_cropped = im_scaled.crop((left, top, left + target_w, top + target_h))
-    return im_cropped.filter(ImageFilter.DETAIL).filter(
-        ImageFilter.UnsharpMask(radius=2, percent=220, threshold=1)
+    return (
+        im_cropped.filter(ImageFilter.DETAIL)
+        .filter(ImageFilter.SHARPEN)
+        .filter(ImageFilter.UnsharpMask(radius=2, percent=250, threshold=1))
     )
 
 
@@ -432,7 +434,7 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
 
     try:
         clean_p = urllib.parse.quote(prompt[:320])
-        url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=1080&height=1920&nologo=true&seed={seed}"
+        url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=576&height=1024&nologo=true&seed={seed}"
         print(f"[IMAGE-ENGINE] [TIER-4: Pollinations FLUX] Fetching: '{prompt[:48]}...'")
 
         headers = {
@@ -488,12 +490,12 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: i
     if generate_flux_hf_space(enriched, output_path, seed=seed):
         return output_path
 
-    # 4. Tier 4: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
-    if generate_sd_turbo_local(enriched, output_path, seed=seed):
+    # 4. Tier 4: Pollinations Clean Free Engine (Fast Cloud FLUX Endpoint)
+    if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
-    # 5. Tier 5: Pollinations Clean Free Engine
-    if generate_pollinations_clean(enriched, output_path, seed=seed):
+    # 5. Tier 5: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
+    if generate_sd_turbo_local(enriched, output_path, seed=seed):
         return output_path
 
     # Hard Failure: Zero-upload safety guard strictly prohibits fake or missing images!
