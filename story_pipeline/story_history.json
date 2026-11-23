@@ -31,10 +31,11 @@
     "dynamic::What lies beneath Antarctica's 2-mile thick ice sheet?::Ep31",
     "dynamic::What if you fell into Jupiter's atmosphere?::Ep32",
     "dynamic::What if you could freeze time for 24 hours?::Ep33",
-    "dynamic::What happens to your body if you stop sleeping forever right now?::Ep34"
+    "dynamic::What happens to your body if you stop sleeping forever right now?::Ep34",
+    "dynamic::What happens to your consciousness the exact millisecond you fall into a black hole?::Ep35"
   ],
   "last_book": "Dynamic Viral Curiosity Universe",
-  "episode_count": 34,
+  "episode_count": 35,
   "generated_topics": [
     "The Deep Sea Abyssal Creature",
     "What if aliens land on Earth tomorrow?",
@@ -66,13 +67,15 @@
     "What lies beneath Antarctica's 2-mile thick ice sheet?",
     "What if you fell into Jupiter's atmosphere?",
     "What if you could freeze time for 24 hours?",
-    "What happens to your body if you stop sleeping forever right now?"
+    "What happens to your body if you stop sleeping forever right now?",
+    "What happens to your consciousness the exact millisecond you fall into a black hole?"
   ],
   "used_topics": [
-    "What if you fell into Jupiter's atmosphere?",
     "What happens to your body if you stop sleeping forever right now?",
-    "The immortal jellyfish that can live forever",
+    "What happens to your consciousness the exact millisecond you fall into a black hole?",
     "What if you could freeze time for 24 hours?",
-    "What lies beneath Antarctica's 2-mile thick ice sheet?"
+    "What lies beneath Antarctica's 2-mile thick ice sheet?",
+    "The immortal jellyfish that can live forever",
+    "What if you fell into Jupiter's atmosphere?"
   ]
 }
