@@ -88,8 +88,8 @@ CRITICAL STORYTELLING & CINEMATOGRAPHY RULES:
    - Beat 2 (10-22s): Context & Hidden Tension (Unveil the hidden scientific reality, 24-28 words)
    - Beat 3 (22-34s): Escalating Chain Reaction (The physical consequence in motion, 24-28 words)
    - Beat 4 (34-46s): The Climax Revelation (Mind-blowing paradox or peak danger, 24-28 words)
-   - Beat 5 (46-55s): The Philosophical Twist & Seamless Loop (Connects directly into Beat 1, 23-28 words)
-2. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 126 AND 138 WORDS (Yields 52-56 seconds of optimal high-retention speech; APV > 105%).
+   - Beat 5 (46-55s): The Philosophical Twist & Seamless Loop (Connects directly into Beat 1, exactly 24-28 words)
+2. TOTAL SPOKEN WORDS: STRICTLY BETWEEN 128 AND 140 WORDS (Total 5 beats, each beat strictly 25-28 spoken words).
 3. CADENCE: Short punchy sentences (<12 words). Use active, vivid verbs and clear causal transitions ('Because of this...', 'Within seconds...', 'This instantly triggers...'). NO ellipses (...), NO em-dashes.
 4. SEAMLESS INFINITE LOOP: The last sentence of Beat 5 MUST grammatically and visually fuse into the very first word of Beat 1.
 5. INVARIANT CHARACTER DNA & VISUAL ANCHOR (ZERO INCONSISTENCY POLICY):
@@ -146,12 +146,12 @@ Output JSON ONLY:
   }}
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash"]
+            active_model = "gemini-3.5-flash-lite"
+            models_to_try = ["gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.5-flash", "gemini-3.8-flash"]
             for candidate_model in models_to_try:
                 for attempt in range(1, 3):
                     try:
-                        print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, attempt {attempt}/2, timeout 20s)...")
+                        print(f"⏳ [Script Engine] Querying Gemini ({candidate_model}, attempt {attempt}/2, timeout 15s)...")
                         res = call_with_timeout(
                             client.models.generate_content,
                             kwargs=dict(
@@ -159,13 +159,20 @@ Output JSON ONLY:
                                 contents=prompt,
                                 config=dict(response_mime_type="application/json"),
                             ),
-                            timeout_sec=20,
+                            timeout_sec=15,
                         )
                         if res and res.text:
-                            active_model = candidate_model
-                            break
+                            data_check = json.loads(res.text)
+                            if "beats" in data_check and len(data_check["beats"]) == 5:
+                                wc = sum(len(b['narration'].split()) for b in data_check['beats'])
+                                if 112 <= wc <= 146:
+                                    active_model = candidate_model
+                                    break
+                                else:
+                                    print(f"⚠️ [Script Engine] {candidate_model} generated {wc} words (expected 112-146). Retrying...")
+                                    res = None
                     except concurrent.futures.TimeoutError:
-                        print(f"⏱️ [Script Engine] {candidate_model} timed out after 20s. Retrying...")
+                        print(f"⏱️ [Script Engine] {candidate_model} timed out after 15s. Retrying...")
                     except Exception as m_err:
                         print(f"⚠️ Model {candidate_model} script note: {m_err}")
                         s_err = str(m_err).lower()

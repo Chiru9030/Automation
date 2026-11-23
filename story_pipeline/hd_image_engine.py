@@ -284,20 +284,21 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
     clean_p = sanitize_for_ai_filter(prompt)
     spaces_config = [
-        ("evalstate/flux1_schnell", "/infer", "flux"),
         ("black-forest-labs/FLUX.1-schnell", "/infer", "flux"),
+        ("evalstate/flux1_schnell", "/infer", "flux"),
     ]
 
     for space_name, api_endpoint, model_type in spaces_config:
-        # Try anonymous first to preserve user ZeroGPU quota, fallback to authenticated token
-        modes = [("anon", None)]
+        # Prioritize authenticated token when available to bypass anonymous datacenter IP ZeroGPU rate limits
+        modes = []
         if hf_token:
             modes.append(("auth", hf_token))
+        modes.append(("anon", None))
 
         for mode, tok in modes:
             try:
                 print(f"[IMAGE-ENGINE] [TIER-2: {space_name}] Mode: {mode}, Prompt: '{clean_p[:45]}...'")
-                client = Client(space_name, token=tok)
+                client = Client(space_name, token=tok, headers={"Authorization": f"Bearer {tok}"} if tok else None)
 
                 def _predict():
                     if model_type == "flux":
@@ -305,8 +306,8 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
                             prompt=clean_p[:300],
                             seed=seed,
                             randomize_seed=True,
-                            width=768,
-                            height=1360,
+                            width=576,
+                            height=1024,
                             num_inference_steps=4,
                             api_name=api_endpoint,
                         )
@@ -317,7 +318,7 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
                             api_name=api_endpoint,
                         )
 
-                result_tuple = call_with_timeout(_predict, timeout_sec=25)
+                result_tuple = call_with_timeout(_predict, timeout_sec=35)
                 res_path = (
                     result_tuple[0]
                     if isinstance(result_tuple, (tuple, list))
@@ -395,7 +396,7 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
                 generator=generator,
             ).images[0]
 
-        image = call_with_timeout(_run_diffusion, timeout_sec=30)
+        image = call_with_timeout(_run_diffusion, timeout_sec=60)
         im_std = standardize_to_1080x1920(image.convert("RGB"))
         im_std.save(output_path, "JPEG", quality=95)
 
