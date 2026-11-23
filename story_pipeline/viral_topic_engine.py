@@ -216,12 +216,12 @@ Return JSON format ONLY:
   "style": "Visual style description (e.g. 3D Pixar animation / Unreal Engine 5)"
 }}"""
             res = None
-            active_model = "gemini-3.8-flash"
-            models_to_try = ["gemini-3.8-flash", "gemini-2.5-flash", "gemini-flash-latest", "gemini-pro-latest"]
+            active_model = "gemini-3.5-flash-lite"
+            models_to_try = ["gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.5-flash", "gemini-3.8-flash"]
             for candidate_model in models_to_try:
-                for attempt in range(1, 4):
+                for attempt in range(1, 3):
                     try:
-                        print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, attempt {attempt}/3, timeout 25s)...")
+                        print(f"⏳ [Topic Engine] Querying Gemini ({candidate_model}, attempt {attempt}/2, timeout 15s)...")
                         res = call_with_timeout(
                             client.models.generate_content,
                             kwargs=dict(
@@ -229,7 +229,7 @@ Return JSON format ONLY:
                                 contents=prompt,
                                 config=dict(response_mime_type="application/json"),
                             ),
-                            timeout_sec=25,
+                            timeout_sec=15,
                         )
                         if res and res.text:
                             active_model = candidate_model
