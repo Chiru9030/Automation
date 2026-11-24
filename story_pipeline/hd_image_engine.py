@@ -390,29 +390,31 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
 
 
 def get_sd_turbo_pipeline():
-    """Lazily loads and caches the single-step SD-Turbo diffusion pipeline in memory."""
+    """Lazily loads and caches the single-step SD-Turbo diffusion pipeline in memory with thread safety."""
     global _SD_TURBO_PIPE, LOCAL_SD_TURBO_ACTIVE
     if _SD_TURBO_PIPE is not None:
         return _SD_TURBO_PIPE
     if not LOCAL_SD_TURBO_ACTIVE:
         return None
 
-    try:
-        import torch
-        from diffusers import AutoPipelineForText2Image
+    with _SD_TURBO_LOCK:
+        if _SD_TURBO_PIPE is not None:
+            return _SD_TURBO_PIPE
+        try:
+            import torch
+            from diffusers import AutoPipelineForText2Image
 
-        print("[IMAGE-ENGINE] [TIER-3: Local SD-Turbo] Initializing single-step neural pipeline...")
-        _SD_TURBO_PIPE = AutoPipelineForText2Image.from_pretrained(
-            "stabilityai/sd-turbo",
-            torch_dtype=torch.float32,
-            use_safetensors=True,
-        )
-        print("[IMAGE-ENGINE] [TIER-3] SD-Turbo loaded into memory successfully!")
-        return _SD_TURBO_PIPE
-    except Exception as e:
-        print(f"[IMAGE-ENGINE] [TIER-3 Notice] Local SD-Turbo unavailable ({str(e)[:90]}). Falling back...")
-        LOCAL_SD_TURBO_ACTIVE = False
-        return None
+            print("[IMAGE-ENGINE] [TIER-3: Local SD-Turbo] Initializing single-step neural pipeline...")
+            _SD_TURBO_PIPE = AutoPipelineForText2Image.from_pretrained(
+                "stabilityai/sd-turbo",
+                torch_dtype=torch.float32,
+                use_safetensors=True,
+            )
+            print("[IMAGE-ENGINE] [TIER-3] SD-Turbo loaded into memory successfully!")
+            return _SD_TURBO_PIPE
+        except Exception as e:
+            print(f"[IMAGE-ENGINE] [TIER-3 Notice] Local SD-Turbo initialization note ({str(e)[:90]}). Falling back...")
+            return None
 
 
 def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> bool:
@@ -496,7 +498,11 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
                             pass
                         return True
         except Exception as e:
-            print(f"[IMAGE-ENGINE] [Pollinations Notice] Attempt {attempt}/2 ({str(e)[:70]}), retrying...")
+            err_str = str(e)
+            if "402" in err_str or "payment" in err_str.lower():
+                print(f"[IMAGE-ENGINE] [Pollinations Notice] Free IP rate limit hit ({err_str[:60]}). Falling over to next tier...")
+                break
+            print(f"[IMAGE-ENGINE] [Pollinations Notice] Attempt {attempt}/2 ({err_str[:70]}), retrying...")
             time.sleep(1.0 * attempt)
     return False
 
@@ -596,6 +602,12 @@ def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
     """Generates enhanced visuals for all scenes/beats concurrently with active quality auditing."""
     PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     print(f"\n🎨 [Image Engine] Batch-generating {len(beats)} rapid-cut scene visuals (2 paced workers)...")
+
+    # Pre-warm SD-Turbo neural pipeline synchronously once to eliminate multi-thread initialization collisions
+    try:
+        get_sd_turbo_pipeline()
+    except Exception:
+        pass
 
     # Use 2 paced workers to guarantee zero rate-limiting and thread safety
     max_workers = min(2, len(beats))

@@ -71,6 +71,7 @@ from story_pipeline.backlog_publisher import (
     get_pending_backlog,
     dequeue_backlog_episode,
 )
+from story_pipeline.storage_cleaner import cleanup_storage
 from story_pipeline.training_pipeline import trigger_failure_training
 from audio_generator import generate_music_for_genre
 from main import upload_to_youtube, upload_to_instagram
@@ -144,6 +145,14 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
 
     current_stage = "Stage 1: Dynamic Viral Topic Generator"
     try:
+        # -------------------------------------------------------------
+        # STAGE 0.0: Pre-Flight Storage Pruning (Prevents Disk Exhaustion)
+        # -------------------------------------------------------------
+        try:
+            cleanup_storage(keep_episodes=3, verbose=True)
+        except Exception as e_clean:
+            print(f"⚠️ [Storage Cleaner Notice] Pre-flight cleanup warning: {e_clean}")
+
         # -------------------------------------------------------------
         # STAGE 0: Pre-Flight Backlog Queue Drainage (Self-Healing Publishing)
         # -------------------------------------------------------------
@@ -558,6 +567,14 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             youtube_res=yt_res,
             video_path=out_mp4,
         )
+
+        # -------------------------------------------------------------
+        # STAGE 8: Post-Flight Storage Pruning & Temp Cache Eviction
+        # -------------------------------------------------------------
+        try:
+            cleanup_storage(keep_episodes=3, verbose=True)
+        except Exception as e_clean:
+            print(f"⚠️ [Storage Cleaner Notice] Post-flight cleanup warning: {e_clean}")
 
         print("\n==================================================================")
         print(f" 🎉 Episode #{ep_num} 100% Certified & Published!")

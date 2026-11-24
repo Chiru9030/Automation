@@ -2,10 +2,14 @@ name: Autonomous Daily Story Video Pipeline
 
 on:
   schedule:
-    # 2 premier high-quality runs per day: 07:17 UTC & 14:17 UTC
-    # Off-minute scheduling (:17) avoids GitHub top-of-hour & half-hour queue congestion
-    # Spaced perfectly at peak global viral windows (12:47 IST / Lunch & 19:47 IST / Prime Evening)
-    - cron: '17 7,14 * * *'
+    # 5 premier high-curiosity viral drops per day:
+    # 03:17 UTC (08:47 AM IST / Morning Commute)
+    # 07:17 UTC (12:47 PM IST / Lunchtime Peak)
+    # 11:17 UTC (04:47 PM IST / Afternoon Rush)
+    # 14:17 UTC (07:47 PM IST / Prime Evening Viral Window)
+    # 17:17 UTC (10:47 PM IST / Late Night Bedtime Feed)
+    # Off-minute scheduling (:17) eliminates top-of-hour & half-hour runner queue stalling
+    - cron: '17 3,7,11,14,17 * * *'
   workflow_dispatch:
     inputs:
       custom_topic:
@@ -78,7 +82,7 @@ jobs:
       - name: Install Python Requirements
         run: |
           pip install --upgrade pip
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
           pip install -r requirements.txt
 
       - name: Cache Node Modules
@@ -128,7 +132,7 @@ jobs:
         with:
           name: story-episode-mp4
           path: video-app/out/**/*.mp4
-          retention-days: 7
+          retention-days: 1
 
       - name: Upload Generated Thumbnail Artifact
         if: always()
@@ -136,7 +140,28 @@ jobs:
         with:
           name: story-thumbnail-jpg
           path: video-app/out/**/*.jpg
-          retention-days: 7
+          retention-days: 1
+
+      - name: Prune Stale GitHub Artifacts (Quota Shield)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 -c "
+          import subprocess, json
+          try:
+              out = subprocess.check_output(['gh', 'api', 'repos/${{ github.repository }}/actions/artifacts', '--paginate'], text=True)
+              data = json.loads(out)
+              artifacts = data.get('artifacts', [])
+              # Retain only the latest 2 sets of artifacts to keep GitHub cloud storage strictly bounded
+              if len(artifacts) > 4:
+                  for art in artifacts[4:]:
+                      art_id = art['id']
+                      subprocess.run(['gh', 'api', '-X', 'DELETE', f'repos/${{ github.repository }}/actions/artifacts/{art_id}'], check=False)
+                      print(f'Purged historical artifact {art_id} ({art.get(\"name\")})')
+          except Exception as e:
+              print(f'Artifact prune note: {e}')
+          " || true
 
       - name: Commit Updated Story History
         run: |
