@@ -45,6 +45,15 @@ def generate_viral_script(topic_data: dict, part_number: int = 1, total_parts: i
     ep_num = topic_data.get("episode", 1)
     banner = topic_data.get("top_hook_banner") or topic[:55]
 
+    t_lower = topic.lower()
+    # High-Priority Precision Archetypes for Viral Instagram Recreations (@riddlelantern & @gutter.gyan)
+    if any(k in t_lower for k in ["nakli", "note", "golu", "samosa", "riddle", "paheli", "jungle", "lion", "sher", "don"]):
+        print(f"🎬 [Script Engine] Prioritizing Curated 2D Vector Cartoon Archetype for '{topic}'...")
+        proc_script = generate_procedural_script(topic, hook_premise, style, ep_num, banner=banner)
+        if topic_data.get("riddle_options") and not proc_script.get("riddle_options"):
+            proc_script["riddle_options"] = topic_data.get("riddle_options")
+        return ensure_video_prompts_and_motion(proc_script)
+
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
         try:
@@ -59,6 +68,7 @@ TOPIC: {topic}
 PREMISE: {hook_premise}
 TOP HOOK BANNER: {banner}
 CATEGORY: {category}
+VISUAL ART STYLE: {style}
 EPISODE: #{ep_num}
 
 CRITICAL PACING & VISUAL RULES (THE 2-SECOND RULE):
@@ -235,11 +245,20 @@ def ensure_video_prompts_and_motion(script_data: dict) -> dict:
     topic = script_data.get("episode_title") or script_data.get("topic") or "Viral Reel"
     t_lower = topic.lower()
 
+    is_2d = any(k in t_lower or k in str(script_data.get("style", "")).lower() or k in str(script_data.get("category", "")).lower() for k in ["2d", "cartoon", "vector", "paheli", "riddle", "fable", "storybook", "chibi", "comic", "nakli", "note", "golu", "samosa", "lion", "jungle", "sher"])
+
     char_dna = script_data.get("character_dna", "")
     vis_anchor = script_data.get("visual_anchor", "")
 
     if not char_dna or len(char_dna.strip()) < 20:
-        if any(k in t_lower for k in ["brand", "comment", "reels", "friend", "instagram", "phone", "social media", "skit", "comedy"]):
+        if is_2d:
+            if any(k in t_lower for k in ["lion", "jungle", "sher", "don"]):
+                char_dna = "Cute unimpressed 2D cartoon lion king wearing a golden crown sitting on an ornate wooden throne, thick clean black outlines, storybook aesthetic, vibrant flat colors, deadpan comic gaze"
+                vis_anchor = "Lush vibrant 2D cartoon jungle foliage with sunburst background rays and floating green leaves, children's storybook flat vector illustration, 9:16 vertical"
+            else:
+                char_dna = "Chibi 2D cartoon Indian street vendor with white chef cap, colorful apron, expressive cartoon mustache and comical sweat drops"
+                vis_anchor = "Vibrant Indian street food stall GOLU SAMOSA CORNER, sizzling golden samosas in glass display, thick clean black outlines, storybook flat 2D vector illustration, 9:16 vertical"
+        elif any(k in t_lower for k in ["brand", "comment", "reels", "friend", "instagram", "phone", "social media", "skit", "comedy"]):
             char_dna = "Expressive young man in casual streetwear with colorful stylish jacket and modern haircut, comedic animated expressions"
             vis_anchor = "Vibrant modern studio apartment with warm neon LED ambient lighting, glowing smartphone screen reflections, 3D Pixar film render, 8k"
         elif any(k in t_lower for k in ["space", "jupiter", "saturn", "moon", "cosmic", "black hole", "astronaut"]):
@@ -316,15 +335,33 @@ def ensure_video_prompts_and_motion(script_data: dict) -> dict:
         has_kine = any(tok in vp.lower() for tok in kinematics_tokens)
         has_dna = any(w in vp.lower() for w in char_dna.lower().split()[:3])
 
-        if not vp or not has_lens or not has_kine or not has_dna:
-            cam = sc.get("camera_motion")
-            sc["video_prompt"] = (
-                f"Cinematic {cam} camera motion, {lens_spec}, {char_dna} {motion_spec}, "
-                f"set in {vis_anchor}, volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution"
-            )
-
-        if not sc.get("visual_prompt"):
-            sc["visual_prompt"] = f"{lens_spec} of {char_dna}, {motion_spec}, {vis_anchor}, 8k render"
+        if is_2d:
+            sc["style"] = "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D"
+            if vp and ("2d" in vp.lower() or "cartoon" in vp.lower() or "vector" in vp.lower()):
+                # Preserve existing high-quality 2D prompt while guaranteeing lens and kinematics for auditor
+                if not has_lens:
+                    vp = f"{lens_spec}, {vp}"
+                if not has_kine:
+                    vp = f"{vp}, {motion_spec}"
+                sc["video_prompt"] = vp
+            else:
+                cam = sc.get("camera_motion")
+                sc["video_prompt"] = (
+                    f"Flat 2D vector cartoon, {lens_spec}, cute chibi {char_dna} {motion_spec}, "
+                    f"set in {vis_anchor}, thick clean black outlines, storybook aesthetic, "
+                    f"vibrant flat colors, clean flat cell shading, zero 3D, zero photorealism, 9:16 vertical"
+                )
+            if not sc.get("visual_prompt"):
+                sc["visual_prompt"] = f"Flat 2D vector cartoon illustration of {char_dna}, {motion_spec}, {vis_anchor}, 9:16"
+        else:
+            if not vp or not has_lens or not has_kine or not has_dna:
+                cam = sc.get("camera_motion")
+                sc["video_prompt"] = (
+                    f"Cinematic {cam} camera motion, {lens_spec}, {char_dna} {motion_spec}, "
+                    f"set in {vis_anchor}, volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution"
+                )
+            if not sc.get("visual_prompt"):
+                sc["visual_prompt"] = f"{lens_spec} of {char_dna}, {motion_spec}, {vis_anchor}, 8k render"
 
         if not sc.get("sfx"):
             sc["sfx"] = "pop" if sc_num % 2 == 1 else "whoosh"
@@ -340,8 +377,338 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
     if not banner:
         banner = topic[:55]
 
+    riddle_options = None
+
+    # Archetype 0: Indian Paheli / Counterfeit Note Math Riddle Skit (@riddlelantern format)
+    if any(k in t_lower for k in ["nakli", "note", "golu", "samosa", "riddle", "paheli", "paheliyan", "puzzle", "loss", "nuksaan"]):
+        char_dna = "Chibi 2D cartoon Indian street vendor with white chef cap, colorful apron, expressive cartoon mustache and comical sweat drops"
+        vis_anchor = "Vibrant Indian street food stall GOLU SAMOSA CORNER, sizzling golden samosas in glass display, thick clean black outlines, storybook flat 2D vector illustration, 9:16 vertical"
+        banner = "GOLU SAMOSA CORNER: KUL NUKSAAN KITNA HUA?"
+        riddle_options = ["₹200", "₹500", "₹800", "₹1000"]
+
+        scenes = [
+            {
+                "scene_number": 1,
+                "narration": "Ek nakli note ne Golu ke papa ka poora din bigaad diya!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, cute chibi Indian samosa shopkeeper holding a 500 rupee note marked NAKLI with shocked face and sweat drops, Golu Samosa Corner signboard, thick black outlines, storybook aesthetic, vibrant saturated colors, 9:16 vertical",
+                "visual_prompt": "Flat 2D vector cartoon of cute Indian shopkeeper shocked holding fake 500 note, thick outlines, 9:16",
+            },
+            {
+                "scene_number": 2,
+                "narration": "Subah-subah pehla customer aaya aur bola, do sau rupaye ke garam samose do!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, hungry customer in bright green kurta pointing at sizzling golden triangular samosas inside display counter, cute shopkeeper smiling, clean flat art, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon customer ordering samosas at street food counter, vibrant colors, 9:16",
+            },
+            {
+                "scene_number": 3,
+                "narration": "Customer ne paanch sau ka note thama diya, par dukan mein chutta nahi tha!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "pop",
+                "camera_motion": "dramatic-pulse",
+                "video_prompt": "Flat 2D vector cartoon, customer hand extending a crisp 500 rupee banknote across counter, shopkeeper opening wooden cash drawer showing zero change, comical panic expression, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon hand giving 500 note to shopkeeper with empty drawer, 9:16",
+            },
+            {
+                "scene_number": 4,
+                "narration": "Papa bagal wale kirana chacha ke paas gaye aur paanch sau ka chutta karwake laaye!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, shopkeeper hurrying to neighboring grocery shop counter where an elderly Indian uncle with glasses happily exchanges 500 note for hundred rupee bills, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon shopkeeper exchanging 500 note with neighbor uncle, 9:16",
+            },
+            {
+                "scene_number": 5,
+                "narration": "Customer ko do sau ke samose aur teen sau rupaye cash wapas de diya!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "pop",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, shopkeeper handing customer a steaming brown paper bag of samosas and three crisp 100 rupee notes, customer smiling cheekily, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon shopkeeper handing samosa bag and 300 cash to customer, 9:16",
+            },
+            {
+                "scene_number": 6,
+                "narration": "Customer muskurate hue garam samose leke market mein gayab ho gaya!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": "Flat 2D vector cartoon, customer walking away briskly into sunny vibrant Indian street market with steam wafting from bag, shopkeeper waving peacefully, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon customer walking away fast into market alley with samosas, 9:16",
+            },
+            {
+                "scene_number": 7,
+                "narration": "Do ghante baad, bagal wale chacha gusse mein laal-peele daudte hue aaye!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, angry neighboring uncle with red face storming into Golu Samosa stall, steam venting from ears in anime style, pointing angrily, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon angry neighbor uncle marching with furious expression, 9:16",
+            },
+            {
+                "scene_number": 8,
+                "narration": "Chacha chillaye: arey bhai, yeh paanch sau ka note toh bilkul nakli nikla!",
+                "speaker": "speaker_2",
+                "speaker_name": "Chacha",
+                "speaker_avatar": "👴",
+                "sfx": "pop",
+                "camera_motion": "dramatic-pulse",
+                "video_prompt": "Flat 2D vector cartoon, extreme close-up of 500 banknote with giant red diagonal stamp reading NAKLI, uncle holding it with furious glare, thick outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon close-up of fake 500 rupee note stamped NAKLI, 9:16",
+            },
+            {
+                "scene_number": 9,
+                "narration": "Mera paanch sau rupaye asli cash abhi ke abhi wapas karo!",
+                "speaker": "speaker_2",
+                "speaker_name": "Chacha",
+                "speaker_avatar": "👴",
+                "sfx": "whoosh",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, angry uncle thrusting open palm forward demanding his money back at the samosa counter, shopkeeper sweating in terror, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon uncle demanding real cash with outstretched hand, 9:16",
+            },
+            {
+                "scene_number": 10,
+                "narration": "Golu ke papa ko majboori mein apni jeb se paanch sau asli rupaye dene pade!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, devastated shopkeeper reluctantly pulling 500 real cash from personal wallet and handing to uncle, comic waterfall tears streaming, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon sad shopkeeper handing 500 real cash to uncle, 9:16",
+            },
+            {
+                "scene_number": 11,
+                "narration": "Ab dukan band karke Golu ke papa sar pakad kar sochte reh gaye!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "dramatic-pulse",
+                "camera_motion": "dramatic-pulse",
+                "video_prompt": "Flat 2D vector cartoon, shopkeeper sitting on wooden stool holding head with both hands, three giant question marks orbiting his head, empty samosa trays, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon shopkeeper sitting on stool clutching head in deep thought, 9:16",
+            },
+            {
+                "scene_number": 12,
+                "narration": "Samose bhi gaye, cash bhi gaya, poora din barbaad ho gaya!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": "Flat 2D vector cartoon, shopkeeper looking at a calculator with smoke puffing out, floating math equations and torn fake note on floor, dramatic storybook lighting, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon shopkeeper looking at calculator with funny smoke puffs, 9:16",
+            },
+            {
+                "scene_number": 13,
+                "narration": "Toh aakhir Golu ke papa ka kul nuksaan kitna hua?",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, giant glowing golden question mark above Golu Samosa Corner, shopkeeper pointing forward at the viewer with suspenseful expression, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon shopkeeper pointing at viewer under giant glowing question mark, 9:16",
+            },
+            {
+                "scene_number": 14,
+                "narration": "Option A do sau, B paanch sau, C aath sau, ya D hazaar rupaye? Comment your answer!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "loop-convergence-zoom",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": "Flat 2D vector cartoon, vibrant multiple choice quiz card hovering in center displaying options A 200, B 500, C 800, D 1000, shopkeeper waiting eagerly for comments, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon multiple choice options board A 200 B 500 C 800 D 1000, 9:16",
+            },
+        ]
+
+    # Archetype 0B: Jungle Ka Asli Don (Lion King on Golden Throne Fable Comedy - @gutter.gyan format)
+    elif any(k in t_lower for k in ["jungle", "lion", "sher", "don", "king", "fable"]):
+        char_dna = "Cute unimpressed 2D cartoon lion king wearing a golden crown sitting on an ornate wooden throne, thick clean black outlines, storybook aesthetic, vibrant flat colors, deadpan comic gaze"
+        vis_anchor = "Lush vibrant 2D cartoon jungle foliage with sunburst background rays and floating green leaves, children's storybook flat vector illustration, 9:16 vertical"
+        banner = "JUNGLE KA ASLI DON: WHO RULES THE WILD?"
+        riddle_options = ["Sher 🦁", "Haathi 🐘", "Bhalu 🐻", "Bandar 🐒"]
+
+        scenes = [
+            {
+                "scene_number": 1,
+                "narration": "Kya jungle ka asli don sher hi hai? Dekho!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, cute unimpressed cartoon lion king wearing a golden crown sitting on an ornate throne in lush jungle, 10mm ultra-wide lens, dynamic push-in shot, animals arguing in background, thick clean black outlines, storybook aesthetic, vibrant flat colors, 9:16 vertical",
+                "visual_prompt": "Flat 2D vector cartoon, cute lion king with crown on throne looking unimpressed, jungle foliage, thick black outlines, 9:16",
+            },
+            {
+                "scene_number": 2,
+                "narration": "Sher apne takht par baitha bore ho raha tha.",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, deadpan cartoon lion king resting chin on paw looking sideways with bored half-open eyes, 24mm tracking pan, golden crown tilted, sunburst background rays, thick black outlines, storybook aesthetic, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon lion king resting chin on paw bored on throne, 9:16",
+            },
+            {
+                "scene_number": 3,
+                "narration": "Bhalu bola: 'Mera panja sabse zyada bhaari hai!'",
+                "speaker": "speaker_2",
+                "speaker_name": "Bhalu",
+                "speaker_avatar": "🐻",
+                "sfx": "pop",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, giant comical cartoon brown bear slamming massive furry paw on a jungle rock with aggressive roar, 35mm prime lens, dust flying, thick black outlines, vibrant colors, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon brown bear slamming heavy paw on rock roaring, 9:16",
+            },
+            {
+                "scene_number": 4,
+                "narration": "Bandar chilla: 'Main sabse tez aur chatur hoon!'",
+                "speaker": "speaker_2",
+                "speaker_name": "Bandar",
+                "speaker_avatar": "🐒",
+                "sfx": "pop",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, cheeky cartoon monkey hanging upside down by tail from jungle vine waving a banana and mocking, 24mm low-angle shot, thick clean outlines, vibrant saturated colors, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon monkey hanging by tail mocking with banana, 9:16",
+            },
+            {
+                "scene_number": 5,
+                "narration": "Haathi ne soond utha kar zor se dahaad di!",
+                "speaker": "speaker_2",
+                "speaker_name": "Haathi",
+                "speaker_avatar": "🐘",
+                "sfx": "impact_boom",
+                "camera_motion": "vertical-tilt-reveal",
+                "video_prompt": "Flat 2D vector cartoon, colossal cute cartoon elephant raising long trunk high trumpeting loudly, 10mm ultra-wide low angle shot, ground trembling shockwaves, thick black outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon elephant trumpeting with raised trunk, 9:16",
+            },
+            {
+                "scene_number": 6,
+                "narration": "Lomdi muskuraayi: 'Asli dimaag toh sirf mere paas hai!'",
+                "speaker": "speaker_2",
+                "speaker_name": "Lomdi",
+                "speaker_avatar": "🦊",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, sly cartoon orange fox tapping forehead with paw and winking with cunning smile, 35mm prime reaction shot, thick clean black outlines, storybook aesthetic, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon sly fox tapping forehead winking, 9:16",
+            },
+            {
+                "scene_number": 7,
+                "narration": "Sher ne aadhi aankh kholi aur sabko ghoora.",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "dramatic-pulse",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, intense extreme close up 50mm cinema lens of cartoon lion king golden eyes narrowing into piercing royal gaze, golden crown glinting, thick black outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon close up of lion king golden eyes staring sharply, 9:16",
+            },
+            {
+                "scene_number": 8,
+                "narration": "Ek pal mein poora jungle bilkul shaant ho gaya!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": "Flat 2D vector cartoon, bear, elephant, monkey and fox all freezing in terror with comical sweat drops and wide eyes, 24mm wide angle shot, thick clean outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon animals frozen in silence with sweat drops, 9:16",
+            },
+            {
+                "scene_number": 9,
+                "narration": "Sher bola: 'Dahaadna toh kamzoron ka kaam hai!'",
+                "speaker": "speaker_1",
+                "speaker_name": "Sher Raja",
+                "speaker_avatar": "🦁",
+                "sfx": "pop",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, lion king on golden throne calmly waving one front paw dismissively with royal smirk, 35mm medium shot, floating leaves, thick black outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon lion king waving paw dismissively on throne, 9:16",
+            },
+            {
+                "scene_number": 10,
+                "narration": "Asli raja wahi jiske aage sab chup ho jaayein!",
+                "speaker": "speaker_1",
+                "speaker_name": "Sher Raja",
+                "speaker_avatar": "🦁",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, majestic cartoon lion king standing tall on throne rock with flowing golden mane, 10mm ultra-wide hero angle, sunburst rays radiating behind him, thick black outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon majestic lion king standing tall with sunburst rays, 9:16",
+            },
+            {
+                "scene_number": 11,
+                "narration": "Sabhi janwar chupchap sar jhuka kar piche hat gaye.",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "whoosh",
+                "camera_motion": "smooth-lateral-pan-right",
+                "video_prompt": "Flat 2D vector cartoon, sheepish bear, elephant and monkey bowing heads and tiptoeing backward into bushes, 24mm tracking pan, thick clean black outlines, storybook aesthetic, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon animals bowing heads and backing into bushes, 9:16",
+            },
+            {
+                "scene_number": 12,
+                "narration": "Sachi taakat shor mein nahi, khamoshi mein hoti hai.",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "dramatic-pulse",
+                "camera_motion": "climax-pull-back",
+                "video_prompt": "Flat 2D vector cartoon, lion king relaxing back into throne cushion with satisfied peaceful grin and folded paws, golden crown glowing, 35mm prime shot, thick outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon lion king relaxing peacefully on throne, 9:16",
+            },
+            {
+                "scene_number": 13,
+                "narration": "Toh batao, jungle ka asli don kaun hai?",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "impact_boom",
+                "camera_motion": "rapid-push-in-shake",
+                "video_prompt": "Flat 2D vector cartoon, lion king leaning forward pointing majestic royal paw directly at viewer under glowing jungle title banner, 10mm ultra-wide shot, thick clean black outlines, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon lion pointing paw at camera under jungle banner, 9:16",
+            },
+            {
+                "scene_number": 14,
+                "narration": "A Sher, B Haathi, C Bhalu, ya D Bandar? Comment now!",
+                "speaker": "speaker_1",
+                "speaker_name": "Narrator",
+                "speaker_avatar": "🎙️",
+                "sfx": "loop-convergence-zoom",
+                "camera_motion": "loop-convergence-zoom",
+                "video_prompt": "Flat 2D vector cartoon, vibrant multiple choice quiz card hovering in center displaying options A Sher, B Haathi, C Bhalu, D Bandar, lion king smiling knowingly on throne, 9:16 vertical",
+                "visual_prompt": "Flat 2D cartoon multiple choice options board A Sher B Haathi C Bhalu D Bandar, 9:16",
+            },
+        ]
+
     # Archetype A: Brands Commenting Under Reels / Viral Skit
-    if any(k in t_lower for k in ["brand", "comment", "reels", "friend", "instagram"]):
+    elif any(k in t_lower for k in ["brand", "comment", "reels", "friend", "instagram"]):
         char_dna = "Young comedic creator in stylish orange and blue streetwear jacket with expressive eyes and modern haircut"
         vis_anchor = "Vibrant colorful modern apartment with glowing neon ambient lighting and floating social media icons, 3D Pixar comedy animation, 8k"
         banner = "Brands commenting under reels like they're our friends"
@@ -858,6 +1225,7 @@ def generate_procedural_script(topic: str, hook_premise: str, style: str, ep_num
         "hook_headline": f"WHAT HAPPENS NEXT?!",
         "character_dna": char_dna,
         "visual_anchor": vis_anchor,
+        "riddle_options": riddle_options,
         "total_words_count": total_words,
         "scenes": scenes,
         "beats": scenes,

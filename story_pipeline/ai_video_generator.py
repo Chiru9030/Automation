@@ -609,18 +609,49 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path, beat_number:
             f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
         )
     else:
-        # Fast Single Shot for short rapid-cut scenes (1.5 - 2.8s)
+        # High-Energy Puppet Kinematics & Snap Punch-ins for rapid-cut scenes (1.5 - 2.8s)
+        # Adds organic breathing bounce, micro-sway, and high-impact snap zooms matching cartoon skits
         mod_beat = ((b_num - 1) % 5) + 1
-        if mod_beat == 2:
-            zoom_expr = f"zoompan=z='1.12+0.10*(on/{dur_frames})':x='(iw-ow)*(on/{dur_frames})':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+        if mod_beat == 1:
+            # Beat 1 / Hook: 8-frame Snap Punch-in + High-Energy Vertical Puppet Breathing Bounce
+            zoom_expr = (
+                f"zoompan=z='if(lt(on,8),1.05+0.18*(on/8),1.23+0.04*(on/{dur_frames}))':"
+                f"x='iw/2-(iw/zoom/2)+cos(on/5)*8':"
+                f"y='ih/2-(ih/zoom/2)+sin(on/3)*12':"
+                f"d={dur_frames}:s=1080x1920:fps={fps}"
+            )
+        elif mod_beat == 2:
+            # Beat 2 / Dialogue: Smooth Tracking Pan with Organic Puppet Bobbing
+            zoom_expr = (
+                f"zoompan=z='1.16+0.08*(on/{dur_frames})':"
+                f"x='(iw-ow)*(on/{dur_frames})':"
+                f"y='ih/2-(ih/zoom/2)+sin(on/4)*10':"
+                f"d={dur_frames}:s=1080x1920:fps={fps}"
+            )
         elif mod_beat == 3:
-            zoom_expr = f"zoompan=z='1.15+0.10*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
+            # Beat 3 / Shock & Twist: High-Tension Comic Shock Micro-Tremor
+            zoom_expr = (
+                f"zoompan=z='1.28+0.05*(on/{dur_frames})':"
+                f"x='iw/2-(iw/zoom/2)+sin(on)*5':"
+                f"y='ih/2-(ih/zoom/2)+cos(on*1.3)*6':"
+                f"d={dur_frames}:s=1080x1920:fps={fps}"
+            )
         elif mod_beat == 4:
-            zoom_expr = f"zoompan=z='1.25-0.15*(on/{dur_frames})':x='(iw-ow)*(1-on/{dur_frames})':y='(ih-oh)*(on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
-        elif mod_beat == 5:
-            zoom_expr = f"zoompan=z='1.14-0.08*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+            # Beat 4 / Revelation: Dynamic Climax Pull-Back with Spring Deceleration
+            zoom_expr = (
+                f"zoompan=z='1.28-0.18*(on/{dur_frames})':"
+                f"x='iw/2-(iw/zoom/2)+cos(on/6)*6':"
+                f"y='(ih-oh)*(0.2+0.6*on/{dur_frames})+sin(on/4)*8':"
+                f"d={dur_frames}:s=1080x1920:fps={fps}"
+            )
         else:
-            zoom_expr = f"zoompan=z='1.06+0.18*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+            # Beat 5 / Riddle CTA: Centered Convergence with Rhythmic Breathing Pulse
+            zoom_expr = (
+                f"zoompan=z='1.18-0.08*(on/{dur_frames})':"
+                f"x='iw/2-(iw/zoom/2)+sin(on/5)*6':"
+                f"y='ih/2-(ih/zoom/2)+sin(on/3)*10':"
+                f"d={dur_frames}:s=1080x1920:fps={fps}"
+            )
 
         filter_complex = (
             f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"

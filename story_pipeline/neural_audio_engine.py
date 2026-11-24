@@ -44,13 +44,27 @@ VOICE_SUITES = [
     {
         "anchor": {"voice": "en-IE-ConnorNeural", "rate": "+2%", "pitch": "-1Hz", "name": "Storyteller (IE)"},
         "analyst": {"voice": "en-IE-EmilyNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Historian (IE)"}
+    },
+    {
+        "anchor": {"voice": "hi-IN-MadhurNeural", "rate": "+4%", "pitch": "+0Hz", "name": "Energetic Paheli Host (IN)"},
+        "analyst": {"voice": "hi-IN-SwaraNeural", "rate": "+3%", "pitch": "+1Hz", "name": "Curious Specialist (IN)"}
+    },
+    {
+        "anchor": {"voice": "en-IN-PrabhatNeural", "rate": "+3%", "pitch": "-1Hz", "name": "Indian Storyteller (IN)"},
+        "analyst": {"voice": "en-IN-NeerjaNeural", "rate": "+3%", "pitch": "+0Hz", "name": "Indian Analyst (IN)"}
     }
 ]
 
 
-def get_voice_for_beat(beat_number: int, episode_num: int = 1) -> dict:
-    """Alternates between Lead Anchor (Beats 1, 3, 5) and Science Specialist (Beats 2, 4) with suite rotation and micro-jitter."""
-    suite = VOICE_SUITES[episode_num % len(VOICE_SUITES)]
+def get_voice_for_beat(beat_number: int, episode_num: int = 1, text: str = "", category: str = "") -> dict:
+    """Alternates between Lead Anchor and Specialist with suite rotation, language detection, and micro-jitter."""
+    is_hindi = any(w in (text + " " + category).lower() for w in ["paheli", "nakli", "golu", "samosa", "chacha", "rupaye", "hindi", "nuksaan"])
+    if is_hindi:
+        # Use energetic Indian Hindi voice suite
+        suite = VOICE_SUITES[-2]
+    else:
+        suite = VOICE_SUITES[episode_num % (len(VOICE_SUITES) - 2)]
+
     base = suite["anchor"] if beat_number % 2 == 1 else suite["analyst"]
 
     # Subtle deterministic acoustic jitter (+/- 1Hz pitch, +/- 1% rate) to prevent audio fingerprinting
@@ -96,9 +110,9 @@ async def synthesize_beat_audios(beats: list[dict], episode_num: int = 1) -> lis
     total_frames = 0
 
     for i, beat in enumerate(beats):
-        b_num = beat["beat_number"]
+        b_num = beat.get("scene_number") or beat.get("beat_number", i + 1)
         narration = beat["narration"]
-        cfg = get_voice_for_beat(b_num, episode_num)
+        cfg = get_voice_for_beat(b_num, episode_num, text=narration, category=beat.get("category", ""))
         speaker_name = cfg.get("name", "Narrator")
 
         audio_filename = f"beat_{b_num}.mp3"

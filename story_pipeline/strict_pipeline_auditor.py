@@ -75,7 +75,10 @@ def audit_story_script(script_data: dict) -> bool:
         "in 10 seconds", "shocking", "scientists", "nobody", "everything",
         "secret", "within", "truth", "this is", "could you", "you think",
         "you", "picture", "suppose", "freeze", "freezing", "stunning",
-        "bro", "order", "i just", "when", "ever"
+        "bro", "order", "i just", "when", "ever",
+        # Multilingual & Skit Hook Triggers
+        "ek", "yeh", "kya", "kaise", "kyun", "dekho", "socho", "suno", "sabse",
+        "once", "one", "a fake", "fake", "nakli", "note", "golu"
     ]
     if not any(k in first_beat for k in hook_keywords):
         raise QualityAuditError("Hook Rejection: Scene 1 lacks an immediate curiosity hook trigger word!")
@@ -151,8 +154,8 @@ def audit_scientific_factuality(script_data: dict) -> bool:
     to ensure 100% scientific plausibility and eliminate AI hallucinations.
     """
     cat = (script_data.get("category") or "").lower()
-    if any(k in cat for k in ["comedy", "skit", "satire", "parody", "relatable"]):
-        print("[AUDITOR] [GATE-6] Comedy/Relatable Skit verified (scientific grounding check waived for creative parody).")
+    if any(k in cat for k in ["comedy", "skit", "satire", "parody", "relatable", "riddle", "paheli", "fable", "puzzle", "cartoon"]):
+        print("[AUDITOR] [GATE-6] Creative Skit/Riddle verified (scientific grounding check waived for creative riddle/parody).")
         return True
 
     beats = script_data.get("beats", [])

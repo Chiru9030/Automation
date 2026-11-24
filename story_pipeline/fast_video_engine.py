@@ -130,11 +130,12 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     ]
     subprocess.run(cmd_concat, check=True, capture_output=True)
 
-    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting & Persistent Top Hook Banner)
+    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting, Persistent Top Hook Banner & Riddle Card)
     ass_path = temp_dir / "subtitles.ass"
     ep_num = script_data.get("episode", 1)
     banner = script_data.get("top_hook_banner") or ""
-    compile_kinetic_subtitles(scenes, ass_path, episode_num=ep_num, top_hook_banner=banner)
+    r_opts = script_data.get("riddle_options") or (scenes[0].get("riddle_options") if scenes else None)
+    compile_kinetic_subtitles(scenes, ass_path, episode_num=ep_num, top_hook_banner=banner, riddle_options=r_opts)
     print(f"  ✨ Frame-Accurate discrete kinetic subtitles generated (Ep #{ep_num}, Banner: '{banner[:35]}'): {ass_path.name}")
 
     # Step 4: Multi-Track Audio Mixing (Voiceovers + Ducked Music + SFX)

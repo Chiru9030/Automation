@@ -35,6 +35,22 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=15):
 # Extensive Curated Pool of High-CTR "What If" & Shocking Curiosity Topics
 VIRAL_TOPIC_POOL = [
     {
+        "topic": "Ek nakli note ne Golu ke papa ka poora din bigaad diya",
+        "top_hook_banner": "GOLU SAMOSA CORNER: KUL NUKSAAN KITNA HUA?",
+        "hook_premise": "A fake 500-rupee note at Golu Samosa Corner started a wild chain of transactions. How much did the shopkeeper actually lose?",
+        "category": "Viral Paheli / Riddle Skit",
+        "style": "Flat 2D vector cartoon, cute Indian shopkeeper, chibi art style, storybook aesthetic",
+        "riddle_options": ["₹200", "₹500", "₹800", "₹1000"],
+    },
+    {
+        "topic": "Jungle Ka Asli Don: Who rules the wild?",
+        "top_hook_banner": "JUNGLE KA ASLI DON: WHO RULES THE WILD?",
+        "hook_premise": "The lion king sits on his throne looking completely unimpressed as every jungle animal claims to be the true boss.",
+        "category": "Animated Cartoon Fable",
+        "style": "Flat 2D vector illustration, cute lion king on golden throne, jungle foliage, storybook art",
+        "riddle_options": ["Sher 🦁", "Haathi 🐘", "Bhalu 🐻", "Bandar 🐒"],
+    },
+    {
         "topic": "Brands commenting under reels like they’re our friends",
         "top_hook_banner": "Brands commenting under reels like they're our friends",
         "hook_premise": "Why are corporate brand accounts sliding into comment sections giving unsolicited life advice like they grew up with us?",
@@ -236,8 +252,20 @@ def generate_unique_viral_topic() -> dict:
     2. Falls back to the curated pool, guaranteeing zero repeats.
     """
     history = load_history()
-    used_topics = set(history.get("used_topics", []))
+    used_topics = set(history.get("used_topics", []) + history.get("generated_topics", []))
+    for entry in history.get("processed_chapters", []):
+        if "::" in entry:
+            used_topics.add(entry.split("::")[1].strip())
     ep_count = history.get("episode_count", 0) + 1
+
+    # Prioritize unconsumed curated pool topics (e.g. user-requested viral formats)
+    for item in VIRAL_TOPIC_POOL:
+        t_name = item["topic"]
+        if t_name not in used_topics and not any(t_name.lower() in str(u).lower() for u in used_topics):
+            data = dict(item)
+            data["episode"] = ep_count
+            print(f"💡 [Stage 1: Topic Engine] Selected Curated Priority Topic #{ep_count}: '{data['topic']}'")
+            return data
 
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:

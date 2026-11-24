@@ -73,15 +73,49 @@ def sanitize_for_ai_filter(prompt: str) -> str:
     return clean
 
 
-def enrich_prompt(base_prompt: str) -> str:
-    """Enriches image prompt with cinema-grade 3D Pixar / Unreal Engine 5 lighting tokens."""
+def enrich_prompt(base_prompt: str, style_hint: str = "") -> str:
+    """Enriches image prompt with style-aware tokens (2D vector cartoon, 3D Pixar, or hyper-realistic)."""
     sanitized = sanitize_for_ai_filter(base_prompt)
-    cinematic_modifiers = (
-        "3D Pixar animated film style, Disney character design, Unreal Engine 5 render, "
-        "8k resolution, volumetric dramatic lighting, subsurface scattering, "
-        "ray tracing reflections, shallow depth of field, masterpiece"
-    )
-    return f"{sanitized}, {cinematic_modifiers}"
+    combined = f"{base_prompt} {style_hint}".lower()
+
+    if any(k in combined for k in ["2d", "flat vector", "cartoon", "illustration", "chibi", "paheli", "riddle", "fable", "storybook", "comic"]):
+        # Strip out conflicting photorealistic / 3D tokens
+        conflicting_tokens = [
+            "photorealistic cinematic style", "photorealistic", "cinematic photo", "cinematic photograph",
+            "realistic", "photo", "35mm prime lens", "50mm cinema lens", "85mm portrait lens",
+            "10mm ultra-wide lens", "24mm anamorphic lens", "35mm portrait", "50mm close up",
+            "skin texture", "skin pores", "subsurface scattering", "ray tracing reflections",
+            "ray tracing", "unreal engine 5 render", "unreal engine 5", "unreal engine",
+            "volumetric atmospheric god rays", "volumetric atmospheric lighting",
+            "hyper-realistic cinematic photograph", "hyper-realistic", "arri alexa 65",
+            "arri alexa", "3d pixar animated film style", "3d pixar render", "3d pixar", "octane render"
+        ]
+        clean_p = sanitized
+        for tok in conflicting_tokens:
+            clean_p = clean_p.replace(tok, "").replace(tok.title(), "").replace(tok.upper(), "")
+        # Clean extra commas and whitespace
+        clean_p = ", ".join(part.strip() for part in clean_p.split(",") if part.strip())
+
+        return (
+            f"Flat 2D vector cartoon illustration, cute chibi character design, thick clean black outlines, "
+            f"storybook aesthetic, vibrant flat colors, {clean_p}, clean flat cell shading, "
+            f"bright flat lighting, crisp sharp lines, zero 3D render, zero photorealism, "
+            f"no realistic skin textures, 9:16 vertical composition, masterpiece"
+        )
+    elif any(k in combined for k in ["dark sci-fi", "hyper-realistic", "space", "cosmic", "black hole", "antarctica", "submarine"]):
+        modifiers = (
+            "hyper-realistic cinematic photograph, shot on ARRI Alexa 65, anamorphic lens, "
+            "volumetric atmospheric lighting, Unreal Engine 5 render, ray tracing, 8k resolution, "
+            "photorealistic textures, award-winning cinematography, vertical 9:16 frame"
+        )
+        return f"{sanitized}, {modifiers}"
+    else:
+        modifiers = (
+            "3D Pixar animated film style, Disney character design, Unreal Engine 5 render, "
+            "8k resolution, volumetric dramatic lighting, subsurface scattering, "
+            "ray tracing reflections, shallow depth of field, masterpiece"
+        )
+        return f"{sanitized}, {modifiers}"
 
 
 def standardize_to_1080x1920(im: Image.Image) -> Image.Image:
@@ -351,6 +385,7 @@ def generate_flux_hf_space(prompt: str, output_path: Path, seed: int = 42) -> bo
                     break
                 else:
                     print(f"[IMAGE-ENGINE] [TIER-2 Notice] {space_name} ({mode}) note: {str(e)[:90]}")
+    HF_SPACES_ACTIVE = False
     return False
 
 
@@ -396,12 +431,12 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
             with _SD_TURBO_LOCK:
                 return pipe(
                     prompt=clean_p[:280],
-                    num_inference_steps=2,
+                    num_inference_steps=1,
                     guidance_scale=0.0,
                     generator=generator,
                 ).images[0]
 
-        image = call_with_timeout(_run_diffusion, timeout_sec=60)
+        image = call_with_timeout(_run_diffusion, timeout_sec=120)
         im_std = standardize_to_1080x1920(image.convert("RGB"))
         im_std.save(output_path, "JPEG", quality=95)
 
@@ -433,8 +468,10 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
 
     for attempt in range(1, 3):
         try:
-            clean_p = urllib.parse.quote(prompt[:280])
-            url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=576&height=1024&nologo=true&seed={seed}"
+            p_len = 280 if attempt == 1 else 180
+            clean_p = urllib.parse.quote(prompt[:p_len])
+            model_param = "&model=flux" if attempt == 1 else ""
+            url = f"https://image.pollinations.ai/prompt/{clean_p}?width=576&height=1024{model_param}&seed={seed}"
             print(f"[IMAGE-ENGINE] [TIER-1: Pollinations FLUX] Fetching (attempt {attempt}/2): '{prompt[:45]}...'")
 
             headers = {
@@ -464,10 +501,10 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
     return False
 
 
-def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: int = 1) -> Path:
+def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: int = 1, style_hint: str = "") -> Path:
     """Generates an authentic 9:16 vertical 1080x1920 visual with strict multi-tier AI model failover."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    enriched = enrich_prompt(prompt)
+    enriched = enrich_prompt(prompt, style_hint=style_hint)
 
     # 1. Tier 1: Pollinations Clean FLUX Engine (Fast, authentic FLUX cloud generator)
     if generate_pollinations_clean(enriched, output_path, seed=seed):
@@ -507,13 +544,27 @@ def _process_single_scene_image(beat: dict, episode_num: int) -> dict:
     b_num = beat.get("scene_number") or beat.get("beat_number", 1)
     out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_scene_{b_num}.jpg"
     prompt = beat.get("video_prompt") or beat.get("visual_prompt") or f"{beat.get('title', 'Action')}, {beat.get('narration', '')}"
+    style_hint = beat.get("style", "")
     seed = int(episode_num * 100 + b_num * 17)
+    beat_title = beat.get("title", f"Scene #{b_num}")
+
+    # Check if a valid, certified visual asset already exists on disk
+    if out_file.exists() and out_file.stat().st_size > 25_000:
+        try:
+            metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
+            print(
+                f"[AUDITOR] [GATE-2] Scene #{b_num} Image Reused & Certified: {out_file.name} "
+                f"(Quality: {metrics['quality']}, Clarity: {metrics['clarity']})"
+            )
+            beat["image_url"] = f"images/{out_file.name}"
+            return beat
+        except Exception:
+            pass
 
     beat_certified = False
-    beat_title = beat.get("title", f"Scene #{b_num}")
     for attempt in range(1, 4):
         try:
-            generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
+            generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num, style_hint=style_hint)
             metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
 
             print(

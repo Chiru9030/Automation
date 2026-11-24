@@ -182,6 +182,7 @@ def compile_kinetic_subtitles(
     episode_num: int = 1,
     preset_id: str | None = None,
     top_hook_banner: str | None = None,
+    riddle_options: list[str] | None = None,
 ) -> Path:
     """Compiles exact frame-accurate ASS subtitles with persistent top banner and lower-third kinetic karaoke."""
     preset = get_typography_preset(episode_num=episode_num, preset_id=preset_id)
@@ -192,6 +193,7 @@ def compile_kinetic_subtitles(
         top_hook_banner = beats[0].get("top_hook_banner") or beats[0].get("banner") or ""
 
     banner_style = "Style: TopHookBanner,Arial,42,&H00FFFFFF,&H00FFFFFF,&H00000000,&HE6121215,-1,0,0,0,100,100,1,0,3,18,0,8,45,45,90,1\n"
+    riddle_style = "Style: RiddleCard,Arial Black,42,&H00FFFFFF,&H00FFFFFF,&H00000000,&HCC101018,-1,0,0,0,100,100,2,0,3,16,0,5,30,30,0,1\n"
 
     header = f"""[Script Info]
 Title: Kinetic Viral Story Subtitles
@@ -204,7 +206,7 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-{banner_style}Style: KineticSub,{preset['font']},{preset['size']},{preset['primary']},{preset['secondary']},{preset['outline_color'] if 'outline_color' in preset else '&H00000000&'},&H90000000,-1,0,0,0,100,100,2,0,1,{preset['outline']},{preset['shadow']},2,60,60,420,1
+{banner_style}{riddle_style}Style: KineticSub,{preset['font']},{preset['size']},{preset['primary']},{preset['secondary']},{preset['outline_color'] if 'outline_color' in preset else '&H00000000&'},&H90000000,-1,0,0,0,100,100,2,0,1,{preset['outline']},{preset['shadow']},2,60,60,420,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -256,6 +258,23 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 events.append(f"Dialogue: 2,{format_ass_time(last_w_end)},{format_ass_time(chunk_end)},KineticSub,,0,0,0,,{plain_text}")
 
         running_time += beat_dur
+
+    # Interactive Riddle Options Card (Injected during the final 4-6 seconds)
+    if not riddle_options and beats:
+        riddle_options = beats[0].get("riddle_options")
+
+    if riddle_options and len(riddle_options) >= 4:
+        import re
+        clean_opts = [re.sub(r"[^\x00-\x7F]+", "", str(o)).strip() for o in riddle_options]
+        r_start = max(0.0, total_dur_sec - 5.5)
+        opt_text = (
+            rf"{{\an5\pos(540,1180)\bord5\shad0\c&H0000FFFF&\b1\fs44}}"
+            rf"[ A: {clean_opts[0]} ]      [ B: {clean_opts[1]} ]\N\N"
+            rf"{{\c&H0000FFFF&\b1\fs44}}[ C: {clean_opts[2]} ]      [ D: {clean_opts[3]} ]\N\N"
+            rf"{{\fs32\c&HFFFFFF&\b1}}COMMENT YOUR ANSWER BELOW!"
+        )
+        events.append(f"Dialogue: 3,{format_ass_time(r_start)},{format_ass_time(total_dur_sec)},RiddleCard,,0,0,0,,{opt_text}")
+        print(f"  🎯 [Riddle Overlay] Injected interactive options card: {clean_opts} ({r_start:.1f}s -> {total_dur_sec:.1f}s)")
 
     output_ass_path.parent.mkdir(parents=True, exist_ok=True)
     output_ass_path.write_text(header + "\n".join(events), encoding="utf-8")

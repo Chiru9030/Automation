@@ -207,12 +207,35 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             print(f"\n💡 [Custom User Topic Mode] Generating video for: '{custom_override.strip()}'")
             history = load_history()
             ep_num = history.get("episode_count", 0) + 1
+            c_low = custom_override.lower()
+            if any(k in c_low for k in ["nakli", "note", "golu", "samosa", "riddle", "paheli", "puzzle", "nuksaan"]):
+                cat = "Viral Paheli / Riddle Skit"
+                style = "Flat 2D vector cartoon, cute Indian shopkeeper, chibi art style, storybook aesthetic"
+                banner = "GOLU SAMOSA CORNER: KUL NUKSAAN KITNA HUA?"
+                r_opts = ["₹200", "₹500", "₹800", "₹1000"]
+            elif any(k in c_low for k in ["jungle", "lion", "don", "king", "fable", "wild", "animal"]):
+                cat = "Animated Cartoon Fable"
+                style = "Flat 2D vector illustration, cute lion king on golden throne, jungle foliage, storybook art"
+                banner = "JUNGLE KA ASLI DON: WHO RULES THE WILD?"
+                r_opts = None
+            elif any(k in c_low for k in ["brand", "reels", "comment", "friend", "skit", "comedy"]):
+                cat = "Viral Skit / Relatable Comedy"
+                style = "3D Pixar animation comedy Unreal Engine 5"
+                banner = custom_override.strip()[:55]
+                r_opts = None
+            else:
+                cat = "Mind-Blowing Stories & Science"
+                style = "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k"
+                banner = custom_override.strip()[:55]
+                r_opts = None
+
             topic_data = {
                 "topic": custom_override.strip(),
-                "top_hook_banner": custom_override.strip()[:55],
+                "top_hook_banner": banner,
                 "hook_premise": f"The hilarious and shocking reality of {custom_override.strip()}",
-                "category": "Viral Skit / Relatable Comedy" if any(k in custom_override.lower() for k in ["brand", "reels", "comment", "friend", "skit", "comedy"]) else "Mind-Blowing Stories & Science",
-                "style": "3D Pixar animation comedy Unreal Engine 5",
+                "category": cat,
+                "style": style,
+                "riddle_options": r_opts,
                 "episode": ep_num,
             }
         else:
@@ -309,7 +332,9 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         active_preset = get_typography_preset(episode_num=ep_num)
         RUN_TRACKER.set_typography(f"{active_preset['name']} ({active_preset['font']})")
         banner = script_data.get("top_hook_banner") or chapter_title[:55]
-        compile_kinetic_subtitles(beats, ass_path, episode_num=ep_num, top_hook_banner=banner)
+        r_opts = script_data.get("riddle_options") or topic_data.get("riddle_options")
+        script_data["riddle_options"] = r_opts
+        compile_kinetic_subtitles(beats, ass_path, episode_num=ep_num, top_hook_banner=banner, riddle_options=r_opts)
         from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
         actual_total_dur = sum(b.get("duration_in_frames", 360) for b in beats) / 30.0
         append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=actual_total_dur, episode_num=ep_num)
