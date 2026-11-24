@@ -35,20 +35,18 @@ def call_with_timeout(func, args=(), kwargs=None, timeout_sec=15):
 # Extensive Curated Pool of High-CTR "What If" & Shocking Curiosity Topics
 VIRAL_TOPIC_POOL = [
     {
-        "topic": "Ek nakli note ne Golu ke papa ka poora din bigaad diya",
-        "top_hook_banner": "GOLU SAMOSA CORNER: KUL NUKSAAN KITNA HUA?",
-        "hook_premise": "A fake 500-rupee note at Golu Samosa Corner started a wild chain of transactions. How much did the shopkeeper actually lose?",
-        "category": "Viral Paheli / Riddle Skit",
-        "style": "Flat 2D vector cartoon, cute Indian shopkeeper, chibi art style, storybook aesthetic",
-        "riddle_options": ["₹200", "₹500", "₹800", "₹1000"],
+        "topic": "What if you could freeze time for 24 hours?",
+        "top_hook_banner": "WHAT IF YOU COULD FREEZE TIME FOR 24 HOURS?",
+        "hook_premise": "If you could pause all time on Earth, light photons would freeze in place, instantly blinding you, and frozen oxygen molecules would suffocate your lungs in sixty seconds.",
+        "category": "Dark Sci-Fi / Power Fantasy Paradox",
+        "style": "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k",
     },
     {
-        "topic": "Jungle Ka Asli Don: Who rules the wild?",
-        "top_hook_banner": "JUNGLE KA ASLI DON: WHO RULES THE WILD?",
-        "hook_premise": "The lion king sits on his throne looking completely unimpressed as every jungle animal claims to be the true boss.",
-        "category": "Animated Cartoon Fable",
-        "style": "Flat 2D vector illustration, cute lion king on golden throne, jungle foliage, storybook art",
-        "riddle_options": ["Sher 🦁", "Haathi 🐘", "Bhalu 🐻", "Bandar 🐒"],
+        "topic": "What if gravity vanished for just 60 seconds?",
+        "top_hook_banner": "IF GRAVITY TURNED OFF FOR 60 SECONDS...",
+        "hook_premise": "If gravity turned off for one minute, oceans, skyscrapers, and billions of people would violently catapult into outer space at one thousand miles an hour.",
+        "category": "Dark Sci-Fi / Power Fantasy Paradox",
+        "style": "Hyper-realistic CGI dark sci-fi Unreal Engine 5 render, 8k",
     },
     {
         "topic": "Brands commenting under reels like they’re our friends",

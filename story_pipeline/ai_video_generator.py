@@ -542,123 +542,55 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path, beat_number:
     duration_sec = dur_frames / fps
     b_num = scene.get("beat_number") or beat_number
 
-    if dur_frames >= 180:
-        # 3 Rapid Narrative-Aligned Camera Cuts
-        d1 = max(60, int(dur_frames * 0.35))
-        d2 = max(60, int(dur_frames * 0.35))
-        d3 = dur_frames - d1 - d2
-
-        if b_num == 1:
-            # Beat 1: The Hook (Rapid Center Push-In with micro-jitter + tail whip acceleration)
-            f_s0 = f"zoompan=z='1.05+0.22*(on/{d1})':x='iw/2-(iw/zoom/2)+sin(on/15)*10':y='ih/2-(ih/zoom/2)+cos(on/18)*8':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.40+0.12*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-            f_s2 = f"zoompan=z='1.32+0.16*(on/{d3})':x='iw/2-(iw/zoom/2)+sin(on/10)*8':y='ih/2-(ih/zoom/2)':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2]"
-        elif b_num == 2:
-            # Beat 2: The Scientific Mechanism (Cinematic Lateral Pan Left to Right + Macro Angle)
-            f_s0 = f"zoompan=z='1.15+0.10*(on/{d1})':x='(iw-ow)*(on/{d1})':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.36+0.12*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)+sin(on/20)*10':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-            f_s2 = f"zoompan=z='1.20+0.08*(on/{d3})':x='(iw-ow)*(0.5+0.5*on/{d3})':y='ih/2-(ih/zoom/2)':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2]"
-        elif b_num == 3:
-            # Beat 3: The Escalation / Deep Dive (Vertical Bottom-Up Tilt Reveal + Tension Push)
-            f_s0 = f"zoompan=z='1.18+0.12*(on/{d1})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{d1})':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.38+0.14*(on/{d2})':x='iw/2-(iw/zoom/2)+cos(on/16)*10':y='(ih-oh)*0.3':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-            f_s2 = f"zoompan=z='1.24+0.10*(on/{d3})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(0.4-0.4*on/{d3})':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2]"
-        elif b_num == 4:
-            # Beat 4: The Climax Revelation (High-Energy Dynamic Pull-Back Zoom Out + Diagonal Drift)
-            f_s0 = f"zoompan=z='1.38-0.22*(on/{d1})':x='(iw-ow)*(1-on/{d1})':y='(ih-oh)*(on/{d1})':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.42+0.14*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)+sin(on/12)*12':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-            f_s2 = f"zoompan=z='1.28-0.12*(on/{d3})':x='(iw-ow)*(on/{d3})':y='(ih-oh)*(1-on/{d3})':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2]"
-        else:
-            # Beat 5: The Loop Paradox (Re-centering Convergence targeting Beat 1 entrance framing)
-            f_s0 = f"zoompan=z='1.20-0.12*(on/{d1})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.26+0.08*(on/{d2})':x='iw/2-(iw/zoom/2)+sin(on/22)*8':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-            f_s2 = f"zoompan=z='1.14-0.09*(on/{d3})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d3}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d3},setpts=PTS-STARTPTS[v2]"
-
-        filter_complex = (
-            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,split=3[s0][s1][s2];"
-            f"[s0]{f_s0};"
-            f"[s1]{f_s1};"
-            f"[s2]{f_s2};"
-            f"[v0][v1][v2]concat=n=3:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
+    # Cinema-Grade Continuous Smooth Camera Motion (Zero internal jump-cuts - fluid cinematic pan/zoom)
+    mod_beat = ((b_num - 1) % 5) + 1
+    if mod_beat == 1:
+        # Scene 1: Smooth continuous dramatic push-in with subtle micro-scale acceleration
+        zoom_expr = (
+            f"zoompan=z='1.05+0.16*(on/{dur_frames})':"
+            f"x='iw/2-(iw/zoom/2)':"
+            f"y='ih/2-(ih/zoom/2)':"
+            f"d={dur_frames}:s=1080x1920:fps={fps}"
         )
-    elif dur_frames >= 100:
-        # 2 Rapid Narrative-Aligned Camera Cuts (Establishing -> Punch-In)
-        d1 = int(dur_frames * 0.5)
-        d2 = dur_frames - d1
-
-        if b_num == 1:
-            f_s0 = f"zoompan=z='1.06+0.20*(on/{d1})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.40+0.15*(on/{d2})':x='(iw-ow)*(on/{d2})':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-        elif b_num == 2:
-            f_s0 = f"zoompan=z='1.15+0.10*(on/{d1})':x='(iw-ow)*(on/{d1})':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.35+0.12*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-        elif b_num == 3:
-            f_s0 = f"zoompan=z='1.18+0.12*(on/{d1})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{d1})':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.36+0.14*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-        elif b_num == 4:
-            f_s0 = f"zoompan=z='1.38-0.20*(on/{d1})':x='(iw-ow)*(1-on/{d1})':y='(ih-oh)*(on/{d1})':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.42+0.14*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-        else:
-            f_s0 = f"zoompan=z='1.20-0.12*(on/{d1})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d1}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d1},setpts=PTS-STARTPTS[v0]"
-            f_s1 = f"zoompan=z='1.14-0.09*(on/{d2})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={d2}:s=1080x1920:fps={fps},trim=start_frame=0:end_frame={d2},setpts=PTS-STARTPTS[v1]"
-
-        filter_complex = (
-            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,split=2[s0][s1];"
-            f"[s0]{f_s0};"
-            f"[s1]{f_s1};"
-            f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
+    elif mod_beat == 2:
+        # Scene 2: Smooth continuous lateral pan from left to right across the environment
+        zoom_expr = (
+            f"zoompan=z='1.15':"
+            f"x='(iw-ow)*(on/{dur_frames})':"
+            f"y='ih/2-(ih/zoom/2)':"
+            f"d={dur_frames}:s=1080x1920:fps={fps}"
+        )
+    elif mod_beat == 3:
+        # Scene 3: Smooth continuous vertical crane tilt upward revealing scale
+        zoom_expr = (
+            f"zoompan=z='1.15':"
+            f"x='iw/2-(iw/zoom/2)':"
+            f"y='(ih-oh)*(1-on/{dur_frames})':"
+            f"d={dur_frames}:s=1080x1920:fps={fps}"
+        )
+    elif mod_beat == 4:
+        # Scene 4: Smooth continuous dramatic pull-back reveal
+        zoom_expr = (
+            f"zoompan=z='1.24-0.14*(on/{dur_frames})':"
+            f"x='iw/2-(iw/zoom/2)':"
+            f"y='ih/2-(ih/zoom/2)':"
+            f"d={dur_frames}:s=1080x1920:fps={fps}"
         )
     else:
-        # High-Energy Puppet Kinematics & Snap Punch-ins for rapid-cut scenes (1.5 - 2.8s)
-        # Adds organic breathing bounce, micro-sway, and high-impact snap zooms matching cartoon skits
-        mod_beat = ((b_num - 1) % 5) + 1
-        if mod_beat == 1:
-            # Beat 1 / Hook: 8-frame Snap Punch-in + High-Energy Vertical Puppet Breathing Bounce
-            zoom_expr = (
-                f"zoompan=z='if(lt(on,8),1.05+0.18*(on/8),1.23+0.04*(on/{dur_frames}))':"
-                f"x='iw/2-(iw/zoom/2)+cos(on/5)*8':"
-                f"y='ih/2-(ih/zoom/2)+sin(on/3)*12':"
-                f"d={dur_frames}:s=1080x1920:fps={fps}"
-            )
-        elif mod_beat == 2:
-            # Beat 2 / Dialogue: Smooth Tracking Pan with Organic Puppet Bobbing
-            zoom_expr = (
-                f"zoompan=z='1.16+0.08*(on/{dur_frames})':"
-                f"x='(iw-ow)*(on/{dur_frames})':"
-                f"y='ih/2-(ih/zoom/2)+sin(on/4)*10':"
-                f"d={dur_frames}:s=1080x1920:fps={fps}"
-            )
-        elif mod_beat == 3:
-            # Beat 3 / Shock & Twist: High-Tension Comic Shock Micro-Tremor
-            zoom_expr = (
-                f"zoompan=z='1.28+0.05*(on/{dur_frames})':"
-                f"x='iw/2-(iw/zoom/2)+sin(on)*5':"
-                f"y='ih/2-(ih/zoom/2)+cos(on*1.3)*6':"
-                f"d={dur_frames}:s=1080x1920:fps={fps}"
-            )
-        elif mod_beat == 4:
-            # Beat 4 / Revelation: Dynamic Climax Pull-Back with Spring Deceleration
-            zoom_expr = (
-                f"zoompan=z='1.28-0.18*(on/{dur_frames})':"
-                f"x='iw/2-(iw/zoom/2)+cos(on/6)*6':"
-                f"y='(ih-oh)*(0.2+0.6*on/{dur_frames})+sin(on/4)*8':"
-                f"d={dur_frames}:s=1080x1920:fps={fps}"
-            )
-        else:
-            # Beat 5 / Riddle CTA: Centered Convergence with Rhythmic Breathing Pulse
-            zoom_expr = (
-                f"zoompan=z='1.18-0.08*(on/{dur_frames})':"
-                f"x='iw/2-(iw/zoom/2)+sin(on/5)*6':"
-                f"y='ih/2-(ih/zoom/2)+sin(on/3)*10':"
-                f"d={dur_frames}:s=1080x1920:fps={fps}"
-            )
-
-        filter_complex = (
-            f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
-            f"{zoom_expr},"
-            f"trim=start_frame=0:end_frame={dur_frames},setpts=PTS-STARTPTS,"
-            f"eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
+        # Scene 5: Smooth continuous atmospheric drift
+        zoom_expr = (
+            f"zoompan=z='1.08+0.10*(on/{dur_frames})':"
+            f"x='iw/2-(iw/zoom/2)':"
+            f"y='ih/2-(ih/zoom/2)':"
+            f"d={dur_frames}:s=1080x1920:fps={fps}"
         )
+
+    filter_complex = (
+        f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"
+        f"{zoom_expr},"
+        f"trim=start_frame=0:end_frame={dur_frames},setpts=PTS-STARTPTS,"
+        f"eq=saturation=1.15:contrast=1.10:brightness=0.01,vignette=PI/5[outv]"
+    )
 
     cmd = [
         "ffmpeg", "-y",

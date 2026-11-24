@@ -1,166 +1,235 @@
 {
-  "episode_title": "JUNGLE KA ASLI DON: WHO RULE",
-  "top_hook_banner": "JUNGLE KA ASLI DON: WHO RULES THE WILD?",
-  "hook_headline": "WHAT HAPPENS NEXT?!",
-  "character_dna": "Cute unimpressed 2D cartoon lion king wearing a golden crown sitting on an ornate wooden throne, thick clean black outlines, storybook aesthetic, vibrant flat colors, deadpan comic gaze",
-  "visual_anchor": "Lush vibrant 2D cartoon jungle foliage with sunburst background rays and floating green leaves, children's storybook flat vector illustration, 9:16 vertical",
-  "riddle_options": [
-    "Sher \ud83e\udd81",
-    "Haathi \ud83d\udc18",
-    "Bhalu \ud83d\udc3b",
-    "Bandar \ud83d\udc12"
-  ],
-  "total_words_count": 123,
+  "episode_title": "WHAT IF YOU COULD FREEZE TIM",
+  "top_hook_banner": "WHAT IF YOU COULD FREEZE TIME FOR 24 HOURS?",
+  "hook_headline": "WHAT IF YOU COULD FR",
+  "character_dna": "A young man in a dark charcoal streetwear hoodie with modern sleek black sunglasses and wavy dark hair",
+  "visual_anchor": "Frozen modern metropolis under deep midnight navy and glowing cyan volumetric rim lighting, suspended raindrops and shattered giant Roman-numeral clock in the sky",
+  "total_words_count": 90,
+  "loop_lead_in": "The colossal temporal clock in the sky shatte",
   "scenes": [
     {
       "scene_number": 1,
-      "narration": "Kya jungle ka asli don sher hi hai? Dekho!",
+      "narration": "What if you woke up tomorrow with the power to freeze time for 24 hours?",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, cute unimpressed cartoon lion king wearing a golden crown sitting on an ornate throne in lush jungle, 10mm ultra-wide lens, dynamic push-in shot, animals arguing in background, thick clean black outlines, storybook aesthetic, vibrant flat colors, 9:16 vertical",
-      "visual_prompt": "Flat 2D vector cartoon, cute lion king with crown on throne looking unimpressed, jungle foliage, thick black outlines, 9:16",
+      "camera_motion": "smooth-zoom-in",
+      "video_prompt": "24mm anamorphic wide angle shot, low-angle perspective, young man in dark charcoal hoodie stepping forward through a frozen city avenue, hand outstretched in extreme foreshortening, suspended raindrops floating in mid-air, levitating yellow cabs, shattered glowing cyan clock in sky, Unreal Engine 5 render, ray-traced volumetric lighting, 8k vertical 9:16",
+      "visual_prompt": "24mm anamorphic wide angle shot of young man in dark hoodie stepping through frozen city with floating raindrops and glowing clock, 8k",
       "beat_number": 1,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #1",
-      "image_url": "images/ep_39_scene_1.jpg",
+      "image_url": "images/ep_40_scene_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 4.85,
-      "duration_in_frames": 143,
+      "audio_duration_sec": 4.94,
+      "duration_in_frames": 156,
       "words": [
         {
-          "word": "Kya",
-          "start_sec": 0.099,
-          "end_sec": 0.33183300000000004,
+          "word": "What",
+          "start_sec": 0.1,
+          "end_sec": 0.30000000000000004,
           "start_frame": 3,
-          "end_frame": 10
+          "end_frame": 9
         },
         {
-          "word": "jungle",
-          "start_sec": 0.393125,
-          "end_sec": 0.71175,
-          "start_frame": 12,
-          "end_frame": 21
+          "word": "if",
+          "start_sec": 0.3125,
+          "end_sec": 0.4125,
+          "start_frame": 9,
+          "end_frame": 12
         },
         {
-          "word": "ka",
-          "start_sec": 0.773041,
-          "end_sec": 1.091666,
-          "start_frame": 23,
-          "end_frame": 33
+          "word": "you",
+          "start_sec": 0.425,
+          "end_sec": 0.5375,
+          "start_frame": 13,
+          "end_frame": 16
         },
         {
-          "word": "asli",
-          "start_sec": 1.140666,
-          "end_sec": 1.459291,
-          "start_frame": 34,
-          "end_frame": 44
+          "word": "woke",
+          "start_sec": 0.55,
+          "end_sec": 0.775,
+          "start_frame": 16,
+          "end_frame": 23
         },
         {
-          "word": "don",
-          "start_sec": 1.508333,
-          "end_sec": 1.716666,
-          "start_frame": 45,
-          "end_frame": 51
+          "word": "up",
+          "start_sec": 0.7875,
+          "end_sec": 0.9375,
+          "start_frame": 24,
+          "end_frame": 28
         },
         {
-          "word": "sher",
-          "start_sec": 1.741166,
-          "end_sec": 1.986249,
-          "start_frame": 52,
-          "end_frame": 60
+          "word": "tomorrow",
+          "start_sec": 0.95,
+          "end_sec": 1.4375,
+          "start_frame": 28,
+          "end_frame": 43
         },
         {
-          "word": "hi",
-          "start_sec": 2.023041,
-          "end_sec": 2.231374,
-          "start_frame": 61,
-          "end_frame": 67
+          "word": "with",
+          "start_sec": 1.45,
+          "end_sec": 1.575,
+          "start_frame": 44,
+          "end_frame": 47
         },
         {
-          "word": "hai",
-          "start_sec": 2.268125,
-          "end_sec": 2.53775,
-          "start_frame": 68,
+          "word": "the",
+          "start_sec": 1.5875,
+          "end_sec": 1.6749999999999998,
+          "start_frame": 48,
+          "end_frame": 50
+        },
+        {
+          "word": "power",
+          "start_sec": 1.6875,
+          "end_sec": 2.0625,
+          "start_frame": 51,
+          "end_frame": 62
+        },
+        {
+          "word": "to",
+          "start_sec": 2.075,
+          "end_sec": 2.1750000000000003,
+          "start_frame": 62,
+          "end_frame": 65
+        },
+        {
+          "word": "freeze",
+          "start_sec": 2.1875,
+          "end_sec": 2.55,
+          "start_frame": 66,
           "end_frame": 76
         },
         {
-          "word": "Dekho",
-          "start_sec": 3.492666,
-          "end_sec": 3.848041,
-          "start_frame": 105,
-          "end_frame": 115
+          "word": "time",
+          "start_sec": 2.5625,
+          "end_sec": 2.875,
+          "start_frame": 77,
+          "end_frame": 86
+        },
+        {
+          "word": "for",
+          "start_sec": 2.8875,
+          "end_sec": 3.0125,
+          "start_frame": 87,
+          "end_frame": 90
+        },
+        {
+          "word": "24 hours",
+          "start_sec": 3.025,
+          "end_sec": 4.0625,
+          "start_frame": 91,
+          "end_frame": 122
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "KYA JUNGLE KA",
+          "text": "WHAT IF YOU",
           "start_frame": 3,
-          "end_frame": 34,
+          "end_frame": 16,
           "words": [
             {
-              "word": "KYA",
+              "word": "WHAT",
               "start_frame": 3,
-              "end_frame": 10
+              "end_frame": 9
             },
             {
-              "word": "JUNGLE",
-              "start_frame": 12,
-              "end_frame": 21
+              "word": "IF",
+              "start_frame": 9,
+              "end_frame": 12
             },
             {
-              "word": "KA",
-              "start_frame": 23,
-              "end_frame": 33
+              "word": "YOU",
+              "start_frame": 13,
+              "end_frame": 16
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "ASLI DON SHER",
-          "start_frame": 34,
-          "end_frame": 61,
+          "text": "WOKE UP TOMORROW",
+          "start_frame": 16,
+          "end_frame": 44,
           "words": [
             {
-              "word": "ASLI",
-              "start_frame": 34,
-              "end_frame": 44
+              "word": "WOKE",
+              "start_frame": 16,
+              "end_frame": 23
             },
             {
-              "word": "DON",
-              "start_frame": 45,
-              "end_frame": 51
+              "word": "UP",
+              "start_frame": 24,
+              "end_frame": 28
             },
             {
-              "word": "SHER",
-              "start_frame": 52,
-              "end_frame": 60
+              "word": "TOMORROW",
+              "start_frame": 28,
+              "end_frame": 43
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "HI HAI DEKHO",
-          "start_frame": 61,
-          "end_frame": 115,
+          "text": "WITH THE POWER",
+          "start_frame": 44,
+          "end_frame": 62,
           "words": [
             {
-              "word": "HI",
-              "start_frame": 61,
-              "end_frame": 67
+              "word": "WITH",
+              "start_frame": 44,
+              "end_frame": 47
             },
             {
-              "word": "HAI",
-              "start_frame": 68,
+              "word": "THE",
+              "start_frame": 48,
+              "end_frame": 50
+            },
+            {
+              "word": "POWER",
+              "start_frame": 51,
+              "end_frame": 62
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "TO FREEZE TIME",
+          "start_frame": 62,
+          "end_frame": 87,
+          "words": [
+            {
+              "word": "TO",
+              "start_frame": 62,
+              "end_frame": 65
+            },
+            {
+              "word": "FREEZE",
+              "start_frame": 66,
               "end_frame": 76
             },
             {
-              "word": "DEKHO",
-              "start_frame": 105,
-              "end_frame": 115
+              "word": "TIME",
+              "start_frame": 77,
+              "end_frame": 86
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "FOR 24 HOURS",
+          "start_frame": 87,
+          "end_frame": 122,
+          "words": [
+            {
+              "word": "FOR",
+              "start_frame": 87,
+              "end_frame": 90
+            },
+            {
+              "word": "24 HOURS",
+              "start_frame": 91,
+              "end_frame": 122
             }
           ]
         }
@@ -168,153 +237,283 @@
     },
     {
       "scene_number": 2,
-      "narration": "Sher apne takht par baitha bore ho raha tha.",
+      "narration": "At first, it feels like the ultimate playground: floating raindrops, frozen traffic, and complete silence in the city.",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, deadpan cartoon lion king resting chin on paw looking sideways with bored half-open eyes, 24mm tracking pan, golden crown tilted, sunburst background rays, thick black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon lion king resting chin on paw bored on throne, 9:16",
+      "video_prompt": "10mm ultra-wide lens tracking pan, young man walking calmly past frozen pedestrians stuck mid-stride on urban sidewalk, a cup of coffee suspended mid-spill with floating liquid droplets, dramatic depth, Unreal Engine 5 cinematic render, glowing blue rim light, 8k vertical 9:16",
+      "visual_prompt": "10mm ultra-wide lens tracking pan of young man walking past frozen pedestrians with floating coffee droplets, 8k",
       "beat_number": 2,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #2",
-      "image_url": "images/ep_39_scene_2.jpg",
+      "image_url": "images/ep_40_scene_2.jpg",
       "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 3.5,
-      "duration_in_frames": 104,
+      "audio_duration_sec": 8.69,
+      "duration_in_frames": 268,
       "words": [
         {
-          "word": "Sher",
-          "start_sec": 0.1,
-          "end_sec": 0.4125,
+          "word": "At",
+          "start_sec": 0.088375,
+          "end_sec": 0.202,
           "start_frame": 3,
-          "end_frame": 12
+          "end_frame": 6
         },
         {
-          "word": "apne",
-          "start_sec": 0.425,
-          "end_sec": 0.725,
-          "start_frame": 13,
-          "end_frame": 22
+          "word": "first",
+          "start_sec": 0.214666,
+          "end_sec": 0.707082,
+          "start_frame": 6,
+          "end_frame": 21
         },
         {
-          "word": "takht",
-          "start_sec": 0.75,
-          "end_sec": 1.0625,
-          "start_frame": 22,
-          "end_frame": 32
+          "word": "it",
+          "start_sec": 1.060625,
+          "end_sec": 1.149,
+          "start_frame": 32,
+          "end_frame": 34
         },
         {
-          "word": "par",
-          "start_sec": 1.0875,
-          "end_sec": 1.3125,
-          "start_frame": 33,
-          "end_frame": 39
+          "word": "feels",
+          "start_sec": 1.161625,
+          "end_sec": 1.540416,
+          "start_frame": 35,
+          "end_frame": 46
         },
         {
-          "word": "baitha",
-          "start_sec": 1.325,
-          "end_sec": 1.65,
-          "start_frame": 40,
-          "end_frame": 50
+          "word": "like",
+          "start_sec": 1.553041,
+          "end_sec": 1.691916,
+          "start_frame": 47,
+          "end_frame": 51
         },
         {
-          "word": "bore",
-          "start_sec": 1.675,
-          "end_sec": 1.925,
-          "start_frame": 50,
-          "end_frame": 58
+          "word": "the",
+          "start_sec": 1.704541,
+          "end_sec": 1.805541,
+          "start_frame": 51,
+          "end_frame": 54
         },
         {
-          "word": "ho",
-          "start_sec": 1.95,
-          "end_sec": 2.1125,
-          "start_frame": 58,
-          "end_frame": 63
+          "word": "ultimate",
+          "start_sec": 1.868666,
+          "end_sec": 2.285332,
+          "start_frame": 56,
+          "end_frame": 69
         },
         {
-          "word": "raha",
-          "start_sec": 2.1375,
-          "end_sec": 2.4000000000000004,
-          "start_frame": 64,
-          "end_frame": 72
+          "word": "playground",
+          "start_sec": 2.298,
+          "end_sec": 2.878791,
+          "start_frame": 69,
+          "end_frame": 86
         },
         {
-          "word": "tha",
-          "start_sec": 2.4125,
-          "end_sec": 2.6125000000000003,
-          "start_frame": 72,
-          "end_frame": 78
+          "word": "floating",
+          "start_sec": 3.649,
+          "end_sec": 4.078291,
+          "start_frame": 109,
+          "end_frame": 122
+        },
+        {
+          "word": "raindrops",
+          "start_sec": 4.090916,
+          "end_sec": 4.747499,
+          "start_frame": 123,
+          "end_frame": 142
+        },
+        {
+          "word": "frozen",
+          "start_sec": 5.189375,
+          "end_sec": 5.568166,
+          "start_frame": 156,
+          "end_frame": 167
+        },
+        {
+          "word": "traffic",
+          "start_sec": 5.580791,
+          "end_sec": 6.098457,
+          "start_frame": 167,
+          "end_frame": 183
+        },
+        {
+          "word": "and",
+          "start_sec": 6.603541,
+          "end_sec": 6.679291,
+          "start_frame": 198,
+          "end_frame": 200
+        },
+        {
+          "word": "complete",
+          "start_sec": 6.691916,
+          "end_sec": 7.133832,
+          "start_frame": 201,
+          "end_frame": 214
+        },
+        {
+          "word": "silence",
+          "start_sec": 7.146458,
+          "end_sec": 7.714624,
+          "start_frame": 214,
+          "end_frame": 231
+        },
+        {
+          "word": "in",
+          "start_sec": 7.727291,
+          "end_sec": 7.803041,
+          "start_frame": 232,
+          "end_frame": 234
+        },
+        {
+          "word": "the",
+          "start_sec": 7.815666,
+          "end_sec": 7.891416,
+          "start_frame": 234,
+          "end_frame": 237
+        },
+        {
+          "word": "city",
+          "start_sec": 7.904041,
+          "end_sec": 8.308082,
+          "start_frame": 237,
+          "end_frame": 249
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "SHER APNE TAKHT",
+          "text": "AT FIRST IT",
           "start_frame": 3,
-          "end_frame": 33,
+          "end_frame": 35,
           "words": [
             {
-              "word": "SHER",
+              "word": "AT",
               "start_frame": 3,
-              "end_frame": 12
+              "end_frame": 6
             },
             {
-              "word": "APNE",
-              "start_frame": 13,
-              "end_frame": 22
+              "word": "FIRST",
+              "start_frame": 6,
+              "end_frame": 21
             },
             {
-              "word": "TAKHT",
-              "start_frame": 22,
-              "end_frame": 32
+              "word": "IT",
+              "start_frame": 32,
+              "end_frame": 34
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "PAR BAITHA BORE",
-          "start_frame": 33,
-          "end_frame": 58,
+          "text": "FEELS LIKE THE",
+          "start_frame": 35,
+          "end_frame": 56,
           "words": [
             {
-              "word": "PAR",
-              "start_frame": 33,
-              "end_frame": 39
+              "word": "FEELS",
+              "start_frame": 35,
+              "end_frame": 46
             },
             {
-              "word": "BAITHA",
-              "start_frame": 40,
-              "end_frame": 50
+              "word": "LIKE",
+              "start_frame": 47,
+              "end_frame": 51
             },
             {
-              "word": "BORE",
-              "start_frame": 50,
-              "end_frame": 58
+              "word": "THE",
+              "start_frame": 51,
+              "end_frame": 54
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "HO RAHA THA",
-          "start_frame": 58,
-          "end_frame": 78,
+          "text": "ULTIMATE PLAYGROUND FLOATING",
+          "start_frame": 56,
+          "end_frame": 123,
           "words": [
             {
-              "word": "HO",
-              "start_frame": 58,
-              "end_frame": 63
+              "word": "ULTIMATE",
+              "start_frame": 56,
+              "end_frame": 69
             },
             {
-              "word": "RAHA",
-              "start_frame": 64,
-              "end_frame": 72
+              "word": "PLAYGROUND",
+              "start_frame": 69,
+              "end_frame": 86
             },
             {
-              "word": "THA",
-              "start_frame": 72,
-              "end_frame": 78
+              "word": "FLOATING",
+              "start_frame": 109,
+              "end_frame": 122
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "RAINDROPS FROZEN TRAFFIC",
+          "start_frame": 123,
+          "end_frame": 198,
+          "words": [
+            {
+              "word": "RAINDROPS",
+              "start_frame": 123,
+              "end_frame": 142
+            },
+            {
+              "word": "FROZEN",
+              "start_frame": 156,
+              "end_frame": 167
+            },
+            {
+              "word": "TRAFFIC",
+              "start_frame": 167,
+              "end_frame": 183
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "AND COMPLETE SILENCE",
+          "start_frame": 198,
+          "end_frame": 232,
+          "words": [
+            {
+              "word": "AND",
+              "start_frame": 198,
+              "end_frame": 200
+            },
+            {
+              "word": "COMPLETE",
+              "start_frame": 201,
+              "end_frame": 214
+            },
+            {
+              "word": "SILENCE",
+              "start_frame": 214,
+              "end_frame": 231
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "IN THE CITY",
+          "start_frame": 232,
+          "end_frame": 249,
+          "words": [
+            {
+              "word": "IN",
+              "start_frame": 232,
+              "end_frame": 234
+            },
+            {
+              "word": "THE",
+              "start_frame": 234,
+              "end_frame": 237
+            },
+            {
+              "word": "CITY",
+              "start_frame": 237,
+              "end_frame": 249
             }
           ]
         }
@@ -322,141 +521,283 @@
     },
     {
       "scene_number": 3,
-      "narration": "Bhalu bola: 'Mera panja sabse zyada bhaari hai!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Bhalu",
-      "speaker_avatar": "\ud83d\udc3b",
+      "narration": "Within ten seconds, sheer terror sets in. Light photons stop moving, instantly plunging your vision into pitch-black darkness.",
+      "speaker": "speaker_1",
+      "speaker_name": "Narrator",
       "sfx": "pop",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, giant comical cartoon brown bear slamming massive furry paw on a jungle rock with aggressive roar, 35mm prime lens, dust flying, thick black outlines, vibrant colors, 9:16 vertical, turning quickly toward camera with comedic shock",
-      "visual_prompt": "Flat 2D cartoon brown bear slamming heavy paw on rock roaring, 9:16",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "35mm prime lens macro close-up, young man reacting with wide eyes in shock, reaching upward with trembling hands as pitch darkness creeps across his face, light beams freezing like solid luminescent glass rods, volumetric cyan lighting, ray tracing, 8k vertical 9:16",
+      "visual_prompt": "35mm prime lens close up of young man reacting in shock reaching upward as darkness creeps across face, 8k",
       "beat_number": 3,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #3",
-      "image_url": "images/ep_39_scene_3.jpg",
+      "image_url": "images/ep_40_scene_3.jpg",
       "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 4.13,
-      "duration_in_frames": 122,
+      "audio_duration_sec": 9.26,
+      "duration_in_frames": 285,
       "words": [
         {
-          "word": "Bhalu",
-          "start_sec": 0.0995,
-          "end_sec": 0.39654100000000003,
+          "word": "Within",
+          "start_sec": 0.1,
+          "end_sec": 0.5,
           "start_frame": 3,
-          "end_frame": 12
+          "end_frame": 15
         },
         {
-          "word": "bola",
-          "start_sec": 0.433666,
-          "end_sec": 0.780207,
-          "start_frame": 13,
-          "end_frame": 23
+          "word": "ten",
+          "start_sec": 0.5125,
+          "end_sec": 0.7875,
+          "start_frame": 15,
+          "end_frame": 24
         },
         {
-          "word": "Mera",
-          "start_sec": 0.990583,
-          "end_sec": 1.250499,
-          "start_frame": 30,
-          "end_frame": 38
+          "word": "seconds",
+          "start_sec": 0.8,
+          "end_sec": 1.3625,
+          "start_frame": 24,
+          "end_frame": 41
         },
         {
-          "word": "panja",
-          "start_sec": 1.3,
-          "end_sec": 1.584666,
-          "start_frame": 39,
-          "end_frame": 48
+          "word": "sheer",
+          "start_sec": 1.5625,
+          "end_sec": 1.85,
+          "start_frame": 47,
+          "end_frame": 56
         },
         {
-          "word": "sabse",
-          "start_sec": 1.621791,
-          "end_sec": 2.054957,
-          "start_frame": 49,
-          "end_frame": 62
+          "word": "terror",
+          "start_sec": 1.8625,
+          "end_sec": 2.2,
+          "start_frame": 56,
+          "end_frame": 66
         },
         {
-          "word": "zyada",
-          "start_sec": 2.104458,
-          "end_sec": 2.512874,
-          "start_frame": 63,
-          "end_frame": 75
+          "word": "sets",
+          "start_sec": 2.2125,
+          "end_sec": 2.5375,
+          "start_frame": 66,
+          "end_frame": 76
         },
         {
-          "word": "bhaari",
-          "start_sec": 2.537625,
-          "end_sec": 2.822291,
+          "word": "in",
+          "start_sec": 2.55,
+          "end_sec": 2.8249999999999997,
           "start_frame": 76,
           "end_frame": 85
         },
         {
-          "word": "hai",
-          "start_sec": 2.859416,
-          "end_sec": 3.144082,
-          "start_frame": 86,
-          "end_frame": 94
+          "word": "Light",
+          "start_sec": 3.6875,
+          "end_sec": 4.0125,
+          "start_frame": 111,
+          "end_frame": 120
+        },
+        {
+          "word": "photons",
+          "start_sec": 4.025,
+          "end_sec": 4.5625,
+          "start_frame": 121,
+          "end_frame": 137
+        },
+        {
+          "word": "stop",
+          "start_sec": 4.575,
+          "end_sec": 4.8500000000000005,
+          "start_frame": 137,
+          "end_frame": 146
+        },
+        {
+          "word": "moving",
+          "start_sec": 4.8625,
+          "end_sec": 5.25,
+          "start_frame": 146,
+          "end_frame": 158
+        },
+        {
+          "word": "instantly",
+          "start_sec": 5.5125,
+          "end_sec": 5.9375,
+          "start_frame": 165,
+          "end_frame": 178
+        },
+        {
+          "word": "plunging",
+          "start_sec": 5.95,
+          "end_sec": 6.3875,
+          "start_frame": 178,
+          "end_frame": 192
+        },
+        {
+          "word": "your",
+          "start_sec": 6.4,
+          "end_sec": 6.5375000000000005,
+          "start_frame": 192,
+          "end_frame": 196
+        },
+        {
+          "word": "vision",
+          "start_sec": 6.55,
+          "end_sec": 6.9125,
+          "start_frame": 196,
+          "end_frame": 207
+        },
+        {
+          "word": "into",
+          "start_sec": 6.925,
+          "end_sec": 7.1375,
+          "start_frame": 208,
+          "end_frame": 214
+        },
+        {
+          "word": "pitch-black",
+          "start_sec": 7.15,
+          "end_sec": 7.75,
+          "start_frame": 214,
+          "end_frame": 232
+        },
+        {
+          "word": "darkness",
+          "start_sec": 7.7625,
+          "end_sec": 8.4125,
+          "start_frame": 233,
+          "end_frame": 252
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "BHALU BOLA MERA",
+          "text": "WITHIN TEN SECONDS",
           "start_frame": 3,
-          "end_frame": 39,
+          "end_frame": 47,
           "words": [
             {
-              "word": "BHALU",
+              "word": "WITHIN",
               "start_frame": 3,
-              "end_frame": 12
+              "end_frame": 15
             },
             {
-              "word": "BOLA",
-              "start_frame": 13,
-              "end_frame": 23
+              "word": "TEN",
+              "start_frame": 15,
+              "end_frame": 24
             },
             {
-              "word": "MERA",
-              "start_frame": 30,
-              "end_frame": 38
+              "word": "SECONDS",
+              "start_frame": 24,
+              "end_frame": 41
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "PANJA SABSE ZYADA",
-          "start_frame": 39,
+          "text": "SHEER TERROR SETS",
+          "start_frame": 47,
           "end_frame": 76,
           "words": [
             {
-              "word": "PANJA",
-              "start_frame": 39,
-              "end_frame": 48
+              "word": "SHEER",
+              "start_frame": 47,
+              "end_frame": 56
             },
             {
-              "word": "SABSE",
-              "start_frame": 49,
-              "end_frame": 62
+              "word": "TERROR",
+              "start_frame": 56,
+              "end_frame": 66
             },
             {
-              "word": "ZYADA",
-              "start_frame": 63,
-              "end_frame": 75
+              "word": "SETS",
+              "start_frame": 66,
+              "end_frame": 76
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "BHAARI HAI",
+          "text": "IN LIGHT PHOTONS",
           "start_frame": 76,
-          "end_frame": 94,
+          "end_frame": 137,
           "words": [
             {
-              "word": "BHAARI",
+              "word": "IN",
               "start_frame": 76,
               "end_frame": 85
             },
             {
-              "word": "HAI",
-              "start_frame": 86,
-              "end_frame": 94
+              "word": "LIGHT",
+              "start_frame": 111,
+              "end_frame": 120
+            },
+            {
+              "word": "PHOTONS",
+              "start_frame": 121,
+              "end_frame": 137
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "STOP MOVING INSTANTLY",
+          "start_frame": 137,
+          "end_frame": 178,
+          "words": [
+            {
+              "word": "STOP",
+              "start_frame": 137,
+              "end_frame": 146
+            },
+            {
+              "word": "MOVING",
+              "start_frame": 146,
+              "end_frame": 158
+            },
+            {
+              "word": "INSTANTLY",
+              "start_frame": 165,
+              "end_frame": 178
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "PLUNGING YOUR VISION",
+          "start_frame": 178,
+          "end_frame": 208,
+          "words": [
+            {
+              "word": "PLUNGING",
+              "start_frame": 178,
+              "end_frame": 192
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 192,
+              "end_frame": 196
+            },
+            {
+              "word": "VISION",
+              "start_frame": 196,
+              "end_frame": 207
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "INTO PITCH-BLACK DARKNESS",
+          "start_frame": 208,
+          "end_frame": 252,
+          "words": [
+            {
+              "word": "INTO",
+              "start_frame": 208,
+              "end_frame": 214
+            },
+            {
+              "word": "PITCH-BLACK",
+              "start_frame": 214,
+              "end_frame": 232
+            },
+            {
+              "word": "DARKNESS",
+              "start_frame": 233,
+              "end_frame": 252
             }
           ]
         }
@@ -464,141 +805,283 @@
     },
     {
       "scene_number": 4,
-      "narration": "Bandar chilla: 'Main sabse tez aur chatur hoon!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Bandar",
-      "speaker_avatar": "\ud83d\udc12",
-      "sfx": "pop",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, cheeky cartoon monkey hanging upside down by tail from jungle vine waving a banana and mocking, 24mm low-angle shot, thick clean outlines, vibrant saturated colors, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon monkey hanging by tail mocking with banana, 9:16",
+      "narration": "Oxygen molecules freeze in place like solid glass, meaning your lungs cannot pull a single breath of air.",
+      "speaker": "speaker_1",
+      "speaker_name": "Narrator",
+      "sfx": "dramatic-pulse",
+      "camera_motion": "dramatic-pulse",
+      "video_prompt": "50mm cinema lens medium shot, young man clutching throat gasping for breath, glowing blue frost crystals forming around mouth as frozen air resists inhalation, collapsing to one knee on frozen asphalt street, shattered temporal clock above, Unreal Engine 5 render, 8k vertical 9:16",
+      "visual_prompt": "50mm cinema lens medium shot of young man clutching throat collapsing to one knee on frozen street, 8k",
       "beat_number": 4,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #4",
-      "image_url": "images/ep_39_scene_4.jpg",
+      "image_url": "images/ep_40_scene_4.jpg",
       "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 3.72,
-      "duration_in_frames": 110,
+      "audio_duration_sec": 6.84,
+      "duration_in_frames": 213,
       "words": [
         {
-          "word": "Bandar",
-          "start_sec": 0.1,
-          "end_sec": 0.55,
+          "word": "Oxygen",
+          "start_sec": 0.088375,
+          "end_sec": 0.517666,
           "start_frame": 3,
           "end_frame": 16
         },
         {
-          "word": "chilla",
-          "start_sec": 0.5625,
-          "end_sec": 0.8625,
-          "start_frame": 17,
-          "end_frame": 26
+          "word": "molecules",
+          "start_sec": 0.530291,
+          "end_sec": 1.085832,
+          "start_frame": 16,
+          "end_frame": 33
         },
         {
-          "word": "Main",
-          "start_sec": 1.075,
-          "end_sec": 1.3,
-          "start_frame": 32,
-          "end_frame": 39
+          "word": "freeze",
+          "start_sec": 1.0985,
+          "end_sec": 1.5277910000000001,
+          "start_frame": 33,
+          "end_frame": 46
         },
         {
-          "word": "sabse",
-          "start_sec": 1.325,
-          "end_sec": 1.6749999999999998,
-          "start_frame": 40,
+          "word": "in",
+          "start_sec": 1.540416,
+          "end_sec": 1.679291,
+          "start_frame": 46,
           "end_frame": 50
         },
         {
-          "word": "tez",
-          "start_sec": 1.7,
-          "end_sec": 2.0,
+          "word": "place",
+          "start_sec": 1.691916,
+          "end_sec": 2.0580819999999997,
           "start_frame": 51,
-          "end_frame": 60
+          "end_frame": 62
         },
         {
-          "word": "aur",
-          "start_sec": 2.025,
-          "end_sec": 2.1125,
-          "start_frame": 61,
-          "end_frame": 63
+          "word": "like",
+          "start_sec": 2.070708,
+          "end_sec": 2.2474580000000004,
+          "start_frame": 62,
+          "end_frame": 67
         },
         {
-          "word": "chatur",
-          "start_sec": 2.125,
-          "end_sec": 2.45,
-          "start_frame": 64,
-          "end_frame": 74
+          "word": "solid",
+          "start_sec": 2.260083,
+          "end_sec": 2.638874,
+          "start_frame": 68,
+          "end_frame": 79
         },
         {
-          "word": "hoon",
-          "start_sec": 2.475,
-          "end_sec": 2.8125,
-          "start_frame": 74,
-          "end_frame": 84
+          "word": "glass",
+          "start_sec": 2.6515,
+          "end_sec": 3.1691659999999997,
+          "start_frame": 80,
+          "end_frame": 95
+        },
+        {
+          "word": "meaning",
+          "start_sec": 3.6995,
+          "end_sec": 4.015166,
+          "start_frame": 111,
+          "end_frame": 120
+        },
+        {
+          "word": "your",
+          "start_sec": 4.027791,
+          "end_sec": 4.191916,
+          "start_frame": 121,
+          "end_frame": 126
+        },
+        {
+          "word": "lungs",
+          "start_sec": 4.204541,
+          "end_sec": 4.5833319999999995,
+          "start_frame": 126,
+          "end_frame": 137
+        },
+        {
+          "word": "cannot",
+          "start_sec": 4.595958,
+          "end_sec": 4.962124,
+          "start_frame": 138,
+          "end_frame": 149
+        },
+        {
+          "word": "pull",
+          "start_sec": 4.97475,
+          "end_sec": 5.227291,
+          "start_frame": 149,
+          "end_frame": 157
+        },
+        {
+          "word": "a",
+          "start_sec": 5.239916,
+          "end_sec": 5.303041,
+          "start_frame": 157,
+          "end_frame": 159
+        },
+        {
+          "word": "single",
+          "start_sec": 5.315666,
+          "end_sec": 5.681832,
+          "start_frame": 159,
+          "end_frame": 170
+        },
+        {
+          "word": "breath",
+          "start_sec": 5.694458,
+          "end_sec": 5.972249,
+          "start_frame": 171,
+          "end_frame": 179
+        },
+        {
+          "word": "of",
+          "start_sec": 5.984833,
+          "end_sec": 6.073208,
+          "start_frame": 180,
+          "end_frame": 182
+        },
+        {
+          "word": "air",
+          "start_sec": 6.085875,
+          "end_sec": 6.4520409999999995,
+          "start_frame": 183,
+          "end_frame": 194
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "BANDAR CHILLA MAIN",
+          "text": "OXYGEN MOLECULES FREEZE",
           "start_frame": 3,
-          "end_frame": 40,
+          "end_frame": 46,
           "words": [
             {
-              "word": "BANDAR",
+              "word": "OXYGEN",
               "start_frame": 3,
               "end_frame": 16
             },
             {
-              "word": "CHILLA",
-              "start_frame": 17,
-              "end_frame": 26
+              "word": "MOLECULES",
+              "start_frame": 16,
+              "end_frame": 33
             },
             {
-              "word": "MAIN",
-              "start_frame": 32,
-              "end_frame": 39
+              "word": "FREEZE",
+              "start_frame": 33,
+              "end_frame": 46
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "SABSE TEZ AUR",
-          "start_frame": 40,
-          "end_frame": 64,
+          "text": "IN PLACE LIKE",
+          "start_frame": 46,
+          "end_frame": 68,
           "words": [
             {
-              "word": "SABSE",
-              "start_frame": 40,
+              "word": "IN",
+              "start_frame": 46,
               "end_frame": 50
             },
             {
-              "word": "TEZ",
+              "word": "PLACE",
               "start_frame": 51,
-              "end_frame": 60
+              "end_frame": 62
             },
             {
-              "word": "AUR",
-              "start_frame": 61,
-              "end_frame": 63
+              "word": "LIKE",
+              "start_frame": 62,
+              "end_frame": 67
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "CHATUR HOON",
-          "start_frame": 64,
-          "end_frame": 84,
+          "text": "SOLID GLASS MEANING",
+          "start_frame": 68,
+          "end_frame": 121,
           "words": [
             {
-              "word": "CHATUR",
-              "start_frame": 64,
-              "end_frame": 74
+              "word": "SOLID",
+              "start_frame": 68,
+              "end_frame": 79
             },
             {
-              "word": "HOON",
-              "start_frame": 74,
-              "end_frame": 84
+              "word": "GLASS",
+              "start_frame": 80,
+              "end_frame": 95
+            },
+            {
+              "word": "MEANING",
+              "start_frame": 111,
+              "end_frame": 120
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "YOUR LUNGS CANNOT",
+          "start_frame": 121,
+          "end_frame": 149,
+          "words": [
+            {
+              "word": "YOUR",
+              "start_frame": 121,
+              "end_frame": 126
+            },
+            {
+              "word": "LUNGS",
+              "start_frame": 126,
+              "end_frame": 137
+            },
+            {
+              "word": "CANNOT",
+              "start_frame": 138,
+              "end_frame": 149
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "PULL A SINGLE",
+          "start_frame": 149,
+          "end_frame": 171,
+          "words": [
+            {
+              "word": "PULL",
+              "start_frame": 149,
+              "end_frame": 157
+            },
+            {
+              "word": "A",
+              "start_frame": 157,
+              "end_frame": 159
+            },
+            {
+              "word": "SINGLE",
+              "start_frame": 159,
+              "end_frame": 170
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "BREATH OF AIR",
+          "start_frame": 171,
+          "end_frame": 194,
+          "words": [
+            {
+              "word": "BREATH",
+              "start_frame": 171,
+              "end_frame": 179
+            },
+            {
+              "word": "OF",
+              "start_frame": 180,
+              "end_frame": 182
+            },
+            {
+              "word": "AIR",
+              "start_frame": 183,
+              "end_frame": 194
             }
           ]
         }
@@ -606,1535 +1089,347 @@
     },
     {
       "scene_number": 5,
-      "narration": "Haathi ne soond utha kar zor se dahaad di!",
-      "speaker": "speaker_2",
-      "speaker_name": "Haathi",
-      "speaker_avatar": "\ud83d\udc18",
-      "sfx": "impact_boom",
-      "camera_motion": "vertical-tilt-reveal",
-      "video_prompt": "Flat 2D vector cartoon, colossal cute cartoon elephant raising long trunk high trumpeting loudly, 10mm ultra-wide low angle shot, ground trembling shockwaves, thick black outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon elephant trumpeting with raised trunk, 9:16",
-      "beat_number": 5,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #5",
-      "image_url": "images/ep_39_scene_5.jpg",
-      "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 3.58,
-      "duration_in_frames": 106,
-      "words": [
-        {
-          "word": "Haathi",
-          "start_sec": 0.098541,
-          "end_sec": 0.389791,
-          "start_frame": 3,
-          "end_frame": 12
-        },
-        {
-          "word": "ne",
-          "start_sec": 0.462625,
-          "end_sec": 0.6689160000000001,
-          "start_frame": 14,
-          "end_frame": 20
-        },
-        {
-          "word": "soond",
-          "start_sec": 0.729625,
-          "end_sec": 0.935916,
-          "start_frame": 22,
-          "end_frame": 28
-        },
-        {
-          "word": "utha",
-          "start_sec": 0.948041,
-          "end_sec": 1.190749,
-          "start_frame": 28,
-          "end_frame": 36
-        },
-        {
-          "word": "kar",
-          "start_sec": 1.263583,
-          "end_sec": 1.457749,
-          "start_frame": 38,
-          "end_frame": 44
-        },
-        {
-          "word": "zor",
-          "start_sec": 1.494166,
-          "end_sec": 1.700457,
-          "start_frame": 45,
-          "end_frame": 51
-        },
-        {
-          "word": "se",
-          "start_sec": 1.736875,
-          "end_sec": 1.870375,
-          "start_frame": 52,
-          "end_frame": 56
-        },
-        {
-          "word": "dahaad",
-          "start_sec": 1.894666,
-          "end_sec": 2.270874,
-          "start_frame": 57,
-          "end_frame": 68
-        },
-        {
-          "word": "di",
-          "start_sec": 2.283,
-          "end_sec": 2.622791,
-          "start_frame": 68,
-          "end_frame": 79
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "HAATHI NE SOOND",
-          "start_frame": 3,
-          "end_frame": 28,
-          "words": [
-            {
-              "word": "HAATHI",
-              "start_frame": 3,
-              "end_frame": 12
-            },
-            {
-              "word": "NE",
-              "start_frame": 14,
-              "end_frame": 20
-            },
-            {
-              "word": "SOOND",
-              "start_frame": 22,
-              "end_frame": 28
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "UTHA KAR ZOR",
-          "start_frame": 28,
-          "end_frame": 52,
-          "words": [
-            {
-              "word": "UTHA",
-              "start_frame": 28,
-              "end_frame": 36
-            },
-            {
-              "word": "KAR",
-              "start_frame": 38,
-              "end_frame": 44
-            },
-            {
-              "word": "ZOR",
-              "start_frame": 45,
-              "end_frame": 51
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SE DAHAAD DI",
-          "start_frame": 52,
-          "end_frame": 79,
-          "words": [
-            {
-              "word": "SE",
-              "start_frame": 52,
-              "end_frame": 56
-            },
-            {
-              "word": "DAHAAD",
-              "start_frame": 57,
-              "end_frame": 68
-            },
-            {
-              "word": "DI",
-              "start_frame": 68,
-              "end_frame": 79
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 6,
-      "narration": "Lomdi muskuraayi: 'Asli dimaag toh sirf mere paas hai!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Lomdi",
-      "speaker_avatar": "\ud83e\udd8a",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, sly cartoon orange fox tapping forehead with paw and winking with cunning smile, 35mm prime reaction shot, thick clean black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon sly fox tapping forehead winking, 9:16",
-      "beat_number": 6,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #6",
-      "image_url": "images/ep_39_scene_6.jpg",
-      "audio_url": "audio/beat_6.mp3",
-      "audio_duration_sec": 4.13,
-      "duration_in_frames": 122,
-      "words": [
-        {
-          "word": "Lomdi",
-          "start_sec": 0.1,
-          "end_sec": 0.4375,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "muskuraayi",
-          "start_sec": 0.4625,
-          "end_sec": 1.0375,
-          "start_frame": 14,
-          "end_frame": 31
-        },
-        {
-          "word": "Asli",
-          "start_sec": 1.2,
-          "end_sec": 1.5125,
-          "start_frame": 36,
-          "end_frame": 45
-        },
-        {
-          "word": "dimaag",
-          "start_sec": 1.525,
-          "end_sec": 1.875,
-          "start_frame": 46,
-          "end_frame": 56
-        },
-        {
-          "word": "toh",
-          "start_sec": 1.9,
-          "end_sec": 2.0625,
-          "start_frame": 57,
-          "end_frame": 62
-        },
-        {
-          "word": "sirf",
-          "start_sec": 2.0875,
-          "end_sec": 2.375,
-          "start_frame": 63,
-          "end_frame": 71
-        },
-        {
-          "word": "mere",
-          "start_sec": 2.3875,
-          "end_sec": 2.575,
-          "start_frame": 72,
-          "end_frame": 77
-        },
-        {
-          "word": "paas",
-          "start_sec": 2.5875,
-          "end_sec": 2.85,
-          "start_frame": 78,
-          "end_frame": 86
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.875,
-          "end_sec": 3.2375,
-          "start_frame": 86,
-          "end_frame": 97
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "LOMDI MUSKURAAYI ASLI",
-          "start_frame": 3,
-          "end_frame": 46,
-          "words": [
-            {
-              "word": "LOMDI",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "MUSKURAAYI",
-              "start_frame": 14,
-              "end_frame": 31
-            },
-            {
-              "word": "ASLI",
-              "start_frame": 36,
-              "end_frame": 45
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "DIMAAG TOH SIRF",
-          "start_frame": 46,
-          "end_frame": 72,
-          "words": [
-            {
-              "word": "DIMAAG",
-              "start_frame": 46,
-              "end_frame": 56
-            },
-            {
-              "word": "TOH",
-              "start_frame": 57,
-              "end_frame": 62
-            },
-            {
-              "word": "SIRF",
-              "start_frame": 63,
-              "end_frame": 71
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "MERE PAAS HAI",
-          "start_frame": 72,
-          "end_frame": 97,
-          "words": [
-            {
-              "word": "MERE",
-              "start_frame": 72,
-              "end_frame": 77
-            },
-            {
-              "word": "PAAS",
-              "start_frame": 78,
-              "end_frame": 86
-            },
-            {
-              "word": "HAI",
-              "start_frame": 86,
-              "end_frame": 97
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 7,
-      "narration": "Sher ne aadhi aankh kholi aur sabko ghoora.",
+      "narration": "The colossal temporal clock in the sky shatters violently, proving that freezing time won't make you a god\u2014it will erase you.",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "dramatic-pulse",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, intense extreme close up 50mm cinema lens of cartoon lion king golden eyes narrowing into piercing royal gaze, golden crown glinting, thick black outlines, 9:16 vertical, shaking head with hands on cheeks in absolute disbelief",
-      "visual_prompt": "Flat 2D cartoon close up of lion king golden eyes staring sharply, 9:16",
-      "beat_number": 7,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #7",
-      "image_url": "images/ep_39_scene_7.jpg",
-      "audio_url": "audio/beat_7.mp3",
-      "audio_duration_sec": 3.82,
-      "duration_in_frames": 113,
-      "words": [
-        {
-          "word": "Sher",
-          "start_sec": 0.099,
-          "end_sec": 0.417625,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "ne",
-          "start_sec": 0.503416,
-          "end_sec": 0.7607489999999999,
-          "start_frame": 15,
-          "end_frame": 23
-        },
-        {
-          "word": "aadhi",
-          "start_sec": 0.834333,
-          "end_sec": 1.165208,
-          "start_frame": 25,
-          "end_frame": 35
-        },
-        {
-          "word": "aankh",
-          "start_sec": 1.251,
-          "end_sec": 1.483833,
-          "start_frame": 38,
-          "end_frame": 45
-        },
-        {
-          "word": "kholi",
-          "start_sec": 1.532833,
-          "end_sec": 1.8514579999999998,
-          "start_frame": 46,
-          "end_frame": 56
-        },
-        {
-          "word": "aur",
-          "start_sec": 1.9005,
-          "end_sec": 2.010791,
-          "start_frame": 57,
-          "end_frame": 60
-        },
-        {
-          "word": "sabko",
-          "start_sec": 2.047541,
-          "end_sec": 2.4519569999999997,
-          "start_frame": 61,
-          "end_frame": 74
-        },
-        {
-          "word": "ghoora",
-          "start_sec": 2.501,
-          "end_sec": 2.8686659999999997,
-          "start_frame": 75,
-          "end_frame": 86
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SHER NE AADHI",
-          "start_frame": 3,
-          "end_frame": 38,
-          "words": [
-            {
-              "word": "SHER",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "NE",
-              "start_frame": 15,
-              "end_frame": 23
-            },
-            {
-              "word": "AADHI",
-              "start_frame": 25,
-              "end_frame": 35
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "AANKH KHOLI AUR",
-          "start_frame": 38,
-          "end_frame": 61,
-          "words": [
-            {
-              "word": "AANKH",
-              "start_frame": 38,
-              "end_frame": 45
-            },
-            {
-              "word": "KHOLI",
-              "start_frame": 46,
-              "end_frame": 56
-            },
-            {
-              "word": "AUR",
-              "start_frame": 57,
-              "end_frame": 60
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SABKO GHOORA",
-          "start_frame": 61,
-          "end_frame": 86,
-          "words": [
-            {
-              "word": "SABKO",
-              "start_frame": 61,
-              "end_frame": 74
-            },
-            {
-              "word": "GHOORA",
-              "start_frame": 75,
-              "end_frame": 86
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 8,
-      "narration": "Ek pal mein poora jungle bilkul shaant ho gaya!",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
+      "sfx": "climax-pull-back",
       "camera_motion": "climax-pull-back",
-      "video_prompt": "Flat 2D vector cartoon, bear, elephant, monkey and fox all freezing in terror with comical sweat drops and wide eyes, 24mm wide angle shot, thick clean outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon animals frozen in silence with sweat drops, 9:16",
-      "beat_number": 8,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #8",
-      "image_url": "images/ep_39_scene_8.jpg",
-      "audio_url": "audio/beat_8.mp3",
-      "audio_duration_sec": 4.18,
-      "duration_in_frames": 123,
+      "video_prompt": "10mm wide-angle epic scope pull-back shot, giant shattered Roman-numeral clock in the sky vibrating violently, clock hands fracturing into blinding cyan sparks, temporal shockwaves sweeping across the frozen city, cinematic masterpiece, Unreal Engine 5 render, 8k vertical 9:16",
+      "visual_prompt": "10mm wide-angle pull-back shot of giant shattered clock in sky vibrating and fracturing into sparks over frozen city, 8k",
+      "beat_number": 5,
+      "title": "Beat #5",
+      "image_url": "images/ep_40_scene_5.jpg",
+      "audio_url": "audio/beat_5.mp3",
+      "audio_duration_sec": 7.73,
+      "duration_in_frames": 239,
       "words": [
         {
-          "word": "Ek",
+          "word": "The",
           "start_sec": 0.1,
-          "end_sec": 0.340375,
+          "end_sec": 0.225,
           "start_frame": 3,
-          "end_frame": 10
+          "end_frame": 7
         },
         {
-          "word": "pal",
-          "start_sec": 0.340375,
-          "end_sec": 0.628833,
-          "start_frame": 10,
-          "end_frame": 19
+          "word": "colossal",
+          "start_sec": 0.2375,
+          "end_sec": 0.7375,
+          "start_frame": 7,
+          "end_frame": 22
         },
         {
-          "word": "mein",
-          "start_sec": 0.628833,
-          "end_sec": 0.977374,
-          "start_frame": 19,
-          "end_frame": 29
+          "word": "temporal",
+          "start_sec": 0.75,
+          "end_sec": 1.1,
+          "start_frame": 22,
+          "end_frame": 33
         },
         {
-          "word": "poora",
-          "start_sec": 0.977416,
-          "end_sec": 1.434124,
-          "start_frame": 29,
+          "word": "clock",
+          "start_sec": 1.1125,
+          "end_sec": 1.4375,
+          "start_frame": 33,
           "end_frame": 43
         },
         {
-          "word": "jungle",
-          "start_sec": 1.434125,
-          "end_sec": 1.81875,
-          "start_frame": 43,
-          "end_frame": 55
+          "word": "in",
+          "start_sec": 1.45,
+          "end_sec": 1.5125,
+          "start_frame": 44,
+          "end_frame": 45
         },
         {
-          "word": "bilkul",
-          "start_sec": 1.81875,
-          "end_sec": 2.2033750000000003,
-          "start_frame": 55,
-          "end_frame": 66
+          "word": "the",
+          "start_sec": 1.525,
+          "end_sec": 1.5999999999999999,
+          "start_frame": 46,
+          "end_frame": 48
         },
         {
-          "word": "shaant",
-          "start_sec": 2.203375,
-          "end_sec": 2.672125,
-          "start_frame": 66,
-          "end_frame": 80
+          "word": "sky",
+          "start_sec": 1.6125,
+          "end_sec": 1.9125,
+          "start_frame": 48,
+          "end_frame": 57
         },
         {
-          "word": "ho",
-          "start_sec": 2.672125,
-          "end_sec": 2.828375,
-          "start_frame": 80,
-          "end_frame": 85
+          "word": "shatters",
+          "start_sec": 1.925,
+          "end_sec": 2.4125,
+          "start_frame": 58,
+          "end_frame": 72
         },
         {
-          "word": "gaya",
-          "start_sec": 2.828375,
-          "end_sec": 3.36925,
-          "start_frame": 85,
-          "end_frame": 101
+          "word": "violently",
+          "start_sec": 2.425,
+          "end_sec": 2.9875,
+          "start_frame": 73,
+          "end_frame": 90
+        },
+        {
+          "word": "proving",
+          "start_sec": 3.3125,
+          "end_sec": 3.65,
+          "start_frame": 99,
+          "end_frame": 110
+        },
+        {
+          "word": "that",
+          "start_sec": 3.6625,
+          "end_sec": 3.825,
+          "start_frame": 110,
+          "end_frame": 115
+        },
+        {
+          "word": "freezing",
+          "start_sec": 3.8375,
+          "end_sec": 4.2875,
+          "start_frame": 115,
+          "end_frame": 129
+        },
+        {
+          "word": "time",
+          "start_sec": 4.3,
+          "end_sec": 4.6,
+          "start_frame": 129,
+          "end_frame": 138
+        },
+        {
+          "word": "won't",
+          "start_sec": 4.6125,
+          "end_sec": 4.8,
+          "start_frame": 138,
+          "end_frame": 144
+        },
+        {
+          "word": "make",
+          "start_sec": 4.8125,
+          "end_sec": 5.0125,
+          "start_frame": 144,
+          "end_frame": 150
+        },
+        {
+          "word": "you",
+          "start_sec": 5.025,
+          "end_sec": 5.15,
+          "start_frame": 151,
+          "end_frame": 154
+        },
+        {
+          "word": "a",
+          "start_sec": 5.1625,
+          "end_sec": 5.225,
+          "start_frame": 155,
+          "end_frame": 157
+        },
+        {
+          "word": "god",
+          "start_sec": 5.2375,
+          "end_sec": 5.625,
+          "start_frame": 157,
+          "end_frame": 169
+        },
+        {
+          "word": "it",
+          "start_sec": 5.9375,
+          "end_sec": 6.025,
+          "start_frame": 178,
+          "end_frame": 181
+        },
+        {
+          "word": "will",
+          "start_sec": 6.0375,
+          "end_sec": 6.175,
+          "start_frame": 181,
+          "end_frame": 185
+        },
+        {
+          "word": "erase",
+          "start_sec": 6.1875,
+          "end_sec": 6.5625,
+          "start_frame": 186,
+          "end_frame": 197
+        },
+        {
+          "word": "you",
+          "start_sec": 6.575,
+          "end_sec": 6.8625,
+          "start_frame": 197,
+          "end_frame": 206
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "EK PAL MEIN",
+          "text": "THE COLOSSAL TEMPORAL",
           "start_frame": 3,
-          "end_frame": 29,
+          "end_frame": 33,
           "words": [
             {
-              "word": "EK",
+              "word": "THE",
               "start_frame": 3,
-              "end_frame": 10
+              "end_frame": 7
             },
             {
-              "word": "PAL",
-              "start_frame": 10,
-              "end_frame": 19
+              "word": "COLOSSAL",
+              "start_frame": 7,
+              "end_frame": 22
             },
             {
-              "word": "MEIN",
-              "start_frame": 19,
-              "end_frame": 29
+              "word": "TEMPORAL",
+              "start_frame": 22,
+              "end_frame": 33
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "POORA JUNGLE BILKUL",
-          "start_frame": 29,
-          "end_frame": 66,
+          "text": "CLOCK IN THE",
+          "start_frame": 33,
+          "end_frame": 48,
           "words": [
             {
-              "word": "POORA",
-              "start_frame": 29,
+              "word": "CLOCK",
+              "start_frame": 33,
               "end_frame": 43
             },
             {
-              "word": "JUNGLE",
-              "start_frame": 43,
-              "end_frame": 55
-            },
-            {
-              "word": "BILKUL",
-              "start_frame": 55,
-              "end_frame": 66
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SHAANT HO GAYA",
-          "start_frame": 66,
-          "end_frame": 101,
-          "words": [
-            {
-              "word": "SHAANT",
-              "start_frame": 66,
-              "end_frame": 80
-            },
-            {
-              "word": "HO",
-              "start_frame": 80,
-              "end_frame": 85
-            },
-            {
-              "word": "GAYA",
-              "start_frame": 85,
-              "end_frame": 101
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 9,
-      "narration": "Sher bola: 'Dahaadna toh kamzoron ka kaam hai!'",
-      "speaker": "speaker_1",
-      "speaker_name": "Sher Raja",
-      "speaker_avatar": "\ud83e\udd81",
-      "sfx": "pop",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, lion king on golden throne calmly waving one front paw dismissively with royal smirk, 35mm medium shot, floating leaves, thick black outlines, 9:16 vertical, gesturing in humorous disbelief as hands fly into frame",
-      "visual_prompt": "Flat 2D cartoon lion king waving paw dismissively on throne, 9:16",
-      "beat_number": 9,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #9",
-      "image_url": "images/ep_39_scene_9.jpg",
-      "audio_url": "audio/beat_9.mp3",
-      "audio_duration_sec": 3.98,
-      "duration_in_frames": 118,
-      "words": [
-        {
-          "word": "Sher",
-          "start_sec": 0.0995,
-          "end_sec": 0.39654100000000003,
-          "start_frame": 3,
-          "end_frame": 12
-        },
-        {
-          "word": "bola",
-          "start_sec": 0.408916,
-          "end_sec": 0.755457,
-          "start_frame": 12,
-          "end_frame": 23
-        },
-        {
-          "word": "Dahaadna",
-          "start_sec": 0.990583,
-          "end_sec": 1.3989989999999999,
-          "start_frame": 30,
-          "end_frame": 42
-        },
-        {
-          "word": "toh",
-          "start_sec": 1.460875,
-          "end_sec": 1.597,
-          "start_frame": 44,
-          "end_frame": 48
-        },
-        {
-          "word": "kamzoron",
-          "start_sec": 1.671291,
-          "end_sec": 2.092082,
-          "start_frame": 50,
-          "end_frame": 63
-        },
-        {
-          "word": "ka",
-          "start_sec": 2.153958,
-          "end_sec": 2.438624,
-          "start_frame": 65,
-          "end_frame": 73
-        },
-        {
-          "word": "kaam",
-          "start_sec": 2.5005,
-          "end_sec": 2.72325,
-          "start_frame": 75,
-          "end_frame": 82
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.72325,
-          "end_sec": 3.0079160000000003,
-          "start_frame": 82,
-          "end_frame": 90
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SHER BOLA DAHAADNA",
-          "start_frame": 3,
-          "end_frame": 44,
-          "words": [
-            {
-              "word": "SHER",
-              "start_frame": 3,
-              "end_frame": 12
-            },
-            {
-              "word": "BOLA",
-              "start_frame": 12,
-              "end_frame": 23
-            },
-            {
-              "word": "DAHAADNA",
-              "start_frame": 30,
-              "end_frame": 42
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "TOH KAMZORON KA",
-          "start_frame": 44,
-          "end_frame": 75,
-          "words": [
-            {
-              "word": "TOH",
+              "word": "IN",
               "start_frame": 44,
+              "end_frame": 45
+            },
+            {
+              "word": "THE",
+              "start_frame": 46,
               "end_frame": 48
-            },
-            {
-              "word": "KAMZORON",
-              "start_frame": 50,
-              "end_frame": 63
-            },
-            {
-              "word": "KA",
-              "start_frame": 65,
-              "end_frame": 73
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "KAAM HAI",
-          "start_frame": 75,
-          "end_frame": 90,
+          "text": "SKY SHATTERS VIOLENTLY",
+          "start_frame": 48,
+          "end_frame": 99,
           "words": [
             {
-              "word": "KAAM",
-              "start_frame": 75,
-              "end_frame": 82
+              "word": "SKY",
+              "start_frame": 48,
+              "end_frame": 57
             },
             {
-              "word": "HAI",
-              "start_frame": 82,
-              "end_frame": 90
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 10,
-      "narration": "Asli raja wahi jiske aage sab chup ho jaayein!",
-      "speaker": "speaker_1",
-      "speaker_name": "Sher Raja",
-      "speaker_avatar": "\ud83e\udd81",
-      "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, majestic cartoon lion king standing tall on throne rock with flowing golden mane, 10mm ultra-wide hero angle, sunburst rays radiating behind him, thick black outlines, 9:16 vertical, turning quickly toward camera with comedic shock",
-      "visual_prompt": "Flat 2D cartoon majestic lion king standing tall with sunburst rays, 9:16",
-      "beat_number": 10,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #10",
-      "image_url": "images/ep_39_scene_10.jpg",
-      "audio_url": "audio/beat_10.mp3",
-      "audio_duration_sec": 4.01,
-      "duration_in_frames": 119,
-      "words": [
-        {
-          "word": "Asli",
-          "start_sec": 0.1,
-          "end_sec": 0.52475,
-          "start_frame": 3,
-          "end_frame": 16
-        },
-        {
-          "word": "raja",
-          "start_sec": 0.52475,
-          "end_sec": 0.9373750000000001,
-          "start_frame": 16,
-          "end_frame": 28
-        },
-        {
-          "word": "wahi",
-          "start_sec": 0.937375,
-          "end_sec": 1.277166,
-          "start_frame": 28,
-          "end_frame": 38
-        },
-        {
-          "word": "jiske",
-          "start_sec": 1.277166,
-          "end_sec": 1.5805820000000002,
-          "start_frame": 38,
-          "end_frame": 47
-        },
-        {
-          "word": "aage",
-          "start_sec": 1.580583,
-          "end_sec": 1.8597080000000001,
-          "start_frame": 47,
-          "end_frame": 56
-        },
-        {
-          "word": "sab",
-          "start_sec": 1.859708,
-          "end_sec": 2.078166,
-          "start_frame": 56,
-          "end_frame": 62
-        },
-        {
-          "word": "chup",
-          "start_sec": 2.078166,
-          "end_sec": 2.320874,
-          "start_frame": 62,
-          "end_frame": 70
-        },
-        {
-          "word": "ho",
-          "start_sec": 2.320875,
-          "end_sec": 2.478625,
-          "start_frame": 70,
-          "end_frame": 74
-        },
-        {
-          "word": "jaayein",
-          "start_sec": 2.478625,
-          "end_sec": 3.1946250000000003,
-          "start_frame": 74,
-          "end_frame": 96
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "ASLI RAJA WAHI",
-          "start_frame": 3,
-          "end_frame": 38,
-          "words": [
-            {
-              "word": "ASLI",
-              "start_frame": 3,
-              "end_frame": 16
-            },
-            {
-              "word": "RAJA",
-              "start_frame": 16,
-              "end_frame": 28
-            },
-            {
-              "word": "WAHI",
-              "start_frame": 28,
-              "end_frame": 38
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "JISKE AAGE SAB",
-          "start_frame": 38,
-          "end_frame": 62,
-          "words": [
-            {
-              "word": "JISKE",
-              "start_frame": 38,
-              "end_frame": 47
-            },
-            {
-              "word": "AAGE",
-              "start_frame": 47,
-              "end_frame": 56
-            },
-            {
-              "word": "SAB",
-              "start_frame": 56,
-              "end_frame": 62
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "CHUP HO JAAYEIN",
-          "start_frame": 62,
-          "end_frame": 96,
-          "words": [
-            {
-              "word": "CHUP",
-              "start_frame": 62,
-              "end_frame": 70
-            },
-            {
-              "word": "HO",
-              "start_frame": 70,
-              "end_frame": 74
-            },
-            {
-              "word": "JAAYEIN",
-              "start_frame": 74,
-              "end_frame": 96
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 11,
-      "narration": "Sabhi janwar chupchap sar jhuka kar piche hat gaye.",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, sheepish bear, elephant and monkey bowing heads and tiptoeing backward into bushes, 24mm tracking pan, thick clean black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon animals bowing heads and backing into bushes, 9:16",
-      "beat_number": 11,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #11",
-      "image_url": "images/ep_39_scene_11.jpg",
-      "audio_url": "audio/beat_11.mp3",
-      "audio_duration_sec": 4.32,
-      "duration_in_frames": 127,
-      "words": [
-        {
-          "word": "Sabhi",
-          "start_sec": 0.098541,
-          "end_sec": 0.462624,
-          "start_frame": 3,
-          "end_frame": 14
-        },
-        {
-          "word": "janwar",
-          "start_sec": 0.523291,
-          "end_sec": 0.935916,
-          "start_frame": 16,
-          "end_frame": 28
-        },
-        {
-          "word": "chupchap",
-          "start_sec": 0.996583,
-          "end_sec": 1.469874,
-          "start_frame": 30,
-          "end_frame": 44
-        },
-        {
-          "word": "sar",
-          "start_sec": 1.506291,
-          "end_sec": 1.9795820000000002,
-          "start_frame": 45,
-          "end_frame": 59
-        },
-        {
-          "word": "jhuka",
-          "start_sec": 2.040291,
-          "end_sec": 2.3437069999999998,
-          "start_frame": 61,
-          "end_frame": 70
-        },
-        {
-          "word": "kar",
-          "start_sec": 2.404375,
-          "end_sec": 2.610666,
-          "start_frame": 72,
-          "end_frame": 78
-        },
-        {
-          "word": "piche",
-          "start_sec": 2.659208,
-          "end_sec": 2.889791,
-          "start_frame": 80,
-          "end_frame": 87
-        },
-        {
-          "word": "hat",
-          "start_sec": 2.901958,
-          "end_sec": 3.071874,
-          "start_frame": 87,
-          "end_frame": 92
-        },
-        {
-          "word": "gaye",
-          "start_sec": 3.120375,
-          "end_sec": 3.363083,
-          "start_frame": 94,
-          "end_frame": 101
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SABHI JANWAR CHUPCHAP",
-          "start_frame": 3,
-          "end_frame": 45,
-          "words": [
-            {
-              "word": "SABHI",
-              "start_frame": 3,
-              "end_frame": 14
-            },
-            {
-              "word": "JANWAR",
-              "start_frame": 16,
-              "end_frame": 28
-            },
-            {
-              "word": "CHUPCHAP",
-              "start_frame": 30,
-              "end_frame": 44
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "SAR JHUKA KAR",
-          "start_frame": 45,
-          "end_frame": 80,
-          "words": [
-            {
-              "word": "SAR",
-              "start_frame": 45,
-              "end_frame": 59
-            },
-            {
-              "word": "JHUKA",
-              "start_frame": 61,
-              "end_frame": 70
-            },
-            {
-              "word": "KAR",
-              "start_frame": 72,
-              "end_frame": 78
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "PICHE HAT GAYE",
-          "start_frame": 80,
-          "end_frame": 101,
-          "words": [
-            {
-              "word": "PICHE",
-              "start_frame": 80,
-              "end_frame": 87
-            },
-            {
-              "word": "HAT",
-              "start_frame": 87,
-              "end_frame": 92
-            },
-            {
-              "word": "GAYE",
-              "start_frame": 94,
-              "end_frame": 101
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 12,
-      "narration": "Sachi taakat shor mein nahi, khamoshi mein hoti hai.",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "dramatic-pulse",
-      "camera_motion": "climax-pull-back",
-      "video_prompt": "Flat 2D vector cartoon, lion king relaxing back into throne cushion with satisfied peaceful grin and folded paws, golden crown glowing, 35mm prime shot, thick outlines, 9:16 vertical, stumbling backward in comical bewilderment",
-      "visual_prompt": "Flat 2D cartoon lion king relaxing peacefully on throne, 9:16",
-      "beat_number": 12,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #12",
-      "image_url": "images/ep_39_scene_12.jpg",
-      "audio_url": "audio/beat_12.mp3",
-      "audio_duration_sec": 4.25,
-      "duration_in_frames": 125,
-      "words": [
-        {
-          "word": "Sachi",
-          "start_sec": 0.1,
-          "end_sec": 0.48750000000000004,
-          "start_frame": 3,
-          "end_frame": 15
-        },
-        {
-          "word": "taakat",
-          "start_sec": 0.5125,
-          "end_sec": 0.875,
-          "start_frame": 15,
-          "end_frame": 26
-        },
-        {
-          "word": "shor",
-          "start_sec": 0.8875,
-          "end_sec": 1.1375,
-          "start_frame": 27,
-          "end_frame": 34
-        },
-        {
-          "word": "mein",
-          "start_sec": 1.1625,
-          "end_sec": 1.375,
-          "start_frame": 35,
-          "end_frame": 41
-        },
-        {
-          "word": "nahi",
-          "start_sec": 1.4,
-          "end_sec": 1.75,
-          "start_frame": 42,
-          "end_frame": 52
-        },
-        {
-          "word": "khamoshi",
-          "start_sec": 1.925,
-          "end_sec": 2.375,
-          "start_frame": 58,
-          "end_frame": 71
-        },
-        {
-          "word": "mein",
-          "start_sec": 2.4,
-          "end_sec": 2.6125,
-          "start_frame": 72,
-          "end_frame": 78
-        },
-        {
-          "word": "hoti",
-          "start_sec": 2.6375,
-          "end_sec": 2.9250000000000003,
-          "start_frame": 79,
-          "end_frame": 88
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.95,
-          "end_sec": 3.35,
-          "start_frame": 88,
-          "end_frame": 100
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SACHI TAAKAT SHOR",
-          "start_frame": 3,
-          "end_frame": 35,
-          "words": [
-            {
-              "word": "SACHI",
-              "start_frame": 3,
-              "end_frame": 15
-            },
-            {
-              "word": "TAAKAT",
-              "start_frame": 15,
-              "end_frame": 26
-            },
-            {
-              "word": "SHOR",
-              "start_frame": 27,
-              "end_frame": 34
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "MEIN NAHI KHAMOSHI",
-          "start_frame": 35,
-          "end_frame": 72,
-          "words": [
-            {
-              "word": "MEIN",
-              "start_frame": 35,
-              "end_frame": 41
-            },
-            {
-              "word": "NAHI",
-              "start_frame": 42,
-              "end_frame": 52
-            },
-            {
-              "word": "KHAMOSHI",
+              "word": "SHATTERS",
               "start_frame": 58,
-              "end_frame": 71
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "MEIN HOTI HAI",
-          "start_frame": 72,
-          "end_frame": 100,
-          "words": [
-            {
-              "word": "MEIN",
-              "start_frame": 72,
-              "end_frame": 78
+              "end_frame": 72
             },
             {
-              "word": "HOTI",
-              "start_frame": 79,
-              "end_frame": 88
-            },
-            {
-              "word": "HAI",
-              "start_frame": 88,
-              "end_frame": 100
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 13,
-      "narration": "Toh batao, jungle ka asli don kaun hai?",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, lion king leaning forward pointing majestic royal paw directly at viewer under glowing jungle title banner, 10mm ultra-wide shot, thick clean black outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon lion pointing paw at camera under jungle banner, 9:16",
-      "beat_number": 13,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #13",
-      "image_url": "images/ep_39_scene_13.jpg",
-      "audio_url": "audio/beat_13.mp3",
-      "audio_duration_sec": 3.72,
-      "duration_in_frames": 110,
-      "words": [
-        {
-          "word": "Toh",
-          "start_sec": 0.099,
-          "end_sec": 0.25833300000000003,
-          "start_frame": 3,
-          "end_frame": 8
-        },
-        {
-          "word": "batao",
-          "start_sec": 0.270583,
-          "end_sec": 0.662749,
-          "start_frame": 8,
-          "end_frame": 20
-        },
-        {
-          "word": "jungle",
-          "start_sec": 0.920083,
-          "end_sec": 1.238708,
-          "start_frame": 28,
-          "end_frame": 37
-        },
-        {
-          "word": "ka",
-          "start_sec": 1.3,
-          "end_sec": 1.606375,
-          "start_frame": 39,
-          "end_frame": 48
-        },
-        {
-          "word": "asli",
-          "start_sec": 1.655375,
-          "end_sec": 1.974,
-          "start_frame": 50,
-          "end_frame": 59
-        },
-        {
-          "word": "don",
-          "start_sec": 2.023041,
-          "end_sec": 2.194624,
-          "start_frame": 61,
-          "end_frame": 66
-        },
-        {
-          "word": "kaun",
-          "start_sec": 2.268125,
-          "end_sec": 2.476458,
-          "start_frame": 68,
-          "end_frame": 74
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.476458,
-          "end_sec": 2.7705830000000002,
-          "start_frame": 74,
-          "end_frame": 83
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "TOH BATAO JUNGLE",
-          "start_frame": 3,
-          "end_frame": 39,
-          "words": [
-            {
-              "word": "TOH",
-              "start_frame": 3,
-              "end_frame": 8
-            },
-            {
-              "word": "BATAO",
-              "start_frame": 8,
-              "end_frame": 20
-            },
-            {
-              "word": "JUNGLE",
-              "start_frame": 28,
-              "end_frame": 37
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "KA ASLI DON",
-          "start_frame": 39,
-          "end_frame": 68,
-          "words": [
-            {
-              "word": "KA",
-              "start_frame": 39,
-              "end_frame": 48
-            },
-            {
-              "word": "ASLI",
-              "start_frame": 50,
-              "end_frame": 59
-            },
-            {
-              "word": "DON",
-              "start_frame": 61,
-              "end_frame": 66
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "KAUN HAI",
-          "start_frame": 68,
-          "end_frame": 83,
-          "words": [
-            {
-              "word": "KAUN",
-              "start_frame": 68,
-              "end_frame": 74
-            },
-            {
-              "word": "HAI",
-              "start_frame": 74,
-              "end_frame": 83
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 14,
-      "narration": "A Sher, B Haathi, C Bhalu, ya D Bandar? Comment now!",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "loop-convergence-zoom",
-      "camera_motion": "loop-convergence-zoom",
-      "video_prompt": "50mm cinema lens, medium conversational framing, Flat 2D vector cartoon, vibrant multiple choice quiz card hovering in center displaying options A Sher, B Haathi, C Bhalu, D Bandar, lion king smiling knowingly on throne, 9:16 vertical, shaking head with hands on cheeks in absolute disbelief",
-      "visual_prompt": "Flat 2D cartoon multiple choice options board A Sher B Haathi C Bhalu D Bandar, 9:16",
-      "beat_number": 14,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #14",
-      "image_url": "images/ep_39_scene_14.jpg",
-      "audio_url": "audio/beat_14.mp3",
-      "audio_duration_sec": 6.77,
-      "duration_in_frames": 198,
-      "words": [
-        {
-          "word": "A",
-          "start_sec": 0.0995,
-          "end_sec": 0.20766600000000002,
-          "start_frame": 3,
-          "end_frame": 6
-        },
-        {
-          "word": "Sher",
-          "start_sec": 0.207708,
-          "end_sec": 0.832708,
-          "start_frame": 6,
-          "end_frame": 25
-        },
-        {
-          "word": "B",
-          "start_sec": 1.013,
-          "end_sec": 1.229333,
-          "start_frame": 30,
-          "end_frame": 37
-        },
-        {
-          "word": "Haathi",
-          "start_sec": 1.229333,
-          "end_sec": 1.806249,
-          "start_frame": 37,
-          "end_frame": 54
-        },
-        {
-          "word": "C",
-          "start_sec": 2.022583,
-          "end_sec": 2.311041,
-          "start_frame": 61,
-          "end_frame": 69
-        },
-        {
-          "word": "Bhalu",
-          "start_sec": 2.311041,
-          "end_sec": 2.8999989999999998,
-          "start_frame": 69,
-          "end_frame": 87
-        },
-        {
-          "word": "ya",
-          "start_sec": 3.104333,
-          "end_sec": 3.500958,
-          "start_frame": 93,
-          "end_frame": 105
-        },
-        {
-          "word": "D",
-          "start_sec": 3.500958,
-          "end_sec": 3.7293329999999996,
-          "start_frame": 105,
-          "end_frame": 112
-        },
-        {
-          "word": "Bandar",
-          "start_sec": 3.729333,
-          "end_sec": 4.1980830000000005,
-          "start_frame": 112,
-          "end_frame": 126
-        },
-        {
-          "word": "Comment",
-          "start_sec": 5.001458,
-          "end_sec": 5.494249,
-          "start_frame": 150,
-          "end_frame": 165
-        },
-        {
-          "word": "now",
-          "start_sec": 5.49425,
-          "end_sec": 5.963,
-          "start_frame": 165,
-          "end_frame": 179
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "A SHER B",
-          "start_frame": 3,
-          "end_frame": 37,
-          "words": [
-            {
-              "word": "A",
-              "start_frame": 3,
-              "end_frame": 6
-            },
-            {
-              "word": "SHER",
-              "start_frame": 6,
-              "end_frame": 25
-            },
-            {
-              "word": "B",
-              "start_frame": 30,
-              "end_frame": 37
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "HAATHI C BHALU",
-          "start_frame": 37,
-          "end_frame": 93,
-          "words": [
-            {
-              "word": "HAATHI",
-              "start_frame": 37,
-              "end_frame": 54
-            },
-            {
-              "word": "C",
-              "start_frame": 61,
-              "end_frame": 69
-            },
-            {
-              "word": "BHALU",
-              "start_frame": 69,
-              "end_frame": 87
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "YA D BANDAR",
-          "start_frame": 93,
-          "end_frame": 150,
-          "words": [
-            {
-              "word": "YA",
-              "start_frame": 93,
-              "end_frame": 105
-            },
-            {
-              "word": "D",
-              "start_frame": 105,
-              "end_frame": 112
-            },
-            {
-              "word": "BANDAR",
-              "start_frame": 112,
-              "end_frame": 126
+              "word": "VIOLENTLY",
+              "start_frame": 73,
+              "end_frame": 90
             }
           ]
         },
         {
           "chunk_id": 3,
-          "text": "COMMENT NOW",
-          "start_frame": 150,
-          "end_frame": 179,
+          "text": "PROVING THAT FREEZING",
+          "start_frame": 99,
+          "end_frame": 129,
           "words": [
             {
-              "word": "COMMENT",
-              "start_frame": 150,
-              "end_frame": 165
+              "word": "PROVING",
+              "start_frame": 99,
+              "end_frame": 110
             },
             {
-              "word": "NOW",
-              "start_frame": 165,
-              "end_frame": 179
+              "word": "THAT",
+              "start_frame": 110,
+              "end_frame": 115
+            },
+            {
+              "word": "FREEZING",
+              "start_frame": 115,
+              "end_frame": 129
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "TIME WON'T MAKE",
+          "start_frame": 129,
+          "end_frame": 151,
+          "words": [
+            {
+              "word": "TIME",
+              "start_frame": 129,
+              "end_frame": 138
+            },
+            {
+              "word": "WON'T",
+              "start_frame": 138,
+              "end_frame": 144
+            },
+            {
+              "word": "MAKE",
+              "start_frame": 144,
+              "end_frame": 150
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "YOU A GOD",
+          "start_frame": 151,
+          "end_frame": 178,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 151,
+              "end_frame": 154
+            },
+            {
+              "word": "A",
+              "start_frame": 155,
+              "end_frame": 157
+            },
+            {
+              "word": "GOD",
+              "start_frame": 157,
+              "end_frame": 169
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "IT WILL ERASE",
+          "start_frame": 178,
+          "end_frame": 197,
+          "words": [
+            {
+              "word": "IT",
+              "start_frame": 178,
+              "end_frame": 181
+            },
+            {
+              "word": "WILL",
+              "start_frame": 181,
+              "end_frame": 185
+            },
+            {
+              "word": "ERASE",
+              "start_frame": 186,
+              "end_frame": 197
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "YOU",
+          "start_frame": 197,
+          "end_frame": 206,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 197,
+              "end_frame": 206
             }
           ]
         }
@@ -2144,153 +1439,227 @@
   "beats": [
     {
       "scene_number": 1,
-      "narration": "Kya jungle ka asli don sher hi hai? Dekho!",
+      "narration": "What if you woke up tomorrow with the power to freeze time for 24 hours?",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, cute unimpressed cartoon lion king wearing a golden crown sitting on an ornate throne in lush jungle, 10mm ultra-wide lens, dynamic push-in shot, animals arguing in background, thick clean black outlines, storybook aesthetic, vibrant flat colors, 9:16 vertical",
-      "visual_prompt": "Flat 2D vector cartoon, cute lion king with crown on throne looking unimpressed, jungle foliage, thick black outlines, 9:16",
+      "camera_motion": "smooth-zoom-in",
+      "video_prompt": "24mm anamorphic wide angle shot, low-angle perspective, young man in dark charcoal hoodie stepping forward through a frozen city avenue, hand outstretched in extreme foreshortening, suspended raindrops floating in mid-air, levitating yellow cabs, shattered glowing cyan clock in sky, Unreal Engine 5 render, ray-traced volumetric lighting, 8k vertical 9:16",
+      "visual_prompt": "24mm anamorphic wide angle shot of young man in dark hoodie stepping through frozen city with floating raindrops and glowing clock, 8k",
       "beat_number": 1,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #1",
-      "image_url": "images/ep_39_scene_1.jpg",
+      "image_url": "images/ep_40_scene_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 4.85,
-      "duration_in_frames": 143,
+      "audio_duration_sec": 4.94,
+      "duration_in_frames": 156,
       "words": [
         {
-          "word": "Kya",
-          "start_sec": 0.099,
-          "end_sec": 0.33183300000000004,
+          "word": "What",
+          "start_sec": 0.1,
+          "end_sec": 0.30000000000000004,
           "start_frame": 3,
-          "end_frame": 10
+          "end_frame": 9
         },
         {
-          "word": "jungle",
-          "start_sec": 0.393125,
-          "end_sec": 0.71175,
-          "start_frame": 12,
-          "end_frame": 21
+          "word": "if",
+          "start_sec": 0.3125,
+          "end_sec": 0.4125,
+          "start_frame": 9,
+          "end_frame": 12
         },
         {
-          "word": "ka",
-          "start_sec": 0.773041,
-          "end_sec": 1.091666,
-          "start_frame": 23,
-          "end_frame": 33
+          "word": "you",
+          "start_sec": 0.425,
+          "end_sec": 0.5375,
+          "start_frame": 13,
+          "end_frame": 16
         },
         {
-          "word": "asli",
-          "start_sec": 1.140666,
-          "end_sec": 1.459291,
-          "start_frame": 34,
-          "end_frame": 44
+          "word": "woke",
+          "start_sec": 0.55,
+          "end_sec": 0.775,
+          "start_frame": 16,
+          "end_frame": 23
         },
         {
-          "word": "don",
-          "start_sec": 1.508333,
-          "end_sec": 1.716666,
-          "start_frame": 45,
-          "end_frame": 51
+          "word": "up",
+          "start_sec": 0.7875,
+          "end_sec": 0.9375,
+          "start_frame": 24,
+          "end_frame": 28
         },
         {
-          "word": "sher",
-          "start_sec": 1.741166,
-          "end_sec": 1.986249,
-          "start_frame": 52,
-          "end_frame": 60
+          "word": "tomorrow",
+          "start_sec": 0.95,
+          "end_sec": 1.4375,
+          "start_frame": 28,
+          "end_frame": 43
         },
         {
-          "word": "hi",
-          "start_sec": 2.023041,
-          "end_sec": 2.231374,
-          "start_frame": 61,
-          "end_frame": 67
+          "word": "with",
+          "start_sec": 1.45,
+          "end_sec": 1.575,
+          "start_frame": 44,
+          "end_frame": 47
         },
         {
-          "word": "hai",
-          "start_sec": 2.268125,
-          "end_sec": 2.53775,
-          "start_frame": 68,
+          "word": "the",
+          "start_sec": 1.5875,
+          "end_sec": 1.6749999999999998,
+          "start_frame": 48,
+          "end_frame": 50
+        },
+        {
+          "word": "power",
+          "start_sec": 1.6875,
+          "end_sec": 2.0625,
+          "start_frame": 51,
+          "end_frame": 62
+        },
+        {
+          "word": "to",
+          "start_sec": 2.075,
+          "end_sec": 2.1750000000000003,
+          "start_frame": 62,
+          "end_frame": 65
+        },
+        {
+          "word": "freeze",
+          "start_sec": 2.1875,
+          "end_sec": 2.55,
+          "start_frame": 66,
           "end_frame": 76
         },
         {
-          "word": "Dekho",
-          "start_sec": 3.492666,
-          "end_sec": 3.848041,
-          "start_frame": 105,
-          "end_frame": 115
+          "word": "time",
+          "start_sec": 2.5625,
+          "end_sec": 2.875,
+          "start_frame": 77,
+          "end_frame": 86
+        },
+        {
+          "word": "for",
+          "start_sec": 2.8875,
+          "end_sec": 3.0125,
+          "start_frame": 87,
+          "end_frame": 90
+        },
+        {
+          "word": "24 hours",
+          "start_sec": 3.025,
+          "end_sec": 4.0625,
+          "start_frame": 91,
+          "end_frame": 122
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "KYA JUNGLE KA",
+          "text": "WHAT IF YOU",
           "start_frame": 3,
-          "end_frame": 34,
+          "end_frame": 16,
           "words": [
             {
-              "word": "KYA",
+              "word": "WHAT",
               "start_frame": 3,
-              "end_frame": 10
+              "end_frame": 9
             },
             {
-              "word": "JUNGLE",
-              "start_frame": 12,
-              "end_frame": 21
+              "word": "IF",
+              "start_frame": 9,
+              "end_frame": 12
             },
             {
-              "word": "KA",
-              "start_frame": 23,
-              "end_frame": 33
+              "word": "YOU",
+              "start_frame": 13,
+              "end_frame": 16
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "ASLI DON SHER",
-          "start_frame": 34,
-          "end_frame": 61,
+          "text": "WOKE UP TOMORROW",
+          "start_frame": 16,
+          "end_frame": 44,
           "words": [
             {
-              "word": "ASLI",
-              "start_frame": 34,
-              "end_frame": 44
+              "word": "WOKE",
+              "start_frame": 16,
+              "end_frame": 23
             },
             {
-              "word": "DON",
-              "start_frame": 45,
-              "end_frame": 51
+              "word": "UP",
+              "start_frame": 24,
+              "end_frame": 28
             },
             {
-              "word": "SHER",
-              "start_frame": 52,
-              "end_frame": 60
+              "word": "TOMORROW",
+              "start_frame": 28,
+              "end_frame": 43
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "HI HAI DEKHO",
-          "start_frame": 61,
-          "end_frame": 115,
+          "text": "WITH THE POWER",
+          "start_frame": 44,
+          "end_frame": 62,
           "words": [
             {
-              "word": "HI",
-              "start_frame": 61,
-              "end_frame": 67
+              "word": "WITH",
+              "start_frame": 44,
+              "end_frame": 47
             },
             {
-              "word": "HAI",
-              "start_frame": 68,
+              "word": "THE",
+              "start_frame": 48,
+              "end_frame": 50
+            },
+            {
+              "word": "POWER",
+              "start_frame": 51,
+              "end_frame": 62
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "TO FREEZE TIME",
+          "start_frame": 62,
+          "end_frame": 87,
+          "words": [
+            {
+              "word": "TO",
+              "start_frame": 62,
+              "end_frame": 65
+            },
+            {
+              "word": "FREEZE",
+              "start_frame": 66,
               "end_frame": 76
             },
             {
-              "word": "DEKHO",
-              "start_frame": 105,
-              "end_frame": 115
+              "word": "TIME",
+              "start_frame": 77,
+              "end_frame": 86
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "FOR 24 HOURS",
+          "start_frame": 87,
+          "end_frame": 122,
+          "words": [
+            {
+              "word": "FOR",
+              "start_frame": 87,
+              "end_frame": 90
+            },
+            {
+              "word": "24 HOURS",
+              "start_frame": 91,
+              "end_frame": 122
             }
           ]
         }
@@ -2298,153 +1667,283 @@
     },
     {
       "scene_number": 2,
-      "narration": "Sher apne takht par baitha bore ho raha tha.",
+      "narration": "At first, it feels like the ultimate playground: floating raindrops, frozen traffic, and complete silence in the city.",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
       "sfx": "whoosh",
       "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, deadpan cartoon lion king resting chin on paw looking sideways with bored half-open eyes, 24mm tracking pan, golden crown tilted, sunburst background rays, thick black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon lion king resting chin on paw bored on throne, 9:16",
+      "video_prompt": "10mm ultra-wide lens tracking pan, young man walking calmly past frozen pedestrians stuck mid-stride on urban sidewalk, a cup of coffee suspended mid-spill with floating liquid droplets, dramatic depth, Unreal Engine 5 cinematic render, glowing blue rim light, 8k vertical 9:16",
+      "visual_prompt": "10mm ultra-wide lens tracking pan of young man walking past frozen pedestrians with floating coffee droplets, 8k",
       "beat_number": 2,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #2",
-      "image_url": "images/ep_39_scene_2.jpg",
+      "image_url": "images/ep_40_scene_2.jpg",
       "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 3.5,
-      "duration_in_frames": 104,
+      "audio_duration_sec": 8.69,
+      "duration_in_frames": 268,
       "words": [
         {
-          "word": "Sher",
-          "start_sec": 0.1,
-          "end_sec": 0.4125,
+          "word": "At",
+          "start_sec": 0.088375,
+          "end_sec": 0.202,
           "start_frame": 3,
-          "end_frame": 12
+          "end_frame": 6
         },
         {
-          "word": "apne",
-          "start_sec": 0.425,
-          "end_sec": 0.725,
-          "start_frame": 13,
-          "end_frame": 22
+          "word": "first",
+          "start_sec": 0.214666,
+          "end_sec": 0.707082,
+          "start_frame": 6,
+          "end_frame": 21
         },
         {
-          "word": "takht",
-          "start_sec": 0.75,
-          "end_sec": 1.0625,
-          "start_frame": 22,
-          "end_frame": 32
+          "word": "it",
+          "start_sec": 1.060625,
+          "end_sec": 1.149,
+          "start_frame": 32,
+          "end_frame": 34
         },
         {
-          "word": "par",
-          "start_sec": 1.0875,
-          "end_sec": 1.3125,
-          "start_frame": 33,
-          "end_frame": 39
+          "word": "feels",
+          "start_sec": 1.161625,
+          "end_sec": 1.540416,
+          "start_frame": 35,
+          "end_frame": 46
         },
         {
-          "word": "baitha",
-          "start_sec": 1.325,
-          "end_sec": 1.65,
-          "start_frame": 40,
-          "end_frame": 50
+          "word": "like",
+          "start_sec": 1.553041,
+          "end_sec": 1.691916,
+          "start_frame": 47,
+          "end_frame": 51
         },
         {
-          "word": "bore",
-          "start_sec": 1.675,
-          "end_sec": 1.925,
-          "start_frame": 50,
-          "end_frame": 58
+          "word": "the",
+          "start_sec": 1.704541,
+          "end_sec": 1.805541,
+          "start_frame": 51,
+          "end_frame": 54
         },
         {
-          "word": "ho",
-          "start_sec": 1.95,
-          "end_sec": 2.1125,
-          "start_frame": 58,
-          "end_frame": 63
+          "word": "ultimate",
+          "start_sec": 1.868666,
+          "end_sec": 2.285332,
+          "start_frame": 56,
+          "end_frame": 69
         },
         {
-          "word": "raha",
-          "start_sec": 2.1375,
-          "end_sec": 2.4000000000000004,
-          "start_frame": 64,
-          "end_frame": 72
+          "word": "playground",
+          "start_sec": 2.298,
+          "end_sec": 2.878791,
+          "start_frame": 69,
+          "end_frame": 86
         },
         {
-          "word": "tha",
-          "start_sec": 2.4125,
-          "end_sec": 2.6125000000000003,
-          "start_frame": 72,
-          "end_frame": 78
+          "word": "floating",
+          "start_sec": 3.649,
+          "end_sec": 4.078291,
+          "start_frame": 109,
+          "end_frame": 122
+        },
+        {
+          "word": "raindrops",
+          "start_sec": 4.090916,
+          "end_sec": 4.747499,
+          "start_frame": 123,
+          "end_frame": 142
+        },
+        {
+          "word": "frozen",
+          "start_sec": 5.189375,
+          "end_sec": 5.568166,
+          "start_frame": 156,
+          "end_frame": 167
+        },
+        {
+          "word": "traffic",
+          "start_sec": 5.580791,
+          "end_sec": 6.098457,
+          "start_frame": 167,
+          "end_frame": 183
+        },
+        {
+          "word": "and",
+          "start_sec": 6.603541,
+          "end_sec": 6.679291,
+          "start_frame": 198,
+          "end_frame": 200
+        },
+        {
+          "word": "complete",
+          "start_sec": 6.691916,
+          "end_sec": 7.133832,
+          "start_frame": 201,
+          "end_frame": 214
+        },
+        {
+          "word": "silence",
+          "start_sec": 7.146458,
+          "end_sec": 7.714624,
+          "start_frame": 214,
+          "end_frame": 231
+        },
+        {
+          "word": "in",
+          "start_sec": 7.727291,
+          "end_sec": 7.803041,
+          "start_frame": 232,
+          "end_frame": 234
+        },
+        {
+          "word": "the",
+          "start_sec": 7.815666,
+          "end_sec": 7.891416,
+          "start_frame": 234,
+          "end_frame": 237
+        },
+        {
+          "word": "city",
+          "start_sec": 7.904041,
+          "end_sec": 8.308082,
+          "start_frame": 237,
+          "end_frame": 249
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "SHER APNE TAKHT",
+          "text": "AT FIRST IT",
           "start_frame": 3,
-          "end_frame": 33,
+          "end_frame": 35,
           "words": [
             {
-              "word": "SHER",
+              "word": "AT",
               "start_frame": 3,
-              "end_frame": 12
+              "end_frame": 6
             },
             {
-              "word": "APNE",
-              "start_frame": 13,
-              "end_frame": 22
+              "word": "FIRST",
+              "start_frame": 6,
+              "end_frame": 21
             },
             {
-              "word": "TAKHT",
-              "start_frame": 22,
-              "end_frame": 32
+              "word": "IT",
+              "start_frame": 32,
+              "end_frame": 34
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "PAR BAITHA BORE",
-          "start_frame": 33,
-          "end_frame": 58,
+          "text": "FEELS LIKE THE",
+          "start_frame": 35,
+          "end_frame": 56,
           "words": [
             {
-              "word": "PAR",
-              "start_frame": 33,
-              "end_frame": 39
+              "word": "FEELS",
+              "start_frame": 35,
+              "end_frame": 46
             },
             {
-              "word": "BAITHA",
-              "start_frame": 40,
-              "end_frame": 50
+              "word": "LIKE",
+              "start_frame": 47,
+              "end_frame": 51
             },
             {
-              "word": "BORE",
-              "start_frame": 50,
-              "end_frame": 58
+              "word": "THE",
+              "start_frame": 51,
+              "end_frame": 54
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "HO RAHA THA",
-          "start_frame": 58,
-          "end_frame": 78,
+          "text": "ULTIMATE PLAYGROUND FLOATING",
+          "start_frame": 56,
+          "end_frame": 123,
           "words": [
             {
-              "word": "HO",
-              "start_frame": 58,
-              "end_frame": 63
+              "word": "ULTIMATE",
+              "start_frame": 56,
+              "end_frame": 69
             },
             {
-              "word": "RAHA",
-              "start_frame": 64,
-              "end_frame": 72
+              "word": "PLAYGROUND",
+              "start_frame": 69,
+              "end_frame": 86
             },
             {
-              "word": "THA",
-              "start_frame": 72,
-              "end_frame": 78
+              "word": "FLOATING",
+              "start_frame": 109,
+              "end_frame": 122
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "RAINDROPS FROZEN TRAFFIC",
+          "start_frame": 123,
+          "end_frame": 198,
+          "words": [
+            {
+              "word": "RAINDROPS",
+              "start_frame": 123,
+              "end_frame": 142
+            },
+            {
+              "word": "FROZEN",
+              "start_frame": 156,
+              "end_frame": 167
+            },
+            {
+              "word": "TRAFFIC",
+              "start_frame": 167,
+              "end_frame": 183
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "AND COMPLETE SILENCE",
+          "start_frame": 198,
+          "end_frame": 232,
+          "words": [
+            {
+              "word": "AND",
+              "start_frame": 198,
+              "end_frame": 200
+            },
+            {
+              "word": "COMPLETE",
+              "start_frame": 201,
+              "end_frame": 214
+            },
+            {
+              "word": "SILENCE",
+              "start_frame": 214,
+              "end_frame": 231
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "IN THE CITY",
+          "start_frame": 232,
+          "end_frame": 249,
+          "words": [
+            {
+              "word": "IN",
+              "start_frame": 232,
+              "end_frame": 234
+            },
+            {
+              "word": "THE",
+              "start_frame": 234,
+              "end_frame": 237
+            },
+            {
+              "word": "CITY",
+              "start_frame": 237,
+              "end_frame": 249
             }
           ]
         }
@@ -2452,141 +1951,283 @@
     },
     {
       "scene_number": 3,
-      "narration": "Bhalu bola: 'Mera panja sabse zyada bhaari hai!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Bhalu",
-      "speaker_avatar": "\ud83d\udc3b",
+      "narration": "Within ten seconds, sheer terror sets in. Light photons stop moving, instantly plunging your vision into pitch-black darkness.",
+      "speaker": "speaker_1",
+      "speaker_name": "Narrator",
       "sfx": "pop",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, giant comical cartoon brown bear slamming massive furry paw on a jungle rock with aggressive roar, 35mm prime lens, dust flying, thick black outlines, vibrant colors, 9:16 vertical, turning quickly toward camera with comedic shock",
-      "visual_prompt": "Flat 2D cartoon brown bear slamming heavy paw on rock roaring, 9:16",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "35mm prime lens macro close-up, young man reacting with wide eyes in shock, reaching upward with trembling hands as pitch darkness creeps across his face, light beams freezing like solid luminescent glass rods, volumetric cyan lighting, ray tracing, 8k vertical 9:16",
+      "visual_prompt": "35mm prime lens close up of young man reacting in shock reaching upward as darkness creeps across face, 8k",
       "beat_number": 3,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #3",
-      "image_url": "images/ep_39_scene_3.jpg",
+      "image_url": "images/ep_40_scene_3.jpg",
       "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 4.13,
-      "duration_in_frames": 122,
+      "audio_duration_sec": 9.26,
+      "duration_in_frames": 285,
       "words": [
         {
-          "word": "Bhalu",
-          "start_sec": 0.0995,
-          "end_sec": 0.39654100000000003,
+          "word": "Within",
+          "start_sec": 0.1,
+          "end_sec": 0.5,
           "start_frame": 3,
-          "end_frame": 12
+          "end_frame": 15
         },
         {
-          "word": "bola",
-          "start_sec": 0.433666,
-          "end_sec": 0.780207,
-          "start_frame": 13,
-          "end_frame": 23
+          "word": "ten",
+          "start_sec": 0.5125,
+          "end_sec": 0.7875,
+          "start_frame": 15,
+          "end_frame": 24
         },
         {
-          "word": "Mera",
-          "start_sec": 0.990583,
-          "end_sec": 1.250499,
-          "start_frame": 30,
-          "end_frame": 38
+          "word": "seconds",
+          "start_sec": 0.8,
+          "end_sec": 1.3625,
+          "start_frame": 24,
+          "end_frame": 41
         },
         {
-          "word": "panja",
-          "start_sec": 1.3,
-          "end_sec": 1.584666,
-          "start_frame": 39,
-          "end_frame": 48
+          "word": "sheer",
+          "start_sec": 1.5625,
+          "end_sec": 1.85,
+          "start_frame": 47,
+          "end_frame": 56
         },
         {
-          "word": "sabse",
-          "start_sec": 1.621791,
-          "end_sec": 2.054957,
-          "start_frame": 49,
-          "end_frame": 62
+          "word": "terror",
+          "start_sec": 1.8625,
+          "end_sec": 2.2,
+          "start_frame": 56,
+          "end_frame": 66
         },
         {
-          "word": "zyada",
-          "start_sec": 2.104458,
-          "end_sec": 2.512874,
-          "start_frame": 63,
-          "end_frame": 75
+          "word": "sets",
+          "start_sec": 2.2125,
+          "end_sec": 2.5375,
+          "start_frame": 66,
+          "end_frame": 76
         },
         {
-          "word": "bhaari",
-          "start_sec": 2.537625,
-          "end_sec": 2.822291,
+          "word": "in",
+          "start_sec": 2.55,
+          "end_sec": 2.8249999999999997,
           "start_frame": 76,
           "end_frame": 85
         },
         {
-          "word": "hai",
-          "start_sec": 2.859416,
-          "end_sec": 3.144082,
-          "start_frame": 86,
-          "end_frame": 94
+          "word": "Light",
+          "start_sec": 3.6875,
+          "end_sec": 4.0125,
+          "start_frame": 111,
+          "end_frame": 120
+        },
+        {
+          "word": "photons",
+          "start_sec": 4.025,
+          "end_sec": 4.5625,
+          "start_frame": 121,
+          "end_frame": 137
+        },
+        {
+          "word": "stop",
+          "start_sec": 4.575,
+          "end_sec": 4.8500000000000005,
+          "start_frame": 137,
+          "end_frame": 146
+        },
+        {
+          "word": "moving",
+          "start_sec": 4.8625,
+          "end_sec": 5.25,
+          "start_frame": 146,
+          "end_frame": 158
+        },
+        {
+          "word": "instantly",
+          "start_sec": 5.5125,
+          "end_sec": 5.9375,
+          "start_frame": 165,
+          "end_frame": 178
+        },
+        {
+          "word": "plunging",
+          "start_sec": 5.95,
+          "end_sec": 6.3875,
+          "start_frame": 178,
+          "end_frame": 192
+        },
+        {
+          "word": "your",
+          "start_sec": 6.4,
+          "end_sec": 6.5375000000000005,
+          "start_frame": 192,
+          "end_frame": 196
+        },
+        {
+          "word": "vision",
+          "start_sec": 6.55,
+          "end_sec": 6.9125,
+          "start_frame": 196,
+          "end_frame": 207
+        },
+        {
+          "word": "into",
+          "start_sec": 6.925,
+          "end_sec": 7.1375,
+          "start_frame": 208,
+          "end_frame": 214
+        },
+        {
+          "word": "pitch-black",
+          "start_sec": 7.15,
+          "end_sec": 7.75,
+          "start_frame": 214,
+          "end_frame": 232
+        },
+        {
+          "word": "darkness",
+          "start_sec": 7.7625,
+          "end_sec": 8.4125,
+          "start_frame": 233,
+          "end_frame": 252
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "BHALU BOLA MERA",
+          "text": "WITHIN TEN SECONDS",
           "start_frame": 3,
-          "end_frame": 39,
+          "end_frame": 47,
           "words": [
             {
-              "word": "BHALU",
+              "word": "WITHIN",
               "start_frame": 3,
-              "end_frame": 12
+              "end_frame": 15
             },
             {
-              "word": "BOLA",
-              "start_frame": 13,
-              "end_frame": 23
+              "word": "TEN",
+              "start_frame": 15,
+              "end_frame": 24
             },
             {
-              "word": "MERA",
-              "start_frame": 30,
-              "end_frame": 38
+              "word": "SECONDS",
+              "start_frame": 24,
+              "end_frame": 41
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "PANJA SABSE ZYADA",
-          "start_frame": 39,
+          "text": "SHEER TERROR SETS",
+          "start_frame": 47,
           "end_frame": 76,
           "words": [
             {
-              "word": "PANJA",
-              "start_frame": 39,
-              "end_frame": 48
+              "word": "SHEER",
+              "start_frame": 47,
+              "end_frame": 56
             },
             {
-              "word": "SABSE",
-              "start_frame": 49,
-              "end_frame": 62
+              "word": "TERROR",
+              "start_frame": 56,
+              "end_frame": 66
             },
             {
-              "word": "ZYADA",
-              "start_frame": 63,
-              "end_frame": 75
+              "word": "SETS",
+              "start_frame": 66,
+              "end_frame": 76
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "BHAARI HAI",
+          "text": "IN LIGHT PHOTONS",
           "start_frame": 76,
-          "end_frame": 94,
+          "end_frame": 137,
           "words": [
             {
-              "word": "BHAARI",
+              "word": "IN",
               "start_frame": 76,
               "end_frame": 85
             },
             {
-              "word": "HAI",
-              "start_frame": 86,
-              "end_frame": 94
+              "word": "LIGHT",
+              "start_frame": 111,
+              "end_frame": 120
+            },
+            {
+              "word": "PHOTONS",
+              "start_frame": 121,
+              "end_frame": 137
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "STOP MOVING INSTANTLY",
+          "start_frame": 137,
+          "end_frame": 178,
+          "words": [
+            {
+              "word": "STOP",
+              "start_frame": 137,
+              "end_frame": 146
+            },
+            {
+              "word": "MOVING",
+              "start_frame": 146,
+              "end_frame": 158
+            },
+            {
+              "word": "INSTANTLY",
+              "start_frame": 165,
+              "end_frame": 178
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "PLUNGING YOUR VISION",
+          "start_frame": 178,
+          "end_frame": 208,
+          "words": [
+            {
+              "word": "PLUNGING",
+              "start_frame": 178,
+              "end_frame": 192
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 192,
+              "end_frame": 196
+            },
+            {
+              "word": "VISION",
+              "start_frame": 196,
+              "end_frame": 207
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "INTO PITCH-BLACK DARKNESS",
+          "start_frame": 208,
+          "end_frame": 252,
+          "words": [
+            {
+              "word": "INTO",
+              "start_frame": 208,
+              "end_frame": 214
+            },
+            {
+              "word": "PITCH-BLACK",
+              "start_frame": 214,
+              "end_frame": 232
+            },
+            {
+              "word": "DARKNESS",
+              "start_frame": 233,
+              "end_frame": 252
             }
           ]
         }
@@ -2594,141 +2235,283 @@
     },
     {
       "scene_number": 4,
-      "narration": "Bandar chilla: 'Main sabse tez aur chatur hoon!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Bandar",
-      "speaker_avatar": "\ud83d\udc12",
-      "sfx": "pop",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, cheeky cartoon monkey hanging upside down by tail from jungle vine waving a banana and mocking, 24mm low-angle shot, thick clean outlines, vibrant saturated colors, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon monkey hanging by tail mocking with banana, 9:16",
+      "narration": "Oxygen molecules freeze in place like solid glass, meaning your lungs cannot pull a single breath of air.",
+      "speaker": "speaker_1",
+      "speaker_name": "Narrator",
+      "sfx": "dramatic-pulse",
+      "camera_motion": "dramatic-pulse",
+      "video_prompt": "50mm cinema lens medium shot, young man clutching throat gasping for breath, glowing blue frost crystals forming around mouth as frozen air resists inhalation, collapsing to one knee on frozen asphalt street, shattered temporal clock above, Unreal Engine 5 render, 8k vertical 9:16",
+      "visual_prompt": "50mm cinema lens medium shot of young man clutching throat collapsing to one knee on frozen street, 8k",
       "beat_number": 4,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
       "title": "Beat #4",
-      "image_url": "images/ep_39_scene_4.jpg",
+      "image_url": "images/ep_40_scene_4.jpg",
       "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 3.72,
-      "duration_in_frames": 110,
+      "audio_duration_sec": 6.84,
+      "duration_in_frames": 213,
       "words": [
         {
-          "word": "Bandar",
-          "start_sec": 0.1,
-          "end_sec": 0.55,
+          "word": "Oxygen",
+          "start_sec": 0.088375,
+          "end_sec": 0.517666,
           "start_frame": 3,
           "end_frame": 16
         },
         {
-          "word": "chilla",
-          "start_sec": 0.5625,
-          "end_sec": 0.8625,
-          "start_frame": 17,
-          "end_frame": 26
+          "word": "molecules",
+          "start_sec": 0.530291,
+          "end_sec": 1.085832,
+          "start_frame": 16,
+          "end_frame": 33
         },
         {
-          "word": "Main",
-          "start_sec": 1.075,
-          "end_sec": 1.3,
-          "start_frame": 32,
-          "end_frame": 39
+          "word": "freeze",
+          "start_sec": 1.0985,
+          "end_sec": 1.5277910000000001,
+          "start_frame": 33,
+          "end_frame": 46
         },
         {
-          "word": "sabse",
-          "start_sec": 1.325,
-          "end_sec": 1.6749999999999998,
-          "start_frame": 40,
+          "word": "in",
+          "start_sec": 1.540416,
+          "end_sec": 1.679291,
+          "start_frame": 46,
           "end_frame": 50
         },
         {
-          "word": "tez",
-          "start_sec": 1.7,
-          "end_sec": 2.0,
+          "word": "place",
+          "start_sec": 1.691916,
+          "end_sec": 2.0580819999999997,
           "start_frame": 51,
-          "end_frame": 60
+          "end_frame": 62
         },
         {
-          "word": "aur",
-          "start_sec": 2.025,
-          "end_sec": 2.1125,
-          "start_frame": 61,
-          "end_frame": 63
+          "word": "like",
+          "start_sec": 2.070708,
+          "end_sec": 2.2474580000000004,
+          "start_frame": 62,
+          "end_frame": 67
         },
         {
-          "word": "chatur",
-          "start_sec": 2.125,
-          "end_sec": 2.45,
-          "start_frame": 64,
-          "end_frame": 74
+          "word": "solid",
+          "start_sec": 2.260083,
+          "end_sec": 2.638874,
+          "start_frame": 68,
+          "end_frame": 79
         },
         {
-          "word": "hoon",
-          "start_sec": 2.475,
-          "end_sec": 2.8125,
-          "start_frame": 74,
-          "end_frame": 84
+          "word": "glass",
+          "start_sec": 2.6515,
+          "end_sec": 3.1691659999999997,
+          "start_frame": 80,
+          "end_frame": 95
+        },
+        {
+          "word": "meaning",
+          "start_sec": 3.6995,
+          "end_sec": 4.015166,
+          "start_frame": 111,
+          "end_frame": 120
+        },
+        {
+          "word": "your",
+          "start_sec": 4.027791,
+          "end_sec": 4.191916,
+          "start_frame": 121,
+          "end_frame": 126
+        },
+        {
+          "word": "lungs",
+          "start_sec": 4.204541,
+          "end_sec": 4.5833319999999995,
+          "start_frame": 126,
+          "end_frame": 137
+        },
+        {
+          "word": "cannot",
+          "start_sec": 4.595958,
+          "end_sec": 4.962124,
+          "start_frame": 138,
+          "end_frame": 149
+        },
+        {
+          "word": "pull",
+          "start_sec": 4.97475,
+          "end_sec": 5.227291,
+          "start_frame": 149,
+          "end_frame": 157
+        },
+        {
+          "word": "a",
+          "start_sec": 5.239916,
+          "end_sec": 5.303041,
+          "start_frame": 157,
+          "end_frame": 159
+        },
+        {
+          "word": "single",
+          "start_sec": 5.315666,
+          "end_sec": 5.681832,
+          "start_frame": 159,
+          "end_frame": 170
+        },
+        {
+          "word": "breath",
+          "start_sec": 5.694458,
+          "end_sec": 5.972249,
+          "start_frame": 171,
+          "end_frame": 179
+        },
+        {
+          "word": "of",
+          "start_sec": 5.984833,
+          "end_sec": 6.073208,
+          "start_frame": 180,
+          "end_frame": 182
+        },
+        {
+          "word": "air",
+          "start_sec": 6.085875,
+          "end_sec": 6.4520409999999995,
+          "start_frame": 183,
+          "end_frame": 194
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "BANDAR CHILLA MAIN",
+          "text": "OXYGEN MOLECULES FREEZE",
           "start_frame": 3,
-          "end_frame": 40,
+          "end_frame": 46,
           "words": [
             {
-              "word": "BANDAR",
+              "word": "OXYGEN",
               "start_frame": 3,
               "end_frame": 16
             },
             {
-              "word": "CHILLA",
-              "start_frame": 17,
-              "end_frame": 26
+              "word": "MOLECULES",
+              "start_frame": 16,
+              "end_frame": 33
             },
             {
-              "word": "MAIN",
-              "start_frame": 32,
-              "end_frame": 39
+              "word": "FREEZE",
+              "start_frame": 33,
+              "end_frame": 46
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "SABSE TEZ AUR",
-          "start_frame": 40,
-          "end_frame": 64,
+          "text": "IN PLACE LIKE",
+          "start_frame": 46,
+          "end_frame": 68,
           "words": [
             {
-              "word": "SABSE",
-              "start_frame": 40,
+              "word": "IN",
+              "start_frame": 46,
               "end_frame": 50
             },
             {
-              "word": "TEZ",
+              "word": "PLACE",
               "start_frame": 51,
-              "end_frame": 60
+              "end_frame": 62
             },
             {
-              "word": "AUR",
-              "start_frame": 61,
-              "end_frame": 63
+              "word": "LIKE",
+              "start_frame": 62,
+              "end_frame": 67
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "CHATUR HOON",
-          "start_frame": 64,
-          "end_frame": 84,
+          "text": "SOLID GLASS MEANING",
+          "start_frame": 68,
+          "end_frame": 121,
           "words": [
             {
-              "word": "CHATUR",
-              "start_frame": 64,
-              "end_frame": 74
+              "word": "SOLID",
+              "start_frame": 68,
+              "end_frame": 79
             },
             {
-              "word": "HOON",
-              "start_frame": 74,
-              "end_frame": 84
+              "word": "GLASS",
+              "start_frame": 80,
+              "end_frame": 95
+            },
+            {
+              "word": "MEANING",
+              "start_frame": 111,
+              "end_frame": 120
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "YOUR LUNGS CANNOT",
+          "start_frame": 121,
+          "end_frame": 149,
+          "words": [
+            {
+              "word": "YOUR",
+              "start_frame": 121,
+              "end_frame": 126
+            },
+            {
+              "word": "LUNGS",
+              "start_frame": 126,
+              "end_frame": 137
+            },
+            {
+              "word": "CANNOT",
+              "start_frame": 138,
+              "end_frame": 149
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "PULL A SINGLE",
+          "start_frame": 149,
+          "end_frame": 171,
+          "words": [
+            {
+              "word": "PULL",
+              "start_frame": 149,
+              "end_frame": 157
+            },
+            {
+              "word": "A",
+              "start_frame": 157,
+              "end_frame": 159
+            },
+            {
+              "word": "SINGLE",
+              "start_frame": 159,
+              "end_frame": 170
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "BREATH OF AIR",
+          "start_frame": 171,
+          "end_frame": 194,
+          "words": [
+            {
+              "word": "BREATH",
+              "start_frame": 171,
+              "end_frame": 179
+            },
+            {
+              "word": "OF",
+              "start_frame": 180,
+              "end_frame": 182
+            },
+            {
+              "word": "AIR",
+              "start_frame": 183,
+              "end_frame": 194
             }
           ]
         }
@@ -2736,1535 +2519,347 @@
     },
     {
       "scene_number": 5,
-      "narration": "Haathi ne soond utha kar zor se dahaad di!",
-      "speaker": "speaker_2",
-      "speaker_name": "Haathi",
-      "speaker_avatar": "\ud83d\udc18",
-      "sfx": "impact_boom",
-      "camera_motion": "vertical-tilt-reveal",
-      "video_prompt": "Flat 2D vector cartoon, colossal cute cartoon elephant raising long trunk high trumpeting loudly, 10mm ultra-wide low angle shot, ground trembling shockwaves, thick black outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon elephant trumpeting with raised trunk, 9:16",
-      "beat_number": 5,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #5",
-      "image_url": "images/ep_39_scene_5.jpg",
-      "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 3.58,
-      "duration_in_frames": 106,
-      "words": [
-        {
-          "word": "Haathi",
-          "start_sec": 0.098541,
-          "end_sec": 0.389791,
-          "start_frame": 3,
-          "end_frame": 12
-        },
-        {
-          "word": "ne",
-          "start_sec": 0.462625,
-          "end_sec": 0.6689160000000001,
-          "start_frame": 14,
-          "end_frame": 20
-        },
-        {
-          "word": "soond",
-          "start_sec": 0.729625,
-          "end_sec": 0.935916,
-          "start_frame": 22,
-          "end_frame": 28
-        },
-        {
-          "word": "utha",
-          "start_sec": 0.948041,
-          "end_sec": 1.190749,
-          "start_frame": 28,
-          "end_frame": 36
-        },
-        {
-          "word": "kar",
-          "start_sec": 1.263583,
-          "end_sec": 1.457749,
-          "start_frame": 38,
-          "end_frame": 44
-        },
-        {
-          "word": "zor",
-          "start_sec": 1.494166,
-          "end_sec": 1.700457,
-          "start_frame": 45,
-          "end_frame": 51
-        },
-        {
-          "word": "se",
-          "start_sec": 1.736875,
-          "end_sec": 1.870375,
-          "start_frame": 52,
-          "end_frame": 56
-        },
-        {
-          "word": "dahaad",
-          "start_sec": 1.894666,
-          "end_sec": 2.270874,
-          "start_frame": 57,
-          "end_frame": 68
-        },
-        {
-          "word": "di",
-          "start_sec": 2.283,
-          "end_sec": 2.622791,
-          "start_frame": 68,
-          "end_frame": 79
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "HAATHI NE SOOND",
-          "start_frame": 3,
-          "end_frame": 28,
-          "words": [
-            {
-              "word": "HAATHI",
-              "start_frame": 3,
-              "end_frame": 12
-            },
-            {
-              "word": "NE",
-              "start_frame": 14,
-              "end_frame": 20
-            },
-            {
-              "word": "SOOND",
-              "start_frame": 22,
-              "end_frame": 28
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "UTHA KAR ZOR",
-          "start_frame": 28,
-          "end_frame": 52,
-          "words": [
-            {
-              "word": "UTHA",
-              "start_frame": 28,
-              "end_frame": 36
-            },
-            {
-              "word": "KAR",
-              "start_frame": 38,
-              "end_frame": 44
-            },
-            {
-              "word": "ZOR",
-              "start_frame": 45,
-              "end_frame": 51
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SE DAHAAD DI",
-          "start_frame": 52,
-          "end_frame": 79,
-          "words": [
-            {
-              "word": "SE",
-              "start_frame": 52,
-              "end_frame": 56
-            },
-            {
-              "word": "DAHAAD",
-              "start_frame": 57,
-              "end_frame": 68
-            },
-            {
-              "word": "DI",
-              "start_frame": 68,
-              "end_frame": 79
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 6,
-      "narration": "Lomdi muskuraayi: 'Asli dimaag toh sirf mere paas hai!'",
-      "speaker": "speaker_2",
-      "speaker_name": "Lomdi",
-      "speaker_avatar": "\ud83e\udd8a",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, sly cartoon orange fox tapping forehead with paw and winking with cunning smile, 35mm prime reaction shot, thick clean black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon sly fox tapping forehead winking, 9:16",
-      "beat_number": 6,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #6",
-      "image_url": "images/ep_39_scene_6.jpg",
-      "audio_url": "audio/beat_6.mp3",
-      "audio_duration_sec": 4.13,
-      "duration_in_frames": 122,
-      "words": [
-        {
-          "word": "Lomdi",
-          "start_sec": 0.1,
-          "end_sec": 0.4375,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "muskuraayi",
-          "start_sec": 0.4625,
-          "end_sec": 1.0375,
-          "start_frame": 14,
-          "end_frame": 31
-        },
-        {
-          "word": "Asli",
-          "start_sec": 1.2,
-          "end_sec": 1.5125,
-          "start_frame": 36,
-          "end_frame": 45
-        },
-        {
-          "word": "dimaag",
-          "start_sec": 1.525,
-          "end_sec": 1.875,
-          "start_frame": 46,
-          "end_frame": 56
-        },
-        {
-          "word": "toh",
-          "start_sec": 1.9,
-          "end_sec": 2.0625,
-          "start_frame": 57,
-          "end_frame": 62
-        },
-        {
-          "word": "sirf",
-          "start_sec": 2.0875,
-          "end_sec": 2.375,
-          "start_frame": 63,
-          "end_frame": 71
-        },
-        {
-          "word": "mere",
-          "start_sec": 2.3875,
-          "end_sec": 2.575,
-          "start_frame": 72,
-          "end_frame": 77
-        },
-        {
-          "word": "paas",
-          "start_sec": 2.5875,
-          "end_sec": 2.85,
-          "start_frame": 78,
-          "end_frame": 86
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.875,
-          "end_sec": 3.2375,
-          "start_frame": 86,
-          "end_frame": 97
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "LOMDI MUSKURAAYI ASLI",
-          "start_frame": 3,
-          "end_frame": 46,
-          "words": [
-            {
-              "word": "LOMDI",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "MUSKURAAYI",
-              "start_frame": 14,
-              "end_frame": 31
-            },
-            {
-              "word": "ASLI",
-              "start_frame": 36,
-              "end_frame": 45
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "DIMAAG TOH SIRF",
-          "start_frame": 46,
-          "end_frame": 72,
-          "words": [
-            {
-              "word": "DIMAAG",
-              "start_frame": 46,
-              "end_frame": 56
-            },
-            {
-              "word": "TOH",
-              "start_frame": 57,
-              "end_frame": 62
-            },
-            {
-              "word": "SIRF",
-              "start_frame": 63,
-              "end_frame": 71
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "MERE PAAS HAI",
-          "start_frame": 72,
-          "end_frame": 97,
-          "words": [
-            {
-              "word": "MERE",
-              "start_frame": 72,
-              "end_frame": 77
-            },
-            {
-              "word": "PAAS",
-              "start_frame": 78,
-              "end_frame": 86
-            },
-            {
-              "word": "HAI",
-              "start_frame": 86,
-              "end_frame": 97
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 7,
-      "narration": "Sher ne aadhi aankh kholi aur sabko ghoora.",
+      "narration": "The colossal temporal clock in the sky shatters violently, proving that freezing time won't make you a god\u2014it will erase you.",
       "speaker": "speaker_1",
       "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "dramatic-pulse",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, intense extreme close up 50mm cinema lens of cartoon lion king golden eyes narrowing into piercing royal gaze, golden crown glinting, thick black outlines, 9:16 vertical, shaking head with hands on cheeks in absolute disbelief",
-      "visual_prompt": "Flat 2D cartoon close up of lion king golden eyes staring sharply, 9:16",
-      "beat_number": 7,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #7",
-      "image_url": "images/ep_39_scene_7.jpg",
-      "audio_url": "audio/beat_7.mp3",
-      "audio_duration_sec": 3.82,
-      "duration_in_frames": 113,
-      "words": [
-        {
-          "word": "Sher",
-          "start_sec": 0.099,
-          "end_sec": 0.417625,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "ne",
-          "start_sec": 0.503416,
-          "end_sec": 0.7607489999999999,
-          "start_frame": 15,
-          "end_frame": 23
-        },
-        {
-          "word": "aadhi",
-          "start_sec": 0.834333,
-          "end_sec": 1.165208,
-          "start_frame": 25,
-          "end_frame": 35
-        },
-        {
-          "word": "aankh",
-          "start_sec": 1.251,
-          "end_sec": 1.483833,
-          "start_frame": 38,
-          "end_frame": 45
-        },
-        {
-          "word": "kholi",
-          "start_sec": 1.532833,
-          "end_sec": 1.8514579999999998,
-          "start_frame": 46,
-          "end_frame": 56
-        },
-        {
-          "word": "aur",
-          "start_sec": 1.9005,
-          "end_sec": 2.010791,
-          "start_frame": 57,
-          "end_frame": 60
-        },
-        {
-          "word": "sabko",
-          "start_sec": 2.047541,
-          "end_sec": 2.4519569999999997,
-          "start_frame": 61,
-          "end_frame": 74
-        },
-        {
-          "word": "ghoora",
-          "start_sec": 2.501,
-          "end_sec": 2.8686659999999997,
-          "start_frame": 75,
-          "end_frame": 86
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SHER NE AADHI",
-          "start_frame": 3,
-          "end_frame": 38,
-          "words": [
-            {
-              "word": "SHER",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "NE",
-              "start_frame": 15,
-              "end_frame": 23
-            },
-            {
-              "word": "AADHI",
-              "start_frame": 25,
-              "end_frame": 35
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "AANKH KHOLI AUR",
-          "start_frame": 38,
-          "end_frame": 61,
-          "words": [
-            {
-              "word": "AANKH",
-              "start_frame": 38,
-              "end_frame": 45
-            },
-            {
-              "word": "KHOLI",
-              "start_frame": 46,
-              "end_frame": 56
-            },
-            {
-              "word": "AUR",
-              "start_frame": 57,
-              "end_frame": 60
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SABKO GHOORA",
-          "start_frame": 61,
-          "end_frame": 86,
-          "words": [
-            {
-              "word": "SABKO",
-              "start_frame": 61,
-              "end_frame": 74
-            },
-            {
-              "word": "GHOORA",
-              "start_frame": 75,
-              "end_frame": 86
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 8,
-      "narration": "Ek pal mein poora jungle bilkul shaant ho gaya!",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
+      "sfx": "climax-pull-back",
       "camera_motion": "climax-pull-back",
-      "video_prompt": "Flat 2D vector cartoon, bear, elephant, monkey and fox all freezing in terror with comical sweat drops and wide eyes, 24mm wide angle shot, thick clean outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon animals frozen in silence with sweat drops, 9:16",
-      "beat_number": 8,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #8",
-      "image_url": "images/ep_39_scene_8.jpg",
-      "audio_url": "audio/beat_8.mp3",
-      "audio_duration_sec": 4.18,
-      "duration_in_frames": 123,
+      "video_prompt": "10mm wide-angle epic scope pull-back shot, giant shattered Roman-numeral clock in the sky vibrating violently, clock hands fracturing into blinding cyan sparks, temporal shockwaves sweeping across the frozen city, cinematic masterpiece, Unreal Engine 5 render, 8k vertical 9:16",
+      "visual_prompt": "10mm wide-angle pull-back shot of giant shattered clock in sky vibrating and fracturing into sparks over frozen city, 8k",
+      "beat_number": 5,
+      "title": "Beat #5",
+      "image_url": "images/ep_40_scene_5.jpg",
+      "audio_url": "audio/beat_5.mp3",
+      "audio_duration_sec": 7.73,
+      "duration_in_frames": 239,
       "words": [
         {
-          "word": "Ek",
+          "word": "The",
           "start_sec": 0.1,
-          "end_sec": 0.340375,
+          "end_sec": 0.225,
           "start_frame": 3,
-          "end_frame": 10
+          "end_frame": 7
         },
         {
-          "word": "pal",
-          "start_sec": 0.340375,
-          "end_sec": 0.628833,
-          "start_frame": 10,
-          "end_frame": 19
+          "word": "colossal",
+          "start_sec": 0.2375,
+          "end_sec": 0.7375,
+          "start_frame": 7,
+          "end_frame": 22
         },
         {
-          "word": "mein",
-          "start_sec": 0.628833,
-          "end_sec": 0.977374,
-          "start_frame": 19,
-          "end_frame": 29
+          "word": "temporal",
+          "start_sec": 0.75,
+          "end_sec": 1.1,
+          "start_frame": 22,
+          "end_frame": 33
         },
         {
-          "word": "poora",
-          "start_sec": 0.977416,
-          "end_sec": 1.434124,
-          "start_frame": 29,
+          "word": "clock",
+          "start_sec": 1.1125,
+          "end_sec": 1.4375,
+          "start_frame": 33,
           "end_frame": 43
         },
         {
-          "word": "jungle",
-          "start_sec": 1.434125,
-          "end_sec": 1.81875,
-          "start_frame": 43,
-          "end_frame": 55
+          "word": "in",
+          "start_sec": 1.45,
+          "end_sec": 1.5125,
+          "start_frame": 44,
+          "end_frame": 45
         },
         {
-          "word": "bilkul",
-          "start_sec": 1.81875,
-          "end_sec": 2.2033750000000003,
-          "start_frame": 55,
-          "end_frame": 66
+          "word": "the",
+          "start_sec": 1.525,
+          "end_sec": 1.5999999999999999,
+          "start_frame": 46,
+          "end_frame": 48
         },
         {
-          "word": "shaant",
-          "start_sec": 2.203375,
-          "end_sec": 2.672125,
-          "start_frame": 66,
-          "end_frame": 80
+          "word": "sky",
+          "start_sec": 1.6125,
+          "end_sec": 1.9125,
+          "start_frame": 48,
+          "end_frame": 57
         },
         {
-          "word": "ho",
-          "start_sec": 2.672125,
-          "end_sec": 2.828375,
-          "start_frame": 80,
-          "end_frame": 85
+          "word": "shatters",
+          "start_sec": 1.925,
+          "end_sec": 2.4125,
+          "start_frame": 58,
+          "end_frame": 72
         },
         {
-          "word": "gaya",
-          "start_sec": 2.828375,
-          "end_sec": 3.36925,
-          "start_frame": 85,
-          "end_frame": 101
+          "word": "violently",
+          "start_sec": 2.425,
+          "end_sec": 2.9875,
+          "start_frame": 73,
+          "end_frame": 90
+        },
+        {
+          "word": "proving",
+          "start_sec": 3.3125,
+          "end_sec": 3.65,
+          "start_frame": 99,
+          "end_frame": 110
+        },
+        {
+          "word": "that",
+          "start_sec": 3.6625,
+          "end_sec": 3.825,
+          "start_frame": 110,
+          "end_frame": 115
+        },
+        {
+          "word": "freezing",
+          "start_sec": 3.8375,
+          "end_sec": 4.2875,
+          "start_frame": 115,
+          "end_frame": 129
+        },
+        {
+          "word": "time",
+          "start_sec": 4.3,
+          "end_sec": 4.6,
+          "start_frame": 129,
+          "end_frame": 138
+        },
+        {
+          "word": "won't",
+          "start_sec": 4.6125,
+          "end_sec": 4.8,
+          "start_frame": 138,
+          "end_frame": 144
+        },
+        {
+          "word": "make",
+          "start_sec": 4.8125,
+          "end_sec": 5.0125,
+          "start_frame": 144,
+          "end_frame": 150
+        },
+        {
+          "word": "you",
+          "start_sec": 5.025,
+          "end_sec": 5.15,
+          "start_frame": 151,
+          "end_frame": 154
+        },
+        {
+          "word": "a",
+          "start_sec": 5.1625,
+          "end_sec": 5.225,
+          "start_frame": 155,
+          "end_frame": 157
+        },
+        {
+          "word": "god",
+          "start_sec": 5.2375,
+          "end_sec": 5.625,
+          "start_frame": 157,
+          "end_frame": 169
+        },
+        {
+          "word": "it",
+          "start_sec": 5.9375,
+          "end_sec": 6.025,
+          "start_frame": 178,
+          "end_frame": 181
+        },
+        {
+          "word": "will",
+          "start_sec": 6.0375,
+          "end_sec": 6.175,
+          "start_frame": 181,
+          "end_frame": 185
+        },
+        {
+          "word": "erase",
+          "start_sec": 6.1875,
+          "end_sec": 6.5625,
+          "start_frame": 186,
+          "end_frame": 197
+        },
+        {
+          "word": "you",
+          "start_sec": 6.575,
+          "end_sec": 6.8625,
+          "start_frame": 197,
+          "end_frame": 206
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "EK PAL MEIN",
+          "text": "THE COLOSSAL TEMPORAL",
           "start_frame": 3,
-          "end_frame": 29,
+          "end_frame": 33,
           "words": [
             {
-              "word": "EK",
+              "word": "THE",
               "start_frame": 3,
-              "end_frame": 10
+              "end_frame": 7
             },
             {
-              "word": "PAL",
-              "start_frame": 10,
-              "end_frame": 19
+              "word": "COLOSSAL",
+              "start_frame": 7,
+              "end_frame": 22
             },
             {
-              "word": "MEIN",
-              "start_frame": 19,
-              "end_frame": 29
+              "word": "TEMPORAL",
+              "start_frame": 22,
+              "end_frame": 33
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "POORA JUNGLE BILKUL",
-          "start_frame": 29,
-          "end_frame": 66,
+          "text": "CLOCK IN THE",
+          "start_frame": 33,
+          "end_frame": 48,
           "words": [
             {
-              "word": "POORA",
-              "start_frame": 29,
+              "word": "CLOCK",
+              "start_frame": 33,
               "end_frame": 43
             },
             {
-              "word": "JUNGLE",
-              "start_frame": 43,
-              "end_frame": 55
-            },
-            {
-              "word": "BILKUL",
-              "start_frame": 55,
-              "end_frame": 66
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SHAANT HO GAYA",
-          "start_frame": 66,
-          "end_frame": 101,
-          "words": [
-            {
-              "word": "SHAANT",
-              "start_frame": 66,
-              "end_frame": 80
-            },
-            {
-              "word": "HO",
-              "start_frame": 80,
-              "end_frame": 85
-            },
-            {
-              "word": "GAYA",
-              "start_frame": 85,
-              "end_frame": 101
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 9,
-      "narration": "Sher bola: 'Dahaadna toh kamzoron ka kaam hai!'",
-      "speaker": "speaker_1",
-      "speaker_name": "Sher Raja",
-      "speaker_avatar": "\ud83e\udd81",
-      "sfx": "pop",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, lion king on golden throne calmly waving one front paw dismissively with royal smirk, 35mm medium shot, floating leaves, thick black outlines, 9:16 vertical, gesturing in humorous disbelief as hands fly into frame",
-      "visual_prompt": "Flat 2D cartoon lion king waving paw dismissively on throne, 9:16",
-      "beat_number": 9,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #9",
-      "image_url": "images/ep_39_scene_9.jpg",
-      "audio_url": "audio/beat_9.mp3",
-      "audio_duration_sec": 3.98,
-      "duration_in_frames": 118,
-      "words": [
-        {
-          "word": "Sher",
-          "start_sec": 0.0995,
-          "end_sec": 0.39654100000000003,
-          "start_frame": 3,
-          "end_frame": 12
-        },
-        {
-          "word": "bola",
-          "start_sec": 0.408916,
-          "end_sec": 0.755457,
-          "start_frame": 12,
-          "end_frame": 23
-        },
-        {
-          "word": "Dahaadna",
-          "start_sec": 0.990583,
-          "end_sec": 1.3989989999999999,
-          "start_frame": 30,
-          "end_frame": 42
-        },
-        {
-          "word": "toh",
-          "start_sec": 1.460875,
-          "end_sec": 1.597,
-          "start_frame": 44,
-          "end_frame": 48
-        },
-        {
-          "word": "kamzoron",
-          "start_sec": 1.671291,
-          "end_sec": 2.092082,
-          "start_frame": 50,
-          "end_frame": 63
-        },
-        {
-          "word": "ka",
-          "start_sec": 2.153958,
-          "end_sec": 2.438624,
-          "start_frame": 65,
-          "end_frame": 73
-        },
-        {
-          "word": "kaam",
-          "start_sec": 2.5005,
-          "end_sec": 2.72325,
-          "start_frame": 75,
-          "end_frame": 82
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.72325,
-          "end_sec": 3.0079160000000003,
-          "start_frame": 82,
-          "end_frame": 90
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SHER BOLA DAHAADNA",
-          "start_frame": 3,
-          "end_frame": 44,
-          "words": [
-            {
-              "word": "SHER",
-              "start_frame": 3,
-              "end_frame": 12
-            },
-            {
-              "word": "BOLA",
-              "start_frame": 12,
-              "end_frame": 23
-            },
-            {
-              "word": "DAHAADNA",
-              "start_frame": 30,
-              "end_frame": 42
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "TOH KAMZORON KA",
-          "start_frame": 44,
-          "end_frame": 75,
-          "words": [
-            {
-              "word": "TOH",
+              "word": "IN",
               "start_frame": 44,
+              "end_frame": 45
+            },
+            {
+              "word": "THE",
+              "start_frame": 46,
               "end_frame": 48
-            },
-            {
-              "word": "KAMZORON",
-              "start_frame": 50,
-              "end_frame": 63
-            },
-            {
-              "word": "KA",
-              "start_frame": 65,
-              "end_frame": 73
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "KAAM HAI",
-          "start_frame": 75,
-          "end_frame": 90,
+          "text": "SKY SHATTERS VIOLENTLY",
+          "start_frame": 48,
+          "end_frame": 99,
           "words": [
             {
-              "word": "KAAM",
-              "start_frame": 75,
-              "end_frame": 82
+              "word": "SKY",
+              "start_frame": 48,
+              "end_frame": 57
             },
             {
-              "word": "HAI",
-              "start_frame": 82,
-              "end_frame": 90
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 10,
-      "narration": "Asli raja wahi jiske aage sab chup ho jaayein!",
-      "speaker": "speaker_1",
-      "speaker_name": "Sher Raja",
-      "speaker_avatar": "\ud83e\udd81",
-      "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, majestic cartoon lion king standing tall on throne rock with flowing golden mane, 10mm ultra-wide hero angle, sunburst rays radiating behind him, thick black outlines, 9:16 vertical, turning quickly toward camera with comedic shock",
-      "visual_prompt": "Flat 2D cartoon majestic lion king standing tall with sunburst rays, 9:16",
-      "beat_number": 10,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #10",
-      "image_url": "images/ep_39_scene_10.jpg",
-      "audio_url": "audio/beat_10.mp3",
-      "audio_duration_sec": 4.01,
-      "duration_in_frames": 119,
-      "words": [
-        {
-          "word": "Asli",
-          "start_sec": 0.1,
-          "end_sec": 0.52475,
-          "start_frame": 3,
-          "end_frame": 16
-        },
-        {
-          "word": "raja",
-          "start_sec": 0.52475,
-          "end_sec": 0.9373750000000001,
-          "start_frame": 16,
-          "end_frame": 28
-        },
-        {
-          "word": "wahi",
-          "start_sec": 0.937375,
-          "end_sec": 1.277166,
-          "start_frame": 28,
-          "end_frame": 38
-        },
-        {
-          "word": "jiske",
-          "start_sec": 1.277166,
-          "end_sec": 1.5805820000000002,
-          "start_frame": 38,
-          "end_frame": 47
-        },
-        {
-          "word": "aage",
-          "start_sec": 1.580583,
-          "end_sec": 1.8597080000000001,
-          "start_frame": 47,
-          "end_frame": 56
-        },
-        {
-          "word": "sab",
-          "start_sec": 1.859708,
-          "end_sec": 2.078166,
-          "start_frame": 56,
-          "end_frame": 62
-        },
-        {
-          "word": "chup",
-          "start_sec": 2.078166,
-          "end_sec": 2.320874,
-          "start_frame": 62,
-          "end_frame": 70
-        },
-        {
-          "word": "ho",
-          "start_sec": 2.320875,
-          "end_sec": 2.478625,
-          "start_frame": 70,
-          "end_frame": 74
-        },
-        {
-          "word": "jaayein",
-          "start_sec": 2.478625,
-          "end_sec": 3.1946250000000003,
-          "start_frame": 74,
-          "end_frame": 96
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "ASLI RAJA WAHI",
-          "start_frame": 3,
-          "end_frame": 38,
-          "words": [
-            {
-              "word": "ASLI",
-              "start_frame": 3,
-              "end_frame": 16
-            },
-            {
-              "word": "RAJA",
-              "start_frame": 16,
-              "end_frame": 28
-            },
-            {
-              "word": "WAHI",
-              "start_frame": 28,
-              "end_frame": 38
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "JISKE AAGE SAB",
-          "start_frame": 38,
-          "end_frame": 62,
-          "words": [
-            {
-              "word": "JISKE",
-              "start_frame": 38,
-              "end_frame": 47
-            },
-            {
-              "word": "AAGE",
-              "start_frame": 47,
-              "end_frame": 56
-            },
-            {
-              "word": "SAB",
-              "start_frame": 56,
-              "end_frame": 62
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "CHUP HO JAAYEIN",
-          "start_frame": 62,
-          "end_frame": 96,
-          "words": [
-            {
-              "word": "CHUP",
-              "start_frame": 62,
-              "end_frame": 70
-            },
-            {
-              "word": "HO",
-              "start_frame": 70,
-              "end_frame": 74
-            },
-            {
-              "word": "JAAYEIN",
-              "start_frame": 74,
-              "end_frame": 96
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 11,
-      "narration": "Sabhi janwar chupchap sar jhuka kar piche hat gaye.",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-lateral-pan-right",
-      "video_prompt": "Flat 2D vector cartoon, sheepish bear, elephant and monkey bowing heads and tiptoeing backward into bushes, 24mm tracking pan, thick clean black outlines, storybook aesthetic, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon animals bowing heads and backing into bushes, 9:16",
-      "beat_number": 11,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #11",
-      "image_url": "images/ep_39_scene_11.jpg",
-      "audio_url": "audio/beat_11.mp3",
-      "audio_duration_sec": 4.32,
-      "duration_in_frames": 127,
-      "words": [
-        {
-          "word": "Sabhi",
-          "start_sec": 0.098541,
-          "end_sec": 0.462624,
-          "start_frame": 3,
-          "end_frame": 14
-        },
-        {
-          "word": "janwar",
-          "start_sec": 0.523291,
-          "end_sec": 0.935916,
-          "start_frame": 16,
-          "end_frame": 28
-        },
-        {
-          "word": "chupchap",
-          "start_sec": 0.996583,
-          "end_sec": 1.469874,
-          "start_frame": 30,
-          "end_frame": 44
-        },
-        {
-          "word": "sar",
-          "start_sec": 1.506291,
-          "end_sec": 1.9795820000000002,
-          "start_frame": 45,
-          "end_frame": 59
-        },
-        {
-          "word": "jhuka",
-          "start_sec": 2.040291,
-          "end_sec": 2.3437069999999998,
-          "start_frame": 61,
-          "end_frame": 70
-        },
-        {
-          "word": "kar",
-          "start_sec": 2.404375,
-          "end_sec": 2.610666,
-          "start_frame": 72,
-          "end_frame": 78
-        },
-        {
-          "word": "piche",
-          "start_sec": 2.659208,
-          "end_sec": 2.889791,
-          "start_frame": 80,
-          "end_frame": 87
-        },
-        {
-          "word": "hat",
-          "start_sec": 2.901958,
-          "end_sec": 3.071874,
-          "start_frame": 87,
-          "end_frame": 92
-        },
-        {
-          "word": "gaye",
-          "start_sec": 3.120375,
-          "end_sec": 3.363083,
-          "start_frame": 94,
-          "end_frame": 101
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SABHI JANWAR CHUPCHAP",
-          "start_frame": 3,
-          "end_frame": 45,
-          "words": [
-            {
-              "word": "SABHI",
-              "start_frame": 3,
-              "end_frame": 14
-            },
-            {
-              "word": "JANWAR",
-              "start_frame": 16,
-              "end_frame": 28
-            },
-            {
-              "word": "CHUPCHAP",
-              "start_frame": 30,
-              "end_frame": 44
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "SAR JHUKA KAR",
-          "start_frame": 45,
-          "end_frame": 80,
-          "words": [
-            {
-              "word": "SAR",
-              "start_frame": 45,
-              "end_frame": 59
-            },
-            {
-              "word": "JHUKA",
-              "start_frame": 61,
-              "end_frame": 70
-            },
-            {
-              "word": "KAR",
-              "start_frame": 72,
-              "end_frame": 78
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "PICHE HAT GAYE",
-          "start_frame": 80,
-          "end_frame": 101,
-          "words": [
-            {
-              "word": "PICHE",
-              "start_frame": 80,
-              "end_frame": 87
-            },
-            {
-              "word": "HAT",
-              "start_frame": 87,
-              "end_frame": 92
-            },
-            {
-              "word": "GAYE",
-              "start_frame": 94,
-              "end_frame": 101
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 12,
-      "narration": "Sachi taakat shor mein nahi, khamoshi mein hoti hai.",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "dramatic-pulse",
-      "camera_motion": "climax-pull-back",
-      "video_prompt": "Flat 2D vector cartoon, lion king relaxing back into throne cushion with satisfied peaceful grin and folded paws, golden crown glowing, 35mm prime shot, thick outlines, 9:16 vertical, stumbling backward in comical bewilderment",
-      "visual_prompt": "Flat 2D cartoon lion king relaxing peacefully on throne, 9:16",
-      "beat_number": 12,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #12",
-      "image_url": "images/ep_39_scene_12.jpg",
-      "audio_url": "audio/beat_12.mp3",
-      "audio_duration_sec": 4.25,
-      "duration_in_frames": 125,
-      "words": [
-        {
-          "word": "Sachi",
-          "start_sec": 0.1,
-          "end_sec": 0.48750000000000004,
-          "start_frame": 3,
-          "end_frame": 15
-        },
-        {
-          "word": "taakat",
-          "start_sec": 0.5125,
-          "end_sec": 0.875,
-          "start_frame": 15,
-          "end_frame": 26
-        },
-        {
-          "word": "shor",
-          "start_sec": 0.8875,
-          "end_sec": 1.1375,
-          "start_frame": 27,
-          "end_frame": 34
-        },
-        {
-          "word": "mein",
-          "start_sec": 1.1625,
-          "end_sec": 1.375,
-          "start_frame": 35,
-          "end_frame": 41
-        },
-        {
-          "word": "nahi",
-          "start_sec": 1.4,
-          "end_sec": 1.75,
-          "start_frame": 42,
-          "end_frame": 52
-        },
-        {
-          "word": "khamoshi",
-          "start_sec": 1.925,
-          "end_sec": 2.375,
-          "start_frame": 58,
-          "end_frame": 71
-        },
-        {
-          "word": "mein",
-          "start_sec": 2.4,
-          "end_sec": 2.6125,
-          "start_frame": 72,
-          "end_frame": 78
-        },
-        {
-          "word": "hoti",
-          "start_sec": 2.6375,
-          "end_sec": 2.9250000000000003,
-          "start_frame": 79,
-          "end_frame": 88
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.95,
-          "end_sec": 3.35,
-          "start_frame": 88,
-          "end_frame": 100
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "SACHI TAAKAT SHOR",
-          "start_frame": 3,
-          "end_frame": 35,
-          "words": [
-            {
-              "word": "SACHI",
-              "start_frame": 3,
-              "end_frame": 15
-            },
-            {
-              "word": "TAAKAT",
-              "start_frame": 15,
-              "end_frame": 26
-            },
-            {
-              "word": "SHOR",
-              "start_frame": 27,
-              "end_frame": 34
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "MEIN NAHI KHAMOSHI",
-          "start_frame": 35,
-          "end_frame": 72,
-          "words": [
-            {
-              "word": "MEIN",
-              "start_frame": 35,
-              "end_frame": 41
-            },
-            {
-              "word": "NAHI",
-              "start_frame": 42,
-              "end_frame": 52
-            },
-            {
-              "word": "KHAMOSHI",
+              "word": "SHATTERS",
               "start_frame": 58,
-              "end_frame": 71
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "MEIN HOTI HAI",
-          "start_frame": 72,
-          "end_frame": 100,
-          "words": [
-            {
-              "word": "MEIN",
-              "start_frame": 72,
-              "end_frame": 78
+              "end_frame": 72
             },
             {
-              "word": "HOTI",
-              "start_frame": 79,
-              "end_frame": 88
-            },
-            {
-              "word": "HAI",
-              "start_frame": 88,
-              "end_frame": 100
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 13,
-      "narration": "Toh batao, jungle ka asli don kaun hai?",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "impact_boom",
-      "camera_motion": "rapid-push-in-shake",
-      "video_prompt": "Flat 2D vector cartoon, lion king leaning forward pointing majestic royal paw directly at viewer under glowing jungle title banner, 10mm ultra-wide shot, thick clean black outlines, 9:16 vertical",
-      "visual_prompt": "Flat 2D cartoon lion pointing paw at camera under jungle banner, 9:16",
-      "beat_number": 13,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #13",
-      "image_url": "images/ep_39_scene_13.jpg",
-      "audio_url": "audio/beat_13.mp3",
-      "audio_duration_sec": 3.72,
-      "duration_in_frames": 110,
-      "words": [
-        {
-          "word": "Toh",
-          "start_sec": 0.099,
-          "end_sec": 0.25833300000000003,
-          "start_frame": 3,
-          "end_frame": 8
-        },
-        {
-          "word": "batao",
-          "start_sec": 0.270583,
-          "end_sec": 0.662749,
-          "start_frame": 8,
-          "end_frame": 20
-        },
-        {
-          "word": "jungle",
-          "start_sec": 0.920083,
-          "end_sec": 1.238708,
-          "start_frame": 28,
-          "end_frame": 37
-        },
-        {
-          "word": "ka",
-          "start_sec": 1.3,
-          "end_sec": 1.606375,
-          "start_frame": 39,
-          "end_frame": 48
-        },
-        {
-          "word": "asli",
-          "start_sec": 1.655375,
-          "end_sec": 1.974,
-          "start_frame": 50,
-          "end_frame": 59
-        },
-        {
-          "word": "don",
-          "start_sec": 2.023041,
-          "end_sec": 2.194624,
-          "start_frame": 61,
-          "end_frame": 66
-        },
-        {
-          "word": "kaun",
-          "start_sec": 2.268125,
-          "end_sec": 2.476458,
-          "start_frame": 68,
-          "end_frame": 74
-        },
-        {
-          "word": "hai",
-          "start_sec": 2.476458,
-          "end_sec": 2.7705830000000002,
-          "start_frame": 74,
-          "end_frame": 83
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "TOH BATAO JUNGLE",
-          "start_frame": 3,
-          "end_frame": 39,
-          "words": [
-            {
-              "word": "TOH",
-              "start_frame": 3,
-              "end_frame": 8
-            },
-            {
-              "word": "BATAO",
-              "start_frame": 8,
-              "end_frame": 20
-            },
-            {
-              "word": "JUNGLE",
-              "start_frame": 28,
-              "end_frame": 37
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "KA ASLI DON",
-          "start_frame": 39,
-          "end_frame": 68,
-          "words": [
-            {
-              "word": "KA",
-              "start_frame": 39,
-              "end_frame": 48
-            },
-            {
-              "word": "ASLI",
-              "start_frame": 50,
-              "end_frame": 59
-            },
-            {
-              "word": "DON",
-              "start_frame": 61,
-              "end_frame": 66
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "KAUN HAI",
-          "start_frame": 68,
-          "end_frame": 83,
-          "words": [
-            {
-              "word": "KAUN",
-              "start_frame": 68,
-              "end_frame": 74
-            },
-            {
-              "word": "HAI",
-              "start_frame": 74,
-              "end_frame": 83
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "scene_number": 14,
-      "narration": "A Sher, B Haathi, C Bhalu, ya D Bandar? Comment now!",
-      "speaker": "speaker_1",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "loop-convergence-zoom",
-      "camera_motion": "loop-convergence-zoom",
-      "video_prompt": "50mm cinema lens, medium conversational framing, Flat 2D vector cartoon, vibrant multiple choice quiz card hovering in center displaying options A Sher, B Haathi, C Bhalu, D Bandar, lion king smiling knowingly on throne, 9:16 vertical, shaking head with hands on cheeks in absolute disbelief",
-      "visual_prompt": "Flat 2D cartoon multiple choice options board A Sher B Haathi C Bhalu D Bandar, 9:16",
-      "beat_number": 14,
-      "style": "Flat 2D vector cartoon, thick clean black outlines, storybook aesthetic, zero photorealism, zero 3D",
-      "title": "Beat #14",
-      "image_url": "images/ep_39_scene_14.jpg",
-      "audio_url": "audio/beat_14.mp3",
-      "audio_duration_sec": 6.77,
-      "duration_in_frames": 198,
-      "words": [
-        {
-          "word": "A",
-          "start_sec": 0.0995,
-          "end_sec": 0.20766600000000002,
-          "start_frame": 3,
-          "end_frame": 6
-        },
-        {
-          "word": "Sher",
-          "start_sec": 0.207708,
-          "end_sec": 0.832708,
-          "start_frame": 6,
-          "end_frame": 25
-        },
-        {
-          "word": "B",
-          "start_sec": 1.013,
-          "end_sec": 1.229333,
-          "start_frame": 30,
-          "end_frame": 37
-        },
-        {
-          "word": "Haathi",
-          "start_sec": 1.229333,
-          "end_sec": 1.806249,
-          "start_frame": 37,
-          "end_frame": 54
-        },
-        {
-          "word": "C",
-          "start_sec": 2.022583,
-          "end_sec": 2.311041,
-          "start_frame": 61,
-          "end_frame": 69
-        },
-        {
-          "word": "Bhalu",
-          "start_sec": 2.311041,
-          "end_sec": 2.8999989999999998,
-          "start_frame": 69,
-          "end_frame": 87
-        },
-        {
-          "word": "ya",
-          "start_sec": 3.104333,
-          "end_sec": 3.500958,
-          "start_frame": 93,
-          "end_frame": 105
-        },
-        {
-          "word": "D",
-          "start_sec": 3.500958,
-          "end_sec": 3.7293329999999996,
-          "start_frame": 105,
-          "end_frame": 112
-        },
-        {
-          "word": "Bandar",
-          "start_sec": 3.729333,
-          "end_sec": 4.1980830000000005,
-          "start_frame": 112,
-          "end_frame": 126
-        },
-        {
-          "word": "Comment",
-          "start_sec": 5.001458,
-          "end_sec": 5.494249,
-          "start_frame": 150,
-          "end_frame": 165
-        },
-        {
-          "word": "now",
-          "start_sec": 5.49425,
-          "end_sec": 5.963,
-          "start_frame": 165,
-          "end_frame": 179
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "A SHER B",
-          "start_frame": 3,
-          "end_frame": 37,
-          "words": [
-            {
-              "word": "A",
-              "start_frame": 3,
-              "end_frame": 6
-            },
-            {
-              "word": "SHER",
-              "start_frame": 6,
-              "end_frame": 25
-            },
-            {
-              "word": "B",
-              "start_frame": 30,
-              "end_frame": 37
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "HAATHI C BHALU",
-          "start_frame": 37,
-          "end_frame": 93,
-          "words": [
-            {
-              "word": "HAATHI",
-              "start_frame": 37,
-              "end_frame": 54
-            },
-            {
-              "word": "C",
-              "start_frame": 61,
-              "end_frame": 69
-            },
-            {
-              "word": "BHALU",
-              "start_frame": 69,
-              "end_frame": 87
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "YA D BANDAR",
-          "start_frame": 93,
-          "end_frame": 150,
-          "words": [
-            {
-              "word": "YA",
-              "start_frame": 93,
-              "end_frame": 105
-            },
-            {
-              "word": "D",
-              "start_frame": 105,
-              "end_frame": 112
-            },
-            {
-              "word": "BANDAR",
-              "start_frame": 112,
-              "end_frame": 126
+              "word": "VIOLENTLY",
+              "start_frame": 73,
+              "end_frame": 90
             }
           ]
         },
         {
           "chunk_id": 3,
-          "text": "COMMENT NOW",
-          "start_frame": 150,
-          "end_frame": 179,
+          "text": "PROVING THAT FREEZING",
+          "start_frame": 99,
+          "end_frame": 129,
           "words": [
             {
-              "word": "COMMENT",
-              "start_frame": 150,
-              "end_frame": 165
+              "word": "PROVING",
+              "start_frame": 99,
+              "end_frame": 110
             },
             {
-              "word": "NOW",
-              "start_frame": 165,
-              "end_frame": 179
+              "word": "THAT",
+              "start_frame": 110,
+              "end_frame": 115
+            },
+            {
+              "word": "FREEZING",
+              "start_frame": 115,
+              "end_frame": 129
+            }
+          ]
+        },
+        {
+          "chunk_id": 4,
+          "text": "TIME WON'T MAKE",
+          "start_frame": 129,
+          "end_frame": 151,
+          "words": [
+            {
+              "word": "TIME",
+              "start_frame": 129,
+              "end_frame": 138
+            },
+            {
+              "word": "WON'T",
+              "start_frame": 138,
+              "end_frame": 144
+            },
+            {
+              "word": "MAKE",
+              "start_frame": 144,
+              "end_frame": 150
+            }
+          ]
+        },
+        {
+          "chunk_id": 5,
+          "text": "YOU A GOD",
+          "start_frame": 151,
+          "end_frame": 178,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 151,
+              "end_frame": 154
+            },
+            {
+              "word": "A",
+              "start_frame": 155,
+              "end_frame": 157
+            },
+            {
+              "word": "GOD",
+              "start_frame": 157,
+              "end_frame": 169
+            }
+          ]
+        },
+        {
+          "chunk_id": 6,
+          "text": "IT WILL ERASE",
+          "start_frame": 178,
+          "end_frame": 197,
+          "words": [
+            {
+              "word": "IT",
+              "start_frame": 178,
+              "end_frame": 181
+            },
+            {
+              "word": "WILL",
+              "start_frame": 181,
+              "end_frame": 185
+            },
+            {
+              "word": "ERASE",
+              "start_frame": 186,
+              "end_frame": 197
+            }
+          ]
+        },
+        {
+          "chunk_id": 7,
+          "text": "YOU",
+          "start_frame": 197,
+          "end_frame": 206,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 197,
+              "end_frame": 206
             }
           ]
         }
@@ -4272,31 +2867,26 @@
     }
   ],
   "seo_tags": [
-    "jungle ka asli don: who rule",
-    "viral shorts",
+    "viral",
     "reels",
-    "what if",
-    "mind blowing",
-    "funny animation",
-    "3d pixar",
-    "trending",
-    "comedy skit",
-    "relatable"
+    "shorts",
+    "whatif",
+    "scifi",
+    "paradox",
+    "cinematic",
+    "trending"
   ],
   "hashtags": [
     "#shorts",
     "#viral",
     "#reels",
-    "#relatable",
+    "#whatif",
+    "#scifi",
     "#trending"
   ],
-  "pinned_comment": "Would you survive Jungle Ka Asli Don: Who Rule? Drop your comment below! \ud83d\udc47 Subscribe for daily viral drops! \ud83d\ude80",
-  "branching_decision": {
-    "choice_a": "Option A for next episode",
-    "choice_b": "Option B for next episode",
-    "vote_callout": "Vote A or B in comments!"
-  },
-  "episode": 39,
-  "genre": "Animated Cartoon Fable",
-  "title": "Jungle Ka Asli Don: Who rules the wild?"
+  "pinned_comment": "What would you do in this situation? Comment below! \ud83d\udc47 Subscribe for daily mysteries! \ud83d\ude80",
+  "episode": 40,
+  "genre": "Mind-Blowing Stories & Science",
+  "title": "What if you could freeze time for 24 hours?",
+  "riddle_options": null
 }

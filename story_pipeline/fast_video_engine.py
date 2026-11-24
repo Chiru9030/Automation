@@ -108,27 +108,66 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
 
     print(f"\n⚡ [Lightning Video Engine] Assembling {len(scenes)} cinematic rapid-cut scenes via native hardware acceleration...")
 
-    # Step 1: Render or Retrieve AI Video Clip for each scene
+    # Step 1: Render or Retrieve AI Video Clip for each scene (with handle for smooth crossfades)
     clip_paths = []
+    T_TRANS = 0.5  # 0.5s smooth crossfade between scenes
     for i, sc in enumerate(scenes):
         clip_p = temp_dir / f"clip_{i+1}.mp4"
-        generate_scene_video_clip(sc, clip_p, beat_number=sc.get("beat_number", i + 1))
+        # Clips before the last one get an extra 0.5s handle so the crossfade does not truncate scene speech
+        extra_frames = int(T_TRANS * 30) if i < len(scenes) - 1 else 0
+        orig_frames = sc.get("duration_in_frames", 360)
+        sc_for_clip = dict(sc)
+        sc_for_clip["duration_in_frames"] = orig_frames + extra_frames
+        generate_scene_video_clip(sc_for_clip, clip_p, beat_number=sc.get("beat_number", i + 1))
         clip_paths.append(clip_p)
-        print(f"  🎬 Scene {i+1}/{len(scenes)} clip ready ({sc['duration_in_frames']/30:.1f}s)")
+        print(f"  🎬 Scene {i+1}/{len(scenes)} clip ready ({orig_frames/30:.1f}s + {extra_frames/30:.1f}s handle)")
 
-    # Step 2: Concatenate visual clips
-    concat_list = temp_dir / "concat_list.txt"
-    concat_list.write_text("\n".join(f"file '{p.resolve()}'" for p in clip_paths))
+    # Step 2: Smooth Crossfade Cuts via FFmpeg xfade (dissolve between scenes)
     visuals_only = temp_dir / "visuals_combined.mp4"
+    concat_list = temp_dir / "concat_list.txt"
+    if len(clip_paths) > 1:
+        inputs = []
+        for p in clip_paths:
+            inputs.extend(["-i", str(p)])
 
-    cmd_concat = [
-        "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0",
-        "-i", str(concat_list),
-        "-c", "copy",
-        str(visuals_only),
-    ]
-    subprocess.run(cmd_concat, check=True, capture_output=True)
+        filter_parts = []
+        last_v = "[0:v]"
+        running_offset = 0.0
+        for i in range(1, len(clip_paths)):
+            running_offset += scenes[i - 1].get("duration_in_frames", 360) / 30.0
+            next_v = f"[v{i}]" if i < len(clip_paths) - 1 else "[outv]"
+            filter_parts.append(f"{last_v}[{i}:v]xfade=transition=fade:duration={T_TRANS}:offset={running_offset:.3f}{next_v}")
+            last_v = f"[v{i}]"
+
+        cmd_xfade = [
+            "ffmpeg", "-y",
+            *inputs,
+            "-filter_complex", ";".join(filter_parts),
+            "-map", "[outv]",
+            "-c:v", "libx264",
+            "-preset", "ultrafast",
+            "-crf", "20",
+            "-pix_fmt", "yuv420p",
+            str(visuals_only),
+        ]
+        try:
+            print(f"  🌊 [Lightning Video Engine] Applying smooth cinematic crossfade transitions across {len(clip_paths)} scenes...")
+            subprocess.run(cmd_xfade, check=True, capture_output=True)
+        except Exception as e_xfade:
+            print(f"⚠️ xfade notice ({e_xfade}), falling back to direct concat...")
+            concat_list = temp_dir / "concat_list.txt"
+            concat_list.write_text("\n".join(f"file '{p.resolve()}'" for p in clip_paths))
+            cmd_concat = [
+                "ffmpeg", "-y",
+                "-f", "concat", "-safe", "0",
+                "-i", str(concat_list),
+                "-c", "copy",
+                str(visuals_only),
+            ]
+            subprocess.run(cmd_concat, check=True, capture_output=True)
+    else:
+        import shutil
+        shutil.copy2(clip_paths[0], visuals_only)
 
     # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting, Persistent Top Hook Banner & Riddle Card)
     ass_path = temp_dir / "subtitles.ass"
