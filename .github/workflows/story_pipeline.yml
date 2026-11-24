@@ -2,9 +2,10 @@ name: Autonomous Daily Story Video Pipeline
 
 on:
   schedule:
-    # 2 premier high-quality runs per day: 07:30 UTC & 14:30 UTC
-    # Spaced perfectly at peak global viral windows (13:00 IST / Lunch & 20:00 IST / Prime Evening)
-    - cron: '30 7,14 * * *'
+    # 2 premier high-quality runs per day: 07:17 UTC & 14:17 UTC
+    # Off-minute scheduling (:17) avoids GitHub top-of-hour & half-hour queue congestion
+    # Spaced perfectly at peak global viral windows (12:47 IST / Lunch & 19:47 IST / Prime Evening)
+    - cron: '17 7,14 * * *'
   workflow_dispatch:
     inputs:
       custom_topic:
@@ -102,16 +103,6 @@ jobs:
             echo '${{ secrets.IG_SESSION }}' > instagram_session.json
             echo "✅ Configured Instagram session"
           fi
-
-      - name: Apply Organic Schedule Jitter
-        if: github.event_name == 'schedule'
-        run: |
-          python3 -c "
-          import random, time
-          jitter_sec = random.randint(60, 900)
-          print(f'🎲 [Organic Schedule Jitter] Sleeping {jitter_sec}s ({jitter_sec/60:.1f}m) to defeat automated bot detection...')
-          time.sleep(jitter_sec)
-          "
 
       - name: Run Autonomous Story Pipeline
         env:
