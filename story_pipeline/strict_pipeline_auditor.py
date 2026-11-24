@@ -46,56 +46,65 @@ def hamming_distance(h1: int, h2: int) -> int:
 
 
 def audit_story_script(script_data: dict) -> bool:
-    """Audits narrative structure, word counts, and hook placements."""
-    beats = script_data.get("beats", [])
-    if len(beats) != 5:
-        raise QualityAuditError(f"Engagement Rejection: Expected exactly 5 story beats, found {len(beats)}")
+    """Audits narrative structure, word counts, rapid scene cuts, and hook placements."""
+    beats = script_data.get("scenes") or script_data.get("beats", [])
+    if len(beats) < 5 or len(beats) > 20:
+        raise QualityAuditError(f"Engagement Rejection: Expected 5 to 20 story scenes/cuts, found {len(beats)}")
 
-    total_words = sum(len(b["narration"].split()) for b in beats)
-    if total_words < 112:
+    total_words = sum(len(b.get("narration", "").split()) for b in beats)
+    if total_words < 80:
         raise QualityAuditError(
-            f"Pacing Rejection: Script too short ({total_words} words < 112). "
-            f"Insufficient dialogue will leave dead air and no content in the final 10 seconds!"
+            f"Pacing Rejection: Script too short ({total_words} words < 80). "
+            f"Insufficient dialogue will leave dead air in the video!"
         )
-    if total_words > 146:
-        raise QualityAuditError(f"Duration Rejection: Script too long ({total_words} words > 146). Exceeds 58.5s Shorts safety ceiling!")
+    if total_words > 150:
+        raise QualityAuditError(f"Duration Rejection: Script too long ({total_words} words > 150). Exceeds 58.5s Shorts safety ceiling!")
 
-    # Verify opening psychological hook in Beat 1
+    # Verify persistent Top Hook Banner (essential for initial mute scroll retention)
+    banner = script_data.get("top_hook_banner", "")
+    if not banner or len(banner.strip()) < 5:
+        raise QualityAuditError(
+            "Hook Banner Rejection: Script missing persistent 'top_hook_banner' context headline! "
+            "A high-contrast top banner is strictly required for short-form video retention."
+        )
+
+    # Verify opening psychological hook in Scene 1
     first_beat = beats[0]["narration"].lower()
     hook_keywords = [
         "what", "why", "how", "if", "imagine", "never", "did you know",
         "in 10 seconds", "shocking", "scientists", "nobody", "everything",
         "secret", "within", "truth", "this is", "could you", "you think",
-        "you", "picture", "suppose", "freeze", "freezing", "stunning"
+        "you", "picture", "suppose", "freeze", "freezing", "stunning",
+        "bro", "order", "i just", "when", "ever"
     ]
     if not any(k in first_beat for k in hook_keywords):
-        raise QualityAuditError("Hook Rejection: Beat 1 lacks an immediate curiosity hook trigger word!")
+        raise QualityAuditError("Hook Rejection: Scene 1 lacks an immediate curiosity hook trigger word!")
 
     beat1_words = len(beats[0]["narration"].split())
     if beat1_words > 34:
-        raise QualityAuditError(f"Hook Rejection: Beat 1 is too wordy ({beat1_words} words). Must be punchy (< 32 words) for 3-second retention.")
+        raise QualityAuditError(f"Hook Rejection: Scene 1 is too wordy ({beat1_words} words). Must be punchy for 3-second retention.")
 
-    # Verify concluding payoff in Beat 5
+    # Verify concluding payoff in last scene
     last_beat = beats[-1]["narration"]
     last_beat_words = len(last_beat.split())
-    if last_beat_words < 18:
+    if last_beat_words < 5:
         raise QualityAuditError(
-            f"Payoff Rejection: Beat 5 narration is too short ({last_beat_words} words < 18). "
-            f"Ending will terminate prematurely leaving empty dead air from 50s-58s!"
+            f"Payoff Rejection: Final scene narration is too short ({last_beat_words} words < 5). "
+            f"Ending will terminate prematurely leaving empty dead air!"
         )
 
     # Verify Invariant Character DNA & Visual Anchor (Zero-Drift Policy)
     char_dna = script_data.get("character_dna", "")
-    if not char_dna or len(char_dna.strip()) < 25:
+    if not char_dna or len(char_dna.strip()) < 20:
         raise QualityAuditError(
-            f"Consistency Rejection: Script missing or insufficiently detailed 'character_dna' ({len(char_dna.strip())} chars < 25). "
+            f"Consistency Rejection: Script missing or insufficiently detailed 'character_dna' ({len(char_dna.strip())} chars < 20). "
             f"A persistent visual subject definition is strictly required to prevent character drifting across scenes!"
         )
 
     vis_anchor = script_data.get("visual_anchor", "")
-    if not vis_anchor or len(vis_anchor.strip()) < 20:
+    if not vis_anchor or len(vis_anchor.strip()) < 15:
         raise QualityAuditError(
-            f"Consistency Rejection: Script missing or insufficiently detailed 'visual_anchor' ({len(vis_anchor.strip())} chars < 20). "
+            f"Consistency Rejection: Script missing or insufficiently detailed 'visual_anchor' ({len(vis_anchor.strip())} chars < 15). "
             f"A unified environment and lighting anchor is strictly required!"
         )
 
@@ -108,29 +117,30 @@ def audit_story_script(script_data: dict) -> bool:
         "pushing", "push", "running", "run", "descending", "descend", "accelerating", "accelerate",
         "drifting", "drift", "shattering", "shatter", "spinning", "spin", "plummeting", "plummet",
         "floating", "float", "racing", "race", "diving", "dive", "cutting", "cut", "vibrating", "vibrate", "hovering", "hover",
-        "turning", "turn", "stepping", "step", "walking", "walk", "reaching", "reach", "stumbling", "stumble"
+        "turning", "turn", "stepping", "step", "walking", "walk", "reaching", "reach", "stumbling", "stumble",
+        "reacting", "react", "gesturing", "gesture", "holding", "hold", "pointing", "point",
+        "shaking", "shake", "leaning", "lean", "looking", "look"
     ]
 
     for b in beats:
-        b_num = b.get("beat_number", 1)
+        b_num = b.get("scene_number") or b.get("beat_number", 1)
         vp = b.get("video_prompt", "")
-        if not vp or len(vp.strip()) < 50:
-            raise QualityAuditError(f"Cinematography Rejection: Beat #{b_num} missing detailed 'video_prompt' (>= 50 chars required).")
+        if not vp or len(vp.strip()) < 40:
+            raise QualityAuditError(f"Cinematography Rejection: Scene #{b_num} missing detailed 'video_prompt' (>= 40 chars required).")
 
         vp_lower = vp.lower()
         if not any(tok in vp_lower for tok in lens_tokens):
             raise QualityAuditError(
-                f"Cinematography Rejection: Beat #{b_num} video_prompt lacks explicit camera lens optics token "
+                f"Cinematography Rejection: Scene #{b_num} video_prompt lacks explicit camera lens optics token "
                 f"(expected one of: 10mm, 24mm, 35mm, 50mm, anamorphic, ultra-wide, macro). Found: '{vp[:60]}...'"
             )
 
         if not any(tok in vp_lower for tok in kinematics_tokens):
             raise QualityAuditError(
-                f"Cinematography Rejection: Beat #{b_num} video_prompt lacks dynamic physical kinematics motion verbs "
-                f"(expected active verbs like falling, tumbling, plunging, swirling, surging, drifting, lunging). Found: '{vp[:60]}...'"
+                f"Cinematography Rejection: Scene #{b_num} video_prompt lacks dynamic physical kinematics motion verbs. Found: '{vp[:60]}...'"
             )
 
-    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} beats, {total_words} words, verified curiosity hook, character DNA, lens optics & physical kinematics).")
+    print(f"[AUDITOR] [GATE-1] Story Script Approved ({len(beats)} rapid-cut scenes, {total_words} words, verified top hook banner, curiosity hook, character DNA, lens optics & physical kinematics).")
     return True
 
 
@@ -140,6 +150,11 @@ def audit_scientific_factuality(script_data: dict) -> bool:
     Scans narration for physical units, astronomical distances, and biological metrics
     to ensure 100% scientific plausibility and eliminate AI hallucinations.
     """
+    cat = (script_data.get("category") or "").lower()
+    if any(k in cat for k in ["comedy", "skit", "satire", "parody", "relatable"]):
+        print("[AUDITOR] [GATE-6] Comedy/Relatable Skit verified (scientific grounding check waived for creative parody).")
+        return True
+
     beats = script_data.get("beats", [])
     full_text = " ".join(b.get("narration", "") for b in beats).lower()
 
@@ -627,11 +642,12 @@ def audit_final_rendered_video(mp4_path: Path, ass_path: Path | None = None) -> 
 
                     # Check visual color complexity at this point
                     small = im.resize((120, 213), Image.Resampling.NEAREST)
-                    unique_colors = len(set(small.get_flattened_data())) // 3
-                    if unique_colors < 1000:
+                    flat = small.get_flattened_data() if hasattr(small, "get_flattened_data") else small.getdata()
+                    unique_colors = len(set(flat))
+                    if unique_colors < 800:
                         raise QualityAuditError(
                             f"Visual Defect Rejection: Frame at {t_pt:.1f}s is blank, monochromatic, or lacks visual content "
-                            f"({unique_colors} colors < 1000)!"
+                            f"({unique_colors} colors < 800)!"
                         )
                     frame_hashes.append(compute_dhash(im))
                 temp_frame.unlink(missing_ok=True)

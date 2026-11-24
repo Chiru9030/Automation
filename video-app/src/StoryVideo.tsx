@@ -92,6 +92,7 @@ export interface StoryPayload {
   episode: number;
   genre: string;
   hook_headline: string;
+  top_hook_banner?: string;
   scenes: SceneItem[];
 }
 
@@ -407,12 +408,13 @@ export const StoryVideo: React.FC = () => {
       />
 
       {/* Top Header: Book Title & Episode Pill */}
+      {/* PERSISTENT TOP HOOK BANNER */}
       <div
         style={{
           position: 'absolute',
-          top: 55,
-          left: 0,
-          right: 0,
+          top: 75,
+          left: 40,
+          right: 40,
           zIndex: 20,
           display: 'flex',
           justifyContent: 'center',
@@ -421,39 +423,28 @@ export const StoryVideo: React.FC = () => {
       >
         <div
           style={{
-            background: 'rgba(5, 5, 15, 0.88)',
+            background: 'rgba(10, 10, 18, 0.90)',
             backdropFilter: 'blur(16px)',
-            padding: '12px 36px',
-            borderRadius: 35,
-            border: '2px solid rgba(255, 230, 0, 0.7)',
+            padding: '16px 36px',
+            borderRadius: 30,
+            border: '2px solid rgba(255, 255, 255, 0.25)',
             display: 'flex',
             alignItems: 'center',
-            gap: 14,
-            boxShadow: '0 8px 30px rgba(0,0,0,0.8), 0 0 25px rgba(255,230,0,0.3)',
+            textAlign: 'center',
+            boxShadow: '0 12px 35px rgba(0,0,0,0.85)',
           }}
         >
           <span
             style={{
-              fontFamily: "'Impact', 'Arial Black', sans-serif",
-              fontSize: 24,
-              letterSpacing: 2.5,
-              color: '#FFE600',
-              textTransform: 'uppercase',
-            }}
-          >
-            🦁 {storyData.title || 'STORY TIME'}
-          </span>
-          <span style={{ color: 'rgba(255, 230, 0, 0.4)' }}>•</span>
-          <span
-            style={{
-              fontFamily: "'Impact', 'Arial Black', sans-serif",
-              fontSize: 20,
-              fontWeight: 700,
+              fontFamily: "'Arial Black', 'Impact', sans-serif",
+              fontSize: 34,
               color: '#FFFFFF',
-              letterSpacing: 1.5,
+              letterSpacing: 0.5,
+              textTransform: 'none',
+              lineHeight: 1.25,
             }}
           >
-            EPISODE #{storyData.episode || 1}
+            {storyData.top_hook_banner || storyData.title}
           </span>
         </div>
       </div>

@@ -21,6 +21,7 @@ import time
 import urllib.parse
 import urllib.request
 import concurrent.futures
+import threading
 from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image, ImageFilter
@@ -38,6 +39,7 @@ POLLINATIONS_IMAGE_ACTIVE = True
 LOCAL_SD_TURBO_ACTIVE = True
 
 _SD_TURBO_PIPE = None
+_SD_TURBO_LOCK = threading.Lock()
 
 
 def call_with_timeout(func, args=(), kwargs=None, timeout_sec=30):
@@ -391,19 +393,20 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
         clean_p = sanitize_for_ai_filter(prompt)
 
         def _run_diffusion():
-            return pipe(
-                prompt=clean_p[:280],
-                num_inference_steps=2,
-                guidance_scale=0.0,
-                generator=generator,
-            ).images[0]
+            with _SD_TURBO_LOCK:
+                return pipe(
+                    prompt=clean_p[:280],
+                    num_inference_steps=2,
+                    guidance_scale=0.0,
+                    generator=generator,
+                ).images[0]
 
         image = call_with_timeout(_run_diffusion, timeout_sec=60)
         im_std = standardize_to_1080x1920(image.convert("RGB"))
         im_std.save(output_path, "JPEG", quality=95)
 
         if output_path.exists() and output_path.stat().st_size > 25_000:
-            print(f"[IMAGE-ENGINE] [TIER-3] Local SD-Turbo rendered {output_path.name} successfully!")
+            print(f"[IMAGE-ENGINE] [TIER-5] Local SD-Turbo rendered {output_path.name} successfully!")
             try:
                 from story_pipeline.telegram_notifier import RUN_TRACKER
                 RUN_TRACKER.set_model_used("Visuals", "Local SD-Turbo (Single-Step CPU)")
@@ -411,7 +414,7 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
                 pass
             return True
     except Exception as e:
-        print(f"[IMAGE-ENGINE] [TIER-3 Notice] SD-Turbo generation error: {e}")
+        print(f"[IMAGE-ENGINE] [TIER-5 Notice] SD-Turbo generation error: {e}")
         try:
             from story_pipeline.telegram_notifier import RUN_TRACKER
             RUN_TRACKER.record_model_failure("Local SD-Turbo", f"{str(e)[:60]}")
@@ -421,55 +424,43 @@ def generate_sd_turbo_local(prompt: str, output_path: Path, seed: int = 42) -> b
 
 
 def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) -> bool:
-    """Tier 4: Generates AI visuals using clean Pollinations streaming endpoint."""
-    global POLLINATIONS_IMAGE_ACTIVE
-    if not POLLINATIONS_IMAGE_ACTIVE:
-        return False
-
+    """Tier 1/2: Generates AI visuals using clean Pollinations FLUX streaming endpoint."""
     user_agents = [
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     ]
 
-    try:
-        clean_p = urllib.parse.quote(prompt[:320])
-        url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=576&height=1024&nologo=true&seed={seed}"
-        print(f"[IMAGE-ENGINE] [TIER-4: Pollinations FLUX] Fetching: '{prompt[:48]}...'")
+    for attempt in range(1, 3):
+        try:
+            clean_p = urllib.parse.quote(prompt[:280])
+            url = f"https://image.pollinations.ai/prompt/{clean_p}?model=flux&width=576&height=1024&nologo=true&seed={seed}"
+            print(f"[IMAGE-ENGINE] [TIER-1: Pollinations FLUX] Fetching (attempt {attempt}/2): '{prompt[:45]}...'")
 
-        headers = {
-            "User-Agent": random.choice(user_agents),
-            "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
-        }
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=25) as resp:
-            data = resp.read()
-            if len(data) > 15_000:
-                temp_raw = output_path.with_suffix(".tmp.jpg")
-                temp_raw.write_bytes(data)
-                with Image.open(temp_raw) as im:
-                    im_std = standardize_to_1080x1920(im.convert("RGB"))
-                    im_std.save(output_path, "JPEG", quality=95)
-                temp_raw.unlink(missing_ok=True)
-                if output_path.exists() and output_path.stat().st_size > 25_000:
-                    try:
-                        from story_pipeline.telegram_notifier import RUN_TRACKER
-                        RUN_TRACKER.set_model_used("Visuals", "Pollinations AI Engine")
-                    except Exception:
-                        pass
-                    return True
-    except Exception as e:
-        s_err = str(e).lower()
-        if any(k in s_err for k in ["402", "payment", "403", "forbidden"]):
-            POLLINATIONS_IMAGE_ACTIVE = False
-            print(f"[IMAGE-ENGINE] [TIER-4 Notice] Pollinations returned 402/403. Disabling for remainder of run.")
-            try:
-                from story_pipeline.telegram_notifier import RUN_TRACKER
-                RUN_TRACKER.record_model_failure("Pollinations AI", "HTTP 402/403 Payment Required")
-            except Exception:
-                pass
-        else:
-            print(f"[IMAGE-ENGINE] [TIER-4 Notice] Pollinations note ({str(e)[:100]})")
+            headers = {
+                "User-Agent": random.choice(user_agents),
+                "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+            }
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = resp.read()
+                if len(data) > 15_000:
+                    temp_raw = output_path.with_suffix(".tmp.jpg")
+                    temp_raw.write_bytes(data)
+                    with Image.open(temp_raw) as im:
+                        im_std = standardize_to_1080x1920(im.convert("RGB"))
+                        im_std.save(output_path, "JPEG", quality=95)
+                    temp_raw.unlink(missing_ok=True)
+                    if output_path.exists() and output_path.stat().st_size > 25_000:
+                        try:
+                            from story_pipeline.telegram_notifier import RUN_TRACKER
+                            RUN_TRACKER.set_model_used("Visuals", "Pollinations FLUX")
+                        except Exception:
+                            pass
+                        return True
+        except Exception as e:
+            print(f"[IMAGE-ENGINE] [Pollinations Notice] Attempt {attempt}/2 ({str(e)[:70]}), retrying...")
+            time.sleep(1.0 * attempt)
     return False
 
 
@@ -478,23 +469,23 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: i
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt)
 
-    # 1. Tier 1: Google Imagen 3 (Google AI Studio via GEMINI_API_KEY)
-    if generate_imagen3_google(enriched, output_path, seed=seed):
+    # 1. Tier 1: Pollinations Clean FLUX Engine (Fast, authentic FLUX cloud generator)
+    if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
-    # 2. Tier 2: Replicate FLUX.1-schnell (via REPLICATE_API_TOKEN)
-    if generate_replicate_flux(enriched, output_path, seed=seed):
+    # 2. Tier 2: Google Imagen 3 (Google AI Studio via GEMINI_API_KEY)
+    if generate_imagen3_google(enriched, output_path, seed=seed):
         return output_path
 
     # 3. Tier 3: Hugging Face FLUX / SDXL Spaces (with anonymous auto-fallback)
     if generate_flux_hf_space(enriched, output_path, seed=seed):
         return output_path
 
-    # 4. Tier 4: Pollinations Clean Free Engine (Fast Cloud FLUX Endpoint)
-    if generate_pollinations_clean(enriched, output_path, seed=seed):
+    # 4. Tier 4: Replicate FLUX.1-schnell (via REPLICATE_API_TOKEN)
+    if generate_replicate_flux(enriched, output_path, seed=seed):
         return output_path
 
-    # 5. Tier 5: Local SD-Turbo Single-Step Diffusion Engine (100% offline CPU render)
+    # 5. Tier 5: Local SD-Turbo Single-Step Diffusion Engine (Thread-safe offline CPU render)
     if generate_sd_turbo_local(enriched, output_path, seed=seed):
         return output_path
 
@@ -505,63 +496,67 @@ def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: i
     )
 
 
-def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
-    """Generates enhanced visuals for all beats with active quality auditing and retry loops."""
+def _process_single_scene_image(beat: dict, episode_num: int) -> dict:
+    """Worker to generate, standardize, and audit a single scene visual asset."""
     from story_pipeline.strict_pipeline_auditor import (
         audit_single_visual_asset,
         QualityAuditError,
     )
     from story_pipeline.telegram_notifier import notify_audit_rejection
 
-    PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
-    spacing = 2
+    b_num = beat.get("scene_number") or beat.get("beat_number", 1)
+    out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_scene_{b_num}.jpg"
+    prompt = beat.get("video_prompt") or beat.get("visual_prompt") or f"{beat.get('title', 'Action')}, {beat.get('narration', '')}"
+    seed = int(episode_num * 100 + b_num * 17)
 
-    for idx, beat in enumerate(beats):
-        b_num = beat["beat_number"]
-        out_file = PUBLIC_IMAGES_DIR / f"ep_{episode_num}_beat_{b_num}.jpg"
-        prompt = beat.get("video_prompt") or beat.get("visual_prompt") or f"{beat.get('title', 'Action')}, {beat.get('narration', '')}"
-        seed = int(episode_num * 100 + b_num * 17)
+    beat_certified = False
+    beat_title = beat.get("title", f"Scene #{b_num}")
+    for attempt in range(1, 4):
+        try:
+            generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
+            metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
 
-        # Active quality audit loop (up to 3 attempts with dynamic prompt enhancement)
-        beat_certified = False
-        beat_title = beat.get("title", f"Beat #{b_num}")
-        for attempt in range(1, 4):
-            try:
-                generate_hd_image(prompt, out_file, seed=seed + attempt * 31, beat_num=b_num)
-                metrics = audit_single_visual_asset(out_file, prompt=prompt, beat_title=beat_title)
-
-                print(
-                    f"[AUDITOR] [GATE-2] Beat #{b_num} Image Certified: {out_file.name} "
-                    f"(Content: PASS, Quality: {metrics['quality']}, Clarity: {metrics['clarity']}, Relation: PASS)"
-                )
-                beat_certified = True
-                break
-            except QualityAuditError as q_err:
-                print(f"[AUDITOR] [GATE-2 Rejection] Beat #{b_num} attempt {attempt}/3 rejected: {q_err}")
-                notify_audit_rejection(
-                    gate_name="Gate 2: Visual Assets",
-                    item_name=out_file.name,
-                    reason=str(q_err),
-                    attempt=attempt,
-                    max_attempts=3,
-                    action="Regenerating with enhanced subject-specific visual tokens...",
-                )
-                out_file.unlink(missing_ok=True)
-                prompt += ", extreme sharp edge definition, high-contrast micro-textures, ray tracing, Unreal Engine 5 render, 8k resolution, octane render"
-            except Exception as gen_err:
-                print(f"⚠️ [Image Engine Error] Beat #{b_num} generation attempt {attempt}/3 error: {gen_err}")
-                if attempt == 3:
-                    raise
-
-        if not beat_certified:
-            raise QualityAuditError(
-                f"Visual Asset Hard Block: Beat #{b_num} failed all AI generation attempts and strict auditor inspection. "
-                f"Publication halted by Zero-Upload Safety Guard."
+            print(
+                f"[AUDITOR] [GATE-2] Scene #{b_num} Image Certified: {out_file.name} "
+                f"(Content: PASS, Quality: {metrics['quality']}, Clarity: {metrics['clarity']}, Relation: PASS)"
             )
+            beat_certified = True
+            break
+        except QualityAuditError as q_err:
+            print(f"[AUDITOR] [GATE-2 Rejection] Scene #{b_num} attempt {attempt}/3 rejected: {q_err}")
+            out_file.unlink(missing_ok=True)
+            prompt += ", extreme sharp edge definition, high-contrast micro-textures, ray tracing, Unreal Engine 5 render, 8k resolution, octane render"
+        except Exception as gen_err:
+            print(f"⚠️ [Image Engine Error] Scene #{b_num} generation attempt {attempt}/3 error: {gen_err}")
+            if attempt == 3:
+                raise
 
-        beat["image_url"] = f"images/{out_file.name}"
+    if not beat_certified:
+        raise QualityAuditError(
+            f"Visual Asset Hard Block: Scene #{b_num} failed all AI generation attempts and strict auditor inspection. "
+            f"Publication halted by Zero-Upload Safety Guard."
+        )
 
-        if idx < len(beats) - 1:
-            time.sleep(spacing)
+    beat["image_url"] = f"images/{out_file.name}"
+    return beat
+
+
+def generate_all_beat_images(beats: list[dict], episode_num: int) -> list[dict]:
+    """Generates enhanced visuals for all scenes/beats concurrently with active quality auditing."""
+    PUBLIC_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    print(f"\n🎨 [Image Engine] Batch-generating {len(beats)} rapid-cut scene visuals (2 paced workers)...")
+
+    # Use 2 paced workers to guarantee zero rate-limiting and thread safety
+    max_workers = min(2, len(beats))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = []
+        for beat in beats:
+            futures.append(executor.submit(_process_single_scene_image, beat, episode_num))
+            time.sleep(0.4)  # 400ms pacing prevents burst rate limiting
+
+        for future in concurrent.futures.as_completed(futures):
+            res_beat = future.result()
+            sc_num = res_beat.get("scene_number") or res_beat.get("beat_number")
+            print(f"  ✅ Scene {sc_num}/{len(beats)} visual ready -> {res_beat['image_url']}")
 
     return beats

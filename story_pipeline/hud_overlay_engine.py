@@ -69,29 +69,31 @@ def append_hud_and_progress_to_ass(
     end_time = f"{hrs}:{mins:02d}:{secs:02d}.{cs:02d}"
 
     hud_events = []
+    has_top_banner = "TopHookBanner" in text
 
-    # 1. Theme-Specific Visual Headers
-    if chosen_theme == "technical_telemetry":
-        hud_text = get_thematic_hud_text(category)
-        hud_events.extend([
-            f"Dialogue: 1,{start_time},{end_time},BrandBadge,,0,0,0,,CURIOSITY UNIVERSE",
-            f"Dialogue: 1,{start_time},{end_time},HUDTopRight,,0,0,0,,{hud_text}",
-        ])
-    elif chosen_theme == "curiosity_banner":
-        hook_titles = [
-            "● CAN YOU SURVIVE THIS? ●",
-            "● 99% OF PEOPLE GET THIS WRONG ●",
-            "● THE SHOCKING TRUTH ●",
-            "● SCIENTIFIC ANOMALY DETECTED ●",
-        ]
-        chosen_hook = hook_titles[episode_num % len(hook_titles)]
-        hud_events.append(
-            f"Dialogue: 1,{start_time},{end_time},HookBanner,,0,0,0,,{{\\c&H0000E6FF&}}{chosen_hook}"
-        )
-    elif chosen_theme == "cinematic_archive":
-        hud_events.append(
-            f"Dialogue: 1,{start_time},{end_time},ArchiveMark,,0,0,0,,PARADOX ARCHIVE // EPISODE #{episode_num:02d}"
-        )
+    # 1. Theme-Specific Visual Headers (Skipped if persistent TopHookBanner is active)
+    if not has_top_banner:
+        if chosen_theme == "technical_telemetry":
+            hud_text = get_thematic_hud_text(category)
+            hud_events.extend([
+                f"Dialogue: 1,{start_time},{end_time},BrandBadge,,0,0,0,,CURIOSITY UNIVERSE",
+                f"Dialogue: 1,{start_time},{end_time},HUDTopRight,,0,0,0,,{hud_text}",
+            ])
+        elif chosen_theme == "curiosity_banner":
+            hook_titles = [
+                "● CAN YOU SURVIVE THIS? ●",
+                "● 99% OF PEOPLE GET THIS WRONG ●",
+                "● THE SHOCKING TRUTH ●",
+                "● SCIENTIFIC ANOMALY DETECTED ●",
+            ]
+            chosen_hook = hook_titles[episode_num % len(hook_titles)]
+            hud_events.append(
+                f"Dialogue: 1,{start_time},{end_time},HookBanner,,0,0,0,,{{\\c&H0000E6FF&}}{chosen_hook}"
+            )
+        elif chosen_theme == "cinematic_archive":
+            hud_events.append(
+                f"Dialogue: 1,{start_time},{end_time},ArchiveMark,,0,0,0,,PARADOX ARCHIVE // EPISODE #{episode_num:02d}"
+            )
     # Note: "modern_minimalist" intentionally adds ZERO top overlay elements! Pure cinematic full bleed.
 
     # 2. Subtle Bottom Retention Progress Bar (Divided into 20 advancing keyframes)

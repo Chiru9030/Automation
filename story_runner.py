@@ -209,9 +209,10 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             ep_num = history.get("episode_count", 0) + 1
             topic_data = {
                 "topic": custom_override.strip(),
-                "hook_premise": f"The shocking reality of {custom_override.strip()}",
-                "category": "Mind-Blowing Stories & Science",
-                "style": "3D Pixar animation Unreal Engine 5",
+                "top_hook_banner": custom_override.strip()[:55],
+                "hook_premise": f"The hilarious and shocking reality of {custom_override.strip()}",
+                "category": "Viral Skit / Relatable Comedy" if any(k in custom_override.lower() for k in ["brand", "reels", "comment", "friend", "skit", "comedy"]) else "Mind-Blowing Stories & Science",
+                "style": "3D Pixar animation comedy Unreal Engine 5",
                 "episode": ep_num,
             }
         else:
@@ -231,8 +232,8 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         # -------------------------------------------------------------
         # STAGE 2: 59-Second Hook-Driven Narrative Script Engine & Gate 1 Auditor
         # -------------------------------------------------------------
-        current_stage = "Stage 2: 59-Second Narrative Script Engine"
-        print("\n✍️ [Stage 2/7] Generating 5-beat retention script with hooks every 10 seconds...")
+        current_stage = "Stage 2: Rapid-Cut Narrative Script Engine"
+        print("\n✍️ [Stage 2/7] Generating rapid-cut viral script (12-16 scenes with persistent top hook banner)...")
         script_data = None
         for script_attempt in range(1, 4):
             try:
@@ -307,9 +308,11 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
         from story_pipeline.kinetic_subtitle_engine import compile_kinetic_subtitles, get_typography_preset
         active_preset = get_typography_preset(episode_num=ep_num)
         RUN_TRACKER.set_typography(f"{active_preset['name']} ({active_preset['font']})")
-        compile_kinetic_subtitles(beats, ass_path, episode_num=ep_num)
+        banner = script_data.get("top_hook_banner") or chapter_title[:55]
+        compile_kinetic_subtitles(beats, ass_path, episode_num=ep_num, top_hook_banner=banner)
         from story_pipeline.hud_overlay_engine import append_hud_and_progress_to_ass
-        append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=58.0, episode_num=ep_num)
+        actual_total_dur = sum(b.get("duration_in_frames", 360) for b in beats) / 30.0
+        append_hud_and_progress_to_ass(ass_path, category=genre, total_duration=actual_total_dur, episode_num=ep_num)
 
         # Gate 4: Subtitles Verification Audit
         current_stage = "Gate 4: Subtitles Verification Audit"

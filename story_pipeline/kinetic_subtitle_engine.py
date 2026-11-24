@@ -181,10 +181,17 @@ def compile_kinetic_subtitles(
     output_ass_path: Path,
     episode_num: int = 1,
     preset_id: str | None = None,
+    top_hook_banner: str | None = None,
 ) -> Path:
-    """Compiles exact frame-accurate ASS subtitles for the entire video (clean lower-third safe zone MarginV=420)."""
+    """Compiles exact frame-accurate ASS subtitles with persistent top banner and lower-third kinetic karaoke."""
     preset = get_typography_preset(episode_num=episode_num, preset_id=preset_id)
     print(f"  ✨ [Typography Engine] Active Subtitle Style: '{preset['name']}' (Font: {preset['font']}, Size: {preset['size']}px, Pop: {preset['scale_pop']}%)")
+
+    # Resolve persistent Top Hook Banner text if provided
+    if not top_hook_banner and beats:
+        top_hook_banner = beats[0].get("top_hook_banner") or beats[0].get("banner") or ""
+
+    banner_style = "Style: TopHookBanner,Arial,42,&H00FFFFFF,&H00FFFFFF,&H00000000,&HE6121215,-1,0,0,0,100,100,1,0,3,18,0,8,45,45,90,1\n"
 
     header = f"""[Script Info]
 Title: Kinetic Viral Story Subtitles
@@ -197,13 +204,22 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: KineticSub,{preset['font']},{preset['size']},{preset['primary']},{preset['secondary']},{preset['outline_color'] if 'outline_color' in preset else '&H00000000&'},&H90000000,-1,0,0,0,100,100,2,0,1,{preset['outline']},{preset['shadow']},2,60,60,420,1
+{banner_style}Style: KineticSub,{preset['font']},{preset['size']},{preset['primary']},{preset['secondary']},{preset['outline_color'] if 'outline_color' in preset else '&H00000000&'},&H90000000,-1,0,0,0,100,100,2,0,1,{preset['outline']},{preset['shadow']},2,60,60,420,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     events = []
     fps = 30
+    total_frames = sum(beat.get("duration_in_frames", 348) for beat in beats)
+    total_dur_sec = total_frames / fps
+
+    # Persistent Top Hook Banner (Anchored at top of the frame for the entire duration)
+    if top_hook_banner:
+        clean_banner = top_hook_banner.strip()
+        events.append(f"Dialogue: 1,0:00:00.00,{format_ass_time(total_dur_sec)},TopHookBanner,,0,0,0,,{clean_banner}")
+        print(f"  📌 [Top Hook Banner] Injected persistent header: '{clean_banner}' (0.0s -> {total_dur_sec:.1f}s)")
+
     running_time = 0.0
 
     for beat in beats:

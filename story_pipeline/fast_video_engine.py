@@ -106,7 +106,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     temp_dir = OUTPUT_DIR / "fast_render_tmp"
     temp_dir.mkdir(parents=True, exist_ok=True)
 
-    print("\n⚡ [Lightning Video Engine] Assembling 5 cinematic scenes via native hardware acceleration...")
+    print(f"\n⚡ [Lightning Video Engine] Assembling {len(scenes)} cinematic rapid-cut scenes via native hardware acceleration...")
 
     # Step 1: Render or Retrieve AI Video Clip for each scene
     clip_paths = []
@@ -114,7 +114,7 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
         clip_p = temp_dir / f"clip_{i+1}.mp4"
         generate_scene_video_clip(sc, clip_p, beat_number=sc.get("beat_number", i + 1))
         clip_paths.append(clip_p)
-        print(f"  🎬 Scene {i+1}/5 clip ready ({sc['duration_in_frames']/30:.1f}s)")
+        print(f"  🎬 Scene {i+1}/{len(scenes)} clip ready ({sc['duration_in_frames']/30:.1f}s)")
 
     # Step 2: Concatenate visual clips
     concat_list = temp_dir / "concat_list.txt"
@@ -130,11 +130,12 @@ def render_fast_story_video(script_data: dict, out_mp4: Path) -> Path:
     ]
     subprocess.run(cmd_concat, check=True, capture_output=True)
 
-    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting & Rotating Presets)
+    # Step 3: Generate ASS Subtitles (Frame-Accurate Discrete Highlighting & Persistent Top Hook Banner)
     ass_path = temp_dir / "subtitles.ass"
     ep_num = script_data.get("episode", 1)
-    compile_kinetic_subtitles(scenes, ass_path, episode_num=ep_num)
-    print(f"  ✨ Frame-Accurate discrete kinetic subtitles generated (Ep #{ep_num}): {ass_path.name}")
+    banner = script_data.get("top_hook_banner") or ""
+    compile_kinetic_subtitles(scenes, ass_path, episode_num=ep_num, top_hook_banner=banner)
+    print(f"  ✨ Frame-Accurate discrete kinetic subtitles generated (Ep #{ep_num}, Banner: '{banner[:35]}'): {ass_path.name}")
 
     # Step 4: Multi-Track Audio Mixing (Voiceovers + Ducked Music + SFX)
     audio_inputs = []

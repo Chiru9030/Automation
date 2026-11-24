@@ -609,17 +609,18 @@ def generate_scene_video_clip(scene: dict, output_video_path: Path, beat_number:
             f"[v0][v1]concat=n=2:v=1:a=0,eq=saturation=1.22:contrast=1.12:brightness=0.02,vignette=PI/5,noise=alls=6:allf=t[outv]"
         )
     else:
-        # Fast Single Shot for short scenes
-        if b_num == 2:
-            zoom_expr = f"zoompan=z='1.15+0.12*(on/{dur_frames})':x='(iw-ow)*(on/{dur_frames})':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
-        elif b_num == 3:
-            zoom_expr = f"zoompan=z='1.18+0.12*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
-        elif b_num == 4:
-            zoom_expr = f"zoompan=z='1.36-0.20*(on/{dur_frames})':x='(iw-ow)*(1-on/{dur_frames})':y='(ih-oh)*(on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
-        elif b_num == 5:
-            zoom_expr = f"zoompan=z='1.18-0.12*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+        # Fast Single Shot for short rapid-cut scenes (1.5 - 2.8s)
+        mod_beat = ((b_num - 1) % 5) + 1
+        if mod_beat == 2:
+            zoom_expr = f"zoompan=z='1.12+0.10*(on/{dur_frames})':x='(iw-ow)*(on/{dur_frames})':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+        elif mod_beat == 3:
+            zoom_expr = f"zoompan=z='1.15+0.10*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
+        elif mod_beat == 4:
+            zoom_expr = f"zoompan=z='1.25-0.15*(on/{dur_frames})':x='(iw-ow)*(1-on/{dur_frames})':y='(ih-oh)*(on/{dur_frames})':d={dur_frames}:s=1080x1920:fps={fps}"
+        elif mod_beat == 5:
+            zoom_expr = f"zoompan=z='1.14-0.08*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
         else:
-            zoom_expr = f"zoompan=z='1.08+0.22*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
+            zoom_expr = f"zoompan=z='1.06+0.18*(on/{dur_frames})':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={dur_frames}:s=1080x1920:fps={fps}"
 
         filter_complex = (
             f"[0:v]scale=1920:3413:force_original_aspect_ratio=increase,crop=1920:3413,"

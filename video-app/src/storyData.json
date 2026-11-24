@@ -1,3464 +1,3763 @@
 {
-  "episode_title": "THE COLOSSAL MEGALODON THA",
-  "hook_headline": "WHAT IF THE COLOSSAL MEGAL?!",
-  "total_words_count": 110,
-  "beats": [
+  "episode_title": "BRANDS COMMENTING UNDER REELS",
+  "top_hook_banner": "Brands commenting under reels like they\u2019re our friends",
+  "hook_headline": "WHEN BRANDS ATTACK",
+  "character_dna": "Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic.",
+  "visual_anchor": "Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution.",
+  "total_words_count": 112,
+  "loop_lead_in": "They never leave us alone!",
+  "scenes": [
     {
-      "beat_number": 1,
-      "time_window": "0-10s",
-      "hook_trigger": "Opening Shock Hook",
-      "narration": "What if the colossal megalodon that hunted prehistoric oceans? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-zoom-in",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, dramatic epic opening cinematic of The colossal megalodon that hunted prehistoric oceans, vibrant volumetric lighting, Unreal Engine 5, 8k",
       "scene_number": 1,
-      "title": "Opening Shock Hook",
-      "image_url": "images/ep_11_beat_1.jpg",
+      "beat_number": 1,
+      "time_window": "0-2s",
+      "hook_trigger": "Opening Hook",
+      "narration": "Why is Wendy's acting like my actual best friend?",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "pop",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. reacting with wide eyes and pointing at screen, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "24mm anamorphic close up shot of [character_dna] staring bewildered at phone, 3D Pixar, 8k",
+      "title": "Opening Hook",
+      "image_url": "images/ep_35_scene_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 10.44,
-      "duration_in_frames": 325,
+      "audio_duration_sec": 2.71,
+      "duration_in_frames": 83,
       "words": [
         {
-          "word": "What",
-          "start_sec": 0.098541,
-          "end_sec": 0.304832,
+          "word": "Why",
+          "start_sec": 0.109208,
+          "end_sec": 0.242708,
           "start_frame": 3,
-          "end_frame": 9
-        },
-        {
-          "word": "if",
-          "start_sec": 0.317,
-          "end_sec": 0.414083,
-          "start_frame": 10,
-          "end_frame": 12
-        },
-        {
-          "word": "the",
-          "start_sec": 0.426208,
-          "end_sec": 0.523291,
-          "start_frame": 13,
-          "end_frame": 16
-        },
-        {
-          "word": "colossal",
-          "start_sec": 0.535416,
-          "end_sec": 1.008707,
-          "start_frame": 16,
-          "end_frame": 30
-        },
-        {
-          "word": "megalodon",
-          "start_sec": 1.020875,
-          "end_sec": 1.603416,
-          "start_frame": 31,
-          "end_frame": 48
-        },
-        {
-          "word": "that",
-          "start_sec": 1.615541,
-          "end_sec": 1.7490409999999998,
-          "start_frame": 48,
-          "end_frame": 52
-        },
-        {
-          "word": "hunted",
-          "start_sec": 1.761166,
-          "end_sec": 2.100957,
-          "start_frame": 53,
-          "end_frame": 63
-        },
-        {
-          "word": "prehistoric",
-          "start_sec": 2.113125,
-          "end_sec": 2.7684580000000003,
-          "start_frame": 63,
-          "end_frame": 83
-        },
-        {
-          "word": "oceans",
-          "start_sec": 2.780583,
-          "end_sec": 3.350958,
-          "start_frame": 83,
-          "end_frame": 101
-        },
-        {
-          "word": "Most",
-          "start_sec": 4.186875,
-          "end_sec": 4.550958,
-          "start_frame": 126,
-          "end_frame": 137
-        },
-        {
-          "word": "people",
-          "start_sec": 4.563125,
-          "end_sec": 4.854375,
-          "start_frame": 137,
-          "end_frame": 146
-        },
-        {
-          "word": "assume",
-          "start_sec": 4.8665,
-          "end_sec": 5.242708,
-          "start_frame": 146,
-          "end_frame": 157
-        },
-        {
-          "word": "civilization",
-          "start_sec": 5.254875,
-          "end_sec": 6.007291,
-          "start_frame": 158,
-          "end_frame": 180
-        },
-        {
-          "word": "would",
-          "start_sec": 6.019416,
-          "end_sec": 6.140790999999999,
-          "start_frame": 181,
-          "end_frame": 184
-        },
-        {
-          "word": "carry",
-          "start_sec": 6.152916,
-          "end_sec": 6.504874,
-          "start_frame": 185,
-          "end_frame": 195
-        },
-        {
-          "word": "on",
-          "start_sec": 6.517,
-          "end_sec": 6.759708000000001,
-          "start_frame": 196,
-          "end_frame": 203
-        },
-        {
-          "word": "but",
-          "start_sec": 7.026708,
-          "end_sec": 7.148083,
-          "start_frame": 211,
-          "end_frame": 214
-        },
-        {
-          "word": "the",
-          "start_sec": 7.160208,
-          "end_sec": 7.220874,
-          "start_frame": 215,
-          "end_frame": 217
-        },
-        {
-          "word": "immediate",
-          "start_sec": 7.233,
-          "end_sec": 7.669874999999999,
-          "start_frame": 217,
-          "end_frame": 230
-        },
-        {
-          "word": "reality",
-          "start_sec": 7.682041,
-          "end_sec": 8.191749,
-          "start_frame": 230,
-          "end_frame": 246
+          "end_frame": 7
         },
         {
           "word": "is",
-          "start_sec": 8.203875,
-          "end_sec": 8.3495,
-          "start_frame": 246,
-          "end_frame": 250
+          "start_sec": 0.254875,
+          "end_sec": 0.351958,
+          "start_frame": 8,
+          "end_frame": 11
         },
         {
-          "word": "far",
-          "start_sec": 8.361666,
-          "end_sec": 8.604374,
-          "start_frame": 251,
-          "end_frame": 258
+          "word": "Wendy's",
+          "start_sec": 0.364083,
+          "end_sec": 0.6674990000000001,
+          "start_frame": 11,
+          "end_frame": 20
         },
         {
-          "word": "more",
-          "start_sec": 8.6165,
-          "end_sec": 8.810666,
-          "start_frame": 258,
-          "end_frame": 264
+          "word": "acting",
+          "start_sec": 0.679625,
+          "end_sec": 0.995166,
+          "start_frame": 20,
+          "end_frame": 30
         },
         {
-          "word": "terrifying",
-          "start_sec": 8.822833,
-          "end_sec": 9.587416,
-          "start_frame": 265,
-          "end_frame": 288
+          "word": "like",
+          "start_sec": 1.007291,
+          "end_sec": 1.165041,
+          "start_frame": 30,
+          "end_frame": 35
+        },
+        {
+          "word": "my",
+          "start_sec": 1.177166,
+          "end_sec": 1.3106659999999999,
+          "start_frame": 35,
+          "end_frame": 39
+        },
+        {
+          "word": "actual",
+          "start_sec": 1.322833,
+          "end_sec": 1.6990409999999998,
+          "start_frame": 40,
+          "end_frame": 51
+        },
+        {
+          "word": "best",
+          "start_sec": 1.711166,
+          "end_sec": 1.966041,
+          "start_frame": 51,
+          "end_frame": 59
+        },
+        {
+          "word": "friend",
+          "start_sec": 1.978166,
+          "end_sec": 2.354374,
+          "start_frame": 59,
+          "end_frame": 71
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "WHAT IF THE",
+          "text": "WHY IS WENDY'S",
           "start_frame": 3,
-          "end_frame": 16,
+          "end_frame": 20,
           "words": [
             {
-              "word": "WHAT",
+              "word": "WHY",
               "start_frame": 3,
-              "end_frame": 9
+              "end_frame": 7
             },
             {
-              "word": "IF",
-              "start_frame": 10,
-              "end_frame": 12
+              "word": "IS",
+              "start_frame": 8,
+              "end_frame": 11
             },
             {
-              "word": "THE",
-              "start_frame": 13,
-              "end_frame": 16
+              "word": "WENDY'S",
+              "start_frame": 11,
+              "end_frame": 20
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "COLOSSAL MEGALODON THAT",
-          "start_frame": 16,
-          "end_frame": 53,
+          "text": "ACTING LIKE MY",
+          "start_frame": 20,
+          "end_frame": 40,
           "words": [
             {
-              "word": "COLOSSAL",
-              "start_frame": 16,
+              "word": "ACTING",
+              "start_frame": 20,
               "end_frame": 30
             },
             {
-              "word": "MEGALODON",
-              "start_frame": 31,
-              "end_frame": 48
+              "word": "LIKE",
+              "start_frame": 30,
+              "end_frame": 35
             },
             {
-              "word": "THAT",
-              "start_frame": 48,
-              "end_frame": 52
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "HUNTED PREHISTORIC OCEANS",
-          "start_frame": 53,
-          "end_frame": 126,
-          "words": [
-            {
-              "word": "HUNTED",
-              "start_frame": 53,
-              "end_frame": 63
-            },
-            {
-              "word": "PREHISTORIC",
-              "start_frame": 63,
-              "end_frame": 83
-            },
-            {
-              "word": "OCEANS",
-              "start_frame": 83,
-              "end_frame": 101
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "MOST PEOPLE ASSUME",
-          "start_frame": 126,
-          "end_frame": 158,
-          "words": [
-            {
-              "word": "MOST",
-              "start_frame": 126,
-              "end_frame": 137
-            },
-            {
-              "word": "PEOPLE",
-              "start_frame": 137,
-              "end_frame": 146
-            },
-            {
-              "word": "ASSUME",
-              "start_frame": 146,
-              "end_frame": 157
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "CIVILIZATION WOULD CARRY",
-          "start_frame": 158,
-          "end_frame": 196,
-          "words": [
-            {
-              "word": "CIVILIZATION",
-              "start_frame": 158,
-              "end_frame": 180
-            },
-            {
-              "word": "WOULD",
-              "start_frame": 181,
-              "end_frame": 184
-            },
-            {
-              "word": "CARRY",
-              "start_frame": 185,
-              "end_frame": 195
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "ON BUT THE",
-          "start_frame": 196,
-          "end_frame": 217,
-          "words": [
-            {
-              "word": "ON",
-              "start_frame": 196,
-              "end_frame": 203
-            },
-            {
-              "word": "BUT",
-              "start_frame": 211,
-              "end_frame": 214
-            },
-            {
-              "word": "THE",
-              "start_frame": 215,
-              "end_frame": 217
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "IMMEDIATE REALITY IS",
-          "start_frame": 217,
-          "end_frame": 251,
-          "words": [
-            {
-              "word": "IMMEDIATE",
-              "start_frame": 217,
-              "end_frame": 230
-            },
-            {
-              "word": "REALITY",
-              "start_frame": 230,
-              "end_frame": 246
-            },
-            {
-              "word": "IS",
-              "start_frame": 246,
-              "end_frame": 250
-            }
-          ]
-        },
-        {
-          "chunk_id": 7,
-          "text": "FAR MORE TERRIFYING",
-          "start_frame": 251,
-          "end_frame": 288,
-          "words": [
-            {
-              "word": "FAR",
-              "start_frame": 251,
-              "end_frame": 258
-            },
-            {
-              "word": "MORE",
-              "start_frame": 258,
-              "end_frame": 264
-            },
-            {
-              "word": "TERRIFYING",
-              "start_frame": 265,
-              "end_frame": 288
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 2,
-      "time_window": "10-22s",
-      "hook_trigger": "10s Escalation Hook",
-      "narration": "Within seconds, the initial shockwave ripples across the globe, shattering communication satellites and throwing power grids into absolute chaotic blackout.",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "pan-right",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
-      "scene_number": 2,
-      "title": "10s Escalation Hook",
-      "image_url": "images/ep_11_beat_2.jpg",
-      "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 9.46,
-      "duration_in_frames": 296,
-      "words": [
-        {
-          "word": "Within",
-          "start_sec": 0.098541,
-          "end_sec": 0.486874,
-          "start_frame": 3,
-          "end_frame": 15
-        },
-        {
-          "word": "seconds",
-          "start_sec": 0.499041,
-          "end_sec": 1.033041,
-          "start_frame": 15,
-          "end_frame": 31
-        },
-        {
-          "word": "the",
-          "start_sec": 1.190791,
-          "end_sec": 1.287874,
-          "start_frame": 36,
-          "end_frame": 39
-        },
-        {
-          "word": "initial",
-          "start_sec": 1.3,
-          "end_sec": 1.688333,
-          "start_frame": 39,
-          "end_frame": 51
-        },
-        {
-          "word": "shockwave",
-          "start_sec": 1.7005,
-          "end_sec": 2.283041,
-          "start_frame": 51,
-          "end_frame": 68
-        },
-        {
-          "word": "ripples",
-          "start_sec": 2.295125,
-          "end_sec": 2.6227910000000003,
-          "start_frame": 69,
-          "end_frame": 79
-        },
-        {
-          "word": "across",
-          "start_sec": 2.634958,
-          "end_sec": 3.0111660000000002,
-          "start_frame": 79,
-          "end_frame": 90
-        },
-        {
-          "word": "the",
-          "start_sec": 3.023291,
-          "end_sec": 3.132499,
-          "start_frame": 91,
-          "end_frame": 94
-        },
-        {
-          "word": "globe",
-          "start_sec": 3.144666,
-          "end_sec": 3.484457,
-          "start_frame": 94,
-          "end_frame": 105
-        },
-        {
-          "word": "shattering",
-          "start_sec": 3.775708,
-          "end_sec": 4.224749,
-          "start_frame": 113,
-          "end_frame": 127
-        },
-        {
-          "word": "communication",
-          "start_sec": 4.236875,
-          "end_sec": 4.94075,
-          "start_frame": 127,
-          "end_frame": 148
-        },
-        {
-          "word": "satellites",
-          "start_sec": 4.952916,
-          "end_sec": 5.523291,
-          "start_frame": 149,
-          "end_frame": 166
-        },
-        {
-          "word": "and",
-          "start_sec": 5.535416,
-          "end_sec": 5.693166,
-          "start_frame": 166,
-          "end_frame": 171
-        },
-        {
-          "word": "throwing",
-          "start_sec": 5.705333,
-          "end_sec": 6.069416,
-          "start_frame": 171,
-          "end_frame": 182
-        },
-        {
-          "word": "power",
-          "start_sec": 6.081541,
-          "end_sec": 6.409206999999999,
-          "start_frame": 182,
-          "end_frame": 192
-        },
-        {
-          "word": "grids",
-          "start_sec": 6.421375,
-          "end_sec": 6.749041,
-          "start_frame": 193,
-          "end_frame": 202
-        },
-        {
-          "word": "into",
-          "start_sec": 6.761166,
-          "end_sec": 6.9674570000000005,
-          "start_frame": 203,
-          "end_frame": 209
-        },
-        {
-          "word": "absolute",
-          "start_sec": 6.979625,
-          "end_sec": 7.52575,
-          "start_frame": 209,
-          "end_frame": 226
-        },
-        {
-          "word": "chaotic",
-          "start_sec": 7.537875,
-          "end_sec": 7.999041,
-          "start_frame": 226,
-          "end_frame": 240
-        },
-        {
-          "word": "blackout",
-          "start_sec": 8.011166,
-          "end_sec": 8.605832,
-          "start_frame": 240,
-          "end_frame": 258
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "WITHIN SECONDS THE",
-          "start_frame": 3,
-          "end_frame": 39,
-          "words": [
-            {
-              "word": "WITHIN",
-              "start_frame": 3,
-              "end_frame": 15
-            },
-            {
-              "word": "SECONDS",
-              "start_frame": 15,
-              "end_frame": 31
-            },
-            {
-              "word": "THE",
-              "start_frame": 36,
+              "word": "MY",
+              "start_frame": 35,
               "end_frame": 39
             }
           ]
         },
         {
-          "chunk_id": 1,
-          "text": "INITIAL SHOCKWAVE RIPPLES",
-          "start_frame": 39,
-          "end_frame": 79,
+          "chunk_id": 2,
+          "text": "ACTUAL BEST FRIEND",
+          "start_frame": 40,
+          "end_frame": 71,
           "words": [
             {
-              "word": "INITIAL",
-              "start_frame": 39,
+              "word": "ACTUAL",
+              "start_frame": 40,
               "end_frame": 51
             },
             {
-              "word": "SHOCKWAVE",
+              "word": "BEST",
               "start_frame": 51,
-              "end_frame": 68
+              "end_frame": 59
             },
             {
-              "word": "RIPPLES",
-              "start_frame": 69,
-              "end_frame": 79
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "ACROSS THE GLOBE",
-          "start_frame": 79,
-          "end_frame": 113,
-          "words": [
-            {
-              "word": "ACROSS",
-              "start_frame": 79,
-              "end_frame": 90
-            },
-            {
-              "word": "THE",
-              "start_frame": 91,
-              "end_frame": 94
-            },
-            {
-              "word": "GLOBE",
-              "start_frame": 94,
-              "end_frame": 105
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "SHATTERING COMMUNICATION SATELLITES",
-          "start_frame": 113,
-          "end_frame": 166,
-          "words": [
-            {
-              "word": "SHATTERING",
-              "start_frame": 113,
-              "end_frame": 127
-            },
-            {
-              "word": "COMMUNICATION",
-              "start_frame": 127,
-              "end_frame": 148
-            },
-            {
-              "word": "SATELLITES",
-              "start_frame": 149,
-              "end_frame": 166
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "AND THROWING POWER",
-          "start_frame": 166,
-          "end_frame": 193,
-          "words": [
-            {
-              "word": "AND",
-              "start_frame": 166,
-              "end_frame": 171
-            },
-            {
-              "word": "THROWING",
-              "start_frame": 171,
-              "end_frame": 182
-            },
-            {
-              "word": "POWER",
-              "start_frame": 182,
-              "end_frame": 192
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "GRIDS INTO ABSOLUTE",
-          "start_frame": 193,
-          "end_frame": 226,
-          "words": [
-            {
-              "word": "GRIDS",
-              "start_frame": 193,
-              "end_frame": 202
-            },
-            {
-              "word": "INTO",
-              "start_frame": 203,
-              "end_frame": 209
-            },
-            {
-              "word": "ABSOLUTE",
-              "start_frame": 209,
-              "end_frame": 226
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "CHAOTIC BLACKOUT",
-          "start_frame": 226,
-          "end_frame": 258,
-          "words": [
-            {
-              "word": "CHAOTIC",
-              "start_frame": 226,
-              "end_frame": 240
-            },
-            {
-              "word": "BLACKOUT",
-              "start_frame": 240,
-              "end_frame": 258
+              "word": "FRIEND",
+              "start_frame": 59,
+              "end_frame": 71
             }
           ]
         }
       ]
     },
     {
-      "beat_number": 3,
-      "time_window": "22-35s",
-      "hook_trigger": "20s Danger Hook",
-      "narration": "Panic spreads like wildfire. As the emergency alarms echo through deserted city avenues, survivors scramble for the only remaining underground shelters.",
-      "speaker": "character_hero",
-      "speaker_name": "Commander",
-      "speaker_avatar": "\ud83d\udea8",
-      "sfx": "impact_boom",
-      "camera_motion": "dramatic-pulse",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
-      "scene_number": 3,
-      "title": "20s Danger Hook",
-      "image_url": "images/ep_11_beat_3.jpg",
-      "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 10.3,
-      "duration_in_frames": 321,
+      "scene_number": 2,
+      "beat_number": 2,
+      "time_window": "2-4s",
+      "hook_trigger": "Brand Reveal",
+      "narration": "They popped up on my sad morning crying video.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "whoosh",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. gesturing in humorous disbelief as hands fly into frame, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait shot, giant floating burger mascot waving behind [character_dna], vibrant colors, 8k",
+      "title": "Brand Reveal",
+      "image_url": "images/ep_35_scene_2.jpg",
+      "audio_url": "audio/beat_2.mp3",
+      "audio_duration_sec": 2.69,
+      "duration_in_frames": 82,
       "words": [
         {
-          "word": "Panic",
-          "start_sec": 0.098541,
-          "end_sec": 0.438332,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "spreads",
-          "start_sec": 0.4505,
-          "end_sec": 0.863125,
-          "start_frame": 14,
-          "end_frame": 26
-        },
-        {
-          "word": "like",
-          "start_sec": 0.87525,
-          "end_sec": 1.033,
-          "start_frame": 26,
-          "end_frame": 31
-        },
-        {
-          "word": "wildfire",
-          "start_sec": 1.045125,
-          "end_sec": 1.8825,
-          "start_frame": 31,
-          "end_frame": 56
-        },
-        {
-          "word": "As",
-          "start_sec": 2.718458,
-          "end_sec": 2.9490410000000002,
-          "start_frame": 82,
-          "end_frame": 88
-        },
-        {
-          "word": "the",
-          "start_sec": 2.961166,
-          "end_sec": 3.021832,
-          "start_frame": 89,
-          "end_frame": 91
-        },
-        {
-          "word": "emergency",
-          "start_sec": 3.034,
-          "end_sec": 3.628666,
-          "start_frame": 91,
-          "end_frame": 109
-        },
-        {
-          "word": "alarms",
-          "start_sec": 3.640791,
-          "end_sec": 4.126207,
-          "start_frame": 109,
-          "end_frame": 124
-        },
-        {
-          "word": "echo",
-          "start_sec": 4.138333,
-          "end_sec": 4.405333000000001,
-          "start_frame": 124,
-          "end_frame": 132
-        },
-        {
-          "word": "through",
-          "start_sec": 4.417458,
-          "end_sec": 4.623749,
-          "start_frame": 133,
-          "end_frame": 139
-        },
-        {
-          "word": "deserted",
-          "start_sec": 4.635916,
-          "end_sec": 5.072791,
-          "start_frame": 139,
-          "end_frame": 152
-        },
-        {
-          "word": "city",
-          "start_sec": 5.084958,
-          "end_sec": 5.424749,
-          "start_frame": 153,
-          "end_frame": 163
-        },
-        {
-          "word": "avenues",
-          "start_sec": 5.436875,
-          "end_sec": 5.9708749999999995,
-          "start_frame": 163,
-          "end_frame": 179
-        },
-        {
-          "word": "survivors",
-          "start_sec": 6.213583,
-          "end_sec": 6.783958,
-          "start_frame": 186,
-          "end_frame": 204
-        },
-        {
-          "word": "scramble",
-          "start_sec": 6.796125,
-          "end_sec": 7.245166,
-          "start_frame": 204,
-          "end_frame": 217
-        },
-        {
-          "word": "for",
-          "start_sec": 7.257291,
-          "end_sec": 7.378666,
-          "start_frame": 218,
-          "end_frame": 221
-        },
-        {
-          "word": "the",
-          "start_sec": 7.390791,
-          "end_sec": 7.499999,
-          "start_frame": 222,
-          "end_frame": 225
-        },
-        {
-          "word": "only",
-          "start_sec": 7.512125,
-          "end_sec": 7.827666,
-          "start_frame": 225,
-          "end_frame": 235
-        },
-        {
-          "word": "remaining",
-          "start_sec": 7.839791,
-          "end_sec": 8.264541,
-          "start_frame": 235,
-          "end_frame": 248
-        },
-        {
-          "word": "underground",
-          "start_sec": 8.276708,
-          "end_sec": 8.786416,
-          "start_frame": 248,
-          "end_frame": 264
-        },
-        {
-          "word": "shelters",
-          "start_sec": 8.798541,
-          "end_sec": 9.441749,
-          "start_frame": 264,
-          "end_frame": 283
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "PANIC SPREADS LIKE",
-          "start_frame": 3,
-          "end_frame": 31,
-          "words": [
-            {
-              "word": "PANIC",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "SPREADS",
-              "start_frame": 14,
-              "end_frame": 26
-            },
-            {
-              "word": "LIKE",
-              "start_frame": 26,
-              "end_frame": 31
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "WILDFIRE AS THE",
-          "start_frame": 31,
-          "end_frame": 91,
-          "words": [
-            {
-              "word": "WILDFIRE",
-              "start_frame": 31,
-              "end_frame": 56
-            },
-            {
-              "word": "AS",
-              "start_frame": 82,
-              "end_frame": 88
-            },
-            {
-              "word": "THE",
-              "start_frame": 89,
-              "end_frame": 91
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "EMERGENCY ALARMS ECHO",
-          "start_frame": 91,
-          "end_frame": 133,
-          "words": [
-            {
-              "word": "EMERGENCY",
-              "start_frame": 91,
-              "end_frame": 109
-            },
-            {
-              "word": "ALARMS",
-              "start_frame": 109,
-              "end_frame": 124
-            },
-            {
-              "word": "ECHO",
-              "start_frame": 124,
-              "end_frame": 132
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "THROUGH DESERTED CITY",
-          "start_frame": 133,
-          "end_frame": 163,
-          "words": [
-            {
-              "word": "THROUGH",
-              "start_frame": 133,
-              "end_frame": 139
-            },
-            {
-              "word": "DESERTED",
-              "start_frame": 139,
-              "end_frame": 152
-            },
-            {
-              "word": "CITY",
-              "start_frame": 153,
-              "end_frame": 163
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "AVENUES SURVIVORS SCRAMBLE",
-          "start_frame": 163,
-          "end_frame": 218,
-          "words": [
-            {
-              "word": "AVENUES",
-              "start_frame": 163,
-              "end_frame": 179
-            },
-            {
-              "word": "SURVIVORS",
-              "start_frame": 186,
-              "end_frame": 204
-            },
-            {
-              "word": "SCRAMBLE",
-              "start_frame": 204,
-              "end_frame": 217
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "FOR THE ONLY",
-          "start_frame": 218,
-          "end_frame": 235,
-          "words": [
-            {
-              "word": "FOR",
-              "start_frame": 218,
-              "end_frame": 221
-            },
-            {
-              "word": "THE",
-              "start_frame": 222,
-              "end_frame": 225
-            },
-            {
-              "word": "ONLY",
-              "start_frame": 225,
-              "end_frame": 235
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "REMAINING UNDERGROUND SHELTERS",
-          "start_frame": 235,
-          "end_frame": 283,
-          "words": [
-            {
-              "word": "REMAINING",
-              "start_frame": 235,
-              "end_frame": 248
-            },
-            {
-              "word": "UNDERGROUND",
-              "start_frame": 248,
-              "end_frame": 264
-            },
-            {
-              "word": "SHELTERS",
-              "start_frame": 264,
-              "end_frame": 283
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 4,
-      "time_window": "35-48s",
-      "hook_trigger": "30s Climax Hook",
-      "narration": "Yet amidst the catastrophe, an unexpected scientific discovery reveals a hidden anomaly that might just hold the key to our survival.",
-      "speaker": "character_guide",
-      "speaker_name": "Scientist",
-      "speaker_avatar": "\ud83d\udd2c",
-      "sfx": "pop",
-      "camera_motion": "warm-dolly",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
-      "scene_number": 4,
-      "title": "30s Climax Hook",
-      "image_url": "images/ep_11_beat_4.jpg",
-      "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 7.87,
-      "duration_in_frames": 248,
-      "words": [
-        {
-          "word": "Yet",
-          "start_sec": 0.098541,
-          "end_sec": 0.304832,
+          "word": "They",
+          "start_sec": 0.1,
+          "end_sec": 0.29229099999999997,
           "start_frame": 3,
           "end_frame": 9
         },
         {
-          "word": "amidst",
-          "start_sec": 0.317,
-          "end_sec": 0.644666,
-          "start_frame": 10,
+          "word": "popped",
+          "start_sec": 0.304333,
+          "end_sec": 0.6408739999999999,
+          "start_frame": 9,
           "end_frame": 19
         },
         {
-          "word": "the",
-          "start_sec": 0.656791,
-          "end_sec": 0.729624,
+          "word": "up",
+          "start_sec": 0.652875,
+          "end_sec": 0.761041,
           "start_frame": 20,
-          "end_frame": 22
+          "end_frame": 23
         },
         {
-          "word": "catastrophe",
-          "start_sec": 0.74175,
-          "end_sec": 1.4941659999999999,
-          "start_frame": 22,
-          "end_frame": 45
+          "word": "on",
+          "start_sec": 0.773083,
+          "end_sec": 0.8692489999999999,
+          "start_frame": 23,
+          "end_frame": 26
         },
         {
-          "word": "an",
-          "start_sec": 1.736875,
-          "end_sec": 1.85825,
-          "start_frame": 52,
+          "word": "my",
+          "start_sec": 0.88125,
+          "end_sec": 1.001458,
+          "start_frame": 26,
+          "end_frame": 30
+        },
+        {
+          "word": "sad",
+          "start_sec": 1.013458,
+          "end_sec": 1.2899159999999998,
+          "start_frame": 30,
+          "end_frame": 39
+        },
+        {
+          "word": "morning",
+          "start_sec": 1.301916,
+          "end_sec": 1.5903740000000002,
+          "start_frame": 39,
+          "end_frame": 48
+        },
+        {
+          "word": "crying",
+          "start_sec": 1.602416,
+          "end_sec": 1.8788740000000002,
+          "start_frame": 48,
           "end_frame": 56
         },
         {
-          "word": "unexpected",
-          "start_sec": 1.870375,
-          "end_sec": 2.477166,
-          "start_frame": 56,
-          "end_frame": 74
-        },
-        {
-          "word": "scientific",
-          "start_sec": 2.489333,
-          "end_sec": 3.0961239999999997,
-          "start_frame": 75,
-          "end_frame": 93
-        },
-        {
-          "word": "discovery",
-          "start_sec": 3.10825,
-          "end_sec": 3.6422499999999998,
-          "start_frame": 93,
-          "end_frame": 109
-        },
-        {
-          "word": "reveals",
-          "start_sec": 3.654375,
-          "end_sec": 4.054875,
-          "start_frame": 110,
-          "end_frame": 122
-        },
-        {
-          "word": "a",
-          "start_sec": 4.067,
-          "end_sec": 4.1155409,
-          "start_frame": 122,
-          "end_frame": 123
-        },
-        {
-          "word": "hidden",
-          "start_sec": 4.127666,
-          "end_sec": 4.406790999999999,
-          "start_frame": 124,
-          "end_frame": 132
-        },
-        {
-          "word": "anomaly",
-          "start_sec": 4.418916,
-          "end_sec": 4.904332,
-          "start_frame": 133,
-          "end_frame": 147
-        },
-        {
-          "word": "that",
-          "start_sec": 4.9165,
-          "end_sec": 5.07425,
-          "start_frame": 147,
-          "end_frame": 152
-        },
-        {
-          "word": "might",
-          "start_sec": 5.086416,
-          "end_sec": 5.304874,
-          "start_frame": 153,
-          "end_frame": 159
-        },
-        {
-          "word": "just",
-          "start_sec": 5.317,
-          "end_sec": 5.535458,
-          "start_frame": 160,
-          "end_frame": 166
-        },
-        {
-          "word": "hold",
-          "start_sec": 5.547583,
-          "end_sec": 5.766041,
-          "start_frame": 166,
-          "end_frame": 173
-        },
-        {
-          "word": "the",
-          "start_sec": 5.778166,
-          "end_sec": 5.863124,
-          "start_frame": 173,
-          "end_frame": 176
-        },
-        {
-          "word": "key",
-          "start_sec": 5.87525,
-          "end_sec": 6.142250000000001,
-          "start_frame": 176,
-          "end_frame": 184
-        },
-        {
-          "word": "to",
-          "start_sec": 6.154375,
-          "end_sec": 6.263583,
-          "start_frame": 185,
-          "end_frame": 188
-        },
-        {
-          "word": "our",
-          "start_sec": 6.275708,
-          "end_sec": 6.409208,
-          "start_frame": 188,
-          "end_frame": 192
-        },
-        {
-          "word": "survival",
-          "start_sec": 6.421375,
-          "end_sec": 7.028166000000001,
-          "start_frame": 193,
-          "end_frame": 211
+          "word": "video",
+          "start_sec": 1.890875,
+          "end_sec": 2.347625,
+          "start_frame": 57,
+          "end_frame": 70
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "YET AMIDST THE",
+          "text": "THEY POPPED UP",
           "start_frame": 3,
-          "end_frame": 22,
+          "end_frame": 23,
           "words": [
             {
-              "word": "YET",
+              "word": "THEY",
               "start_frame": 3,
               "end_frame": 9
             },
             {
-              "word": "AMIDST",
-              "start_frame": 10,
+              "word": "POPPED",
+              "start_frame": 9,
               "end_frame": 19
             },
             {
-              "word": "THE",
+              "word": "UP",
               "start_frame": 20,
+              "end_frame": 23
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "ON MY SAD",
+          "start_frame": 23,
+          "end_frame": 39,
+          "words": [
+            {
+              "word": "ON",
+              "start_frame": 23,
+              "end_frame": 26
+            },
+            {
+              "word": "MY",
+              "start_frame": 26,
+              "end_frame": 30
+            },
+            {
+              "word": "SAD",
+              "start_frame": 30,
+              "end_frame": 39
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "MORNING CRYING VIDEO",
+          "start_frame": 39,
+          "end_frame": 70,
+          "words": [
+            {
+              "word": "MORNING",
+              "start_frame": 39,
+              "end_frame": 48
+            },
+            {
+              "word": "CRYING",
+              "start_frame": 48,
+              "end_frame": 56
+            },
+            {
+              "word": "VIDEO",
+              "start_frame": 57,
+              "end_frame": 70
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 3,
+      "beat_number": 3,
+      "time_window": "4-6s",
+      "hook_trigger": "Banter Start",
+      "narration": "What do you mean 'slay queen' on my breakdown?",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 35mm prime lens, expressive reaction portrait, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. turning quickly toward camera with comedic shock, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "35mm close-up shot, [character_dna] pointing at smartphone comment section, intense angle, 8k",
+      "title": "Banter Start",
+      "image_url": "images/ep_35_scene_3.jpg",
+      "audio_url": "audio/beat_3.mp3",
+      "audio_duration_sec": 2.38,
+      "duration_in_frames": 73,
+      "words": [
+        {
+          "word": "What",
+          "start_sec": 0.098041,
+          "end_sec": 0.183832,
+          "start_frame": 3,
+          "end_frame": 6
+        },
+        {
+          "word": "do",
+          "start_sec": 0.196083,
+          "end_sec": 0.245083,
+          "start_frame": 6,
+          "end_frame": 7
+        },
+        {
+          "word": "you",
+          "start_sec": 0.257333,
+          "end_sec": 0.330874,
+          "start_frame": 8,
+          "end_frame": 10
+        },
+        {
+          "word": "mean",
+          "start_sec": 0.343125,
+          "end_sec": 0.526958,
+          "start_frame": 10,
+          "end_frame": 16
+        },
+        {
+          "word": "slay",
+          "start_sec": 0.551458,
+          "end_sec": 0.8578330000000001,
+          "start_frame": 17,
+          "end_frame": 26
+        },
+        {
+          "word": "queen",
+          "start_sec": 0.870083,
+          "end_sec": 1.200958,
+          "start_frame": 26,
+          "end_frame": 36
+        },
+        {
+          "word": "on",
+          "start_sec": 1.2255,
+          "end_sec": 1.323541,
+          "start_frame": 37,
+          "end_frame": 40
+        },
+        {
+          "word": "my",
+          "start_sec": 1.335791,
+          "end_sec": 1.4705819999999998,
+          "start_frame": 40,
+          "end_frame": 44
+        },
+        {
+          "word": "breakdown",
+          "start_sec": 1.482833,
+          "end_sec": 2.022041,
+          "start_frame": 44,
+          "end_frame": 61
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WHAT DO YOU",
+          "start_frame": 3,
+          "end_frame": 10,
+          "words": [
+            {
+              "word": "WHAT",
+              "start_frame": 3,
+              "end_frame": 6
+            },
+            {
+              "word": "DO",
+              "start_frame": 6,
+              "end_frame": 7
+            },
+            {
+              "word": "YOU",
+              "start_frame": 8,
+              "end_frame": 10
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "MEAN SLAY QUEEN",
+          "start_frame": 10,
+          "end_frame": 37,
+          "words": [
+            {
+              "word": "MEAN",
+              "start_frame": 10,
+              "end_frame": 16
+            },
+            {
+              "word": "SLAY",
+              "start_frame": 17,
+              "end_frame": 26
+            },
+            {
+              "word": "QUEEN",
+              "start_frame": 26,
+              "end_frame": 36
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "ON MY BREAKDOWN",
+          "start_frame": 37,
+          "end_frame": 61,
+          "words": [
+            {
+              "word": "ON",
+              "start_frame": 37,
+              "end_frame": 40
+            },
+            {
+              "word": "MY",
+              "start_frame": 40,
+              "end_frame": 44
+            },
+            {
+              "word": "BREAKDOWN",
+              "start_frame": 44,
+              "end_frame": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 4,
+      "beat_number": 4,
+      "time_window": "6-8s",
+      "hook_trigger": "Corporate Vibe",
+      "narration": "We just love your vibe bestie, eat some fries.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 50mm cinema lens, medium conversational framing, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. holding up prop with triumphant hilarious grin, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "10mm ultra-wide shot, floating neon soda cups surrounding [character_dna] in bedroom, dynamic, 8k",
+      "title": "Corporate Vibe",
+      "image_url": "images/ep_35_scene_4.jpg",
+      "audio_url": "audio/beat_4.mp3",
+      "audio_duration_sec": 3.0,
+      "duration_in_frames": 92,
+      "words": [
+        {
+          "word": "We",
+          "start_sec": 0.1,
+          "end_sec": 0.306291,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "just",
+          "start_sec": 0.318458,
+          "end_sec": 0.48837400000000003,
+          "start_frame": 10,
+          "end_frame": 15
+        },
+        {
+          "word": "love",
+          "start_sec": 0.5005,
+          "end_sec": 0.65825,
+          "start_frame": 15,
+          "end_frame": 20
+        },
+        {
+          "word": "your",
+          "start_sec": 0.670375,
+          "end_sec": 0.7917500000000001,
+          "start_frame": 20,
+          "end_frame": 24
+        },
+        {
+          "word": "vibe",
+          "start_sec": 0.803875,
+          "end_sec": 1.034458,
+          "start_frame": 24,
+          "end_frame": 31
+        },
+        {
+          "word": "bestie",
+          "start_sec": 1.046583,
+          "end_sec": 1.531999,
+          "start_frame": 31,
+          "end_frame": 46
+        },
+        {
+          "word": "eat",
+          "start_sec": 1.786875,
+          "end_sec": 1.90825,
+          "start_frame": 54,
+          "end_frame": 57
+        },
+        {
+          "word": "some",
+          "start_sec": 1.920375,
+          "end_sec": 2.090291,
+          "start_frame": 58,
+          "end_frame": 63
+        },
+        {
+          "word": "fries",
+          "start_sec": 2.102416,
+          "end_sec": 2.6364159999999996,
+          "start_frame": 63,
+          "end_frame": 79
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WE JUST LOVE",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "WE",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "JUST",
+              "start_frame": 10,
+              "end_frame": 15
+            },
+            {
+              "word": "LOVE",
+              "start_frame": 15,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "YOUR VIBE BESTIE",
+          "start_frame": 20,
+          "end_frame": 54,
+          "words": [
+            {
+              "word": "YOUR",
+              "start_frame": 20,
+              "end_frame": 24
+            },
+            {
+              "word": "VIBE",
+              "start_frame": 24,
+              "end_frame": 31
+            },
+            {
+              "word": "BESTIE",
+              "start_frame": 31,
+              "end_frame": 46
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "EAT SOME FRIES",
+          "start_frame": 54,
+          "end_frame": 79,
+          "words": [
+            {
+              "word": "EAT",
+              "start_frame": 54,
+              "end_frame": 57
+            },
+            {
+              "word": "SOME",
+              "start_frame": 58,
+              "end_frame": 63
+            },
+            {
+              "word": "FRIES",
+              "start_frame": 63,
+              "end_frame": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 5,
+      "beat_number": 5,
+      "time_window": "8-10s",
+      "hook_trigger": "Escalation",
+      "narration": "You are a multi-billion dollar corporation, leave me alone!",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whip_pan",
+      "camera_motion": "climax-pull-back",
+      "video_prompt": "Cinematic climax-pull-back camera motion, 85mm portrait lens, tight macro reaction close-up, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. stumbling backward in comical bewilderment, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Anamorphic zoom-out shot, [character_dna] throwing hands up in disbelief, dramatic rim lighting, 8k",
+      "title": "Escalation",
+      "image_url": "images/ep_35_scene_5.jpg",
+      "audio_url": "audio/beat_5.mp3",
+      "audio_duration_sec": 3.65,
+      "duration_in_frames": 111,
+      "words": [
+        {
+          "word": "You",
+          "start_sec": 0.096166,
+          "end_sec": 0.31249899999999997,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "are",
+          "start_sec": 0.3245,
+          "end_sec": 0.444708,
+          "start_frame": 10,
+          "end_frame": 13
+        },
+        {
+          "word": "a",
+          "start_sec": 0.45675,
+          "end_sec": 0.4927909,
+          "start_frame": 14,
+          "end_frame": 15
+        },
+        {
+          "word": "multi-billion",
+          "start_sec": 0.504791,
+          "end_sec": 1.334124,
+          "start_frame": 15,
+          "end_frame": 40
+        },
+        {
+          "word": "dollar",
+          "start_sec": 1.346166,
+          "end_sec": 1.610582,
+          "start_frame": 40,
+          "end_frame": 48
+        },
+        {
+          "word": "corporation",
+          "start_sec": 1.622583,
+          "end_sec": 2.247583,
+          "start_frame": 49,
+          "end_frame": 67
+        },
+        {
+          "word": "leave",
+          "start_sec": 2.608166,
+          "end_sec": 2.764416,
+          "start_frame": 78,
+          "end_frame": 83
+        },
+        {
+          "word": "me",
+          "start_sec": 2.776458,
+          "end_sec": 2.884624,
+          "start_frame": 83,
+          "end_frame": 87
+        },
+        {
+          "word": "alone",
+          "start_sec": 2.896625,
+          "end_sec": 3.28125,
+          "start_frame": 87,
+          "end_frame": 98
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "YOU ARE A",
+          "start_frame": 3,
+          "end_frame": 15,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "ARE",
+              "start_frame": 10,
+              "end_frame": 13
+            },
+            {
+              "word": "A",
+              "start_frame": 14,
+              "end_frame": 15
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "MULTI-BILLION DOLLAR CORPORATION",
+          "start_frame": 15,
+          "end_frame": 78,
+          "words": [
+            {
+              "word": "MULTI-BILLION",
+              "start_frame": 15,
+              "end_frame": 40
+            },
+            {
+              "word": "DOLLAR",
+              "start_frame": 40,
+              "end_frame": 48
+            },
+            {
+              "word": "CORPORATION",
+              "start_frame": 49,
+              "end_frame": 67
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "LEAVE ME ALONE",
+          "start_frame": 78,
+          "end_frame": 98,
+          "words": [
+            {
+              "word": "LEAVE",
+              "start_frame": 78,
+              "end_frame": 83
+            },
+            {
+              "word": "ME",
+              "start_frame": 83,
+              "end_frame": 87
+            },
+            {
+              "word": "ALONE",
+              "start_frame": 87,
+              "end_frame": 98
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 6,
+      "beat_number": 6,
+      "time_window": "10-12s",
+      "hook_trigger": "Brand Defense",
+      "narration": "Does that mean our discount code friendship means nothing?",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. leaning into camera with exaggerated conspiratorial whisper, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait shot, giant sad french fry box shedding a digital tear, comedic, 8k",
+      "title": "Brand Defense",
+      "image_url": "images/ep_35_scene_6.jpg",
+      "audio_url": "audio/beat_6.mp3",
+      "audio_duration_sec": 3.12,
+      "duration_in_frames": 95,
+      "words": [
+        {
+          "word": "Does",
+          "start_sec": 0.1,
+          "end_sec": 0.296083,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "that",
+          "start_sec": 0.308333,
+          "end_sec": 0.467666,
+          "start_frame": 9,
+          "end_frame": 14
+        },
+        {
+          "word": "mean",
+          "start_sec": 0.479916,
+          "end_sec": 0.651499,
+          "start_frame": 14,
+          "end_frame": 20
+        },
+        {
+          "word": "our",
+          "start_sec": 0.663708,
+          "end_sec": 0.786249,
+          "start_frame": 20,
+          "end_frame": 24
+        },
+        {
+          "word": "discount",
+          "start_sec": 0.798541,
+          "end_sec": 1.215207,
+          "start_frame": 24,
+          "end_frame": 36
+        },
+        {
+          "word": "code",
+          "start_sec": 1.227458,
+          "end_sec": 1.497083,
+          "start_frame": 37,
+          "end_frame": 45
+        },
+        {
+          "word": "friendship",
+          "start_sec": 1.509333,
+          "end_sec": 1.987291,
+          "start_frame": 45,
+          "end_frame": 60
+        },
+        {
+          "word": "means",
+          "start_sec": 1.9995,
+          "end_sec": 2.256833,
+          "start_frame": 60,
+          "end_frame": 68
+        },
+        {
+          "word": "nothing",
+          "start_sec": 2.269125,
+          "end_sec": 2.759333,
+          "start_frame": 68,
+          "end_frame": 83
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "DOES THAT MEAN",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "DOES",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "THAT",
+              "start_frame": 9,
+              "end_frame": 14
+            },
+            {
+              "word": "MEAN",
+              "start_frame": 14,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "OUR DISCOUNT CODE",
+          "start_frame": 20,
+          "end_frame": 45,
+          "words": [
+            {
+              "word": "OUR",
+              "start_frame": 20,
+              "end_frame": 24
+            },
+            {
+              "word": "DISCOUNT",
+              "start_frame": 24,
+              "end_frame": 36
+            },
+            {
+              "word": "CODE",
+              "start_frame": 37,
+              "end_frame": 45
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "FRIENDSHIP MEANS NOTHING",
+          "start_frame": 45,
+          "end_frame": 83,
+          "words": [
+            {
+              "word": "FRIENDSHIP",
+              "start_frame": 45,
+              "end_frame": 60
+            },
+            {
+              "word": "MEANS",
+              "start_frame": 60,
+              "end_frame": 68
+            },
+            {
+              "word": "NOTHING",
+              "start_frame": 68,
+              "end_frame": 83
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 7,
+      "beat_number": 7,
+      "time_window": "12-14s",
+      "hook_trigger": "Panic Mode",
+      "narration": "Stop trying to sponsor my mental health spiral right now.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. shaking head with hands on cheeks in absolute disbelief, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "24mm tracking pan, [character_dna] pacing rapidly across room clutching head, 8k",
+      "title": "Panic Mode",
+      "image_url": "images/ep_35_scene_7.jpg",
+      "audio_url": "audio/beat_7.mp3",
+      "audio_duration_sec": 3.12,
+      "duration_in_frames": 95,
+      "words": [
+        {
+          "word": "Stop",
+          "start_sec": 0.109208,
+          "end_sec": 0.351916,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "trying",
+          "start_sec": 0.364083,
+          "end_sec": 0.582541,
+          "start_frame": 11,
+          "end_frame": 17
+        },
+        {
+          "word": "to",
+          "start_sec": 0.594666,
+          "end_sec": 0.655332,
+          "start_frame": 18,
+          "end_frame": 20
+        },
+        {
+          "word": "sponsor",
+          "start_sec": 0.667458,
+          "end_sec": 1.104333,
+          "start_frame": 20,
+          "end_frame": 33
+        },
+        {
+          "word": "my",
+          "start_sec": 1.1165,
+          "end_sec": 1.213583,
+          "start_frame": 33,
+          "end_frame": 36
+        },
+        {
+          "word": "mental",
+          "start_sec": 1.225708,
+          "end_sec": 1.577666,
+          "start_frame": 37,
+          "end_frame": 47
+        },
+        {
+          "word": "health",
+          "start_sec": 1.589791,
+          "end_sec": 1.808249,
+          "start_frame": 48,
+          "end_frame": 54
+        },
+        {
+          "word": "spiral",
+          "start_sec": 1.820375,
+          "end_sec": 2.25725,
+          "start_frame": 55,
+          "end_frame": 68
+        },
+        {
+          "word": "right",
+          "start_sec": 2.269416,
+          "end_sec": 2.451457,
+          "start_frame": 68,
+          "end_frame": 74
+        },
+        {
+          "word": "now",
+          "start_sec": 2.463583,
+          "end_sec": 2.7548329999999996,
+          "start_frame": 74,
+          "end_frame": 83
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "STOP TRYING TO",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "STOP",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "TRYING",
+              "start_frame": 11,
+              "end_frame": 17
+            },
+            {
+              "word": "TO",
+              "start_frame": 18,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "SPONSOR MY MENTAL",
+          "start_frame": 20,
+          "end_frame": 48,
+          "words": [
+            {
+              "word": "SPONSOR",
+              "start_frame": 20,
+              "end_frame": 33
+            },
+            {
+              "word": "MY",
+              "start_frame": 33,
+              "end_frame": 36
+            },
+            {
+              "word": "MENTAL",
+              "start_frame": 37,
+              "end_frame": 47
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "HEALTH SPIRAL RIGHT",
+          "start_frame": 48,
+          "end_frame": 74,
+          "words": [
+            {
+              "word": "HEALTH",
+              "start_frame": 48,
+              "end_frame": 54
+            },
+            {
+              "word": "SPIRAL",
+              "start_frame": 55,
+              "end_frame": 68
+            },
+            {
+              "word": "RIGHT",
+              "start_frame": 68,
+              "end_frame": 74
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "NOW",
+          "start_frame": 74,
+          "end_frame": 83,
+          "words": [
+            {
+              "word": "NOW",
+              "start_frame": 74,
+              "end_frame": 83
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 8,
+      "beat_number": 8,
+      "time_window": "14-16s",
+      "hook_trigger": "Subtle Push",
+      "narration": "Use code BROKEN for ten percent off your sorrows.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "whoosh",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 35mm prime lens, expressive reaction portrait, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. reacting with wide eyes and pointing at screen, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "35mm close-up, glowing neon promo code hovering in front of [character_dna] face, 8k",
+      "title": "Subtle Push",
+      "image_url": "images/ep_35_scene_8.jpg",
+      "audio_url": "audio/beat_8.mp3",
+      "audio_duration_sec": 3.1,
+      "duration_in_frames": 94,
+      "words": [
+        {
+          "word": "Use",
+          "start_sec": 0.1,
+          "end_sec": 0.38845799999999997,
+          "start_frame": 3,
+          "end_frame": 12
+        },
+        {
+          "word": "code",
+          "start_sec": 0.4005,
+          "end_sec": 0.688958,
+          "start_frame": 12,
+          "end_frame": 21
+        },
+        {
+          "word": "BROKEN",
+          "start_sec": 0.700958,
+          "end_sec": 1.073541,
+          "start_frame": 21,
+          "end_frame": 32
+        },
+        {
+          "word": "for",
+          "start_sec": 1.085583,
+          "end_sec": 1.217791,
+          "start_frame": 33,
+          "end_frame": 37
+        },
+        {
+          "word": "ten",
+          "start_sec": 1.229791,
+          "end_sec": 1.494207,
+          "start_frame": 37,
+          "end_frame": 45
+        },
+        {
+          "word": "percent",
+          "start_sec": 1.50625,
+          "end_sec": 1.890875,
+          "start_frame": 45,
+          "end_frame": 57
+        },
+        {
+          "word": "off",
+          "start_sec": 1.902875,
+          "end_sec": 2.035083,
+          "start_frame": 57,
+          "end_frame": 61
+        },
+        {
+          "word": "your",
+          "start_sec": 2.047125,
+          "end_sec": 2.143291,
+          "start_frame": 61,
+          "end_frame": 64
+        },
+        {
+          "word": "sorrows",
+          "start_sec": 2.155291,
+          "end_sec": 2.744249,
+          "start_frame": 65,
+          "end_frame": 82
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "USE CODE BROKEN",
+          "start_frame": 3,
+          "end_frame": 33,
+          "words": [
+            {
+              "word": "USE",
+              "start_frame": 3,
+              "end_frame": 12
+            },
+            {
+              "word": "CODE",
+              "start_frame": 12,
+              "end_frame": 21
+            },
+            {
+              "word": "BROKEN",
+              "start_frame": 21,
+              "end_frame": 32
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "FOR TEN PERCENT",
+          "start_frame": 33,
+          "end_frame": 57,
+          "words": [
+            {
+              "word": "FOR",
+              "start_frame": 33,
+              "end_frame": 37
+            },
+            {
+              "word": "TEN",
+              "start_frame": 37,
+              "end_frame": 45
+            },
+            {
+              "word": "PERCENT",
+              "start_frame": 45,
+              "end_frame": 57
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "OFF YOUR SORROWS",
+          "start_frame": 57,
+          "end_frame": 82,
+          "words": [
+            {
+              "word": "OFF",
+              "start_frame": 57,
+              "end_frame": 61
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 61,
+              "end_frame": 64
+            },
+            {
+              "word": "SORROWS",
+              "start_frame": 65,
+              "end_frame": 82
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 9,
+      "beat_number": 9,
+      "time_window": "16-18s",
+      "hook_trigger": "Acceptance",
+      "narration": "Honestly, free delivery does sound kind of nice though.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "pop",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 50mm cinema lens, medium conversational framing, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. gesturing in humorous disbelief as hands fly into frame, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait, [character_dna] expression shifting from angry to interested, 8k",
+      "title": "Acceptance",
+      "image_url": "images/ep_35_scene_9.jpg",
+      "audio_url": "audio/beat_9.mp3",
+      "audio_duration_sec": 2.98,
+      "duration_in_frames": 91,
+      "words": [
+        {
+          "word": "Honestly",
+          "start_sec": 0.098041,
+          "end_sec": 0.5637070000000001,
+          "start_frame": 3,
+          "end_frame": 17
+        },
+        {
+          "word": "free",
+          "start_sec": 0.784333,
+          "end_sec": 0.955916,
+          "start_frame": 24,
+          "end_frame": 29
+        },
+        {
+          "word": "delivery",
+          "start_sec": 0.968125,
+          "end_sec": 1.409291,
+          "start_frame": 29,
+          "end_frame": 42
+        },
+        {
+          "word": "does",
+          "start_sec": 1.421583,
+          "end_sec": 1.593166,
+          "start_frame": 43,
+          "end_frame": 48
+        },
+        {
+          "word": "sound",
+          "start_sec": 1.605375,
+          "end_sec": 1.875,
+          "start_frame": 48,
+          "end_frame": 56
+        },
+        {
+          "word": "kind",
+          "start_sec": 1.88725,
+          "end_sec": 2.058833,
+          "start_frame": 57,
+          "end_frame": 62
+        },
+        {
+          "word": "of",
+          "start_sec": 2.071083,
+          "end_sec": 2.1200829999999997,
+          "start_frame": 62,
+          "end_frame": 64
+        },
+        {
+          "word": "nice",
+          "start_sec": 2.132333,
+          "end_sec": 2.377416,
+          "start_frame": 64,
+          "end_frame": 71
+        },
+        {
+          "word": "though",
+          "start_sec": 2.389708,
+          "end_sec": 2.622541,
+          "start_frame": 72,
+          "end_frame": 79
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "HONESTLY FREE DELIVERY",
+          "start_frame": 3,
+          "end_frame": 43,
+          "words": [
+            {
+              "word": "HONESTLY",
+              "start_frame": 3,
+              "end_frame": 17
+            },
+            {
+              "word": "FREE",
+              "start_frame": 24,
+              "end_frame": 29
+            },
+            {
+              "word": "DELIVERY",
+              "start_frame": 29,
+              "end_frame": 42
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "DOES SOUND KIND",
+          "start_frame": 43,
+          "end_frame": 62,
+          "words": [
+            {
+              "word": "DOES",
+              "start_frame": 43,
+              "end_frame": 48
+            },
+            {
+              "word": "SOUND",
+              "start_frame": 48,
+              "end_frame": 56
+            },
+            {
+              "word": "KIND",
+              "start_frame": 57,
+              "end_frame": 62
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "OF NICE THOUGH",
+          "start_frame": 62,
+          "end_frame": 79,
+          "words": [
+            {
+              "word": "OF",
+              "start_frame": 62,
+              "end_frame": 64
+            },
+            {
+              "word": "NICE",
+              "start_frame": 64,
+              "end_frame": 71
+            },
+            {
+              "word": "THOUGH",
+              "start_frame": 72,
+              "end_frame": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 10,
+      "beat_number": 10,
+      "time_window": "18-20s",
+      "hook_trigger": "Victory",
+      "narration": "That is what we love to hear, bestie!",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 85mm portrait lens, tight macro reaction close-up, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. turning quickly toward camera with comedic shock, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "10mm ultra-wide, confetti raining in bedroom as brand logo glows brightly, 8k",
+      "title": "Victory",
+      "image_url": "images/ep_35_scene_10.jpg",
+      "audio_url": "audio/beat_10.mp3",
+      "audio_duration_sec": 2.28,
+      "duration_in_frames": 70,
+      "words": [
+        {
+          "word": "That",
+          "start_sec": 0.1,
+          "end_sec": 0.37912500000000005,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "is",
+          "start_sec": 0.439791,
+          "end_sec": 0.5611659999999999,
+          "start_frame": 13,
+          "end_frame": 17
+        },
+        {
+          "word": "what",
+          "start_sec": 0.573291,
+          "end_sec": 0.694666,
+          "start_frame": 17,
+          "end_frame": 21
+        },
+        {
+          "word": "we",
+          "start_sec": 0.706791,
+          "end_sec": 0.803874,
+          "start_frame": 21,
+          "end_frame": 24
+        },
+        {
+          "word": "love",
+          "start_sec": 0.816,
+          "end_sec": 1.095125,
+          "start_frame": 24,
+          "end_frame": 33
+        },
+        {
+          "word": "to",
+          "start_sec": 1.107291,
+          "end_sec": 1.204374,
+          "start_frame": 33,
+          "end_frame": 36
+        },
+        {
+          "word": "hear",
+          "start_sec": 1.2165,
+          "end_sec": 1.410666,
+          "start_frame": 36,
+          "end_frame": 42
+        },
+        {
+          "word": "bestie",
+          "start_sec": 1.434958,
+          "end_sec": 1.920374,
+          "start_frame": 43,
+          "end_frame": 58
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "THAT IS WHAT",
+          "start_frame": 3,
+          "end_frame": 21,
+          "words": [
+            {
+              "word": "THAT",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "IS",
+              "start_frame": 13,
+              "end_frame": 17
+            },
+            {
+              "word": "WHAT",
+              "start_frame": 17,
+              "end_frame": 21
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "WE LOVE TO",
+          "start_frame": 21,
+          "end_frame": 36,
+          "words": [
+            {
+              "word": "WE",
+              "start_frame": 21,
+              "end_frame": 24
+            },
+            {
+              "word": "LOVE",
+              "start_frame": 24,
+              "end_frame": 33
+            },
+            {
+              "word": "TO",
+              "start_frame": 33,
+              "end_frame": 36
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "HEAR BESTIE",
+          "start_frame": 36,
+          "end_frame": 58,
+          "words": [
+            {
+              "word": "HEAR",
+              "start_frame": 36,
+              "end_frame": 42
+            },
+            {
+              "word": "BESTIE",
+              "start_frame": 43,
+              "end_frame": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 11,
+      "beat_number": 11,
+      "time_window": "20-22s",
+      "hook_trigger": "Realization",
+      "narration": "Wait, I just got manipulated by a fast food chain.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whip_pan",
+      "camera_motion": "climax-pull-back",
+      "video_prompt": "Cinematic climax-pull-back camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. holding up prop with triumphant hilarious grin, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Anamorphic close-up, [character_dna] gasping in sudden realization looking at phone, 8k",
+      "title": "Realization",
+      "image_url": "images/ep_35_scene_11.jpg",
+      "audio_url": "audio/beat_11.mp3",
+      "audio_duration_sec": 3.05,
+      "duration_in_frames": 93,
+      "words": [
+        {
+          "word": "Wait",
+          "start_sec": 0.096166,
+          "end_sec": 0.36058199999999996,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "I",
+          "start_sec": 0.661041,
+          "end_sec": 0.6970819,
+          "start_frame": 20,
+          "end_frame": 21
+        },
+        {
+          "word": "just",
+          "start_sec": 0.709125,
+          "end_sec": 0.877375,
+          "start_frame": 21,
+          "end_frame": 26
+        },
+        {
+          "word": "got",
+          "start_sec": 0.889416,
+          "end_sec": 1.045666,
+          "start_frame": 27,
+          "end_frame": 31
+        },
+        {
+          "word": "manipulated",
+          "start_sec": 1.057708,
+          "end_sec": 1.6466660000000002,
+          "start_frame": 32,
+          "end_frame": 49
+        },
+        {
+          "word": "by",
+          "start_sec": 1.658666,
+          "end_sec": 1.790874,
+          "start_frame": 50,
+          "end_frame": 54
+        },
+        {
+          "word": "a",
+          "start_sec": 1.802875,
+          "end_sec": 1.850958,
+          "start_frame": 54,
+          "end_frame": 56
+        },
+        {
+          "word": "fast",
+          "start_sec": 1.863,
+          "end_sec": 2.1875,
+          "start_frame": 56,
+          "end_frame": 66
+        },
+        {
+          "word": "food",
+          "start_sec": 2.1995,
+          "end_sec": 2.391791,
+          "start_frame": 66,
+          "end_frame": 72
+        },
+        {
+          "word": "chain",
+          "start_sec": 2.403833,
+          "end_sec": 2.680291,
+          "start_frame": 72,
+          "end_frame": 80
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WAIT I JUST",
+          "start_frame": 3,
+          "end_frame": 27,
+          "words": [
+            {
+              "word": "WAIT",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "I",
+              "start_frame": 20,
+              "end_frame": 21
+            },
+            {
+              "word": "JUST",
+              "start_frame": 21,
+              "end_frame": 26
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "GOT MANIPULATED BY",
+          "start_frame": 27,
+          "end_frame": 54,
+          "words": [
+            {
+              "word": "GOT",
+              "start_frame": 27,
+              "end_frame": 31
+            },
+            {
+              "word": "MANIPULATED",
+              "start_frame": 32,
+              "end_frame": 49
+            },
+            {
+              "word": "BY",
+              "start_frame": 50,
+              "end_frame": 54
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "A FAST FOOD",
+          "start_frame": 54,
+          "end_frame": 72,
+          "words": [
+            {
+              "word": "A",
+              "start_frame": 54,
+              "end_frame": 56
+            },
+            {
+              "word": "FAST",
+              "start_frame": 56,
+              "end_frame": 66
+            },
+            {
+              "word": "FOOD",
+              "start_frame": 66,
+              "end_frame": 72
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "CHAIN",
+          "start_frame": 72,
+          "end_frame": 80,
+          "words": [
+            {
+              "word": "CHAIN",
+              "start_frame": 72,
+              "end_frame": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 12,
+      "beat_number": 12,
+      "time_window": "22-24s",
+      "hook_trigger": "Loop Climax",
+      "narration": "And they never leave us alone, honestly.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "loop-convergence-zoom",
+      "video_prompt": "Cinematic loop-convergence-zoom camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. stumbling backward in comical bewilderment, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Rapid zoom-in shot, burger mascot winking into camera lens, comedic, 8k",
+      "title": "Loop Climax",
+      "image_url": "images/ep_35_scene_12.jpg",
+      "audio_url": "audio/beat_12.mp3",
+      "audio_duration_sec": 2.52,
+      "duration_in_frames": 77,
+      "words": [
+        {
+          "word": "And",
+          "start_sec": 0.1,
+          "end_sec": 0.271583,
+          "start_frame": 3,
+          "end_frame": 8
+        },
+        {
+          "word": "they",
+          "start_sec": 0.283833,
+          "end_sec": 0.39412400000000003,
+          "start_frame": 9,
+          "end_frame": 12
+        },
+        {
+          "word": "never",
+          "start_sec": 0.406375,
+          "end_sec": 0.73725,
+          "start_frame": 12,
+          "end_frame": 22
+        },
+        {
+          "word": "leave",
+          "start_sec": 0.7495,
+          "end_sec": 0.9455830000000001,
+          "start_frame": 22,
+          "end_frame": 28
+        },
+        {
+          "word": "us",
+          "start_sec": 0.957833,
+          "end_sec": 1.092624,
+          "start_frame": 29,
+          "end_frame": 33
+        },
+        {
+          "word": "alone",
+          "start_sec": 1.104916,
+          "end_sec": 1.497082,
+          "start_frame": 33,
+          "end_frame": 45
+        },
+        {
+          "word": "honestly",
+          "start_sec": 1.521583,
+          "end_sec": 2.1465829999999997,
+          "start_frame": 46,
+          "end_frame": 64
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "AND THEY NEVER",
+          "start_frame": 3,
+          "end_frame": 22,
+          "words": [
+            {
+              "word": "AND",
+              "start_frame": 3,
+              "end_frame": 8
+            },
+            {
+              "word": "THEY",
+              "start_frame": 9,
+              "end_frame": 12
+            },
+            {
+              "word": "NEVER",
+              "start_frame": 12,
               "end_frame": 22
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "CATASTROPHE AN UNEXPECTED",
+          "text": "LEAVE US ALONE",
           "start_frame": 22,
-          "end_frame": 75,
+          "end_frame": 46,
           "words": [
             {
-              "word": "CATASTROPHE",
+              "word": "LEAVE",
               "start_frame": 22,
-              "end_frame": 45
+              "end_frame": 28
             },
             {
-              "word": "AN",
-              "start_frame": 52,
-              "end_frame": 56
+              "word": "US",
+              "start_frame": 29,
+              "end_frame": 33
             },
             {
-              "word": "UNEXPECTED",
-              "start_frame": 56,
-              "end_frame": 74
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SCIENTIFIC DISCOVERY REVEALS",
-          "start_frame": 75,
-          "end_frame": 122,
-          "words": [
-            {
-              "word": "SCIENTIFIC",
-              "start_frame": 75,
-              "end_frame": 93
-            },
-            {
-              "word": "DISCOVERY",
-              "start_frame": 93,
-              "end_frame": 109
-            },
-            {
-              "word": "REVEALS",
-              "start_frame": 110,
-              "end_frame": 122
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "A HIDDEN ANOMALY",
-          "start_frame": 122,
-          "end_frame": 147,
-          "words": [
-            {
-              "word": "A",
-              "start_frame": 122,
-              "end_frame": 123
-            },
-            {
-              "word": "HIDDEN",
-              "start_frame": 124,
-              "end_frame": 132
-            },
-            {
-              "word": "ANOMALY",
-              "start_frame": 133,
-              "end_frame": 147
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "THAT MIGHT JUST",
-          "start_frame": 147,
-          "end_frame": 166,
-          "words": [
-            {
-              "word": "THAT",
-              "start_frame": 147,
-              "end_frame": 152
-            },
-            {
-              "word": "MIGHT",
-              "start_frame": 153,
-              "end_frame": 159
-            },
-            {
-              "word": "JUST",
-              "start_frame": 160,
-              "end_frame": 166
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "HOLD THE KEY",
-          "start_frame": 166,
-          "end_frame": 185,
-          "words": [
-            {
-              "word": "HOLD",
-              "start_frame": 166,
-              "end_frame": 173
-            },
-            {
-              "word": "THE",
-              "start_frame": 173,
-              "end_frame": 176
-            },
-            {
-              "word": "KEY",
-              "start_frame": 176,
-              "end_frame": 184
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "TO OUR SURVIVAL",
-          "start_frame": 185,
-          "end_frame": 211,
-          "words": [
-            {
-              "word": "TO",
-              "start_frame": 185,
-              "end_frame": 188
-            },
-            {
-              "word": "OUR",
-              "start_frame": 188,
-              "end_frame": 192
-            },
-            {
-              "word": "SURVIVAL",
-              "start_frame": 193,
-              "end_frame": 211
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 5,
-      "time_window": "48-58s",
-      "hook_trigger": "45s Resolution Hook",
-      "narration": "Our world is far more fragile than we dare to admit. What would you do first? Drop a follow right now for Episode Two!",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "sunset-drift",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
-      "scene_number": 5,
-      "title": "45s Resolution Hook",
-      "image_url": "images/ep_11_beat_5.jpg",
-      "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 8.93,
-      "duration_in_frames": 550,
-      "words": [
-        {
-          "word": "Our",
-          "start_sec": 0.098541,
-          "end_sec": 0.353416,
-          "start_frame": 3,
-          "end_frame": 11
-        },
-        {
-          "word": "world",
-          "start_sec": 0.365541,
-          "end_sec": 0.681082,
-          "start_frame": 11,
-          "end_frame": 20
-        },
-        {
-          "word": "is",
-          "start_sec": 0.693208,
-          "end_sec": 0.8145830000000001,
-          "start_frame": 21,
-          "end_frame": 24
-        },
-        {
-          "word": "far",
-          "start_sec": 0.826708,
-          "end_sec": 1.081583,
-          "start_frame": 25,
-          "end_frame": 32
-        },
-        {
-          "word": "more",
-          "start_sec": 1.093708,
-          "end_sec": 1.287874,
-          "start_frame": 33,
-          "end_frame": 39
-        },
-        {
-          "word": "fragile",
-          "start_sec": 1.3,
-          "end_sec": 1.749041,
-          "start_frame": 39,
-          "end_frame": 52
-        },
-        {
-          "word": "than",
-          "start_sec": 1.761166,
-          "end_sec": 1.894666,
-          "start_frame": 53,
-          "end_frame": 57
-        },
-        {
-          "word": "we",
-          "start_sec": 1.906791,
-          "end_sec": 2.0038739999999997,
-          "start_frame": 57,
-          "end_frame": 60
-        },
-        {
-          "word": "dare",
-          "start_sec": 2.016,
-          "end_sec": 2.283,
-          "start_frame": 60,
-          "end_frame": 68
-        },
-        {
-          "word": "to",
-          "start_sec": 2.295125,
-          "end_sec": 2.4165,
-          "start_frame": 69,
-          "end_frame": 72
-        },
-        {
-          "word": "admit",
-          "start_sec": 2.428625,
-          "end_sec": 2.8533749999999998,
-          "start_frame": 73,
-          "end_frame": 86
-        },
-        {
-          "word": "What",
-          "start_sec": 3.689333,
-          "end_sec": 3.907791,
-          "start_frame": 111,
-          "end_frame": 117
-        },
-        {
-          "word": "would",
-          "start_sec": 3.919916,
-          "end_sec": 4.041291,
-          "start_frame": 118,
-          "end_frame": 121
-        },
-        {
-          "word": "you",
-          "start_sec": 4.053416,
-          "end_sec": 4.138374000000001,
-          "start_frame": 122,
-          "end_frame": 124
-        },
-        {
-          "word": "do",
-          "start_sec": 4.1505,
-          "end_sec": 4.320416,
-          "start_frame": 125,
-          "end_frame": 130
-        },
-        {
-          "word": "first",
-          "start_sec": 4.332541,
-          "end_sec": 4.866541,
-          "start_frame": 130,
-          "end_frame": 146
-        },
-        {
-          "word": "Drop",
-          "start_sec": 5.703875,
-          "end_sec": 6.007291,
-          "start_frame": 171,
-          "end_frame": 180
-        },
-        {
-          "word": "a",
-          "start_sec": 6.019416,
-          "end_sec": 6.092249,
-          "start_frame": 181,
-          "end_frame": 183
-        },
-        {
-          "word": "follow",
-          "start_sec": 6.104375,
-          "end_sec": 6.504875,
-          "start_frame": 183,
-          "end_frame": 195
-        },
-        {
-          "word": "right",
-          "start_sec": 6.517,
-          "end_sec": 6.723291000000001,
-          "start_frame": 196,
-          "end_frame": 202
-        },
-        {
-          "word": "now",
-          "start_sec": 6.735416,
-          "end_sec": 6.965999,
-          "start_frame": 202,
-          "end_frame": 209
-        },
-        {
-          "word": "for",
-          "start_sec": 6.978166,
-          "end_sec": 7.160207,
-          "start_frame": 209,
-          "end_frame": 215
-        },
-        {
-          "word": "Episode",
-          "start_sec": 7.172333,
-          "end_sec": 7.657749,
-          "start_frame": 215,
-          "end_frame": 230
-        },
-        {
-          "word": "Two",
-          "start_sec": 7.669916,
-          "end_sec": 8.058249,
-          "start_frame": 230,
-          "end_frame": 242
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "OUR WORLD IS",
-          "start_frame": 3,
-          "end_frame": 25,
-          "words": [
-            {
-              "word": "OUR",
-              "start_frame": 3,
-              "end_frame": 11
-            },
-            {
-              "word": "WORLD",
-              "start_frame": 11,
-              "end_frame": 20
-            },
-            {
-              "word": "IS",
-              "start_frame": 21,
-              "end_frame": 24
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "FAR MORE FRAGILE",
-          "start_frame": 25,
-          "end_frame": 53,
-          "words": [
-            {
-              "word": "FAR",
-              "start_frame": 25,
-              "end_frame": 32
-            },
-            {
-              "word": "MORE",
+              "word": "ALONE",
               "start_frame": 33,
-              "end_frame": 39
-            },
-            {
-              "word": "FRAGILE",
-              "start_frame": 39,
-              "end_frame": 52
+              "end_frame": 45
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "THAN WE DARE",
-          "start_frame": 53,
-          "end_frame": 69,
+          "text": "HONESTLY",
+          "start_frame": 46,
+          "end_frame": 64,
           "words": [
             {
-              "word": "THAN",
-              "start_frame": 53,
-              "end_frame": 57
-            },
-            {
-              "word": "WE",
-              "start_frame": 57,
-              "end_frame": 60
-            },
-            {
-              "word": "DARE",
-              "start_frame": 60,
-              "end_frame": 68
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "TO ADMIT WHAT",
-          "start_frame": 69,
-          "end_frame": 118,
-          "words": [
-            {
-              "word": "TO",
-              "start_frame": 69,
-              "end_frame": 72
-            },
-            {
-              "word": "ADMIT",
-              "start_frame": 73,
-              "end_frame": 86
-            },
-            {
-              "word": "WHAT",
-              "start_frame": 111,
-              "end_frame": 117
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "WOULD YOU DO",
-          "start_frame": 118,
-          "end_frame": 130,
-          "words": [
-            {
-              "word": "WOULD",
-              "start_frame": 118,
-              "end_frame": 121
-            },
-            {
-              "word": "YOU",
-              "start_frame": 122,
-              "end_frame": 124
-            },
-            {
-              "word": "DO",
-              "start_frame": 125,
-              "end_frame": 130
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "FIRST DROP A",
-          "start_frame": 130,
-          "end_frame": 183,
-          "words": [
-            {
-              "word": "FIRST",
-              "start_frame": 130,
-              "end_frame": 146
-            },
-            {
-              "word": "DROP",
-              "start_frame": 171,
-              "end_frame": 180
-            },
-            {
-              "word": "A",
-              "start_frame": 181,
-              "end_frame": 183
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "FOLLOW RIGHT NOW",
-          "start_frame": 183,
-          "end_frame": 209,
-          "words": [
-            {
-              "word": "FOLLOW",
-              "start_frame": 183,
-              "end_frame": 195
-            },
-            {
-              "word": "RIGHT",
-              "start_frame": 196,
-              "end_frame": 202
-            },
-            {
-              "word": "NOW",
-              "start_frame": 202,
-              "end_frame": 209
-            }
-          ]
-        },
-        {
-          "chunk_id": 7,
-          "text": "FOR EPISODE TWO",
-          "start_frame": 209,
-          "end_frame": 242,
-          "words": [
-            {
-              "word": "FOR",
-              "start_frame": 209,
-              "end_frame": 215
-            },
-            {
-              "word": "EPISODE",
-              "start_frame": 215,
-              "end_frame": 230
-            },
-            {
-              "word": "TWO",
-              "start_frame": 230,
-              "end_frame": 242
+              "word": "HONESTLY",
+              "start_frame": 46,
+              "end_frame": 64
             }
           ]
         }
       ]
     }
   ],
-  "episode": 11,
-  "genre": "Mind-Blowing Stories & Science",
-  "title": "The colossal megalodon that hunted prehistoric oceans",
-  "scenes": [
+  "seo_tags": [
+    "viral",
+    "reels",
+    "shorts",
+    "comedy",
+    "whatif",
+    "relatable",
+    "funny",
+    "animation",
+    "trending"
+  ],
+  "hashtags": [
+    "#shorts",
+    "#viral",
+    "#reels",
+    "#relatable",
+    "#trending"
+  ],
+  "pinned_comment": "Which brand comments on your posts the most? \ud83d\udc47 Subscribe for daily viral drops! \ud83d\ude80",
+  "beats": [
     {
-      "beat_number": 1,
-      "time_window": "0-10s",
-      "hook_trigger": "Opening Shock Hook",
-      "narration": "What if the colossal megalodon that hunted prehistoric oceans? Most people assume civilization would carry on, but the immediate reality is far more terrifying.",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "smooth-zoom-in",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, dramatic epic opening cinematic of The colossal megalodon that hunted prehistoric oceans, vibrant volumetric lighting, Unreal Engine 5, 8k",
       "scene_number": 1,
-      "title": "Opening Shock Hook",
-      "image_url": "images/ep_11_beat_1.jpg",
+      "beat_number": 1,
+      "time_window": "0-2s",
+      "hook_trigger": "Opening Hook",
+      "narration": "Why is Wendy's acting like my actual best friend?",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "pop",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. reacting with wide eyes and pointing at screen, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "24mm anamorphic close up shot of [character_dna] staring bewildered at phone, 3D Pixar, 8k",
+      "title": "Opening Hook",
+      "image_url": "images/ep_35_scene_1.jpg",
       "audio_url": "audio/beat_1.mp3",
-      "audio_duration_sec": 10.44,
-      "duration_in_frames": 325,
+      "audio_duration_sec": 2.71,
+      "duration_in_frames": 83,
       "words": [
         {
-          "word": "What",
-          "start_sec": 0.098541,
-          "end_sec": 0.304832,
+          "word": "Why",
+          "start_sec": 0.109208,
+          "end_sec": 0.242708,
           "start_frame": 3,
-          "end_frame": 9
-        },
-        {
-          "word": "if",
-          "start_sec": 0.317,
-          "end_sec": 0.414083,
-          "start_frame": 10,
-          "end_frame": 12
-        },
-        {
-          "word": "the",
-          "start_sec": 0.426208,
-          "end_sec": 0.523291,
-          "start_frame": 13,
-          "end_frame": 16
-        },
-        {
-          "word": "colossal",
-          "start_sec": 0.535416,
-          "end_sec": 1.008707,
-          "start_frame": 16,
-          "end_frame": 30
-        },
-        {
-          "word": "megalodon",
-          "start_sec": 1.020875,
-          "end_sec": 1.603416,
-          "start_frame": 31,
-          "end_frame": 48
-        },
-        {
-          "word": "that",
-          "start_sec": 1.615541,
-          "end_sec": 1.7490409999999998,
-          "start_frame": 48,
-          "end_frame": 52
-        },
-        {
-          "word": "hunted",
-          "start_sec": 1.761166,
-          "end_sec": 2.100957,
-          "start_frame": 53,
-          "end_frame": 63
-        },
-        {
-          "word": "prehistoric",
-          "start_sec": 2.113125,
-          "end_sec": 2.7684580000000003,
-          "start_frame": 63,
-          "end_frame": 83
-        },
-        {
-          "word": "oceans",
-          "start_sec": 2.780583,
-          "end_sec": 3.350958,
-          "start_frame": 83,
-          "end_frame": 101
-        },
-        {
-          "word": "Most",
-          "start_sec": 4.186875,
-          "end_sec": 4.550958,
-          "start_frame": 126,
-          "end_frame": 137
-        },
-        {
-          "word": "people",
-          "start_sec": 4.563125,
-          "end_sec": 4.854375,
-          "start_frame": 137,
-          "end_frame": 146
-        },
-        {
-          "word": "assume",
-          "start_sec": 4.8665,
-          "end_sec": 5.242708,
-          "start_frame": 146,
-          "end_frame": 157
-        },
-        {
-          "word": "civilization",
-          "start_sec": 5.254875,
-          "end_sec": 6.007291,
-          "start_frame": 158,
-          "end_frame": 180
-        },
-        {
-          "word": "would",
-          "start_sec": 6.019416,
-          "end_sec": 6.140790999999999,
-          "start_frame": 181,
-          "end_frame": 184
-        },
-        {
-          "word": "carry",
-          "start_sec": 6.152916,
-          "end_sec": 6.504874,
-          "start_frame": 185,
-          "end_frame": 195
-        },
-        {
-          "word": "on",
-          "start_sec": 6.517,
-          "end_sec": 6.759708000000001,
-          "start_frame": 196,
-          "end_frame": 203
-        },
-        {
-          "word": "but",
-          "start_sec": 7.026708,
-          "end_sec": 7.148083,
-          "start_frame": 211,
-          "end_frame": 214
-        },
-        {
-          "word": "the",
-          "start_sec": 7.160208,
-          "end_sec": 7.220874,
-          "start_frame": 215,
-          "end_frame": 217
-        },
-        {
-          "word": "immediate",
-          "start_sec": 7.233,
-          "end_sec": 7.669874999999999,
-          "start_frame": 217,
-          "end_frame": 230
-        },
-        {
-          "word": "reality",
-          "start_sec": 7.682041,
-          "end_sec": 8.191749,
-          "start_frame": 230,
-          "end_frame": 246
+          "end_frame": 7
         },
         {
           "word": "is",
-          "start_sec": 8.203875,
-          "end_sec": 8.3495,
-          "start_frame": 246,
-          "end_frame": 250
+          "start_sec": 0.254875,
+          "end_sec": 0.351958,
+          "start_frame": 8,
+          "end_frame": 11
         },
         {
-          "word": "far",
-          "start_sec": 8.361666,
-          "end_sec": 8.604374,
-          "start_frame": 251,
-          "end_frame": 258
+          "word": "Wendy's",
+          "start_sec": 0.364083,
+          "end_sec": 0.6674990000000001,
+          "start_frame": 11,
+          "end_frame": 20
         },
         {
-          "word": "more",
-          "start_sec": 8.6165,
-          "end_sec": 8.810666,
-          "start_frame": 258,
-          "end_frame": 264
+          "word": "acting",
+          "start_sec": 0.679625,
+          "end_sec": 0.995166,
+          "start_frame": 20,
+          "end_frame": 30
         },
         {
-          "word": "terrifying",
-          "start_sec": 8.822833,
-          "end_sec": 9.587416,
-          "start_frame": 265,
-          "end_frame": 288
+          "word": "like",
+          "start_sec": 1.007291,
+          "end_sec": 1.165041,
+          "start_frame": 30,
+          "end_frame": 35
+        },
+        {
+          "word": "my",
+          "start_sec": 1.177166,
+          "end_sec": 1.3106659999999999,
+          "start_frame": 35,
+          "end_frame": 39
+        },
+        {
+          "word": "actual",
+          "start_sec": 1.322833,
+          "end_sec": 1.6990409999999998,
+          "start_frame": 40,
+          "end_frame": 51
+        },
+        {
+          "word": "best",
+          "start_sec": 1.711166,
+          "end_sec": 1.966041,
+          "start_frame": 51,
+          "end_frame": 59
+        },
+        {
+          "word": "friend",
+          "start_sec": 1.978166,
+          "end_sec": 2.354374,
+          "start_frame": 59,
+          "end_frame": 71
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "WHAT IF THE",
+          "text": "WHY IS WENDY'S",
           "start_frame": 3,
-          "end_frame": 16,
+          "end_frame": 20,
           "words": [
             {
-              "word": "WHAT",
+              "word": "WHY",
               "start_frame": 3,
-              "end_frame": 9
+              "end_frame": 7
             },
             {
-              "word": "IF",
-              "start_frame": 10,
-              "end_frame": 12
+              "word": "IS",
+              "start_frame": 8,
+              "end_frame": 11
             },
             {
-              "word": "THE",
-              "start_frame": 13,
-              "end_frame": 16
+              "word": "WENDY'S",
+              "start_frame": 11,
+              "end_frame": 20
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "COLOSSAL MEGALODON THAT",
-          "start_frame": 16,
-          "end_frame": 53,
+          "text": "ACTING LIKE MY",
+          "start_frame": 20,
+          "end_frame": 40,
           "words": [
             {
-              "word": "COLOSSAL",
-              "start_frame": 16,
+              "word": "ACTING",
+              "start_frame": 20,
               "end_frame": 30
             },
             {
-              "word": "MEGALODON",
-              "start_frame": 31,
-              "end_frame": 48
+              "word": "LIKE",
+              "start_frame": 30,
+              "end_frame": 35
             },
             {
-              "word": "THAT",
-              "start_frame": 48,
-              "end_frame": 52
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "HUNTED PREHISTORIC OCEANS",
-          "start_frame": 53,
-          "end_frame": 126,
-          "words": [
-            {
-              "word": "HUNTED",
-              "start_frame": 53,
-              "end_frame": 63
-            },
-            {
-              "word": "PREHISTORIC",
-              "start_frame": 63,
-              "end_frame": 83
-            },
-            {
-              "word": "OCEANS",
-              "start_frame": 83,
-              "end_frame": 101
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "MOST PEOPLE ASSUME",
-          "start_frame": 126,
-          "end_frame": 158,
-          "words": [
-            {
-              "word": "MOST",
-              "start_frame": 126,
-              "end_frame": 137
-            },
-            {
-              "word": "PEOPLE",
-              "start_frame": 137,
-              "end_frame": 146
-            },
-            {
-              "word": "ASSUME",
-              "start_frame": 146,
-              "end_frame": 157
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "CIVILIZATION WOULD CARRY",
-          "start_frame": 158,
-          "end_frame": 196,
-          "words": [
-            {
-              "word": "CIVILIZATION",
-              "start_frame": 158,
-              "end_frame": 180
-            },
-            {
-              "word": "WOULD",
-              "start_frame": 181,
-              "end_frame": 184
-            },
-            {
-              "word": "CARRY",
-              "start_frame": 185,
-              "end_frame": 195
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "ON BUT THE",
-          "start_frame": 196,
-          "end_frame": 217,
-          "words": [
-            {
-              "word": "ON",
-              "start_frame": 196,
-              "end_frame": 203
-            },
-            {
-              "word": "BUT",
-              "start_frame": 211,
-              "end_frame": 214
-            },
-            {
-              "word": "THE",
-              "start_frame": 215,
-              "end_frame": 217
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "IMMEDIATE REALITY IS",
-          "start_frame": 217,
-          "end_frame": 251,
-          "words": [
-            {
-              "word": "IMMEDIATE",
-              "start_frame": 217,
-              "end_frame": 230
-            },
-            {
-              "word": "REALITY",
-              "start_frame": 230,
-              "end_frame": 246
-            },
-            {
-              "word": "IS",
-              "start_frame": 246,
-              "end_frame": 250
-            }
-          ]
-        },
-        {
-          "chunk_id": 7,
-          "text": "FAR MORE TERRIFYING",
-          "start_frame": 251,
-          "end_frame": 288,
-          "words": [
-            {
-              "word": "FAR",
-              "start_frame": 251,
-              "end_frame": 258
-            },
-            {
-              "word": "MORE",
-              "start_frame": 258,
-              "end_frame": 264
-            },
-            {
-              "word": "TERRIFYING",
-              "start_frame": 265,
-              "end_frame": 288
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 2,
-      "time_window": "10-22s",
-      "hook_trigger": "10s Escalation Hook",
-      "narration": "Within seconds, the initial shockwave ripples across the globe, shattering communication satellites and throwing power grids into absolute chaotic blackout.",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "pan-right",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, global view of Earth from space with satellite networks sparking, city lights extinguishing into darkness, cinematic",
-      "scene_number": 2,
-      "title": "10s Escalation Hook",
-      "image_url": "images/ep_11_beat_2.jpg",
-      "audio_url": "audio/beat_2.mp3",
-      "audio_duration_sec": 9.46,
-      "duration_in_frames": 296,
-      "words": [
-        {
-          "word": "Within",
-          "start_sec": 0.098541,
-          "end_sec": 0.486874,
-          "start_frame": 3,
-          "end_frame": 15
-        },
-        {
-          "word": "seconds",
-          "start_sec": 0.499041,
-          "end_sec": 1.033041,
-          "start_frame": 15,
-          "end_frame": 31
-        },
-        {
-          "word": "the",
-          "start_sec": 1.190791,
-          "end_sec": 1.287874,
-          "start_frame": 36,
-          "end_frame": 39
-        },
-        {
-          "word": "initial",
-          "start_sec": 1.3,
-          "end_sec": 1.688333,
-          "start_frame": 39,
-          "end_frame": 51
-        },
-        {
-          "word": "shockwave",
-          "start_sec": 1.7005,
-          "end_sec": 2.283041,
-          "start_frame": 51,
-          "end_frame": 68
-        },
-        {
-          "word": "ripples",
-          "start_sec": 2.295125,
-          "end_sec": 2.6227910000000003,
-          "start_frame": 69,
-          "end_frame": 79
-        },
-        {
-          "word": "across",
-          "start_sec": 2.634958,
-          "end_sec": 3.0111660000000002,
-          "start_frame": 79,
-          "end_frame": 90
-        },
-        {
-          "word": "the",
-          "start_sec": 3.023291,
-          "end_sec": 3.132499,
-          "start_frame": 91,
-          "end_frame": 94
-        },
-        {
-          "word": "globe",
-          "start_sec": 3.144666,
-          "end_sec": 3.484457,
-          "start_frame": 94,
-          "end_frame": 105
-        },
-        {
-          "word": "shattering",
-          "start_sec": 3.775708,
-          "end_sec": 4.224749,
-          "start_frame": 113,
-          "end_frame": 127
-        },
-        {
-          "word": "communication",
-          "start_sec": 4.236875,
-          "end_sec": 4.94075,
-          "start_frame": 127,
-          "end_frame": 148
-        },
-        {
-          "word": "satellites",
-          "start_sec": 4.952916,
-          "end_sec": 5.523291,
-          "start_frame": 149,
-          "end_frame": 166
-        },
-        {
-          "word": "and",
-          "start_sec": 5.535416,
-          "end_sec": 5.693166,
-          "start_frame": 166,
-          "end_frame": 171
-        },
-        {
-          "word": "throwing",
-          "start_sec": 5.705333,
-          "end_sec": 6.069416,
-          "start_frame": 171,
-          "end_frame": 182
-        },
-        {
-          "word": "power",
-          "start_sec": 6.081541,
-          "end_sec": 6.409206999999999,
-          "start_frame": 182,
-          "end_frame": 192
-        },
-        {
-          "word": "grids",
-          "start_sec": 6.421375,
-          "end_sec": 6.749041,
-          "start_frame": 193,
-          "end_frame": 202
-        },
-        {
-          "word": "into",
-          "start_sec": 6.761166,
-          "end_sec": 6.9674570000000005,
-          "start_frame": 203,
-          "end_frame": 209
-        },
-        {
-          "word": "absolute",
-          "start_sec": 6.979625,
-          "end_sec": 7.52575,
-          "start_frame": 209,
-          "end_frame": 226
-        },
-        {
-          "word": "chaotic",
-          "start_sec": 7.537875,
-          "end_sec": 7.999041,
-          "start_frame": 226,
-          "end_frame": 240
-        },
-        {
-          "word": "blackout",
-          "start_sec": 8.011166,
-          "end_sec": 8.605832,
-          "start_frame": 240,
-          "end_frame": 258
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "WITHIN SECONDS THE",
-          "start_frame": 3,
-          "end_frame": 39,
-          "words": [
-            {
-              "word": "WITHIN",
-              "start_frame": 3,
-              "end_frame": 15
-            },
-            {
-              "word": "SECONDS",
-              "start_frame": 15,
-              "end_frame": 31
-            },
-            {
-              "word": "THE",
-              "start_frame": 36,
+              "word": "MY",
+              "start_frame": 35,
               "end_frame": 39
             }
           ]
         },
         {
-          "chunk_id": 1,
-          "text": "INITIAL SHOCKWAVE RIPPLES",
-          "start_frame": 39,
-          "end_frame": 79,
+          "chunk_id": 2,
+          "text": "ACTUAL BEST FRIEND",
+          "start_frame": 40,
+          "end_frame": 71,
           "words": [
             {
-              "word": "INITIAL",
-              "start_frame": 39,
+              "word": "ACTUAL",
+              "start_frame": 40,
               "end_frame": 51
             },
             {
-              "word": "SHOCKWAVE",
+              "word": "BEST",
               "start_frame": 51,
-              "end_frame": 68
+              "end_frame": 59
             },
             {
-              "word": "RIPPLES",
-              "start_frame": 69,
-              "end_frame": 79
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "ACROSS THE GLOBE",
-          "start_frame": 79,
-          "end_frame": 113,
-          "words": [
-            {
-              "word": "ACROSS",
-              "start_frame": 79,
-              "end_frame": 90
-            },
-            {
-              "word": "THE",
-              "start_frame": 91,
-              "end_frame": 94
-            },
-            {
-              "word": "GLOBE",
-              "start_frame": 94,
-              "end_frame": 105
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "SHATTERING COMMUNICATION SATELLITES",
-          "start_frame": 113,
-          "end_frame": 166,
-          "words": [
-            {
-              "word": "SHATTERING",
-              "start_frame": 113,
-              "end_frame": 127
-            },
-            {
-              "word": "COMMUNICATION",
-              "start_frame": 127,
-              "end_frame": 148
-            },
-            {
-              "word": "SATELLITES",
-              "start_frame": 149,
-              "end_frame": 166
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "AND THROWING POWER",
-          "start_frame": 166,
-          "end_frame": 193,
-          "words": [
-            {
-              "word": "AND",
-              "start_frame": 166,
-              "end_frame": 171
-            },
-            {
-              "word": "THROWING",
-              "start_frame": 171,
-              "end_frame": 182
-            },
-            {
-              "word": "POWER",
-              "start_frame": 182,
-              "end_frame": 192
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "GRIDS INTO ABSOLUTE",
-          "start_frame": 193,
-          "end_frame": 226,
-          "words": [
-            {
-              "word": "GRIDS",
-              "start_frame": 193,
-              "end_frame": 202
-            },
-            {
-              "word": "INTO",
-              "start_frame": 203,
-              "end_frame": 209
-            },
-            {
-              "word": "ABSOLUTE",
-              "start_frame": 209,
-              "end_frame": 226
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "CHAOTIC BLACKOUT",
-          "start_frame": 226,
-          "end_frame": 258,
-          "words": [
-            {
-              "word": "CHAOTIC",
-              "start_frame": 226,
-              "end_frame": 240
-            },
-            {
-              "word": "BLACKOUT",
-              "start_frame": 240,
-              "end_frame": 258
+              "word": "FRIEND",
+              "start_frame": 59,
+              "end_frame": 71
             }
           ]
         }
       ]
     },
     {
-      "beat_number": 3,
-      "time_window": "22-35s",
-      "hook_trigger": "20s Danger Hook",
-      "narration": "Panic spreads like wildfire. As the emergency alarms echo through deserted city avenues, survivors scramble for the only remaining underground shelters.",
-      "speaker": "character_hero",
-      "speaker_name": "Commander",
-      "speaker_avatar": "\ud83d\udea8",
-      "sfx": "impact_boom",
-      "camera_motion": "dramatic-pulse",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, futuristic underground vault doors slamming shut with glowing amber warning beacons, intense cinematic tension",
-      "scene_number": 3,
-      "title": "20s Danger Hook",
-      "image_url": "images/ep_11_beat_3.jpg",
-      "audio_url": "audio/beat_3.mp3",
-      "audio_duration_sec": 10.3,
-      "duration_in_frames": 321,
+      "scene_number": 2,
+      "beat_number": 2,
+      "time_window": "2-4s",
+      "hook_trigger": "Brand Reveal",
+      "narration": "They popped up on my sad morning crying video.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "whoosh",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. gesturing in humorous disbelief as hands fly into frame, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait shot, giant floating burger mascot waving behind [character_dna], vibrant colors, 8k",
+      "title": "Brand Reveal",
+      "image_url": "images/ep_35_scene_2.jpg",
+      "audio_url": "audio/beat_2.mp3",
+      "audio_duration_sec": 2.69,
+      "duration_in_frames": 82,
       "words": [
         {
-          "word": "Panic",
-          "start_sec": 0.098541,
-          "end_sec": 0.438332,
-          "start_frame": 3,
-          "end_frame": 13
-        },
-        {
-          "word": "spreads",
-          "start_sec": 0.4505,
-          "end_sec": 0.863125,
-          "start_frame": 14,
-          "end_frame": 26
-        },
-        {
-          "word": "like",
-          "start_sec": 0.87525,
-          "end_sec": 1.033,
-          "start_frame": 26,
-          "end_frame": 31
-        },
-        {
-          "word": "wildfire",
-          "start_sec": 1.045125,
-          "end_sec": 1.8825,
-          "start_frame": 31,
-          "end_frame": 56
-        },
-        {
-          "word": "As",
-          "start_sec": 2.718458,
-          "end_sec": 2.9490410000000002,
-          "start_frame": 82,
-          "end_frame": 88
-        },
-        {
-          "word": "the",
-          "start_sec": 2.961166,
-          "end_sec": 3.021832,
-          "start_frame": 89,
-          "end_frame": 91
-        },
-        {
-          "word": "emergency",
-          "start_sec": 3.034,
-          "end_sec": 3.628666,
-          "start_frame": 91,
-          "end_frame": 109
-        },
-        {
-          "word": "alarms",
-          "start_sec": 3.640791,
-          "end_sec": 4.126207,
-          "start_frame": 109,
-          "end_frame": 124
-        },
-        {
-          "word": "echo",
-          "start_sec": 4.138333,
-          "end_sec": 4.405333000000001,
-          "start_frame": 124,
-          "end_frame": 132
-        },
-        {
-          "word": "through",
-          "start_sec": 4.417458,
-          "end_sec": 4.623749,
-          "start_frame": 133,
-          "end_frame": 139
-        },
-        {
-          "word": "deserted",
-          "start_sec": 4.635916,
-          "end_sec": 5.072791,
-          "start_frame": 139,
-          "end_frame": 152
-        },
-        {
-          "word": "city",
-          "start_sec": 5.084958,
-          "end_sec": 5.424749,
-          "start_frame": 153,
-          "end_frame": 163
-        },
-        {
-          "word": "avenues",
-          "start_sec": 5.436875,
-          "end_sec": 5.9708749999999995,
-          "start_frame": 163,
-          "end_frame": 179
-        },
-        {
-          "word": "survivors",
-          "start_sec": 6.213583,
-          "end_sec": 6.783958,
-          "start_frame": 186,
-          "end_frame": 204
-        },
-        {
-          "word": "scramble",
-          "start_sec": 6.796125,
-          "end_sec": 7.245166,
-          "start_frame": 204,
-          "end_frame": 217
-        },
-        {
-          "word": "for",
-          "start_sec": 7.257291,
-          "end_sec": 7.378666,
-          "start_frame": 218,
-          "end_frame": 221
-        },
-        {
-          "word": "the",
-          "start_sec": 7.390791,
-          "end_sec": 7.499999,
-          "start_frame": 222,
-          "end_frame": 225
-        },
-        {
-          "word": "only",
-          "start_sec": 7.512125,
-          "end_sec": 7.827666,
-          "start_frame": 225,
-          "end_frame": 235
-        },
-        {
-          "word": "remaining",
-          "start_sec": 7.839791,
-          "end_sec": 8.264541,
-          "start_frame": 235,
-          "end_frame": 248
-        },
-        {
-          "word": "underground",
-          "start_sec": 8.276708,
-          "end_sec": 8.786416,
-          "start_frame": 248,
-          "end_frame": 264
-        },
-        {
-          "word": "shelters",
-          "start_sec": 8.798541,
-          "end_sec": 9.441749,
-          "start_frame": 264,
-          "end_frame": 283
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "PANIC SPREADS LIKE",
-          "start_frame": 3,
-          "end_frame": 31,
-          "words": [
-            {
-              "word": "PANIC",
-              "start_frame": 3,
-              "end_frame": 13
-            },
-            {
-              "word": "SPREADS",
-              "start_frame": 14,
-              "end_frame": 26
-            },
-            {
-              "word": "LIKE",
-              "start_frame": 26,
-              "end_frame": 31
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "WILDFIRE AS THE",
-          "start_frame": 31,
-          "end_frame": 91,
-          "words": [
-            {
-              "word": "WILDFIRE",
-              "start_frame": 31,
-              "end_frame": 56
-            },
-            {
-              "word": "AS",
-              "start_frame": 82,
-              "end_frame": 88
-            },
-            {
-              "word": "THE",
-              "start_frame": 89,
-              "end_frame": 91
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "EMERGENCY ALARMS ECHO",
-          "start_frame": 91,
-          "end_frame": 133,
-          "words": [
-            {
-              "word": "EMERGENCY",
-              "start_frame": 91,
-              "end_frame": 109
-            },
-            {
-              "word": "ALARMS",
-              "start_frame": 109,
-              "end_frame": 124
-            },
-            {
-              "word": "ECHO",
-              "start_frame": 124,
-              "end_frame": 132
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "THROUGH DESERTED CITY",
-          "start_frame": 133,
-          "end_frame": 163,
-          "words": [
-            {
-              "word": "THROUGH",
-              "start_frame": 133,
-              "end_frame": 139
-            },
-            {
-              "word": "DESERTED",
-              "start_frame": 139,
-              "end_frame": 152
-            },
-            {
-              "word": "CITY",
-              "start_frame": 153,
-              "end_frame": 163
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "AVENUES SURVIVORS SCRAMBLE",
-          "start_frame": 163,
-          "end_frame": 218,
-          "words": [
-            {
-              "word": "AVENUES",
-              "start_frame": 163,
-              "end_frame": 179
-            },
-            {
-              "word": "SURVIVORS",
-              "start_frame": 186,
-              "end_frame": 204
-            },
-            {
-              "word": "SCRAMBLE",
-              "start_frame": 204,
-              "end_frame": 217
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "FOR THE ONLY",
-          "start_frame": 218,
-          "end_frame": 235,
-          "words": [
-            {
-              "word": "FOR",
-              "start_frame": 218,
-              "end_frame": 221
-            },
-            {
-              "word": "THE",
-              "start_frame": 222,
-              "end_frame": 225
-            },
-            {
-              "word": "ONLY",
-              "start_frame": 225,
-              "end_frame": 235
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "REMAINING UNDERGROUND SHELTERS",
-          "start_frame": 235,
-          "end_frame": 283,
-          "words": [
-            {
-              "word": "REMAINING",
-              "start_frame": 235,
-              "end_frame": 248
-            },
-            {
-              "word": "UNDERGROUND",
-              "start_frame": 248,
-              "end_frame": 264
-            },
-            {
-              "word": "SHELTERS",
-              "start_frame": 264,
-              "end_frame": 283
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 4,
-      "time_window": "35-48s",
-      "hook_trigger": "30s Climax Hook",
-      "narration": "Yet amidst the catastrophe, an unexpected scientific discovery reveals a hidden anomaly that might just hold the key to our survival.",
-      "speaker": "character_guide",
-      "speaker_name": "Scientist",
-      "speaker_avatar": "\ud83d\udd2c",
-      "sfx": "pop",
-      "camera_motion": "warm-dolly",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, glowing holographic core projecting ancient mysterious energy symbols in dark laboratory, warm cyan illumination",
-      "scene_number": 4,
-      "title": "30s Climax Hook",
-      "image_url": "images/ep_11_beat_4.jpg",
-      "audio_url": "audio/beat_4.mp3",
-      "audio_duration_sec": 7.87,
-      "duration_in_frames": 248,
-      "words": [
-        {
-          "word": "Yet",
-          "start_sec": 0.098541,
-          "end_sec": 0.304832,
+          "word": "They",
+          "start_sec": 0.1,
+          "end_sec": 0.29229099999999997,
           "start_frame": 3,
           "end_frame": 9
         },
         {
-          "word": "amidst",
-          "start_sec": 0.317,
-          "end_sec": 0.644666,
-          "start_frame": 10,
+          "word": "popped",
+          "start_sec": 0.304333,
+          "end_sec": 0.6408739999999999,
+          "start_frame": 9,
           "end_frame": 19
         },
         {
-          "word": "the",
-          "start_sec": 0.656791,
-          "end_sec": 0.729624,
+          "word": "up",
+          "start_sec": 0.652875,
+          "end_sec": 0.761041,
           "start_frame": 20,
-          "end_frame": 22
+          "end_frame": 23
         },
         {
-          "word": "catastrophe",
-          "start_sec": 0.74175,
-          "end_sec": 1.4941659999999999,
-          "start_frame": 22,
-          "end_frame": 45
+          "word": "on",
+          "start_sec": 0.773083,
+          "end_sec": 0.8692489999999999,
+          "start_frame": 23,
+          "end_frame": 26
         },
         {
-          "word": "an",
-          "start_sec": 1.736875,
-          "end_sec": 1.85825,
-          "start_frame": 52,
+          "word": "my",
+          "start_sec": 0.88125,
+          "end_sec": 1.001458,
+          "start_frame": 26,
+          "end_frame": 30
+        },
+        {
+          "word": "sad",
+          "start_sec": 1.013458,
+          "end_sec": 1.2899159999999998,
+          "start_frame": 30,
+          "end_frame": 39
+        },
+        {
+          "word": "morning",
+          "start_sec": 1.301916,
+          "end_sec": 1.5903740000000002,
+          "start_frame": 39,
+          "end_frame": 48
+        },
+        {
+          "word": "crying",
+          "start_sec": 1.602416,
+          "end_sec": 1.8788740000000002,
+          "start_frame": 48,
           "end_frame": 56
         },
         {
-          "word": "unexpected",
-          "start_sec": 1.870375,
-          "end_sec": 2.477166,
-          "start_frame": 56,
-          "end_frame": 74
-        },
-        {
-          "word": "scientific",
-          "start_sec": 2.489333,
-          "end_sec": 3.0961239999999997,
-          "start_frame": 75,
-          "end_frame": 93
-        },
-        {
-          "word": "discovery",
-          "start_sec": 3.10825,
-          "end_sec": 3.6422499999999998,
-          "start_frame": 93,
-          "end_frame": 109
-        },
-        {
-          "word": "reveals",
-          "start_sec": 3.654375,
-          "end_sec": 4.054875,
-          "start_frame": 110,
-          "end_frame": 122
-        },
-        {
-          "word": "a",
-          "start_sec": 4.067,
-          "end_sec": 4.1155409,
-          "start_frame": 122,
-          "end_frame": 123
-        },
-        {
-          "word": "hidden",
-          "start_sec": 4.127666,
-          "end_sec": 4.406790999999999,
-          "start_frame": 124,
-          "end_frame": 132
-        },
-        {
-          "word": "anomaly",
-          "start_sec": 4.418916,
-          "end_sec": 4.904332,
-          "start_frame": 133,
-          "end_frame": 147
-        },
-        {
-          "word": "that",
-          "start_sec": 4.9165,
-          "end_sec": 5.07425,
-          "start_frame": 147,
-          "end_frame": 152
-        },
-        {
-          "word": "might",
-          "start_sec": 5.086416,
-          "end_sec": 5.304874,
-          "start_frame": 153,
-          "end_frame": 159
-        },
-        {
-          "word": "just",
-          "start_sec": 5.317,
-          "end_sec": 5.535458,
-          "start_frame": 160,
-          "end_frame": 166
-        },
-        {
-          "word": "hold",
-          "start_sec": 5.547583,
-          "end_sec": 5.766041,
-          "start_frame": 166,
-          "end_frame": 173
-        },
-        {
-          "word": "the",
-          "start_sec": 5.778166,
-          "end_sec": 5.863124,
-          "start_frame": 173,
-          "end_frame": 176
-        },
-        {
-          "word": "key",
-          "start_sec": 5.87525,
-          "end_sec": 6.142250000000001,
-          "start_frame": 176,
-          "end_frame": 184
-        },
-        {
-          "word": "to",
-          "start_sec": 6.154375,
-          "end_sec": 6.263583,
-          "start_frame": 185,
-          "end_frame": 188
-        },
-        {
-          "word": "our",
-          "start_sec": 6.275708,
-          "end_sec": 6.409208,
-          "start_frame": 188,
-          "end_frame": 192
-        },
-        {
-          "word": "survival",
-          "start_sec": 6.421375,
-          "end_sec": 7.028166000000001,
-          "start_frame": 193,
-          "end_frame": 211
+          "word": "video",
+          "start_sec": 1.890875,
+          "end_sec": 2.347625,
+          "start_frame": 57,
+          "end_frame": 70
         }
       ],
       "subtitle_chunks": [
         {
           "chunk_id": 0,
-          "text": "YET AMIDST THE",
+          "text": "THEY POPPED UP",
           "start_frame": 3,
-          "end_frame": 22,
+          "end_frame": 23,
           "words": [
             {
-              "word": "YET",
+              "word": "THEY",
               "start_frame": 3,
               "end_frame": 9
             },
             {
-              "word": "AMIDST",
-              "start_frame": 10,
+              "word": "POPPED",
+              "start_frame": 9,
               "end_frame": 19
             },
             {
-              "word": "THE",
+              "word": "UP",
               "start_frame": 20,
+              "end_frame": 23
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "ON MY SAD",
+          "start_frame": 23,
+          "end_frame": 39,
+          "words": [
+            {
+              "word": "ON",
+              "start_frame": 23,
+              "end_frame": 26
+            },
+            {
+              "word": "MY",
+              "start_frame": 26,
+              "end_frame": 30
+            },
+            {
+              "word": "SAD",
+              "start_frame": 30,
+              "end_frame": 39
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "MORNING CRYING VIDEO",
+          "start_frame": 39,
+          "end_frame": 70,
+          "words": [
+            {
+              "word": "MORNING",
+              "start_frame": 39,
+              "end_frame": 48
+            },
+            {
+              "word": "CRYING",
+              "start_frame": 48,
+              "end_frame": 56
+            },
+            {
+              "word": "VIDEO",
+              "start_frame": 57,
+              "end_frame": 70
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 3,
+      "beat_number": 3,
+      "time_window": "4-6s",
+      "hook_trigger": "Banter Start",
+      "narration": "What do you mean 'slay queen' on my breakdown?",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 35mm prime lens, expressive reaction portrait, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. turning quickly toward camera with comedic shock, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "35mm close-up shot, [character_dna] pointing at smartphone comment section, intense angle, 8k",
+      "title": "Banter Start",
+      "image_url": "images/ep_35_scene_3.jpg",
+      "audio_url": "audio/beat_3.mp3",
+      "audio_duration_sec": 2.38,
+      "duration_in_frames": 73,
+      "words": [
+        {
+          "word": "What",
+          "start_sec": 0.098041,
+          "end_sec": 0.183832,
+          "start_frame": 3,
+          "end_frame": 6
+        },
+        {
+          "word": "do",
+          "start_sec": 0.196083,
+          "end_sec": 0.245083,
+          "start_frame": 6,
+          "end_frame": 7
+        },
+        {
+          "word": "you",
+          "start_sec": 0.257333,
+          "end_sec": 0.330874,
+          "start_frame": 8,
+          "end_frame": 10
+        },
+        {
+          "word": "mean",
+          "start_sec": 0.343125,
+          "end_sec": 0.526958,
+          "start_frame": 10,
+          "end_frame": 16
+        },
+        {
+          "word": "slay",
+          "start_sec": 0.551458,
+          "end_sec": 0.8578330000000001,
+          "start_frame": 17,
+          "end_frame": 26
+        },
+        {
+          "word": "queen",
+          "start_sec": 0.870083,
+          "end_sec": 1.200958,
+          "start_frame": 26,
+          "end_frame": 36
+        },
+        {
+          "word": "on",
+          "start_sec": 1.2255,
+          "end_sec": 1.323541,
+          "start_frame": 37,
+          "end_frame": 40
+        },
+        {
+          "word": "my",
+          "start_sec": 1.335791,
+          "end_sec": 1.4705819999999998,
+          "start_frame": 40,
+          "end_frame": 44
+        },
+        {
+          "word": "breakdown",
+          "start_sec": 1.482833,
+          "end_sec": 2.022041,
+          "start_frame": 44,
+          "end_frame": 61
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WHAT DO YOU",
+          "start_frame": 3,
+          "end_frame": 10,
+          "words": [
+            {
+              "word": "WHAT",
+              "start_frame": 3,
+              "end_frame": 6
+            },
+            {
+              "word": "DO",
+              "start_frame": 6,
+              "end_frame": 7
+            },
+            {
+              "word": "YOU",
+              "start_frame": 8,
+              "end_frame": 10
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "MEAN SLAY QUEEN",
+          "start_frame": 10,
+          "end_frame": 37,
+          "words": [
+            {
+              "word": "MEAN",
+              "start_frame": 10,
+              "end_frame": 16
+            },
+            {
+              "word": "SLAY",
+              "start_frame": 17,
+              "end_frame": 26
+            },
+            {
+              "word": "QUEEN",
+              "start_frame": 26,
+              "end_frame": 36
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "ON MY BREAKDOWN",
+          "start_frame": 37,
+          "end_frame": 61,
+          "words": [
+            {
+              "word": "ON",
+              "start_frame": 37,
+              "end_frame": 40
+            },
+            {
+              "word": "MY",
+              "start_frame": 40,
+              "end_frame": 44
+            },
+            {
+              "word": "BREAKDOWN",
+              "start_frame": 44,
+              "end_frame": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 4,
+      "beat_number": 4,
+      "time_window": "6-8s",
+      "hook_trigger": "Corporate Vibe",
+      "narration": "We just love your vibe bestie, eat some fries.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 50mm cinema lens, medium conversational framing, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. holding up prop with triumphant hilarious grin, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "10mm ultra-wide shot, floating neon soda cups surrounding [character_dna] in bedroom, dynamic, 8k",
+      "title": "Corporate Vibe",
+      "image_url": "images/ep_35_scene_4.jpg",
+      "audio_url": "audio/beat_4.mp3",
+      "audio_duration_sec": 3.0,
+      "duration_in_frames": 92,
+      "words": [
+        {
+          "word": "We",
+          "start_sec": 0.1,
+          "end_sec": 0.306291,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "just",
+          "start_sec": 0.318458,
+          "end_sec": 0.48837400000000003,
+          "start_frame": 10,
+          "end_frame": 15
+        },
+        {
+          "word": "love",
+          "start_sec": 0.5005,
+          "end_sec": 0.65825,
+          "start_frame": 15,
+          "end_frame": 20
+        },
+        {
+          "word": "your",
+          "start_sec": 0.670375,
+          "end_sec": 0.7917500000000001,
+          "start_frame": 20,
+          "end_frame": 24
+        },
+        {
+          "word": "vibe",
+          "start_sec": 0.803875,
+          "end_sec": 1.034458,
+          "start_frame": 24,
+          "end_frame": 31
+        },
+        {
+          "word": "bestie",
+          "start_sec": 1.046583,
+          "end_sec": 1.531999,
+          "start_frame": 31,
+          "end_frame": 46
+        },
+        {
+          "word": "eat",
+          "start_sec": 1.786875,
+          "end_sec": 1.90825,
+          "start_frame": 54,
+          "end_frame": 57
+        },
+        {
+          "word": "some",
+          "start_sec": 1.920375,
+          "end_sec": 2.090291,
+          "start_frame": 58,
+          "end_frame": 63
+        },
+        {
+          "word": "fries",
+          "start_sec": 2.102416,
+          "end_sec": 2.6364159999999996,
+          "start_frame": 63,
+          "end_frame": 79
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WE JUST LOVE",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "WE",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "JUST",
+              "start_frame": 10,
+              "end_frame": 15
+            },
+            {
+              "word": "LOVE",
+              "start_frame": 15,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "YOUR VIBE BESTIE",
+          "start_frame": 20,
+          "end_frame": 54,
+          "words": [
+            {
+              "word": "YOUR",
+              "start_frame": 20,
+              "end_frame": 24
+            },
+            {
+              "word": "VIBE",
+              "start_frame": 24,
+              "end_frame": 31
+            },
+            {
+              "word": "BESTIE",
+              "start_frame": 31,
+              "end_frame": 46
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "EAT SOME FRIES",
+          "start_frame": 54,
+          "end_frame": 79,
+          "words": [
+            {
+              "word": "EAT",
+              "start_frame": 54,
+              "end_frame": 57
+            },
+            {
+              "word": "SOME",
+              "start_frame": 58,
+              "end_frame": 63
+            },
+            {
+              "word": "FRIES",
+              "start_frame": 63,
+              "end_frame": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 5,
+      "beat_number": 5,
+      "time_window": "8-10s",
+      "hook_trigger": "Escalation",
+      "narration": "You are a multi-billion dollar corporation, leave me alone!",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whip_pan",
+      "camera_motion": "climax-pull-back",
+      "video_prompt": "Cinematic climax-pull-back camera motion, 85mm portrait lens, tight macro reaction close-up, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. stumbling backward in comical bewilderment, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Anamorphic zoom-out shot, [character_dna] throwing hands up in disbelief, dramatic rim lighting, 8k",
+      "title": "Escalation",
+      "image_url": "images/ep_35_scene_5.jpg",
+      "audio_url": "audio/beat_5.mp3",
+      "audio_duration_sec": 3.65,
+      "duration_in_frames": 111,
+      "words": [
+        {
+          "word": "You",
+          "start_sec": 0.096166,
+          "end_sec": 0.31249899999999997,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "are",
+          "start_sec": 0.3245,
+          "end_sec": 0.444708,
+          "start_frame": 10,
+          "end_frame": 13
+        },
+        {
+          "word": "a",
+          "start_sec": 0.45675,
+          "end_sec": 0.4927909,
+          "start_frame": 14,
+          "end_frame": 15
+        },
+        {
+          "word": "multi-billion",
+          "start_sec": 0.504791,
+          "end_sec": 1.334124,
+          "start_frame": 15,
+          "end_frame": 40
+        },
+        {
+          "word": "dollar",
+          "start_sec": 1.346166,
+          "end_sec": 1.610582,
+          "start_frame": 40,
+          "end_frame": 48
+        },
+        {
+          "word": "corporation",
+          "start_sec": 1.622583,
+          "end_sec": 2.247583,
+          "start_frame": 49,
+          "end_frame": 67
+        },
+        {
+          "word": "leave",
+          "start_sec": 2.608166,
+          "end_sec": 2.764416,
+          "start_frame": 78,
+          "end_frame": 83
+        },
+        {
+          "word": "me",
+          "start_sec": 2.776458,
+          "end_sec": 2.884624,
+          "start_frame": 83,
+          "end_frame": 87
+        },
+        {
+          "word": "alone",
+          "start_sec": 2.896625,
+          "end_sec": 3.28125,
+          "start_frame": 87,
+          "end_frame": 98
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "YOU ARE A",
+          "start_frame": 3,
+          "end_frame": 15,
+          "words": [
+            {
+              "word": "YOU",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "ARE",
+              "start_frame": 10,
+              "end_frame": 13
+            },
+            {
+              "word": "A",
+              "start_frame": 14,
+              "end_frame": 15
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "MULTI-BILLION DOLLAR CORPORATION",
+          "start_frame": 15,
+          "end_frame": 78,
+          "words": [
+            {
+              "word": "MULTI-BILLION",
+              "start_frame": 15,
+              "end_frame": 40
+            },
+            {
+              "word": "DOLLAR",
+              "start_frame": 40,
+              "end_frame": 48
+            },
+            {
+              "word": "CORPORATION",
+              "start_frame": 49,
+              "end_frame": 67
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "LEAVE ME ALONE",
+          "start_frame": 78,
+          "end_frame": 98,
+          "words": [
+            {
+              "word": "LEAVE",
+              "start_frame": 78,
+              "end_frame": 83
+            },
+            {
+              "word": "ME",
+              "start_frame": 83,
+              "end_frame": 87
+            },
+            {
+              "word": "ALONE",
+              "start_frame": 87,
+              "end_frame": 98
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 6,
+      "beat_number": 6,
+      "time_window": "10-12s",
+      "hook_trigger": "Brand Defense",
+      "narration": "Does that mean our discount code friendship means nothing?",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. leaning into camera with exaggerated conspiratorial whisper, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait shot, giant sad french fry box shedding a digital tear, comedic, 8k",
+      "title": "Brand Defense",
+      "image_url": "images/ep_35_scene_6.jpg",
+      "audio_url": "audio/beat_6.mp3",
+      "audio_duration_sec": 3.12,
+      "duration_in_frames": 95,
+      "words": [
+        {
+          "word": "Does",
+          "start_sec": 0.1,
+          "end_sec": 0.296083,
+          "start_frame": 3,
+          "end_frame": 9
+        },
+        {
+          "word": "that",
+          "start_sec": 0.308333,
+          "end_sec": 0.467666,
+          "start_frame": 9,
+          "end_frame": 14
+        },
+        {
+          "word": "mean",
+          "start_sec": 0.479916,
+          "end_sec": 0.651499,
+          "start_frame": 14,
+          "end_frame": 20
+        },
+        {
+          "word": "our",
+          "start_sec": 0.663708,
+          "end_sec": 0.786249,
+          "start_frame": 20,
+          "end_frame": 24
+        },
+        {
+          "word": "discount",
+          "start_sec": 0.798541,
+          "end_sec": 1.215207,
+          "start_frame": 24,
+          "end_frame": 36
+        },
+        {
+          "word": "code",
+          "start_sec": 1.227458,
+          "end_sec": 1.497083,
+          "start_frame": 37,
+          "end_frame": 45
+        },
+        {
+          "word": "friendship",
+          "start_sec": 1.509333,
+          "end_sec": 1.987291,
+          "start_frame": 45,
+          "end_frame": 60
+        },
+        {
+          "word": "means",
+          "start_sec": 1.9995,
+          "end_sec": 2.256833,
+          "start_frame": 60,
+          "end_frame": 68
+        },
+        {
+          "word": "nothing",
+          "start_sec": 2.269125,
+          "end_sec": 2.759333,
+          "start_frame": 68,
+          "end_frame": 83
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "DOES THAT MEAN",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "DOES",
+              "start_frame": 3,
+              "end_frame": 9
+            },
+            {
+              "word": "THAT",
+              "start_frame": 9,
+              "end_frame": 14
+            },
+            {
+              "word": "MEAN",
+              "start_frame": 14,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "OUR DISCOUNT CODE",
+          "start_frame": 20,
+          "end_frame": 45,
+          "words": [
+            {
+              "word": "OUR",
+              "start_frame": 20,
+              "end_frame": 24
+            },
+            {
+              "word": "DISCOUNT",
+              "start_frame": 24,
+              "end_frame": 36
+            },
+            {
+              "word": "CODE",
+              "start_frame": 37,
+              "end_frame": 45
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "FRIENDSHIP MEANS NOTHING",
+          "start_frame": 45,
+          "end_frame": 83,
+          "words": [
+            {
+              "word": "FRIENDSHIP",
+              "start_frame": 45,
+              "end_frame": 60
+            },
+            {
+              "word": "MEANS",
+              "start_frame": 60,
+              "end_frame": 68
+            },
+            {
+              "word": "NOTHING",
+              "start_frame": 68,
+              "end_frame": 83
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 7,
+      "beat_number": 7,
+      "time_window": "12-14s",
+      "hook_trigger": "Panic Mode",
+      "narration": "Stop trying to sponsor my mental health spiral right now.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. shaking head with hands on cheeks in absolute disbelief, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "24mm tracking pan, [character_dna] pacing rapidly across room clutching head, 8k",
+      "title": "Panic Mode",
+      "image_url": "images/ep_35_scene_7.jpg",
+      "audio_url": "audio/beat_7.mp3",
+      "audio_duration_sec": 3.12,
+      "duration_in_frames": 95,
+      "words": [
+        {
+          "word": "Stop",
+          "start_sec": 0.109208,
+          "end_sec": 0.351916,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "trying",
+          "start_sec": 0.364083,
+          "end_sec": 0.582541,
+          "start_frame": 11,
+          "end_frame": 17
+        },
+        {
+          "word": "to",
+          "start_sec": 0.594666,
+          "end_sec": 0.655332,
+          "start_frame": 18,
+          "end_frame": 20
+        },
+        {
+          "word": "sponsor",
+          "start_sec": 0.667458,
+          "end_sec": 1.104333,
+          "start_frame": 20,
+          "end_frame": 33
+        },
+        {
+          "word": "my",
+          "start_sec": 1.1165,
+          "end_sec": 1.213583,
+          "start_frame": 33,
+          "end_frame": 36
+        },
+        {
+          "word": "mental",
+          "start_sec": 1.225708,
+          "end_sec": 1.577666,
+          "start_frame": 37,
+          "end_frame": 47
+        },
+        {
+          "word": "health",
+          "start_sec": 1.589791,
+          "end_sec": 1.808249,
+          "start_frame": 48,
+          "end_frame": 54
+        },
+        {
+          "word": "spiral",
+          "start_sec": 1.820375,
+          "end_sec": 2.25725,
+          "start_frame": 55,
+          "end_frame": 68
+        },
+        {
+          "word": "right",
+          "start_sec": 2.269416,
+          "end_sec": 2.451457,
+          "start_frame": 68,
+          "end_frame": 74
+        },
+        {
+          "word": "now",
+          "start_sec": 2.463583,
+          "end_sec": 2.7548329999999996,
+          "start_frame": 74,
+          "end_frame": 83
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "STOP TRYING TO",
+          "start_frame": 3,
+          "end_frame": 20,
+          "words": [
+            {
+              "word": "STOP",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "TRYING",
+              "start_frame": 11,
+              "end_frame": 17
+            },
+            {
+              "word": "TO",
+              "start_frame": 18,
+              "end_frame": 20
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "SPONSOR MY MENTAL",
+          "start_frame": 20,
+          "end_frame": 48,
+          "words": [
+            {
+              "word": "SPONSOR",
+              "start_frame": 20,
+              "end_frame": 33
+            },
+            {
+              "word": "MY",
+              "start_frame": 33,
+              "end_frame": 36
+            },
+            {
+              "word": "MENTAL",
+              "start_frame": 37,
+              "end_frame": 47
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "HEALTH SPIRAL RIGHT",
+          "start_frame": 48,
+          "end_frame": 74,
+          "words": [
+            {
+              "word": "HEALTH",
+              "start_frame": 48,
+              "end_frame": 54
+            },
+            {
+              "word": "SPIRAL",
+              "start_frame": 55,
+              "end_frame": 68
+            },
+            {
+              "word": "RIGHT",
+              "start_frame": 68,
+              "end_frame": 74
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "NOW",
+          "start_frame": 74,
+          "end_frame": 83,
+          "words": [
+            {
+              "word": "NOW",
+              "start_frame": 74,
+              "end_frame": 83
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 8,
+      "beat_number": 8,
+      "time_window": "14-16s",
+      "hook_trigger": "Subtle Push",
+      "narration": "Use code BROKEN for ten percent off your sorrows.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "whoosh",
+      "camera_motion": "rapid-push-in-shake",
+      "video_prompt": "Cinematic rapid-push-in-shake camera motion, 35mm prime lens, expressive reaction portrait, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. reacting with wide eyes and pointing at screen, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "35mm close-up, glowing neon promo code hovering in front of [character_dna] face, 8k",
+      "title": "Subtle Push",
+      "image_url": "images/ep_35_scene_8.jpg",
+      "audio_url": "audio/beat_8.mp3",
+      "audio_duration_sec": 3.1,
+      "duration_in_frames": 94,
+      "words": [
+        {
+          "word": "Use",
+          "start_sec": 0.1,
+          "end_sec": 0.38845799999999997,
+          "start_frame": 3,
+          "end_frame": 12
+        },
+        {
+          "word": "code",
+          "start_sec": 0.4005,
+          "end_sec": 0.688958,
+          "start_frame": 12,
+          "end_frame": 21
+        },
+        {
+          "word": "BROKEN",
+          "start_sec": 0.700958,
+          "end_sec": 1.073541,
+          "start_frame": 21,
+          "end_frame": 32
+        },
+        {
+          "word": "for",
+          "start_sec": 1.085583,
+          "end_sec": 1.217791,
+          "start_frame": 33,
+          "end_frame": 37
+        },
+        {
+          "word": "ten",
+          "start_sec": 1.229791,
+          "end_sec": 1.494207,
+          "start_frame": 37,
+          "end_frame": 45
+        },
+        {
+          "word": "percent",
+          "start_sec": 1.50625,
+          "end_sec": 1.890875,
+          "start_frame": 45,
+          "end_frame": 57
+        },
+        {
+          "word": "off",
+          "start_sec": 1.902875,
+          "end_sec": 2.035083,
+          "start_frame": 57,
+          "end_frame": 61
+        },
+        {
+          "word": "your",
+          "start_sec": 2.047125,
+          "end_sec": 2.143291,
+          "start_frame": 61,
+          "end_frame": 64
+        },
+        {
+          "word": "sorrows",
+          "start_sec": 2.155291,
+          "end_sec": 2.744249,
+          "start_frame": 65,
+          "end_frame": 82
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "USE CODE BROKEN",
+          "start_frame": 3,
+          "end_frame": 33,
+          "words": [
+            {
+              "word": "USE",
+              "start_frame": 3,
+              "end_frame": 12
+            },
+            {
+              "word": "CODE",
+              "start_frame": 12,
+              "end_frame": 21
+            },
+            {
+              "word": "BROKEN",
+              "start_frame": 21,
+              "end_frame": 32
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "FOR TEN PERCENT",
+          "start_frame": 33,
+          "end_frame": 57,
+          "words": [
+            {
+              "word": "FOR",
+              "start_frame": 33,
+              "end_frame": 37
+            },
+            {
+              "word": "TEN",
+              "start_frame": 37,
+              "end_frame": 45
+            },
+            {
+              "word": "PERCENT",
+              "start_frame": 45,
+              "end_frame": 57
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "OFF YOUR SORROWS",
+          "start_frame": 57,
+          "end_frame": 82,
+          "words": [
+            {
+              "word": "OFF",
+              "start_frame": 57,
+              "end_frame": 61
+            },
+            {
+              "word": "YOUR",
+              "start_frame": 61,
+              "end_frame": 64
+            },
+            {
+              "word": "SORROWS",
+              "start_frame": 65,
+              "end_frame": 82
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 9,
+      "beat_number": 9,
+      "time_window": "16-18s",
+      "hook_trigger": "Acceptance",
+      "narration": "Honestly, free delivery does sound kind of nice though.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "pop",
+      "camera_motion": "smooth-lateral-pan-right",
+      "video_prompt": "Cinematic smooth-lateral-pan-right camera motion, 50mm cinema lens, medium conversational framing, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. gesturing in humorous disbelief as hands fly into frame, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "50mm portrait, [character_dna] expression shifting from angry to interested, 8k",
+      "title": "Acceptance",
+      "image_url": "images/ep_35_scene_9.jpg",
+      "audio_url": "audio/beat_9.mp3",
+      "audio_duration_sec": 2.98,
+      "duration_in_frames": 91,
+      "words": [
+        {
+          "word": "Honestly",
+          "start_sec": 0.098041,
+          "end_sec": 0.5637070000000001,
+          "start_frame": 3,
+          "end_frame": 17
+        },
+        {
+          "word": "free",
+          "start_sec": 0.784333,
+          "end_sec": 0.955916,
+          "start_frame": 24,
+          "end_frame": 29
+        },
+        {
+          "word": "delivery",
+          "start_sec": 0.968125,
+          "end_sec": 1.409291,
+          "start_frame": 29,
+          "end_frame": 42
+        },
+        {
+          "word": "does",
+          "start_sec": 1.421583,
+          "end_sec": 1.593166,
+          "start_frame": 43,
+          "end_frame": 48
+        },
+        {
+          "word": "sound",
+          "start_sec": 1.605375,
+          "end_sec": 1.875,
+          "start_frame": 48,
+          "end_frame": 56
+        },
+        {
+          "word": "kind",
+          "start_sec": 1.88725,
+          "end_sec": 2.058833,
+          "start_frame": 57,
+          "end_frame": 62
+        },
+        {
+          "word": "of",
+          "start_sec": 2.071083,
+          "end_sec": 2.1200829999999997,
+          "start_frame": 62,
+          "end_frame": 64
+        },
+        {
+          "word": "nice",
+          "start_sec": 2.132333,
+          "end_sec": 2.377416,
+          "start_frame": 64,
+          "end_frame": 71
+        },
+        {
+          "word": "though",
+          "start_sec": 2.389708,
+          "end_sec": 2.622541,
+          "start_frame": 72,
+          "end_frame": 79
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "HONESTLY FREE DELIVERY",
+          "start_frame": 3,
+          "end_frame": 43,
+          "words": [
+            {
+              "word": "HONESTLY",
+              "start_frame": 3,
+              "end_frame": 17
+            },
+            {
+              "word": "FREE",
+              "start_frame": 24,
+              "end_frame": 29
+            },
+            {
+              "word": "DELIVERY",
+              "start_frame": 29,
+              "end_frame": 42
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "DOES SOUND KIND",
+          "start_frame": 43,
+          "end_frame": 62,
+          "words": [
+            {
+              "word": "DOES",
+              "start_frame": 43,
+              "end_frame": 48
+            },
+            {
+              "word": "SOUND",
+              "start_frame": 48,
+              "end_frame": 56
+            },
+            {
+              "word": "KIND",
+              "start_frame": 57,
+              "end_frame": 62
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "OF NICE THOUGH",
+          "start_frame": 62,
+          "end_frame": 79,
+          "words": [
+            {
+              "word": "OF",
+              "start_frame": 62,
+              "end_frame": 64
+            },
+            {
+              "word": "NICE",
+              "start_frame": 64,
+              "end_frame": 71
+            },
+            {
+              "word": "THOUGH",
+              "start_frame": 72,
+              "end_frame": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 10,
+      "beat_number": 10,
+      "time_window": "18-20s",
+      "hook_trigger": "Victory",
+      "narration": "That is what we love to hear, bestie!",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "impact_boom",
+      "camera_motion": "vertical-tilt-reveal",
+      "video_prompt": "Cinematic vertical-tilt-reveal camera motion, 85mm portrait lens, tight macro reaction close-up, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. turning quickly toward camera with comedic shock, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "10mm ultra-wide, confetti raining in bedroom as brand logo glows brightly, 8k",
+      "title": "Victory",
+      "image_url": "images/ep_35_scene_10.jpg",
+      "audio_url": "audio/beat_10.mp3",
+      "audio_duration_sec": 2.28,
+      "duration_in_frames": 70,
+      "words": [
+        {
+          "word": "That",
+          "start_sec": 0.1,
+          "end_sec": 0.37912500000000005,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "is",
+          "start_sec": 0.439791,
+          "end_sec": 0.5611659999999999,
+          "start_frame": 13,
+          "end_frame": 17
+        },
+        {
+          "word": "what",
+          "start_sec": 0.573291,
+          "end_sec": 0.694666,
+          "start_frame": 17,
+          "end_frame": 21
+        },
+        {
+          "word": "we",
+          "start_sec": 0.706791,
+          "end_sec": 0.803874,
+          "start_frame": 21,
+          "end_frame": 24
+        },
+        {
+          "word": "love",
+          "start_sec": 0.816,
+          "end_sec": 1.095125,
+          "start_frame": 24,
+          "end_frame": 33
+        },
+        {
+          "word": "to",
+          "start_sec": 1.107291,
+          "end_sec": 1.204374,
+          "start_frame": 33,
+          "end_frame": 36
+        },
+        {
+          "word": "hear",
+          "start_sec": 1.2165,
+          "end_sec": 1.410666,
+          "start_frame": 36,
+          "end_frame": 42
+        },
+        {
+          "word": "bestie",
+          "start_sec": 1.434958,
+          "end_sec": 1.920374,
+          "start_frame": 43,
+          "end_frame": 58
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "THAT IS WHAT",
+          "start_frame": 3,
+          "end_frame": 21,
+          "words": [
+            {
+              "word": "THAT",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "IS",
+              "start_frame": 13,
+              "end_frame": 17
+            },
+            {
+              "word": "WHAT",
+              "start_frame": 17,
+              "end_frame": 21
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "WE LOVE TO",
+          "start_frame": 21,
+          "end_frame": 36,
+          "words": [
+            {
+              "word": "WE",
+              "start_frame": 21,
+              "end_frame": 24
+            },
+            {
+              "word": "LOVE",
+              "start_frame": 24,
+              "end_frame": 33
+            },
+            {
+              "word": "TO",
+              "start_frame": 33,
+              "end_frame": 36
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "HEAR BESTIE",
+          "start_frame": 36,
+          "end_frame": 58,
+          "words": [
+            {
+              "word": "HEAR",
+              "start_frame": 36,
+              "end_frame": 42
+            },
+            {
+              "word": "BESTIE",
+              "start_frame": 43,
+              "end_frame": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 11,
+      "beat_number": 11,
+      "time_window": "20-22s",
+      "hook_trigger": "Realization",
+      "narration": "Wait, I just got manipulated by a fast food chain.",
+      "speaker": "speaker_1",
+      "speaker_name": "Host",
+      "speaker_avatar": "\ud83c\udf99\ufe0f",
+      "sfx": "whip_pan",
+      "camera_motion": "climax-pull-back",
+      "video_prompt": "Cinematic climax-pull-back camera motion, 10mm ultra-wide lens, dynamic push-in shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. holding up prop with triumphant hilarious grin, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Anamorphic close-up, [character_dna] gasping in sudden realization looking at phone, 8k",
+      "title": "Realization",
+      "image_url": "images/ep_35_scene_11.jpg",
+      "audio_url": "audio/beat_11.mp3",
+      "audio_duration_sec": 3.05,
+      "duration_in_frames": 93,
+      "words": [
+        {
+          "word": "Wait",
+          "start_sec": 0.096166,
+          "end_sec": 0.36058199999999996,
+          "start_frame": 3,
+          "end_frame": 11
+        },
+        {
+          "word": "I",
+          "start_sec": 0.661041,
+          "end_sec": 0.6970819,
+          "start_frame": 20,
+          "end_frame": 21
+        },
+        {
+          "word": "just",
+          "start_sec": 0.709125,
+          "end_sec": 0.877375,
+          "start_frame": 21,
+          "end_frame": 26
+        },
+        {
+          "word": "got",
+          "start_sec": 0.889416,
+          "end_sec": 1.045666,
+          "start_frame": 27,
+          "end_frame": 31
+        },
+        {
+          "word": "manipulated",
+          "start_sec": 1.057708,
+          "end_sec": 1.6466660000000002,
+          "start_frame": 32,
+          "end_frame": 49
+        },
+        {
+          "word": "by",
+          "start_sec": 1.658666,
+          "end_sec": 1.790874,
+          "start_frame": 50,
+          "end_frame": 54
+        },
+        {
+          "word": "a",
+          "start_sec": 1.802875,
+          "end_sec": 1.850958,
+          "start_frame": 54,
+          "end_frame": 56
+        },
+        {
+          "word": "fast",
+          "start_sec": 1.863,
+          "end_sec": 2.1875,
+          "start_frame": 56,
+          "end_frame": 66
+        },
+        {
+          "word": "food",
+          "start_sec": 2.1995,
+          "end_sec": 2.391791,
+          "start_frame": 66,
+          "end_frame": 72
+        },
+        {
+          "word": "chain",
+          "start_sec": 2.403833,
+          "end_sec": 2.680291,
+          "start_frame": 72,
+          "end_frame": 80
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "WAIT I JUST",
+          "start_frame": 3,
+          "end_frame": 27,
+          "words": [
+            {
+              "word": "WAIT",
+              "start_frame": 3,
+              "end_frame": 11
+            },
+            {
+              "word": "I",
+              "start_frame": 20,
+              "end_frame": 21
+            },
+            {
+              "word": "JUST",
+              "start_frame": 21,
+              "end_frame": 26
+            }
+          ]
+        },
+        {
+          "chunk_id": 1,
+          "text": "GOT MANIPULATED BY",
+          "start_frame": 27,
+          "end_frame": 54,
+          "words": [
+            {
+              "word": "GOT",
+              "start_frame": 27,
+              "end_frame": 31
+            },
+            {
+              "word": "MANIPULATED",
+              "start_frame": 32,
+              "end_frame": 49
+            },
+            {
+              "word": "BY",
+              "start_frame": 50,
+              "end_frame": 54
+            }
+          ]
+        },
+        {
+          "chunk_id": 2,
+          "text": "A FAST FOOD",
+          "start_frame": 54,
+          "end_frame": 72,
+          "words": [
+            {
+              "word": "A",
+              "start_frame": 54,
+              "end_frame": 56
+            },
+            {
+              "word": "FAST",
+              "start_frame": 56,
+              "end_frame": 66
+            },
+            {
+              "word": "FOOD",
+              "start_frame": 66,
+              "end_frame": 72
+            }
+          ]
+        },
+        {
+          "chunk_id": 3,
+          "text": "CHAIN",
+          "start_frame": 72,
+          "end_frame": 80,
+          "words": [
+            {
+              "word": "CHAIN",
+              "start_frame": 72,
+              "end_frame": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scene_number": 12,
+      "beat_number": 12,
+      "time_window": "22-24s",
+      "hook_trigger": "Loop Climax",
+      "narration": "And they never leave us alone, honestly.",
+      "speaker": "speaker_2",
+      "speaker_name": "The Brand",
+      "speaker_avatar": "\ud83c\udf54",
+      "sfx": "pop",
+      "camera_motion": "loop-convergence-zoom",
+      "video_prompt": "Cinematic loop-convergence-zoom camera motion, 24mm anamorphic lens, low-angle tracking shot, Late 20s creator with messy brown hair, wearing an oversized green hoodie, expressive comedic facial features, stylized 3D Pixar aesthetic. stumbling backward in comical bewilderment, set in Cluttered bedroom creator studio, neon purple and cyan rim lighting, warm cinematic color grading, 8k resolution., volumetric atmospheric god rays, ray tracing, 3D Pixar render, 8k resolution",
+      "visual_prompt": "Rapid zoom-in shot, burger mascot winking into camera lens, comedic, 8k",
+      "title": "Loop Climax",
+      "image_url": "images/ep_35_scene_12.jpg",
+      "audio_url": "audio/beat_12.mp3",
+      "audio_duration_sec": 2.52,
+      "duration_in_frames": 77,
+      "words": [
+        {
+          "word": "And",
+          "start_sec": 0.1,
+          "end_sec": 0.271583,
+          "start_frame": 3,
+          "end_frame": 8
+        },
+        {
+          "word": "they",
+          "start_sec": 0.283833,
+          "end_sec": 0.39412400000000003,
+          "start_frame": 9,
+          "end_frame": 12
+        },
+        {
+          "word": "never",
+          "start_sec": 0.406375,
+          "end_sec": 0.73725,
+          "start_frame": 12,
+          "end_frame": 22
+        },
+        {
+          "word": "leave",
+          "start_sec": 0.7495,
+          "end_sec": 0.9455830000000001,
+          "start_frame": 22,
+          "end_frame": 28
+        },
+        {
+          "word": "us",
+          "start_sec": 0.957833,
+          "end_sec": 1.092624,
+          "start_frame": 29,
+          "end_frame": 33
+        },
+        {
+          "word": "alone",
+          "start_sec": 1.104916,
+          "end_sec": 1.497082,
+          "start_frame": 33,
+          "end_frame": 45
+        },
+        {
+          "word": "honestly",
+          "start_sec": 1.521583,
+          "end_sec": 2.1465829999999997,
+          "start_frame": 46,
+          "end_frame": 64
+        }
+      ],
+      "subtitle_chunks": [
+        {
+          "chunk_id": 0,
+          "text": "AND THEY NEVER",
+          "start_frame": 3,
+          "end_frame": 22,
+          "words": [
+            {
+              "word": "AND",
+              "start_frame": 3,
+              "end_frame": 8
+            },
+            {
+              "word": "THEY",
+              "start_frame": 9,
+              "end_frame": 12
+            },
+            {
+              "word": "NEVER",
+              "start_frame": 12,
               "end_frame": 22
             }
           ]
         },
         {
           "chunk_id": 1,
-          "text": "CATASTROPHE AN UNEXPECTED",
+          "text": "LEAVE US ALONE",
           "start_frame": 22,
-          "end_frame": 75,
+          "end_frame": 46,
           "words": [
             {
-              "word": "CATASTROPHE",
+              "word": "LEAVE",
               "start_frame": 22,
-              "end_frame": 45
+              "end_frame": 28
             },
             {
-              "word": "AN",
-              "start_frame": 52,
-              "end_frame": 56
+              "word": "US",
+              "start_frame": 29,
+              "end_frame": 33
             },
             {
-              "word": "UNEXPECTED",
-              "start_frame": 56,
-              "end_frame": 74
-            }
-          ]
-        },
-        {
-          "chunk_id": 2,
-          "text": "SCIENTIFIC DISCOVERY REVEALS",
-          "start_frame": 75,
-          "end_frame": 122,
-          "words": [
-            {
-              "word": "SCIENTIFIC",
-              "start_frame": 75,
-              "end_frame": 93
-            },
-            {
-              "word": "DISCOVERY",
-              "start_frame": 93,
-              "end_frame": 109
-            },
-            {
-              "word": "REVEALS",
-              "start_frame": 110,
-              "end_frame": 122
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "A HIDDEN ANOMALY",
-          "start_frame": 122,
-          "end_frame": 147,
-          "words": [
-            {
-              "word": "A",
-              "start_frame": 122,
-              "end_frame": 123
-            },
-            {
-              "word": "HIDDEN",
-              "start_frame": 124,
-              "end_frame": 132
-            },
-            {
-              "word": "ANOMALY",
-              "start_frame": 133,
-              "end_frame": 147
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "THAT MIGHT JUST",
-          "start_frame": 147,
-          "end_frame": 166,
-          "words": [
-            {
-              "word": "THAT",
-              "start_frame": 147,
-              "end_frame": 152
-            },
-            {
-              "word": "MIGHT",
-              "start_frame": 153,
-              "end_frame": 159
-            },
-            {
-              "word": "JUST",
-              "start_frame": 160,
-              "end_frame": 166
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "HOLD THE KEY",
-          "start_frame": 166,
-          "end_frame": 185,
-          "words": [
-            {
-              "word": "HOLD",
-              "start_frame": 166,
-              "end_frame": 173
-            },
-            {
-              "word": "THE",
-              "start_frame": 173,
-              "end_frame": 176
-            },
-            {
-              "word": "KEY",
-              "start_frame": 176,
-              "end_frame": 184
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "TO OUR SURVIVAL",
-          "start_frame": 185,
-          "end_frame": 211,
-          "words": [
-            {
-              "word": "TO",
-              "start_frame": 185,
-              "end_frame": 188
-            },
-            {
-              "word": "OUR",
-              "start_frame": 188,
-              "end_frame": 192
-            },
-            {
-              "word": "SURVIVAL",
-              "start_frame": 193,
-              "end_frame": 211
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "beat_number": 5,
-      "time_window": "48-58s",
-      "hook_trigger": "45s Resolution Hook",
-      "narration": "Our world is far more fragile than we dare to admit. What would you do first? Drop a follow right now for Episode Two!",
-      "speaker": "narrator",
-      "speaker_name": "Narrator",
-      "speaker_avatar": "\ud83c\udf99\ufe0f",
-      "sfx": "whoosh",
-      "camera_motion": "sunset-drift",
-      "visual_prompt": "3D Pixar animation Unreal Engine 5, heroic survivors looking out at reconstructed skyline under a bright dawn sunrise, inspirational Disney masterpiece",
-      "scene_number": 5,
-      "title": "45s Resolution Hook",
-      "image_url": "images/ep_11_beat_5.jpg",
-      "audio_url": "audio/beat_5.mp3",
-      "audio_duration_sec": 8.93,
-      "duration_in_frames": 550,
-      "words": [
-        {
-          "word": "Our",
-          "start_sec": 0.098541,
-          "end_sec": 0.353416,
-          "start_frame": 3,
-          "end_frame": 11
-        },
-        {
-          "word": "world",
-          "start_sec": 0.365541,
-          "end_sec": 0.681082,
-          "start_frame": 11,
-          "end_frame": 20
-        },
-        {
-          "word": "is",
-          "start_sec": 0.693208,
-          "end_sec": 0.8145830000000001,
-          "start_frame": 21,
-          "end_frame": 24
-        },
-        {
-          "word": "far",
-          "start_sec": 0.826708,
-          "end_sec": 1.081583,
-          "start_frame": 25,
-          "end_frame": 32
-        },
-        {
-          "word": "more",
-          "start_sec": 1.093708,
-          "end_sec": 1.287874,
-          "start_frame": 33,
-          "end_frame": 39
-        },
-        {
-          "word": "fragile",
-          "start_sec": 1.3,
-          "end_sec": 1.749041,
-          "start_frame": 39,
-          "end_frame": 52
-        },
-        {
-          "word": "than",
-          "start_sec": 1.761166,
-          "end_sec": 1.894666,
-          "start_frame": 53,
-          "end_frame": 57
-        },
-        {
-          "word": "we",
-          "start_sec": 1.906791,
-          "end_sec": 2.0038739999999997,
-          "start_frame": 57,
-          "end_frame": 60
-        },
-        {
-          "word": "dare",
-          "start_sec": 2.016,
-          "end_sec": 2.283,
-          "start_frame": 60,
-          "end_frame": 68
-        },
-        {
-          "word": "to",
-          "start_sec": 2.295125,
-          "end_sec": 2.4165,
-          "start_frame": 69,
-          "end_frame": 72
-        },
-        {
-          "word": "admit",
-          "start_sec": 2.428625,
-          "end_sec": 2.8533749999999998,
-          "start_frame": 73,
-          "end_frame": 86
-        },
-        {
-          "word": "What",
-          "start_sec": 3.689333,
-          "end_sec": 3.907791,
-          "start_frame": 111,
-          "end_frame": 117
-        },
-        {
-          "word": "would",
-          "start_sec": 3.919916,
-          "end_sec": 4.041291,
-          "start_frame": 118,
-          "end_frame": 121
-        },
-        {
-          "word": "you",
-          "start_sec": 4.053416,
-          "end_sec": 4.138374000000001,
-          "start_frame": 122,
-          "end_frame": 124
-        },
-        {
-          "word": "do",
-          "start_sec": 4.1505,
-          "end_sec": 4.320416,
-          "start_frame": 125,
-          "end_frame": 130
-        },
-        {
-          "word": "first",
-          "start_sec": 4.332541,
-          "end_sec": 4.866541,
-          "start_frame": 130,
-          "end_frame": 146
-        },
-        {
-          "word": "Drop",
-          "start_sec": 5.703875,
-          "end_sec": 6.007291,
-          "start_frame": 171,
-          "end_frame": 180
-        },
-        {
-          "word": "a",
-          "start_sec": 6.019416,
-          "end_sec": 6.092249,
-          "start_frame": 181,
-          "end_frame": 183
-        },
-        {
-          "word": "follow",
-          "start_sec": 6.104375,
-          "end_sec": 6.504875,
-          "start_frame": 183,
-          "end_frame": 195
-        },
-        {
-          "word": "right",
-          "start_sec": 6.517,
-          "end_sec": 6.723291000000001,
-          "start_frame": 196,
-          "end_frame": 202
-        },
-        {
-          "word": "now",
-          "start_sec": 6.735416,
-          "end_sec": 6.965999,
-          "start_frame": 202,
-          "end_frame": 209
-        },
-        {
-          "word": "for",
-          "start_sec": 6.978166,
-          "end_sec": 7.160207,
-          "start_frame": 209,
-          "end_frame": 215
-        },
-        {
-          "word": "Episode",
-          "start_sec": 7.172333,
-          "end_sec": 7.657749,
-          "start_frame": 215,
-          "end_frame": 230
-        },
-        {
-          "word": "Two",
-          "start_sec": 7.669916,
-          "end_sec": 8.058249,
-          "start_frame": 230,
-          "end_frame": 242
-        }
-      ],
-      "subtitle_chunks": [
-        {
-          "chunk_id": 0,
-          "text": "OUR WORLD IS",
-          "start_frame": 3,
-          "end_frame": 25,
-          "words": [
-            {
-              "word": "OUR",
-              "start_frame": 3,
-              "end_frame": 11
-            },
-            {
-              "word": "WORLD",
-              "start_frame": 11,
-              "end_frame": 20
-            },
-            {
-              "word": "IS",
-              "start_frame": 21,
-              "end_frame": 24
-            }
-          ]
-        },
-        {
-          "chunk_id": 1,
-          "text": "FAR MORE FRAGILE",
-          "start_frame": 25,
-          "end_frame": 53,
-          "words": [
-            {
-              "word": "FAR",
-              "start_frame": 25,
-              "end_frame": 32
-            },
-            {
-              "word": "MORE",
+              "word": "ALONE",
               "start_frame": 33,
-              "end_frame": 39
-            },
-            {
-              "word": "FRAGILE",
-              "start_frame": 39,
-              "end_frame": 52
+              "end_frame": 45
             }
           ]
         },
         {
           "chunk_id": 2,
-          "text": "THAN WE DARE",
-          "start_frame": 53,
-          "end_frame": 69,
+          "text": "HONESTLY",
+          "start_frame": 46,
+          "end_frame": 64,
           "words": [
             {
-              "word": "THAN",
-              "start_frame": 53,
-              "end_frame": 57
-            },
-            {
-              "word": "WE",
-              "start_frame": 57,
-              "end_frame": 60
-            },
-            {
-              "word": "DARE",
-              "start_frame": 60,
-              "end_frame": 68
-            }
-          ]
-        },
-        {
-          "chunk_id": 3,
-          "text": "TO ADMIT WHAT",
-          "start_frame": 69,
-          "end_frame": 118,
-          "words": [
-            {
-              "word": "TO",
-              "start_frame": 69,
-              "end_frame": 72
-            },
-            {
-              "word": "ADMIT",
-              "start_frame": 73,
-              "end_frame": 86
-            },
-            {
-              "word": "WHAT",
-              "start_frame": 111,
-              "end_frame": 117
-            }
-          ]
-        },
-        {
-          "chunk_id": 4,
-          "text": "WOULD YOU DO",
-          "start_frame": 118,
-          "end_frame": 130,
-          "words": [
-            {
-              "word": "WOULD",
-              "start_frame": 118,
-              "end_frame": 121
-            },
-            {
-              "word": "YOU",
-              "start_frame": 122,
-              "end_frame": 124
-            },
-            {
-              "word": "DO",
-              "start_frame": 125,
-              "end_frame": 130
-            }
-          ]
-        },
-        {
-          "chunk_id": 5,
-          "text": "FIRST DROP A",
-          "start_frame": 130,
-          "end_frame": 183,
-          "words": [
-            {
-              "word": "FIRST",
-              "start_frame": 130,
-              "end_frame": 146
-            },
-            {
-              "word": "DROP",
-              "start_frame": 171,
-              "end_frame": 180
-            },
-            {
-              "word": "A",
-              "start_frame": 181,
-              "end_frame": 183
-            }
-          ]
-        },
-        {
-          "chunk_id": 6,
-          "text": "FOLLOW RIGHT NOW",
-          "start_frame": 183,
-          "end_frame": 209,
-          "words": [
-            {
-              "word": "FOLLOW",
-              "start_frame": 183,
-              "end_frame": 195
-            },
-            {
-              "word": "RIGHT",
-              "start_frame": 196,
-              "end_frame": 202
-            },
-            {
-              "word": "NOW",
-              "start_frame": 202,
-              "end_frame": 209
-            }
-          ]
-        },
-        {
-          "chunk_id": 7,
-          "text": "FOR EPISODE TWO",
-          "start_frame": 209,
-          "end_frame": 242,
-          "words": [
-            {
-              "word": "FOR",
-              "start_frame": 209,
-              "end_frame": 215
-            },
-            {
-              "word": "EPISODE",
-              "start_frame": 215,
-              "end_frame": 230
-            },
-            {
-              "word": "TWO",
-              "start_frame": 230,
-              "end_frame": 242
+              "word": "HONESTLY",
+              "start_frame": 46,
+              "end_frame": 64
             }
           ]
         }
       ]
     }
-  ]
+  ],
+  "episode": 35,
+  "genre": "Viral Skit / Relatable Comedy",
+  "title": "Brands commenting under reels like they\u2019re our friends"
 }
