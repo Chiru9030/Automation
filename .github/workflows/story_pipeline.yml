@@ -2,14 +2,15 @@ name: Autonomous Daily Story Video Pipeline
 
 on:
   schedule:
-    # 5 premier high-curiosity viral drops per day:
-    # 03:17 UTC (08:47 AM IST / Morning Commute)
-    # 07:17 UTC (12:47 PM IST / Lunchtime Peak)
-    # 11:17 UTC (04:47 PM IST / Afternoon Rush)
-    # 14:17 UTC (07:47 PM IST / Prime Evening Viral Window)
-    # 17:17 UTC (10:47 PM IST / Late Night Bedtime Feed)
+    # 6 premier high-curiosity viral drops per day (spaced every 3 hours across waking hours):
+    # 1. 01:17 UTC -> 06:47 AM IST (Early Morning Wake-up & Commute Drop)
+    # 2. 04:17 UTC -> 09:47 AM IST (Morning Work/Study Tea Break)
+    # 3. 07:17 UTC -> 12:47 PM IST (Lunchtime Viral Peak)
+    # 4. 10:17 UTC -> 03:47 PM IST (Afternoon Slump Recharge)
+    # 5. 13:17 UTC -> 06:47 PM IST (Evening Commute & Prime Relaxation)
+    # 6. 16:17 UTC -> 09:47 PM IST (Bedtime Viral Scrolling Feed)
     # Off-minute scheduling (:17) eliminates top-of-hour & half-hour runner queue stalling
-    - cron: '17 3,7,11,14,17 * * *'
+    - cron: '17 1,4,7,10,13,16 * * *'
   workflow_dispatch:
     inputs:
       custom_topic:
