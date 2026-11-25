@@ -174,7 +174,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
                         thumbnail_path=str(thumb_p) if thumb_p.exists() else None,
                         pinned_comment=item.get("pinned_comment"),
                     )
-                    if not yt_res.startswith("[QUOTA_EXCEEDED]"):
+                    if not (yt_res.startswith("[QUOTA_EXCEEDED]") or yt_res.startswith("[AUTH_EXPIRED]") or yt_res.startswith("[UPLOAD_FAILED]")):
                         print(f"🎉 [Backlog Queue Engine] Successfully published queued Episode #{queued_ep}!")
                         dequeue_backlog_episode(queued_ep)
                         history = load_history()
@@ -201,10 +201,10 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
                             "youtube_res": yt_res,
                         }
                     else:
-                        print(f"⚠️ [Backlog Queue Engine] YouTube quota is still cooling down for Episode #{queued_ep}.")
-                        print("   Preserving runner minutes. Exiting cleanly until 24h reset.")
+                        print(f"⚠️ [Backlog Queue Engine] YouTube upload waiting ({yt_res}).")
+                        print("   Preserving runner minutes. Exiting cleanly until token/quota available.")
                         return {
-                            "status": "QUOTA_STILL_ACTIVE",
+                            "status": "UPLOAD_POSTPONED",
                             "episode": queued_ep,
                             "reason": yt_res,
                         }
@@ -505,8 +505,9 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
             )
             print(f"YouTube: {yt_res}")
 
-            if yt_res.startswith("[QUOTA_EXCEEDED]"):
-                print("\n⚠️ [YOUTUBE QUOTA LIMIT REACHED] Daily upload limit exceeded.")
+            if yt_res.startswith("[QUOTA_EXCEEDED]") or yt_res.startswith("[AUTH_EXPIRED]") or yt_res.startswith("[UPLOAD_FAILED]"):
+                status_type = "QUOTA_EXCEEDED" if yt_res.startswith("[QUOTA_EXCEEDED]") else "AUTH_REQUIRED"
+                print(f"\n⚠️ [{status_type}] Social publishing postponed: {yt_res}")
                 print("   Holding history counter at current episode. Enqueuing into backlog_queue.json.")
                 enqueue_backlog_episode(
                     episode_num=ep_num,
@@ -528,7 +529,7 @@ def process_next_story(custom_topic: str | None = None, publish: bool = True) ->
                     video_path=out_mp4,
                 )
                 return {
-                    "status": "QUOTA_EXCEEDED",
+                    "status": status_type,
                     "episode": ep_num,
                     "title": chapter_title,
                     "video_path": str(out_mp4),

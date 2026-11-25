@@ -46,8 +46,12 @@ def upload_to_youtube(
             f"Run 'generate_tokens.py' to generate your OAuth token."
         )
 
-    credentials = Credentials.from_authorized_user_file(str(token_path))
-    youtube = build("youtube", "v3", credentials=credentials)
+    try:
+        credentials = Credentials.from_authorized_user_file(str(token_path))
+        youtube = build("youtube", "v3", credentials=credentials)
+    except Exception as e_cred:
+        print(f"\n⚠️ [YouTube Auth Error] Failed to initialize credentials: {e_cred}")
+        return f"[AUTH_EXPIRED] Invalid or expired YouTube credentials ({e_cred}). Please refresh via generate_tokens.py."
 
     chosen_privacy = privacy_status or os.getenv("YOUTUBE_PRIVACY_STATUS", "public")
     # YouTube Data API enforces a strict hard ceiling of 100 characters for video titles
@@ -75,10 +79,14 @@ def upload_to_youtube(
         response = request.execute()
         video_id = response.get("id")
     except Exception as e_upload:
-        if "uploadLimitExceeded" in str(e_upload):
+        err_str = str(e_upload).lower()
+        if "uploadlimitexceeded" in err_str:
             print("\n⚠️ [YouTube 24h Quota Exceeded] Daily upload limit reached on channel account.")
             return "[QUOTA_EXCEEDED] Daily YouTube upload quota reached (uploadLimitExceeded). Video is certified & preserved in artifacts."
-        if publish_at and ("invalidPrivacyStatus" in str(e_upload) or "unauthorizedSchedule" in str(e_upload)):
+        if any(k in err_str for k in ["invalid_grant", "expired", "revoked", "refresherror"]):
+            print(f"\n⚠️ [YouTube Token Expired] OAuth token expired or revoked ({e_upload}).")
+            return f"[AUTH_EXPIRED] YouTube OAuth refresh token expired: {e_upload}"
+        if publish_at and ("invalidprivacystatus" in err_str or "unauthorizedschedule" in err_str):
             print(f"⚠️ Notice: Scheduled publishing rejected ({e_upload}), falling back to direct {chosen_privacy} upload...")
             body["status"]["privacyStatus"] = chosen_privacy
             body["status"].pop("publishAt", None)
@@ -86,7 +94,8 @@ def upload_to_youtube(
             response = request.execute()
             video_id = response.get("id")
         else:
-            raise e_upload
+            print(f"\n⚠️ [YouTube Upload Error] {e_upload}")
+            return f"[UPLOAD_FAILED] YouTube upload error: {e_upload}"
 
     # Set custom high-CTR thumbnail if provided
     if video_id and thumbnail_path and Path(thumbnail_path).exists():
