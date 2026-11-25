@@ -508,27 +508,15 @@ def generate_pollinations_clean(prompt: str, output_path: Path, seed: int = 42) 
 
 
 def generate_hd_image(prompt: str, output_path: Path, seed: int = 1, beat_num: int = 1, style_hint: str = "") -> Path:
-    """Generates an authentic 9:16 vertical 1080x1920 visual with strict multi-tier AI model failover."""
+    """Generates an authentic 9:16 vertical 1080x1920 visual with high-speed failover."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     enriched = enrich_prompt(prompt, style_hint=style_hint)
 
-    # 1. Tier 1: Pollinations Clean FLUX Engine (Fast, authentic FLUX cloud generator)
+    # 1. Primary Cloud Tier: Pollinations Clean FLUX Engine
     if generate_pollinations_clean(enriched, output_path, seed=seed):
         return output_path
 
-    # 2. Tier 2: Google Imagen 3 (Google AI Studio via GEMINI_API_KEY)
-    if generate_imagen3_google(enriched, output_path, seed=seed):
-        return output_path
-
-    # 3. Tier 3: Hugging Face FLUX / SDXL Spaces (with anonymous auto-fallback)
-    if generate_flux_hf_space(enriched, output_path, seed=seed):
-        return output_path
-
-    # 4. Tier 4: Replicate FLUX.1-schnell (via REPLICATE_API_TOKEN)
-    if generate_replicate_flux(enriched, output_path, seed=seed):
-        return output_path
-
-    # 5. Tier 5: Local SD-Turbo Single-Step Diffusion Engine (Thread-safe offline CPU render)
+    # 2. Resilient Neural Tier: Local SD-Turbo Single-Step Diffusion Engine (Thread-safe offline CPU render)
     if generate_sd_turbo_local(enriched, output_path, seed=seed):
         return output_path
 

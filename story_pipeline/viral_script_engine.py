@@ -115,8 +115,8 @@ Output JSON ONLY:
 }}"""
 
             res = None
-            active_model = "gemini-3.5-flash-lite"
-            models_to_try = ["gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.5-flash", "gemini-3.8-flash"]
+            active_model = "gemini-3.5-flash"
+            models_to_try = ["gemini-3.5-flash", "gemini-3.5-flash-lite"]
             for candidate_model in models_to_try:
                 for attempt in range(1, 3):
                     try:
